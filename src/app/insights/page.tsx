@@ -1,9 +1,26 @@
 import type { Metadata } from 'next';
+import { ArrowUpRight, BookOpenCheck, DatabaseZap, Recycle } from 'lucide-react';
+import { PageHero } from '@/components/ui/PageHero';
 
 const articles = [
-  'Why waste streams should be evaluated as recoverable resources',
-  'Building practical circular economy programs without unsupported claims',
-  'How structured material data improves recovery decisions'
+  {
+    icon: Recycle,
+    title: 'Why waste streams should be evaluated as recoverable resources',
+    summary: 'A controlled introduction to treating waste as material value without overstating feasibility or outcomes.',
+    status: 'Planned insight'
+  },
+  {
+    icon: BookOpenCheck,
+    title: 'Building practical circular economy programs without unsupported claims',
+    summary: 'A disciplined editorial piece on execution, documentation and careful public sustainability language.',
+    status: 'Planned insight'
+  },
+  {
+    icon: DatabaseZap,
+    title: 'How structured material data improves recovery decisions',
+    summary: 'A public-facing explanation of why better intake data improves review quality without exposing protected systems.',
+    status: 'Planned insight'
+  }
 ];
 
 export const metadata: Metadata = {
@@ -14,22 +31,33 @@ export const metadata: Metadata = {
 
 export default function InsightsPage() {
   return (
-    <section className="section-padding bg-white">
-      <div className="container-shell">
-        <p className="font-bold uppercase tracking-[0.2em] text-coal/70">Insights</p>
-        <h1 className="mt-3 max-w-4xl text-5xl font-bold text-carbon">Controlled insights for waste, carbon and recovery decisions.</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-coal">
-          The full EterSolis insights library will be published after content review. Initial articles will focus on responsible recovery, practical circular economy execution and disciplined sustainability communication.
-        </p>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {articles.map((title) => (
-            <article key={title} className="rounded-3xl border border-cool bg-cool p-6">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-coal/70">Planned insight</p>
-              <h2 className="mt-3 text-xl font-bold text-carbon">{title}</h2>
-            </article>
-          ))}
+    <>
+      <PageHero
+        eyebrow="Insights"
+        title="Controlled insights for waste, carbon and recovery decisions."
+        description="The EterSolis insights library will publish responsible, commercially useful content after review. No unsupported claims, no protected-system disclosures and no confidential counterparty details."
+        primaryHref="/contact"
+        primaryLabel="Request Assessment"
+        secondaryHref="/sell-waste"
+        secondaryLabel="Submit Waste Stream"
+      />
+      <section className="section-padding bg-white dark:bg-black">
+        <div className="container-shell">
+          <div className="grid gap-5 md:grid-cols-3">
+            {articles.map(({ icon: Icon, title, summary, status }) => (
+              <article key={title} className="card-hover group rounded-[2rem] border border-coal/10 bg-[#FAFAF7] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sunshine text-black">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <p className="mt-8 text-xs font-black uppercase tracking-[0.24em] text-coal/60 dark:text-white/45">{status}</p>
+                <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-carbon dark:text-white">{title}</h2>
+                <p className="mt-4 leading-7 text-coal dark:text-white/70">{summary}</p>
+                <p className="mt-7 inline-flex items-center gap-2 text-sm font-black text-carbon dark:text-sunshine">Awaiting editorial approval <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" /></p>
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
