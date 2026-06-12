@@ -1,3 +1,5 @@
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
+
 export function ContactForm() {
   const topics = ['Consultation / Assessment', 'Partnership', 'Executive', 'Scientific / CSO', 'Careers / Associate', 'Privacy', 'General'];
 
@@ -11,6 +13,7 @@ export function ContactForm() {
       </div>
       <label className="grid gap-2 text-sm font-semibold text-carbon">Message<textarea name="message" required minLength={10} maxLength={2000} rows={6} className="rounded-xl border border-coal/20 px-4 py-3" /></label>
       <label className="flex gap-3 rounded-2xl bg-cool p-5 text-sm font-semibold text-carbon"><input name="consentToContact" type="checkbox" required /> I consent to EterSolis contacting me about this inquiry.</label>
+      <TurnstileWidget />
       <button className="rounded-full bg-sunshine px-7 py-4 font-bold text-carbon" type="submit">Submit Inquiry</button>
     </form>
   );
