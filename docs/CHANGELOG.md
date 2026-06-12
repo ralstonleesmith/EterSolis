@@ -2,6 +2,28 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 2026-06-12 — Final Polish, Policy, and Routing Pass
+
+### Policy Pages
+
+- Upgraded Privacy page from plain text into structured policy cards.
+- Added privacy request CTA to `privacy@etersolis.com`.
+- Upgraded Terms page into structured commercial notice cards.
+- Reinforced non-binding submission, no unsolicited samples, regulated-material caution, and EterSolis rights-reserved language.
+
+### Helios
+
+- Upgraded Helios v0 from simple link chips into a branded guided-routing panel.
+- Added transparent EterSolis mark usage.
+- Added route icons and clear guardrail chips.
+- Reinforced no-pricing, no-acceptance, no-hazardous-instructions, and no-protected-system-disclosure guardrails.
+
+### Validation
+
+- PR #2 was merged after GitHub Actions passed typecheck, lint, and build.
+- New polish branch `feature/final-polish-content-ops` created from merged PR #2.
+- Latest branch should run full GitHub Actions validation before merge.
+
 ## 2026-06-12 — Official Branding and UX Polish Pass
 
 ### Branding
@@ -40,7 +62,7 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 ### Validation
 
 - GitHub Actions Build and Test workflow exists and runs typecheck, lint, and production build.
-- PR #2 build initially passed before the additional polish commits; latest commit should be revalidated before merge.
+- PR #2 build passed and was merged into main.
 
 ## 2026-06-12 — Core Website Foundation
 
