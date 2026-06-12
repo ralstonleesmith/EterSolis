@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: ['./src/**/*.{ts,tsx,mdx}'],
   theme: {
     extend: {
@@ -9,7 +10,8 @@ const config: Config = {
         sunshine: '#FCCF25',
         aero: '#FFFFFF',
         cool: '#F2F2F2',
-        carbon: '#000000'
+        carbon: '#000000',
+        mist: '#FAFAF7'
       },
       fontFamily: {
         sans: ['Aptos', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
