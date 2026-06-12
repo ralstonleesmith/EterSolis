@@ -1,4 +1,34 @@
 import type { Metadata } from 'next';
+import { AlertTriangle, Ban, FileText, LockKeyhole, PackageX } from 'lucide-react';
+import { PageHero } from '@/components/ui/PageHero';
+
+const terms = [
+  {
+    icon: FileText,
+    title: 'Informational website use',
+    text: 'Website content is provided for general business inquiry and informational purposes only. It is not technical advice, legal advice, transport approval, disposal instruction, quotation, acceptance or commercial commitment.'
+  },
+  {
+    icon: Ban,
+    title: 'No automatic acceptance',
+    text: 'Submitting a waste opportunity is non-binding. EterSolis review is required before any purchase, acceptance, transport, sample transfer, technical assessment or commercial commitment.'
+  },
+  {
+    icon: PackageX,
+    title: 'No unsolicited samples',
+    text: 'Do not send physical samples or materials unless EterSolis provides written intake instructions. Unapproved samples or material movements are not authorized.'
+  },
+  {
+    icon: AlertTriangle,
+    title: 'Regulated material caution',
+    text: 'Hazardous, regulated, biological, chemical, medical, radioactive or unknown materials require manual review and written instructions before any physical movement.'
+  },
+  {
+    icon: LockKeyhole,
+    title: 'Rights reserved',
+    text: 'EterSolis reserves all rights in its website, software, documentation, brand assets, content, proprietary systems, operating methods and controlled materials.'
+  }
+];
 
 export const metadata: Metadata = {
   title: 'Terms | EterSolis',
@@ -8,18 +38,27 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <section className="section-padding bg-cool">
-      <div className="container-shell max-w-4xl rounded-[2rem] bg-white p-8 shadow-soft">
-        <p className="font-bold uppercase tracking-[0.2em] text-coal/70">Terms</p>
-        <h1 className="mt-3 text-5xl font-bold text-carbon">Website Terms</h1>
-        <div className="mt-8 space-y-5 leading-8 text-coal">
-          <p>Website content is provided for general business inquiry and informational purposes only. It is not technical advice, legal advice, transport approval, disposal instruction, quotation, acceptance or commercial commitment.</p>
-          <p>Submitting a waste opportunity is non-binding. EterSolis review is required before any purchase, acceptance, transport, sample transfer, technical assessment or commercial commitment.</p>
-          <p>Do not send physical samples or materials unless EterSolis provides written intake instructions.</p>
-          <p>Hazardous, regulated, biological, chemical, medical, radioactive or unknown materials require manual review and written instructions before any physical movement.</p>
-          <p>EterSolis reserves all rights in its website, software, documentation, brand assets, content and proprietary systems.</p>
+    <>
+      <PageHero
+        eyebrow="Terms"
+        title="Website Terms"
+        description="These terms protect controlled communication, non-binding waste submissions, brand assets and EterSolis proprietary materials."
+        primaryHref="/sell-waste"
+        primaryLabel="Sell Waste To EterSolis"
+        secondaryHref="/contact"
+        secondaryLabel="Contact EterSolis"
+      />
+      <section className="section-padding bg-[#FAFAF7] dark:bg-black">
+        <div className="container-shell grid gap-5 lg:grid-cols-5">
+          {terms.map(({ icon: Icon, title, text }, index) => (
+            <article key={title} className={`card-hover rounded-[2rem] border border-coal/10 bg-white p-7 shadow-soft dark:border-white/10 dark:bg-white/5 ${index < 2 ? 'lg:col-span-2' : ''}`}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sunshine text-black"><Icon className="h-5 w-5" /></div>
+              <h2 className="mt-6 text-2xl font-black text-carbon dark:text-white">{title}</h2>
+              <p className="mt-4 leading-8 text-coal dark:text-white/72">{text}</p>
+            </article>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
