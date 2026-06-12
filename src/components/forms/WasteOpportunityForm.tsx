@@ -1,3 +1,5 @@
+import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
+
 export function WasteOpportunityForm() {
   const categories = ['Plastics', 'Paper and cardboard', 'Metals', 'E-waste', 'Organics', 'Industrial by-products', 'Construction materials', 'Other recoverable resources'];
   const frequencies = ['One-time', 'Weekly', 'Monthly', 'Quarterly', 'Continuous', 'Unknown'];
@@ -25,6 +27,7 @@ export function WasteOpportunityForm() {
         <label className="grid gap-2 font-semibold">Confidentiality level<select name="confidentialityLevel" required className="rounded-xl border border-coal/20 px-4 py-3"><option>Public</option><option>Potential confidential</option><option>NDA required</option></select></label>
         <label className="flex gap-3 font-semibold"><input name="consentToContact" type="checkbox" required /> I consent to EterSolis contacting me about this submission.</label>
       </div>
+      <TurnstileWidget />
       <p className="text-sm font-semibold text-carbon">Submitting a waste opportunity is non-binding. Do not send physical samples unless EterSolis provides written intake instructions.</p>
       <button className="rounded-full bg-sunshine px-7 py-4 font-bold text-carbon" type="submit">Submit Waste Opportunity</button>
     </form>
