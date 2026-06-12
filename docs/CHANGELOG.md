@@ -2,7 +2,7 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
-## 2026-06-12 — Final Polish, Policy, and Routing Pass
+## 2026-06-12 — Final Polish, Policy, Routing, and Preview Sync Pass
 
 ### Policy Pages
 
@@ -17,6 +17,13 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 - Added transparent EterSolis mark usage.
 - Added route icons and clear guardrail chips.
 - Reinforced no-pricing, no-acceptance, no-hazardous-instructions, and no-protected-system-disclosure guardrails.
+
+### Executive HTML Previews
+
+- Updated preview stylesheet to reflect the current branded visual system, light/dark treatment, cards, forms, hero layouts, banners and footer styling.
+- Updated preview index to describe the current preview set.
+- Updated previews for Home, Sell Waste, Solutions, Industries, About, Contact, Insights, Helios, Privacy and Terms.
+- Previews now reflect the current page structure and content more accurately for executive review.
 
 ### Validation
 
