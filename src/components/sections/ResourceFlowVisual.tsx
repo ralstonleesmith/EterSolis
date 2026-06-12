@@ -1,3 +1,5 @@
+import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
+
 const nodes = [
   { label: 'Waste stream', x: '8%', y: '24%' },
   { label: 'Data review', x: '38%', y: '14%' },
@@ -12,6 +14,7 @@ export function ResourceFlowVisual() {
       <div className="motion-orb gold-gradient h-36 w-36 left-8 top-8" />
       <div className="motion-orb h-44 w-44 right-8 bottom-8 bg-cool" style={{ animationDelay: '1.2s' }} />
       <div className="absolute inset-8 rounded-[2rem] border border-coal/10 surface-grid" />
+      <EterSolisLogo variant="dark" mode="mark" className="absolute right-8 top-8 h-32 w-auto opacity-[0.16]" title="EterSolis transparent mark" />
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
         <path d="M14 30 C34 10, 48 18, 62 36 S80 56, 78 72" stroke="rgba(86,86,86,0.26)" strokeWidth="0.8" fill="none" />
         <path d="M16 30 C34 12, 48 20, 62 37 S79 57, 77 72" stroke="rgba(252,207,37,0.92)" strokeWidth="0.55" fill="none" strokeDasharray="2 2" />
