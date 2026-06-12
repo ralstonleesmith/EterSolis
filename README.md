@@ -4,12 +4,28 @@
 **Website:** https://etersolis.com  
 **Program:** EterSolis Immediate Website Upgrade  
 **Execution specification:** ES-WEB-EXEC-001 v1.0  
-**Status:** Active development foundation  
+**Status:** Active upgrade — official branding, light/dark mode, polished page UX, self-hosting foundation, and lead-capture implementation in progress  
+**Current PR:** #2 — Apply official EterSolis branding and transparent logo system  
 **Classification:** Proprietary and confidential EterSolis source code and implementation documentation
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, waste valorization, and industrial sustainability solutions.
 
 This repository is the controlled implementation base for upgrading `etersolis.com` into a polished, professional, conversion-focused public website and lead-generation system while preserving a scalable technical foundation for future EterSolis digital systems.
+
+## Current Upgrade Snapshot
+
+The current controlled upgrade branch includes:
+
+- Official EterSolis transparent SVG logo system.
+- Full-logo and mark-only variants.
+- Light-logo usage for dark backgrounds and dark-logo usage for light backgrounds.
+- Branded light/dark mode with accessible theme toggle.
+- Modern homepage resource-flow visual.
+- Polished Sell Waste, Industries, About, Contact and Insights pages.
+- Polished light/dark form styling for waste and contact intake.
+- PostgreSQL, SMTP, CRM webhook, Turnstile, rate limiting and self-hosted deployment foundation.
+
+For running history, see [`docs/CHANGELOG.md`](./docs/CHANGELOG.md).
 
 ---
 
@@ -149,11 +165,18 @@ src/app/
   api/health/route.ts
 
 src/components/
+  brand/EterSolisLogo.tsx
   layout/Header.tsx
   layout/Footer.tsx
+  layout/ThemeToggle.tsx
+  ui/PageHero.tsx
+  ui/SectionHeader.tsx
   sections/Hero.tsx
+  sections/ResourceFlowVisual.tsx
   sections/WastePurchaseBanner.tsx
   sections/SolutionGrid.tsx
+  sections/ProblemOrbit.tsx
+  sections/IndustryMosaic.tsx
   forms/WasteOpportunityForm.tsx
   forms/ContactForm.tsx
   helios/HeliosPanel.tsx
@@ -163,9 +186,11 @@ src/lib/
   validators.ts
   crm.ts
   email.ts
+  emailTemplates.ts
   db.ts
   analytics.ts
   security.ts
+  brandAssets.ts
 ```
 
 ---
@@ -174,13 +199,16 @@ src/lib/
 
 ### Visual direction
 
-- White backgrounds by default.
-- Charcoal text.
-- Restrained Sunshine Yellow/gold accents.
-- Cool grey section separation.
-- Professional tables, cards, and forms.
-- No large black panels.
-- No informal startup graphics.
+- Use official EterSolis logo and mark only.
+- All logo usage must be transparent with no background box.
+- Use the dark logo version on light backgrounds.
+- Use the light logo version on dark backgrounds.
+- Support polished light and dark mode.
+- White backgrounds remain the default for high-trust content areas.
+- Charcoal text and restrained Sunshine Yellow/gold accents remain primary.
+- Cool grey section separation may be used where it improves hierarchy.
+- Professional tables, cards, forms, glass panels, motion accents and brand-led section structure are acceptable.
+- No generic startup graphics.
 - No landfill shock imagery.
 - No greenwashing visual language.
 
@@ -197,12 +225,12 @@ Use the current EterSolis brand standard unless superseded by a newer approved d
 ### Typography
 
 - Body: Aptos or a high-quality system equivalent.
-- Logo/display: Lemon Milk only if properly licensed and installed.
+- Logo/display: official EterSolis wordmark or approved vector equivalent.
 - Fallback stack must remain professional and legible.
 
 ### Component standards
 
-- Header: sticky white header, logo left, navigation center, primary yellow Sell Waste button right.
+- Header: sticky, transparent official logo, navigation center, theme toggle and primary yellow Sell Waste button right.
 - Hero: desktop 60/40 copy-to-visual split; mobile single-column.
 - Primary CTA: filled yellow button reserved for the highest-priority action.
 - Secondary CTA: white or outlined charcoal button.

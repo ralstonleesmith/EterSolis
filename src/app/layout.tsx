@@ -27,8 +27,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
+        <Script id="etersolis-theme-init" strategy="beforeInteractive">
+          {`try{var t=localStorage.getItem('etersolis-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}`}
+        </Script>
         <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
         <Header />
         <main>{children}</main>
