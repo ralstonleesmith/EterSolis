@@ -1,0 +1,28 @@
+services:
+  etersolis-web:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - /etc/etersolis-web.env
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - postgres
+    security_opt:
+      - no-new-privileges:true
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: etersolis_web
+      POSTGRES_USER: etersolis_web
+      POSTGRES_PASSWORD: change-this-before-use
+    volumes:
+      - etersolis-postgres:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+
+volumes:
+  etersolis-postgres:
