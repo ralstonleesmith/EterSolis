@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
 
 const routes = [
   ['Waste opportunities', 'waste@etersolis.com'],
@@ -10,37 +11,42 @@ const routes = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-cool bg-white">
-      <div className="container-shell grid gap-10 py-12 md:grid-cols-4">
+    <footer className="dark-gradient text-white">
+      <div className="container-shell grid gap-10 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
-          <p className="text-xl font-bold text-carbon">EterSolis</p>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-coal">
+          <EterSolisLogo variant="light" mode="full" className="h-20 w-auto" />
+          <p className="mt-5 max-w-xl text-sm leading-7 text-white/76">
             Waste & Carbon Management. Resource Recovery | Circular Economy | Carbon Management | Waste Valorization | Industrial Decarbonization.
           </p>
+          <div className="mt-8 flex gap-3">
+            <EterSolisLogo variant="light" mode="mark" className="h-16 w-auto" title="EterSolis mark" />
+            <div className="h-16 w-px bg-white/20" />
+            <p className="max-w-sm text-xs font-bold uppercase leading-6 tracking-[0.2em] text-sunshine">Official transparent mark usage. No background box.</p>
+          </div>
         </div>
         <div>
-          <p className="font-semibold text-carbon">Routes</p>
-          <ul className="mt-3 space-y-2 text-sm text-coal">
+          <p className="font-black text-white">Routes</p>
+          <ul className="mt-3 space-y-3 text-sm text-white/76">
             {routes.map(([label, email]) => (
               <li key={email}>
-                <span className="block text-xs uppercase tracking-wide text-coal/70">{label}</span>
-                <a href={`mailto:${email}`} className="hover:text-carbon">{email}</a>
+                <span className="block text-xs font-black uppercase tracking-wide text-sunshine">{label}</span>
+                <a href={`mailto:${email}`} className="hover:text-white">{email}</a>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <p className="font-semibold text-carbon">Website</p>
-          <ul className="mt-3 space-y-2 text-sm text-coal">
-            <li><Link href="/privacy">Privacy</Link></li>
-            <li><Link href="/terms">Terms</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
-            <li><Link href="/sell-waste">Sell Waste</Link></li>
+          <p className="font-black text-white">Website</p>
+          <ul className="mt-3 space-y-3 text-sm text-white/76">
+            <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
+            <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
+            <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+            <li><Link href="/sell-waste" className="hover:text-white">Sell Waste</Link></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-cool py-5">
-        <div className="container-shell text-xs text-coal/75">
+      <div className="border-t border-white/10 py-5">
+        <div className="container-shell text-xs text-white/62">
           © 2026 EterSolis. All rights reserved. Proprietary and confidential source code.
         </div>
       </div>
