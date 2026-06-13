@@ -3,12 +3,27 @@ name: Playwright Smoke Tests
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'playwright.config.ts'
+      - '.github/workflows/**'
   pull_request:
     branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'playwright.config.ts'
+      - '.github/workflows/**'
 
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    concurrency:
+      group: playwright-smoke-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,7 +35,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit --prefer-offline
 
       - name: Build
         run: npm run build
@@ -40,3 +55,8 @@ jobs:
       - name: Upload Playwright report
         if: failure()
         run: npx playwright show-report && echo "Report available"
+        # keep artifacts only briefly to reduce storage cost
+        # (GitHub Actions stores workflow run logs and artifacts separately)
+      - name: Cleanup node_modules
+        if: always()
+        run: rm -rf node_modules
