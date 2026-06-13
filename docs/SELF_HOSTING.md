@@ -18,9 +18,24 @@ This project is designed for EterSolis-managed hosting on EterSolis-controlled i
 
 ```bash
 npm ci
+npm run check
 npm run build
 PORT=3000 npm run start
 ```
+
+## Local Quality Gates
+
+GitHub Actions may remain as a passive repository check, but production release should not depend on it. Run the controlled local gates before server deployment:
+
+```bash
+npm ci
+npm run check
+npm run test:smoke
+npm run docker:build
+npm run deploy:dry-run
+```
+
+The smoke suite starts a local Next server through Playwright and captures desktop/mobile screenshots under `test-results/screenshots`.
 
 ## Environment
 
@@ -129,10 +144,12 @@ WantedBy=multi-user.target
 1. Pull the reviewed commit to the server.
 2. Install dependencies with `npm ci`.
 3. Run `npm run check`.
-4. Apply database migrations if required.
-5. Restart the systemd or PM2 process.
-6. Verify `/api/health`.
-7. Submit test lead forms using non-sensitive test data.
-8. Confirm internal notification email and submitter confirmation email.
-9. Confirm database records were created.
-10. Record the released commit hash in the deployment log.
+4. Run `npm run deploy:dry-run`.
+5. Build or pull the reviewed Docker image if using container deployment.
+6. Apply database migrations if required.
+7. Restart the systemd, PM2 or Docker Compose service.
+8. Verify `/api/health`.
+9. Submit test lead forms using non-sensitive test data.
+10. Confirm internal notification email and submitter confirmation email.
+11. Confirm database records were created.
+12. Record the released commit hash in the deployment log.

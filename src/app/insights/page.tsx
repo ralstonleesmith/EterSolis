@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ArrowUpRight, BookOpenCheck, DatabaseZap, Recycle } from 'lucide-react';
+import { BookOpenCheck, DatabaseZap, Recycle } from 'lucide-react';
 import { PageHero } from '@/components/ui/PageHero';
 
 const articles = [
@@ -45,14 +45,14 @@ export default function InsightsPage() {
         <div className="container-shell">
           <div className="grid gap-5 md:grid-cols-3">
             {articles.map(({ icon: Icon, title, summary, status }) => (
-              <article key={title} className="card-hover group rounded-[2rem] border border-coal/10 bg-[#FAFAF7] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sunshine text-black">
+              <article key={title} className="card-hover group rounded-lg border border-coal/10 bg-[#FAFAF7] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-sunshine text-black">
                   <Icon className="h-5 w-5" />
                 </div>
-                <p className="mt-8 text-xs font-black uppercase tracking-[0.24em] text-coal/60 dark:text-white/45">{status}</p>
-                <h2 className="mt-3 text-2xl font-black tracking-[-0.03em] text-carbon dark:text-white">{title}</h2>
+                <p className="mt-8 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-white/45">{status}</p>
+                <h2 className="mt-3 text-2xl font-black tracking-normal text-carbon dark:text-white">{title}</h2>
                 <p className="mt-4 leading-7 text-coal dark:text-white/70">{summary}</p>
-                <p className="mt-7 inline-flex items-center gap-2 text-sm font-black text-carbon dark:text-sunshine">Awaiting editorial approval <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" /></p>
+                <p className="mt-7 text-sm font-black text-carbon dark:text-sunshine">Awaiting editorial approval</p>
               </article>
             ))}
           </div>

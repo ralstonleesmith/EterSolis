@@ -2,6 +2,28 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 2026-06-12 — Media-Led UX, Guided Intake, and Local Automation Pass
+
+### Visual System
+
+- Added project-local media assets, generated hero imagery, optimized preview variants and auditable `public/media/credits.json`.
+- Replaced the split homepage hero and generic page hero treatment with full-bleed media-led heroes.
+- Reduced oversized card radii and normalized heading letter spacing across the public UI.
+
+### Interaction and Conversion
+
+- Added mobile navigation with an icon menu and retained visible Sell Waste access.
+- Converted Waste Opportunity and Contact forms into guided steppers while preserving existing API routes.
+- Upgraded Helios into a controlled v1 guided-routing wizard with recommendation state and guardrails.
+- Added mobile sticky Sell Waste CTA on the Sell Waste page.
+
+### Automation
+
+- Added `package-lock.json` workflow support through `npm ci`.
+- Added media asset audit, Playwright smoke screenshots, Docker build and deploy dry-run scripts.
+- Added Docker healthcheck and updated self-hosting release gates to avoid relying on GitHub Actions.
+- Upgraded vulnerable dependencies and added a PostCSS override to clear npm audit.
+
 ## 2026-06-12 — Final Polish, Policy, Routing, and Preview Sync Pass
 
 ### Policy Pages

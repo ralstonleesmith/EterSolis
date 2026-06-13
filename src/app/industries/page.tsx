@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Building2, Factory, Landmark, Package, Recycle, Store, Truck, Zap } from 'lucide-react';
 import { PageHero } from '@/components/ui/PageHero';
+import { WastewaterTreatmentFeature } from '@/components/sections/WastewaterTreatmentFeature';
+import { mediaAssets } from '@/lib/media';
 
 const industries = [
   { icon: Factory, title: 'Manufacturing', description: 'Production residues, packaging scrap, process waste, carbon and material efficiency.', focus: 'Operational waste and recoverable production outputs' },
@@ -14,9 +16,13 @@ const industries = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Industries Served | EterSolis Waste, Carbon and Resource Recovery Solutions',
-  description: 'EterSolis supports manufacturers, municipalities, mining, energy, retail, commercial property, government entities and waste operators.',
-  alternates: { canonical: '/industries' }
+  title: 'Industries Served | EterSolis Waste, Wastewater and Resource Recovery Solutions',
+  description: 'EterSolis supports manufacturers, municipalities, water and wastewater operators, mining, energy, retail, commercial property, government entities and waste operators.',
+  alternates: { canonical: '/industries' },
+  openGraph: {
+    images: [{ url: '/media/og/etersolis-industries-og.png', width: 1600, height: 900, alt: mediaAssets.wastewater.aerial.alt }]
+  },
+  twitter: { images: ['/media/og/etersolis-industries-og.png'] }
 };
 
 export default function IndustriesPage() {
@@ -26,20 +32,22 @@ export default function IndustriesPage() {
         eyebrow="Industries"
         title="Industry-specific resource recovery and waste solutions."
         description="EterSolis supports organizations with real material flows, practical recovery challenges and measurable waste, carbon and circular economy pressure."
+        imageSrc={mediaAssets.wastewater.aerial.previewSrc}
+        imageAlt={mediaAssets.wastewater.aerial.alt}
       />
+      <WastewaterTreatmentFeature />
       <section className="section-padding bg-[#FAFAF7] dark:bg-black">
         <div className="container-shell">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {industries.map(({ icon: Icon, title, description, focus }, index) => (
-              <article key={title} className={`card-hover relative overflow-hidden rounded-[2rem] border border-coal/10 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-white/5 ${index === 0 || index === 2 ? 'lg:col-span-2' : ''}`}>
-                <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-sunshine/20" />
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-sunshine text-black">
+              <article key={title} className={`card-hover relative overflow-hidden rounded-lg border border-coal/10 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-white/5 ${index === 0 || index === 2 ? 'lg:col-span-2' : ''}`}>
+                <div className="relative flex h-12 w-12 items-center justify-center rounded-lg bg-sunshine text-black">
                   <Icon className="h-5 w-5" />
                 </div>
-                <p className="mt-8 text-xs font-black uppercase tracking-[0.24em] text-coal/60 dark:text-white/45">Sector focus</p>
+                <p className="mt-8 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-white/45">Sector focus</p>
                 <h2 className="mt-3 text-2xl font-black text-carbon dark:text-white">{title}</h2>
                 <p className="mt-4 leading-7 text-coal dark:text-white/72">{description}</p>
-                <div className="mt-6 rounded-2xl bg-cool p-4 text-sm font-bold leading-6 text-carbon dark:bg-black/40 dark:text-white/80">{focus}</div>
+                <div className="mt-6 rounded-lg bg-cool p-4 text-sm font-bold leading-6 text-carbon dark:bg-black/40 dark:text-white/80">{focus}</div>
               </article>
             ))}
           </div>

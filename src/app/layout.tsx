@@ -3,6 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { mediaAssets } from '@/lib/media';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://etersolis.com'),
@@ -18,7 +19,22 @@ export const metadata: Metadata = {
       'Resource recovery, carbon management, circular economy and industrial sustainability solutions.',
     url: 'https://etersolis.com',
     siteName: 'EterSolis',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: mediaAssets.hero.ogSrc,
+        width: 1600,
+        height: 900,
+        alt: mediaAssets.wastewater.hero.alt
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'EterSolis | Waste & Carbon Management',
+    description:
+      'Resource recovery, carbon management, circular economy and industrial sustainability solutions.',
+    images: [mediaAssets.hero.ogSrc]
   },
   alternates: {
     canonical: '/'
@@ -33,8 +49,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {`try{var t=localStorage.getItem('etersolis-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}`}
         </Script>
         <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>{children}</main>
         <Footer />
       </body>
     </html>

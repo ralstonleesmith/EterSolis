@@ -3,7 +3,7 @@ export function TurnstileWidget() {
 
   if (!siteKey) {
     return (
-      <div className="rounded-2xl border border-coal/20 bg-cool p-4 text-sm font-semibold text-carbon">
+      <div className="rounded-lg border border-coal/20 bg-cool p-4 text-sm font-semibold text-carbon">
         Bot protection is pending server configuration. Public submissions must remain disabled until Turnstile is configured.
       </div>
     );

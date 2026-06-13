@@ -51,8 +51,8 @@ export default function TermsPage() {
       <section className="section-padding bg-[#FAFAF7] dark:bg-black">
         <div className="container-shell grid gap-5 lg:grid-cols-5">
           {terms.map(({ icon: Icon, title, text }, index) => (
-            <article key={title} className={`card-hover rounded-[2rem] border border-coal/10 bg-white p-7 shadow-soft dark:border-white/10 dark:bg-white/5 ${index < 2 ? 'lg:col-span-2' : ''}`}>
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sunshine text-black"><Icon className="h-5 w-5" /></div>
+            <article key={title} className={`card-hover rounded-lg border border-coal/10 bg-white p-7 shadow-soft dark:border-white/10 dark:bg-white/5 ${index < 2 ? 'lg:col-span-2' : ''}`}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-sunshine text-black"><Icon className="h-5 w-5" /></div>
               <h2 className="mt-6 text-2xl font-black text-carbon dark:text-white">{title}</h2>
               <p className="mt-4 leading-8 text-coal dark:text-white/72">{text}</p>
             </article>

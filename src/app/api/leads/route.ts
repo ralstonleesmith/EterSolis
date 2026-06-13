@@ -12,6 +12,7 @@ function routeForTopic(topic: string) {
   if (topic === 'Scientific / CSO') return { route: env.csoRouteEmail, prefix: '[EterSolis CSO Inquiry]' };
   if (topic === 'Careers / Associate') return { route: env.csoRouteEmail, prefix: '[EterSolis Talent Inquiry]' };
   if (topic === 'Privacy') return { route: env.privacyRouteEmail, prefix: '[EterSolis Privacy Request]' };
+  if (topic === 'Wastewater Treatment') return { route: env.infoRouteEmail, prefix: '[EterSolis Wastewater Assessment Request]' };
   if (topic === 'Consultation / Assessment') return { route: env.infoRouteEmail, prefix: '[EterSolis Assessment Request]' };
   return { route: env.infoRouteEmail, prefix: '[EterSolis General Inquiry]' };
 }

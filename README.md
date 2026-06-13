@@ -535,6 +535,18 @@ Recommended workflow:
 6. Do not merge to `main` without review.
 7. Record the exact commit hash released to production.
 
+Local-first validation:
+
+```bash
+npm ci
+npm run check
+npm run test:smoke
+npm run docker:build
+npm run deploy:dry-run
+```
+
+GitHub Actions, if present, are secondary repository checks. EterSolis-controlled local, Docker and server-side validation remain the release authority.
+
 Recommended branch naming:
 
 ```txt

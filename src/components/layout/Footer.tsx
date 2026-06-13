@@ -16,12 +16,12 @@ export function Footer() {
         <div className="md:col-span-2">
           <EterSolisLogo variant="light" mode="full" className="h-20 w-auto" />
           <p className="mt-5 max-w-xl text-sm leading-7 text-white/76">
-            Waste & Carbon Management. Resource Recovery | Circular Economy | Carbon Management | Waste Valorization | Industrial Decarbonization.
+            Waste & Carbon Management. Resource Recovery | Wastewater Treatment | Circular Economy | Carbon Management | Waste Valorization | Industrial Decarbonization.
           </p>
           <div className="mt-8 flex gap-3">
             <EterSolisLogo variant="light" mode="mark" className="h-16 w-auto" title="EterSolis mark" />
             <div className="h-16 w-px bg-white/20" />
-            <p className="max-w-sm text-xs font-bold uppercase leading-6 tracking-[0.2em] text-sunshine">Official transparent mark usage. No background box.</p>
+            <p className="max-w-sm text-xs font-bold uppercase leading-6 tracking-normal text-sunshine">Official transparent mark usage. No background box.</p>
           </div>
         </div>
         <div>
@@ -40,8 +40,9 @@ export function Footer() {
           <ul className="mt-3 space-y-3 text-sm text-white/76">
             <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
             <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
-            <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
-            <li><Link href="/sell-waste" className="hover:text-white">Sell Waste</Link></li>
+            <li><Link href="/media-credits" className="hover:text-white">Media Credits</Link></li>
+            <li><Link href="/contact#contact-form" className="hover:text-white">Contact</Link></li>
+            <li><Link href="/sell-waste#waste-form" className="hover:text-white">Sell Waste</Link></li>
           </ul>
         </div>
       </div>

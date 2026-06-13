@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { SectionHeader } from '@/components/ui/SectionHeader';
+import { MotionReveal } from '@/components/ui/Motion';
 
 const industries = [
   ['Municipalities', 'Diversion, recycling and public waste stream solutions.'],
@@ -17,7 +18,7 @@ export function IndustryMosaic() {
   return (
     <section className="section-padding bg-[#FAFAF7]">
       <div className="container-shell">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <MotionReveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeader
             eyebrow="Industries served"
             title="Built for organizations with real material flow."
@@ -26,16 +27,16 @@ export function IndustryMosaic() {
           <Link href="/industries" className="inline-flex items-center gap-2 rounded-full border border-coal/30 bg-white px-5 py-3 text-sm font-black text-carbon transition hover:border-sunshine">
             View industries <ArrowUpRight className="h-4 w-4" />
           </Link>
-        </div>
-        <div className="mt-12 grid gap-4 md:grid-cols-4">
+        </MotionReveal>
+        <MotionReveal className="mt-12 grid gap-4 md:grid-cols-4" delay={0.08}>
           {industries.map(([title, description], index) => (
-            <article key={title} className={`card-hover rounded-[2rem] border border-coal/10 bg-white p-6 shadow-sm ${index === 0 || index === 2 ? 'md:col-span-2' : ''}`}>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-coal/60">Sector</p>
+            <article key={title} className={`card-hover rounded-lg border border-coal/10 bg-white p-6 shadow-sm ${index === 0 || index === 2 ? 'md:col-span-2' : ''}`}>
+              <p className="text-xs font-black uppercase tracking-normal text-coal/60">Sector</p>
               <h3 className="mt-4 text-2xl font-black text-carbon">{title}</h3>
               <p className="mt-4 leading-7 text-coal">{description}</p>
             </article>
           ))}
-        </div>
+        </MotionReveal>
       </div>
     </section>
   );

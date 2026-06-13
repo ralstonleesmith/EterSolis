@@ -1,0 +1,151 @@
+{
+  "licenseReferences": [
+    {
+      "name": "Pexels License",
+      "url": "https://www.pexels.com/license/",
+      "note": "Reference license for future curated photo additions."
+    },
+    {
+      "name": "Unsplash License",
+      "url": "https://unsplash.com/license",
+      "note": "Reference license for future curated photo additions."
+    }
+  ],
+  "assets": [
+    {
+      "id": "etersolis-resource-recovery-hero",
+      "path": "/media/generated/etersolis-resource-recovery-hero.png",
+      "type": "ai-generated",
+      "title": "EterSolis resource recovery facility hero",
+      "credit": "Generated with OpenAI image generation for EterSolis",
+      "sourceUrl": "local-generation",
+      "license": "EterSolis controlled website asset",
+      "licenseUrl": "local-generation",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "alt": "A clean modern materials recovery facility with conveyors carrying sorted recyclable material."
+    },
+    {
+      "id": "etersolis-wastewater-treatment-hero",
+      "path": "/media/generated/etersolis-wastewater-treatment-hero.png",
+      "type": "ai-generated",
+      "title": "EterSolis wastewater treatment facility hero",
+      "credit": "Generated with OpenAI image generation for EterSolis",
+      "sourceUrl": "local-generation",
+      "license": "EterSolis controlled website asset",
+      "licenseUrl": "local-generation",
+      "dimensions": {
+        "width": 3840,
+        "height": 2160
+      },
+      "alt": "A clean modern wastewater treatment facility with clarifiers, aeration basins and professional water recovery infrastructure."
+    },
+    {
+      "id": "sims-material-recovery-facility",
+      "path": "/media/photos/sims-material-recovery-facility.jpg",
+      "type": "open-license-photo",
+      "title": "Sims Municipal Recycling Facility",
+      "credit": "JelloMistress via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cycle_sorters.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 3264,
+        "height": 2448
+      },
+      "alt": "A high-angle view of an industrial material recovery facility with yellow safety rails and sorting equipment."
+    },
+    {
+      "id": "wastewater-aeration-tank-bengaluru",
+      "path": "/media/photos/wastewater-aeration-tank-bengaluru.jpg",
+      "type": "open-license-photo",
+      "title": "Aeration tank activated sludge process, Bengaluru",
+      "credit": "Vraj Acharya, WELL Labs via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aeration_tank_activated_sludge_process_STP_Bengaluru_India.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 3840,
+        "height": 2560
+      },
+      "alt": "Aeration tanks at a sewage treatment plant with clean industrial walkways and active water treatment infrastructure."
+    },
+    {
+      "id": "wastewater-aeration-tank-bengaluru-preview",
+      "path": "/media/photos/wastewater-aeration-tank-bengaluru-1600.jpg",
+      "type": "open-license-photo-derivative",
+      "title": "Aeration tank activated sludge process, Bengaluru preview",
+      "credit": "Vraj Acharya, WELL Labs via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aeration_tank_activated_sludge_process_STP_Bengaluru_India.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 1600,
+        "height": 1066
+      },
+      "alt": "Aeration tanks at a sewage treatment plant with clean industrial walkways and active water treatment infrastructure."
+    },
+    {
+      "id": "wastewater-stp-aerial-bengaluru",
+      "path": "/media/photos/wastewater-stp-aerial-bengaluru.jpg",
+      "type": "open-license-photo",
+      "title": "Doddabommasandra Lake sewage treatment plant aerial view",
+      "credit": "Vraj Acharya, WELL Labs via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Doddabommasandra_Lake_STP_Bengaluru_sewage_treatment_plant_aerial_view_India.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 3840,
+        "height": 2160
+      },
+      "alt": "Aerial view of a sewage treatment plant with circular clarifiers and organized water treatment basins."
+    },
+    {
+      "id": "wastewater-stp-aerial-bengaluru-preview",
+      "path": "/media/photos/wastewater-stp-aerial-bengaluru-1600.jpg",
+      "type": "open-license-photo-derivative",
+      "title": "Doddabommasandra Lake sewage treatment plant aerial view preview",
+      "credit": "Vraj Acharya, WELL Labs via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Doddabommasandra_Lake_STP_Bengaluru_sewage_treatment_plant_aerial_view_India.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "alt": "Aerial view of a sewage treatment plant with circular clarifiers and organized water treatment basins."
+    },
+    {
+      "id": "biofactoria-santiago-lagoon",
+      "path": "/media/photos/biofactoria-santiago-lagoon.jpg",
+      "type": "open-license-photo",
+      "title": "Biofactoria Gran Santiago environmental lagoon",
+      "credit": "Periodista2252 via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Biofactoria_Gran_Santiago_Laguna_Ambiental.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 3840,
+        "height": 2160
+      },
+      "alt": "Environmental lagoon at a modern biofactory and water recovery site."
+    },
+    {
+      "id": "biofactoria-santiago-lagoon-preview",
+      "path": "/media/photos/biofactoria-santiago-lagoon-1600.jpg",
+      "type": "open-license-photo-derivative",
+      "title": "Biofactoria Gran Santiago environmental lagoon preview",
+      "credit": "Periodista2252 via Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Biofactoria_Gran_Santiago_Laguna_Ambiental.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "alt": "Environmental lagoon at a modern biofactory and water recovery site."
+    }
+  ]
+}
