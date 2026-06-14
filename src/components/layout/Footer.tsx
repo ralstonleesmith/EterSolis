@@ -19,7 +19,7 @@ export function Footer() {
             Waste & Carbon Management. Resource Recovery | Wastewater Treatment | Circular Economy | Carbon Management | Waste Valorization | Industrial Decarbonization.
           </p>
           <div className="mt-8 flex gap-3">
-            <EterSolisLogo variant="light" mode="mark" className="h-16 w-auto" title="EterSolis mark" />
+            <EterSolisLogo variant="light" mode="mark" className="h-14 w-auto object-contain" title="EterSolis mark" />
             <div className="h-16 w-px bg-white/20" />
             <p className="max-w-sm text-xs font-bold uppercase leading-6 tracking-normal text-sunshine">Official transparent mark usage. No background box.</p>
           </div>
