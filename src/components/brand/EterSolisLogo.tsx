@@ -42,19 +42,23 @@ export function EterSolisLogo({ variant = 'dark', mode = 'full', className, titl
   const eterColor = variant === 'light' ? WHITE : COAL;
 
   if (mode === 'mark') {
-    // Use Next.js Image for automatic optimization and to avoid layout shifts.
-    // `className` controls sizing (e.g. `h-12 w-auto`). Use `unoptimized` to
-    // avoid external image hosting costs and keep builds local.
+    // Render the mark as inline SVG so CSS (Tailwind) can control sizing
+    // precisely and avoid raster distortion or unexpected wrapper sizing.
+    // Use `className` (e.g. `h-12 w-auto`) and `preserveAspectRatio` for
+    // consistent scaling across header/footer.
     return (
-      <Image
+      <svg
         className={className}
-        src="/media/etersolis-mark.png"
-        alt={title}
-        width={150}
-        height={280}
-        priority={false}
-        unoptimized
-      />
+        viewBox="0 0 200 320"
+        role="img"
+        aria-label={title}
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <g transform="translate(0 -20) scale(0.75)">
+          <LogoMark variant={variant} />
+        </g>
+      </svg>
     );
   }
 
