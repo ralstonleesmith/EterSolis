@@ -30,10 +30,10 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-coal/10 bg-white/86 backdrop-blur-xl dark:border-white/10 dark:bg-black/78">
       <div className="container-shell flex min-h-[78px] items-center justify-between gap-6">
         <Link href="/" className="brand-no-background flex items-center" aria-label="EterSolis home" onClick={() => setOpen(false)}>
-          <EterSolisLogo variant="dark" mode="mark" className="h-12 w-auto sm:hidden dark:hidden flex-none object-contain" />
-          <EterSolisLogo variant="light" mode="mark" className="hidden h-12 w-auto dark:block sm:dark:hidden flex-none object-contain" />
-          <EterSolisLogo variant="dark" mode="full" className="hidden h-14 w-auto sm:block dark:hidden flex-none object-contain" />
-          <EterSolisLogo variant="light" mode="full" className="hidden h-14 w-auto sm:dark:block flex-none object-contain" />
+          <EterSolisLogo variant="dark" mode="mark" className="max-h-12 w-auto sm:hidden dark:hidden flex-none object-contain" />
+          <EterSolisLogo variant="light" mode="mark" className="hidden max-h-12 w-auto dark:block sm:dark:hidden flex-none object-contain" />
+          <EterSolisLogo variant="dark" mode="full" className="hidden max-h-14 w-auto sm:block dark:hidden flex-none object-contain" />
+          <EterSolisLogo variant="light" mode="full" className="hidden max-h-14 w-auto sm:dark:block flex-none object-contain" />
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-bold text-coal lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (

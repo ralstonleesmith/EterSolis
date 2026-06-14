@@ -58,7 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>
-        <div className="page-end-spacer h-6" aria-hidden="true" />
+        <div className="page-end-spacer" aria-hidden="true" />
         <Footer />
       </body>
     </html>
