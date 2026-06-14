@@ -49,7 +49,7 @@ export function EterSolisLogo({ variant = 'dark', mode = 'full', className, titl
         alt={title}
         role="img"
         aria-label={title}
-        style={{ display: 'block', width: '100%', height: 'auto' }}
+        decoding="async"
       />
     );
   }
