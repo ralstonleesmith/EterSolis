@@ -12,7 +12,7 @@ const signals = [
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[calc(88svh-78px)] overflow-hidden bg-black py-20 text-white md:min-h-[calc(86svh-78px)]">
+    <section className="relative isolate flex min-h-[calc(88svh-78px)] overflow-hidden bg-black py-28 text-white md:min-h-[calc(86svh-78px)]">
       <Image
         src={mediaAssets.hero.src}
         alt={mediaAssets.hero.alt}
@@ -28,10 +28,10 @@ export function Hero() {
           <p className="mb-5 inline-flex max-w-full rounded-full border border-sunshine/70 bg-black/35 px-4 py-2 text-sm font-black text-white shadow-sm backdrop-blur">
             We Buy Waste | Resource Recovery | Carbon Management | Circular Economy | Industrial Sustainability
           </p>
-          <h1 className="max-w-5xl text-5xl font-black leading-none tracking-normal text-white md:text-7xl lg:text-8xl">
+          <h1 className="max-w-4xl text-5xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
             Waste Is Value Waiting To Be Recovered.
           </h1>
-          <p className="mt-7 max-w-2xl text-xl leading-9 text-white/82">
+          <p className="mt-6 max-w-2xl text-xl leading-8 text-white/85">
             EterSolis is a privately owned waste and carbon management company helping organizations recover value from waste streams, manage carbon exposure and build practical circular economy solutions.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -55,7 +55,7 @@ export function Hero() {
           ))}
         </MotionReveal>
       </div>
-      <div className="container-shell absolute inset-x-0 bottom-5 z-10 hidden text-xs font-black uppercase tracking-normal text-white/58 md:block">
+      <div className="container-shell absolute inset-x-0 bottom-7 z-10 hidden text-xs font-black uppercase tracking-normal text-white/58 md:block">
         Structured intake, controlled review and practical recovery pathways
       </div>
     </section>

@@ -12,7 +12,7 @@ const routes = [
 export function Footer() {
   return (
     <footer className="dark-gradient text-white">
-      <div className="container-shell grid gap-10 py-16 md:grid-cols-4">
+      <div className="container-shell grid gap-10 py-20 md:grid-cols-4">
         <div className="md:col-span-2">
           <EterSolisLogo variant="light" mode="full" className="h-20 w-auto" />
           <p className="mt-5 max-w-xl text-sm leading-7 text-white/76">

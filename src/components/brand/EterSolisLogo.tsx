@@ -39,37 +39,20 @@ function LogoMark({ variant = 'dark' }: { variant?: LogoVariant }) {
 }
 
 export function EterSolisLogo({ variant = 'dark', mode = 'full', className, title = 'EterSolis' }: EterSolisLogoProps) {
-  const eterColor = variant === 'light' ? WHITE : COAL;
+  const alt = title;
 
   if (mode === 'mark') {
-    // Render the mark as inline SVG so CSS (Tailwind) can control sizing
-    // precisely and avoid raster distortion or unexpected wrapper sizing.
-    // Use `className` (e.g. `h-12 w-auto`) and `preserveAspectRatio` for
-    // consistent scaling across header/footer.
     return (
-      <svg
-        className={className}
-        viewBox="0 0 200 320"
-        role="img"
-        aria-label={title}
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <g transform="translate(0 -20) scale(0.75)">
-          <LogoMark variant={variant} />
-        </g>
-      </svg>
+      <Image src="/media/etersolis-mark.png" alt={alt} className={className} width={220} height={280} priority />
     );
   }
 
+  // For full mode, render the approved mark PNG plus clubbed text to avoid
+  // using the previously added SVG file which is not brand-compliant.
   return (
-    <svg className={className} viewBox="0 0 620 160" role="img" aria-label={title} xmlns="http://www.w3.org/2000/svg">
-      <title>{title}</title>
-      <g transform="translate(0 -62) scale(0.58)">
-        <LogoMark variant={variant} />
-      </g>
-      <text x="170" y="105" fontFamily="Aptos, Inter, Arial, sans-serif" fontSize="80" fontWeight="900" letterSpacing="6" fill={eterColor}>ETER</text>
-      <text x="392" y="105" fontFamily="Aptos, Inter, Arial, sans-serif" fontSize="80" fontWeight="900" letterSpacing="6" fill={GOLD}>SOLIS</text>
-    </svg>
+    <div className={`inline-flex items-center gap-4 ${className ?? ''}`} aria-label={title}>
+      <Image src="/media/etersolis-mark.png" alt={alt} width={120} height={160} priority />
+      <span className="font-black text-3xl tracking-wide text-[--coal]">EterSolis</span>
+    </div>
   );
 }

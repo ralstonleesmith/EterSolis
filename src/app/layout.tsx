@@ -44,6 +44,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Preload critical fonts and hero image to stabilize layout for visual tests */}
+        <link rel="preload" href="/fonts/Aptos.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/Inter.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/media/generated/hero-preview.jpg" as="image" />
+      </head>
       <body>
         <Script id="etersolis-theme-init" strategy="beforeInteractive">
           {`try{var t=localStorage.getItem('etersolis-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}`}
@@ -52,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>
+        <div className="page-end-spacer h-6" aria-hidden="true" />
         <Footer />
       </body>
     </html>
