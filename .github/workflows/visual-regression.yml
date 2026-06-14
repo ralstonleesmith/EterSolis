@@ -1,0 +1,26 @@
+name: Playwright Visual Regression
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.github/workflows/**'
+
+jobs:
+  visual-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install deps
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Run Playwright tests (visual)
+        run: npx playwright test --config=playwright.config.ts --reporter=dot
+        # Note: Baseline snapshots should be committed in the repo under tests/visual
+        # To update snapshots locally: `npx playwright test --update-snapshots`
