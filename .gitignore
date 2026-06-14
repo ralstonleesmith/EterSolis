@@ -1,3 +1,18 @@
+# Node
+node_modules/
+
+# Playwright test results and snapshots (keep locally but CI will upload)
+test-results/
+tests/e2e/*-snapshots/
+
+# Generated previews (moved to CI artifacts)
+previews/
+public/media/generated/
+
+.DS_Store
+/.next
+dist/
+coverage/
 node_modules
 .next
 out
