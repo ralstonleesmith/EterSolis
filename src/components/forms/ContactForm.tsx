@@ -103,7 +103,7 @@ export function ContactForm() {
                   ? 'border-sunshine bg-sunshine text-black'
                   : index < step
                     ? 'border-coal/10 bg-cool text-carbon dark:border-white/10 dark:bg-white/10 dark:text-white'
-                    : 'border-coal/10 bg-white text-coal/55 dark:border-white/10 dark:bg-black/20 dark:text-white/45'
+                    : 'border-coal/10 bg-white text-coal dark:border-white/10 dark:bg-black/20 dark:text-white/45'
               }`}
               aria-current={index === step ? 'step' : undefined}
             >
