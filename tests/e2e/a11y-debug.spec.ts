@@ -1,1 +1,0 @@
-// Debug test removed — resolved via CSS overrides. Kept for historical context.
