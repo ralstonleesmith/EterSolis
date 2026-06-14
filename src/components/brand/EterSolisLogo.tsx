@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 type LogoVariant = 'light' | 'dark';
 type LogoMode = 'full' | 'mark';
 
@@ -40,16 +42,18 @@ export function EterSolisLogo({ variant = 'dark', mode = 'full', className, titl
   const eterColor = variant === 'light' ? WHITE : COAL;
 
   if (mode === 'mark') {
-    // Use the raster mark image from `public/media/etersolis-mark.png`.
-    // Ensure the PNG is added to the repo at that path before merging.
+    // Use Next.js Image for automatic optimization and to avoid layout shifts.
+    // `className` controls sizing (e.g. `h-12 w-auto`). Use `unoptimized` to
+    // avoid external image hosting costs and keep builds local.
     return (
-      <img
+      <Image
         className={className}
         src="/media/etersolis-mark.png"
         alt={title}
-        role="img"
-        aria-label={title}
-        decoding="async"
+        width={150}
+        height={280}
+        priority={false}
+        unoptimized
       />
     );
   }
