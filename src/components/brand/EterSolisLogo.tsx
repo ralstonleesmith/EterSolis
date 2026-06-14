@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// Inline SVG only: use the `LogoMark` defined below as the official mark.
 
 type LogoVariant = 'light' | 'dark';
 type LogoMode = 'full' | 'mark';
@@ -40,30 +40,13 @@ function LogoMark({ variant = 'dark' }: { variant?: LogoVariant }) {
 
 export function EterSolisLogo({ variant = 'dark', mode = 'full', className, title = 'EterSolis' }: EterSolisLogoProps) {
   const eterColor = variant === 'light' ? WHITE : COAL;
-  const [imgFailed, setImgFailed] = useState(false);
-
-  // When `mode='mark'` prefer an official raster placed at `public/media/etersolis-mark.png`.
-  // If the image fails to load, fall back to the inline SVG for a safe, non-breaking display.
+  // Render the official mark as inline SVG for sharpness and portability.
   if (mode === 'mark') {
     return (
-      <div className={className} role="img" aria-label={title}>
-        {!imgFailed ? (
-          // Attempt to load the official mark. Add `decoding="async"` for performance.
-          // The image file should be added to `public/media/etersolis-mark.png` on the feature branch or PR.
-          <img
-            src="/media/etersolis-mark.png"
-            alt={title}
-            style={{ display: 'block', width: '100%', height: 'auto' }}
-            decoding="async"
-            onError={() => setImgFailed(true)}
-          />
-        ) : (
-          <svg viewBox="0 0 150 280" xmlns="http://www.w3.org/2000/svg">
-            <title>{title}</title>
-            <LogoMark variant={variant} />
-          </svg>
-        )}
-      </div>
+      <svg className={className} viewBox="0 0 150 280" role="img" aria-label={title} xmlns="http://www.w3.org/2000/svg">
+        <title>{title}</title>
+        <LogoMark variant={variant} />
+      </svg>
     );
   }
 
