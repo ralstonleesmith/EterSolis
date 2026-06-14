@@ -40,11 +40,17 @@ export function EterSolisLogo({ variant = 'dark', mode = 'full', className, titl
   const eterColor = variant === 'light' ? WHITE : COAL;
 
   if (mode === 'mark') {
+    // Use the raster mark image from `public/media/etersolis-mark.png`.
+    // Ensure the PNG is added to the repo at that path before merging.
     return (
-      <svg className={className} viewBox="0 0 150 280" role="img" aria-label={title} xmlns="http://www.w3.org/2000/svg">
-        <title>{title}</title>
-        <LogoMark variant={variant} />
-      </svg>
+      <img
+        className={className}
+        src="/media/etersolis-mark.png"
+        alt={title}
+        role="img"
+        aria-label={title}
+        style={{ display: 'block', width: '100%', height: 'auto' }}
+      />
     );
   }
 
