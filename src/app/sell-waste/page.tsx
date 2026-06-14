@@ -41,7 +41,7 @@ export default function SellWastePage() {
         <div className="container-shell grid gap-10 lg:grid-cols-[0.92fr_1.08fr]">
           <div className="space-y-6">
             <div className="glass-panel rounded-lg p-7">
-              <p className="text-xs font-black uppercase tracking-normal text-coal/70 dark:text-sunshine">Review principle</p>
+              <p className="text-xs font-black uppercase tracking-normal text-coal dark:text-sunshine">Review principle</p>
               <h2 className="mt-4 text-3xl font-black tracking-normal text-carbon dark:text-white">Suitable materials only. Controlled review always.</h2>
               <p className="mt-4 leading-8 text-coal dark:text-white/76">
                 EterSolis buys suitable waste streams, recyclables, industrial by-products and other recoverable materials, subject to review, safety, legality, logistics, quality, quantity and commercial feasibility.
@@ -70,13 +70,13 @@ export default function SellWastePage() {
       </section>
       <section className="section-padding bg-white dark:bg-[#050505]">
         <div className="container-shell">
-          <p className="text-xs font-black uppercase tracking-normal text-coal/70 dark:text-sunshine">Review path</p>
+          <p className="text-xs font-black uppercase tracking-normal text-coal dark:text-sunshine">Review path</p>
           <h2 className="mt-4 max-w-3xl text-4xl font-black tracking-normal text-carbon dark:text-white md:text-6xl">A clear path from inquiry to controlled commercial review.</h2>
           <div className="mt-12 grid gap-5 md:grid-cols-4">
             {reviewSteps.map(({ icon: Icon, title, text }, index) => (
               <article key={title} className="card-hover rounded-lg border border-coal/10 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-white/5">
                 <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-sunshine text-black"><Icon className="h-5 w-5" /></div>
-                <p className="mt-6 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-white/45">0{index + 1}</p>
+                <p className="mt-6 text-xs font-black uppercase tracking-normal text-coal dark:text-white/45">0{index + 1}</p>
                 <h3 className="mt-2 text-xl font-black text-carbon dark:text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-coal dark:text-white/70">{text}</p>
               </article>
