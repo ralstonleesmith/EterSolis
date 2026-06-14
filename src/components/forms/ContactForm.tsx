@@ -61,7 +61,7 @@ export function ContactForm() {
     return (
       <div className="rounded-lg border border-sunshine/70 bg-white p-7 shadow-soft dark:bg-white/5">
         <CheckCircle2 className="h-10 w-10 text-sunshine" />
-        <p className="mt-5 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">Inquiry submitted</p>
+        <p className="mt-5 text-xs font-black uppercase tracking-normal text-coal dark:text-sunshine">Inquiry submitted</p>
         <h2 className="mt-3 text-3xl font-black text-carbon dark:text-white">Your inquiry has been routed for review.</h2>
         <p className="mt-4 leading-7 text-coal dark:text-white/72">{submitMessage}</p>
         <button type="button" className="mt-6 rounded-full bg-sunshine px-6 py-3 font-black text-black" onClick={() => setSubmitState('idle')}>
@@ -82,10 +82,10 @@ export function ContactForm() {
       onSubmit={handleSubmit}
     >
       <div>
-        <p className="text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">Controlled contact</p>
+        <p className="text-xs font-black uppercase tracking-normal text-coal dark:text-sunshine">Controlled contact</p>
         <h2 className="mt-3 text-2xl font-black text-carbon dark:text-white">Route your inquiry</h2>
         <p className="mt-2 text-sm leading-6 text-coal dark:text-white/68">Choose the right path, then submit a concise non-confidential summary.</p>
-        <p className="mt-2 text-xs font-bold text-coal/60 dark:text-white/45">Drafts save locally in this browser until submitted or cleared.</p>
+        <p className="mt-2 text-xs font-bold text-coal dark:text-white/45">Drafts save locally in this browser until submitted or cleared.</p>
       </div>
 
       <div className="grid gap-3">
