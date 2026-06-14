@@ -51,7 +51,7 @@ export function EterSolisLogo({ variant = 'dark', mode = 'full', className, titl
   // using the previously added SVG file which is not brand-compliant.
   return (
     <div className={`inline-flex items-center gap-4 ${className ?? ''}`} aria-label={title}>
-      <Image src="/media/etersolis-mark.png" alt={alt} width={120} height={160} priority />
+      <Image src="/media/etersolis-mark.png" alt="" width={120} height={160} priority />
       <span className="font-black text-3xl tracking-wide text-[--coal]">EterSolis</span>
     </div>
   );
