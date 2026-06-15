@@ -1,0 +1,50 @@
+# EterSolis Preview System
+
+The preview system supports low-cost executive review without replacing the production Next.js app. It provides static HTML previews, generated screenshots and generated page HTML for review and approval.
+
+## Preview Types
+
+### Curated executive previews
+
+Curated previews live in `previews/*.html` with shared styling in `previews/styles.css`. These are lightweight approval views. They should accurately reflect the current structure, tone, layout and visible content of the production pages they represent.
+
+### Generated live previews
+
+Generated previews are captured from the current Next.js application by the Playwright capture test. The default output folder is `previews/generated/`.
+
+Generated output includes an index page, one HTML snapshot per route, one full-page screenshot per route and a manifest file with route-to-file mapping.
+
+Generated previews are preferred for final visual review because they reflect the actual rendered app.
+
+## Required Preview Coverage
+
+The review set must cover Home, Sell Waste, Solutions, Industries, About, Contact, Insights, Helios, Media Credits, Privacy and Terms.
+
+## Preview Update Rules
+
+Update previews in the same pull request when page content, visible copy, hero layout, CTA order, card layout, form layout, visual hierarchy, light/dark behavior, navigation, footer, logo usage, media, legal notices, form fields, warnings or submission notices change.
+
+## Executive Review Instructions
+
+1. Open `previews/index.html` for the curated review pack.
+2. Generate live previews for final rendered review and open `previews/generated/index.html`.
+3. Review desktop and mobile screenshots.
+4. Confirm all pages use official EterSolis branding and transparent logo assets.
+5. Confirm no page is merely whitespace with listed text.
+6. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout.
+7. Confirm Sell Waste and Terms preserve non-binding and no-sample language.
+8. Record the approval decision in the pull request or release checklist.
+
+## Approval States
+
+Use these approval states in pull request comments or review notes:
+
+- Approved for production release
+- Approved subject to copy changes
+- Approved subject to visual changes
+- Hold: legal/privacy review required
+- Hold: technical QA required
+
+## Quality Gate
+
+A preview update is complete only when static previews align with the current pages, generated previews can be produced without test failure, link audit passes and visual concerns are either resolved or documented for the next pull request.

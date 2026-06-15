@@ -1,33 +1,41 @@
 import { test } from '@playwright/test';
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const PREVIEWS_DIR = path.resolve('previews');
+const PREVIEWS_DIR = path.resolve(process.env.PREVIEW_OUTPUT_DIR ?? 'previews/generated');
+const routes = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/media-credits', '/privacy', '/sell-waste', '/solutions', '/terms'];
 
-async function ensureDir(dir: string){
+async function ensureDir(dir: string) {
   await fs.promises.mkdir(dir, { recursive: true });
 }
 
-function filenameFor(route: string){
-  if(route === '/') return 'home.png';
-  return route.replace(/\//g,'').replace(/[^a-z0-9_-]/gi,'') + '.png';
+function filenameFor(route: string, extension: 'html' | 'png') {
+  const name = route === '/' ? 'home' : route.replace(/\//g, '').replace(/[^a-z0-9_-]/gi, '');
+  return `${name}.${extension}`;
 }
 
-const routes = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/media-credits', '/privacy', '/sell-waste', '/solutions', '/terms'];
+function htmlIndex(entries: Array<{ route: string; htmlFile: string; pngFile: string }>) {
+  const items = entries.map((entry) => `<li><a href="${entry.htmlFile}">${entry.route}</a> · <a href="${entry.pngFile}">screenshot</a></li>`).join('\n');
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EterSolis Generated Previews</title><style>body{font-family:Aptos,Arial,sans-serif;margin:40px;line-height:1.6;color:#565656}h1{color:#000}a{color:#000;font-weight:700}li{margin:10px 0}</style></head><body><h1>EterSolis Generated Previews</h1><p>Generated from the current Next.js application for executive review and QA.</p><ul>${items}</ul></body></html>`;
+}
 
-test('capture previews', async ({ page, baseURL }) => {
+test('capture current page previews', async ({ page, baseURL }) => {
   await ensureDir(PREVIEWS_DIR);
-  for (const r of routes) {
-    const url = (baseURL || '') + r;
-    await page.goto(url, { waitUntil: 'load' });
-    await page.waitForLoadState('networkidle').catch(()=>{});
+  const entries: Array<{ route: string; htmlFile: string; pngFile: string }> = [];
+
+  for (const route of routes) {
+    await page.goto(`${baseURL ?? ''}${route}`, { waitUntil: 'load' });
+    await page.waitForLoadState('networkidle').catch(() => undefined);
+    await page.evaluate(() => document.fonts && document.fonts.ready).catch(() => undefined);
     await page.waitForTimeout(500);
-    const file = path.join(PREVIEWS_DIR, filenameFor(r));
-    await page.screenshot({ path: file, fullPage: true });
-    const html = await page.content();
-    const htmlName = filenameFor(r).replace(/\.png$/,'') + '.html';
-    const htmlPath = path.join(PREVIEWS_DIR, htmlName);
-    await fs.promises.writeFile(htmlPath, html, 'utf8');
-    console.log('Saved preview', file, htmlPath);
+
+    const htmlFile = filenameFor(route, 'html');
+    const pngFile = filenameFor(route, 'png');
+    await page.screenshot({ path: path.join(PREVIEWS_DIR, pngFile), fullPage: true });
+    await fs.promises.writeFile(path.join(PREVIEWS_DIR, htmlFile), await page.content(), 'utf8');
+    entries.push({ route, htmlFile, pngFile });
   }
+
+  await fs.promises.writeFile(path.join(PREVIEWS_DIR, 'index.html'), htmlIndex(entries), 'utf8');
+  await fs.promises.writeFile(path.join(PREVIEWS_DIR, 'manifest.json'), JSON.stringify({ generatedAt: new Date().toISOString(), routes: entries }, null, 2));
 });

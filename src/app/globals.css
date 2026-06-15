@@ -75,15 +75,36 @@ a { color: inherit; text-decoration: none; }
   color: var(--coal-strong);
 }
 
-/* Test-focused: force accessible color for interactive elements site-wide
-   This makes Axe contrast checks deterministic during the a11y audit runs. */
-/* Removed broad forced color override to restore component-level styling.
-   Keep targeted utility overrides below for accessibility where needed. */
-
-/* Strengthen light-theme coal-muted utilities that fail contrast checks */
-.text-coal\/60 { color: rgba(11,18,32,0.68) !important; }
-.text-coal\/70 { color: rgba(11,18,32,0.78) !important; }
-.text-coal\/60.font-bold, .text-coal\/60.bold { color: rgba(11,18,32,0.72) !important; }
+/* Targeted contrast safeguards for muted utility classes used in forms and review cards. */
+.text-coal\/45,
+.text-coal\/50,
+.text-coal\/55,
+.text-coal\/60,
+.text-coal\/70 {
+  color: rgba(11, 18, 32, 0.78) !important;
+}
+.text-coal\/60.font-bold,
+.text-coal\/60.bold {
+  color: rgba(11, 18, 32, 0.82) !important;
+}
+.placeholder\:text-coal\/45::placeholder,
+.placeholder\:text-coal\/60::placeholder {
+  color: rgba(11, 18, 32, 0.72) !important;
+  opacity: 1;
+}
+.dark .dark\:text-white\/35,
+.dark .dark\:text-white\/45,
+.dark .dark\:text-white\/68,
+.dark .dark\:text-white\/70,
+.dark .dark\:text-white\/72,
+.dark .dark\:text-white\/82 {
+  color: rgba(255, 255, 255, 0.84) !important;
+}
+.dark .dark\:placeholder\:text-white\/35::placeholder,
+.dark .dark\:placeholder\:text-white\/60::placeholder {
+  color: rgba(255, 255, 255, 0.78) !important;
+  opacity: 1;
+}
 .skip-link:focus { transform: translateY(0); }
 
 .container-shell { width: min(1200px, calc(100% - 2rem)); margin-inline: auto; }
