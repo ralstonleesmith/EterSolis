@@ -58,7 +58,7 @@ jobs:
         run: node -e "const http=require('http');let n=0;const wait=()=>http.get('http://127.0.0.1:3100',r=>process.exit(r.statusCode<500?0:1)).on('error',()=>++n>60?process.exit(1):setTimeout(wait,2000));wait();"
 
       - name: Run Playwright smoke tests
-        run: npx playwright test --reporter=list
+        run: npm run test:smoke
 
       - name: Upload Playwright report
         if: failure()
