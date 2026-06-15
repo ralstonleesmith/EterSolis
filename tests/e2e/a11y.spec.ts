@@ -1,20 +1,24 @@
-import { test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const ROUTES = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/sell-waste', '/solutions'];
+const ROUTES = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/media-credits', '/privacy', '/sell-waste', '/solutions', '/terms'];
 
 for (const route of ROUTES) {
   test(`a11y audit ${route}`, async ({ page, baseURL }) => {
-    await page.goto((baseURL || '') + route);
+    await page.goto(`${baseURL ?? ''}${route}`);
     await page.waitForLoadState('networkidle');
-    // force light theme for deterministic contrast checks
     await page.evaluate(() => document.documentElement.classList.remove('dark'));
     await page.waitForTimeout(250);
     const accessibilityScan = await new AxeBuilder({ page }).analyze();
-    const violations = accessibilityScan.violations || [];
+    const violations = accessibilityScan.violations ?? [];
+
     if (violations.length > 0) {
-      console.log(`A11Y violations on ${route}:`, violations.map(v => ({ id: v.id, impact: v.impact, nodes: v.nodes.length }))); 
+      console.log(
+        `A11Y violations on ${route}:`,
+        violations.map((violation) => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.length }))
+      );
     }
-    test.expect(violations.length).toBe(0);
+
+    expect(violations.length).toBe(0);
   });
 }
