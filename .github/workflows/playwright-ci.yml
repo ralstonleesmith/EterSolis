@@ -37,7 +37,7 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Cache .next
+      - name: Cache Next.js build cache
         uses: actions/cache@v4
         with:
           path: .next/.cache
@@ -51,15 +51,6 @@ jobs:
       - name: Install Chromium for Playwright
         run: npx playwright install --with-deps chromium
 
-      - name: Build
-        run: npm run build
-
-      - name: Start server
-        run: npm run start -- -H 127.0.0.1 -p 3100 &
-
-      - name: Wait for server
-        run: node -e "const http=require('http');let n=0;const wait=()=>http.get('http://127.0.0.1:3100',r=>process.exit(r.statusCode<500?0:1)).on('error',()=>++n>60?process.exit(1):setTimeout(wait,2000));wait();"
-
       - name: Run Playwright smoke tests
         run: npm run test:smoke
 
@@ -70,7 +61,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 3
-
-      - name: Cleanup node_modules
-        if: always()
-        run: rm -rf node_modules
