@@ -2,6 +2,38 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 2026-06-15 — Repository Audit, Documentation, Brand Asset, and Preview-System Pass
+
+### Repository Inspection
+
+- Re-inspected the current repository state after PR #4 and PR #5 were merged.
+- Confirmed the project now includes Next.js 15, Playwright smoke testing, accessibility auditing, asset auditing, link auditing, Docker/self-hosting support and media-credit tooling.
+- Identified that README status still referenced an older PR and needed refresh.
+
+### Brand Assets
+
+- Confirmed transparent dark logo and dark mark assets under `public/brand/`.
+- Added transparent light logo and light mark SVG assets for dark-surface usage.
+- Updated README to display the EterSolis logo and document official brand asset usage.
+
+### Documentation
+
+- Replaced the older README with a current, structured repository guide.
+- Added developer guidance for collaboration, quality gates, code organization, form standards and error minimization.
+- Added executive review instructions for brand, messaging, visual, waste submission, functional and approval review.
+- Added preview-system documentation covering curated previews, generated previews, approval states and quality gates.
+
+### Preview System
+
+- Added a zero-dependency local preview server for static previews.
+- Updated the Playwright preview capture test to output generated app previews to `previews/generated/` with screenshots, HTML snapshots, a manifest and an index page.
+- Kept curated static previews separate from generated application previews to reduce review confusion.
+
+### QA Coverage
+
+- Expanded accessibility route coverage to include Media Credits, Privacy and Terms.
+- Added package scripts for preview capture, preview serving, visual testing and consolidated QA.
+
 ## 2026-06-12 — Media-Led UX, Guided Intake, and Local Automation Pass
 
 ### Visual System
@@ -90,21 +122,21 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 
 ### Validation
 
-- GitHub Actions Build and Test workflow exists and runs typecheck, lint, and production build.
+- GitHub Actions Build and Test workflow exists and runs typecheck, lint and production build.
 - PR #2 build passed and was merged into main.
 
 ## 2026-06-12 — Core Website Foundation
 
 - Initialized Next.js App Router and TypeScript codebase.
 - Added core routes: Home, Sell Waste, Solutions, Industries, About, Contact, Insights, Helios, Privacy, Terms.
-- Added API routes for health, leads, and waste opportunities.
+- Added API routes for health, leads and waste opportunities.
 - Added PostgreSQL schema and lead storage implementation.
 - Added SMTP notification implementation.
 - Added CRM webhook implementation.
 - Added Turnstile and rate-limiting security foundation.
-- Added self-hosting documentation, Dockerfile, and Docker Compose example.
+- Added self-hosting documentation, Dockerfile and Docker Compose example.
 
 ## 2026-06-12 — Documentation and Protection
 
-- Populated README.md with website execution scope, architecture, routes, design rules, security controls, and launch plan.
+- Populated README.md with the website upgrade scope, architecture, routes, design rules, security controls and launch plan.
 - Added proprietary LICENSE.md to protect EterSolis source code and software.
