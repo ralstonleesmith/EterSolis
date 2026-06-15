@@ -1,6 +1,6 @@
 # EterSolis Developer Guide
 
-This guide defines the collaboration, quality and error-minimization standards for the EterSolis website codebase.
+This guide defines collaboration, quality and error-minimization standards for the EterSolis website codebase.
 
 ## Working Principles
 
@@ -12,6 +12,13 @@ This guide defines the collaboration, quality and error-minimization standards f
 - Prefer existing dependencies and native platform features before adding new packages.
 - Optimize CI and preview work for low cost, but never bypass quality gates.
 
+## Brand Rendering Standard
+
+- Use PNG assets for rendered EterSolis logo and mark presentation.
+- Do not use inline SVG for the EterSolis logo or mark.
+- Do not synthesize official logo artwork with typed text when an approved PNG logo file is available.
+- Logo and mark assets must remain transparent and must not sit on embedded background boxes.
+
 ## Branch and Pull Request Workflow
 
 1. Create a feature branch from current `main`.
@@ -20,17 +27,6 @@ This guide defines the collaboration, quality and error-minimization standards f
 4. Run local checks before requesting review.
 5. Merge only after required checks pass.
 6. Record meaningful changes in `docs/CHANGELOG.md`.
-
-Recommended branch names:
-
-```txt
-feature/page-polish
-feature/preview-system
-fix/form-validation
-security/form-hardening
-docs/review-guidance
-ci/cost-optimization
-```
 
 ## Local Quality Commands
 
@@ -65,8 +61,7 @@ src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
 src/components/helios/   Helios guided routing interface
 src/lib/                 Server utilities, validation, email, CRM, DB, analytics and security
-public/brand/            Transparent SVG logo assets for README, docs and external static use
-public/media/            Self-hosted website media with credits
+public/media/            Self-hosted PNG brand and media assets with credits
 previews/                Executive static review previews
 scripts/                 Low-dependency maintenance, audit and preview helpers
 tests/e2e/               Playwright smoke, accessibility, visual and preview capture tests
@@ -74,9 +69,8 @@ tests/e2e/               Playwright smoke, accessibility, visual and preview cap
 
 ## Visual Standards
 
-- Use official transparent EterSolis logos only.
-- Use dark logo variants on light backgrounds and light variants on dark backgrounds.
-- Logos must never sit on embedded background rectangles or boxes.
+- Use official transparent EterSolis PNG logo or mark assets only.
+- Do not use inline SVG logo or mark rendering.
 - Keep high-trust pages bright, spacious and professional.
 - Use Sunshine Yellow as an accent and CTA color, not as a heavy background field.
 - Avoid generic startup gradients, landfill shock imagery, greenwashing imagery or unsupported impact claims.
