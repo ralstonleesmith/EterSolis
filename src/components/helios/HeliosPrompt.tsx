@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import { ArrowRight, Bot, ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { getHeliosIntents, getRecommendedHeliosIntent, type HeliosMode } from '@/lib/helios';
+import { mediaAssets } from '@/lib/media';
 
 export function HeliosPrompt({
   mode = 'etersolis',
@@ -21,8 +23,9 @@ export function HeliosPrompt({
         <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/20 px-4 py-2 text-sm font-black text-sunshine">
-              <Bot className="h-4 w-4" /> Helios guided routing
+              <Image src={mediaAssets.helios.icon.src} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-5 w-5 rounded-full object-cover" /> Helios guided routing
             </div>
+            <Image src={mediaAssets.helios.wordmark.src} alt={mediaAssets.helios.wordmark.alt} width={mediaAssets.helios.wordmark.width} height={mediaAssets.helios.wordmark.height} className="mt-5 h-auto w-64 max-w-full object-contain" />
             <h2 className="mt-5 text-3xl font-black tracking-[-0.04em] text-white md:text-4xl">
               {title ?? 'Use Helios to choose the safest next step.'}
             </h2>

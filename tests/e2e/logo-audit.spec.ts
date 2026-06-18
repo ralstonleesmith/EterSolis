@@ -1,6 +1,21 @@
 import { test, expect } from '@playwright/test';
 
-const ROUTES = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/insights/introducing-etersolis', '/sell-waste', '/solutions'];
+const ROUTES = [
+  '/',
+  '/about',
+  '/contact',
+  '/helios',
+  '/industries',
+  '/insights',
+  '/insights/introducing-etersolis',
+  '/kymnis',
+  '/kymnis/how-it-works',
+  '/kymnis/verification',
+  '/kymnis/resource-recovery',
+  '/kymnis/contact',
+  '/sell-waste',
+  '/solutions'
+];
 
 test.describe('logo audit', () => {
   for (const route of ROUTES) {

@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { ArrowRight, Bot, Compass, X } from 'lucide-react';
+import { ArrowRight, X } from 'lucide-react';
 import { getHeliosIntents, type HeliosMode } from '@/lib/helios';
+import { mediaAssets } from '@/lib/media';
 
 function contextForPath(pathname: string) {
   if (pathname.includes('verification')) return 'verification';
@@ -27,7 +29,7 @@ export function HeliosLauncher() {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-coal/70 dark:text-sunshine">
-                <Compass className="h-4 w-4 text-sunshine" /> Helios
+                <Image src={mediaAssets.helios.icon.src} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-5 w-5 rounded-full object-cover" /> Helios
               </p>
               <h2 className="mt-1 text-lg font-black text-carbon dark:text-white">Guided next-step routing</h2>
               <p className="mt-1 text-xs font-bold text-coal/70 dark:text-white/58">{mode === 'kymnis' ? 'KYMNIS mode' : 'EterSolis mode'}</p>
@@ -58,7 +60,7 @@ export function HeliosLauncher() {
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
       >
-        <Bot className="h-5 w-5" /> Ask Helios
+        <Image src={mediaAssets.helios.icon.src} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-6 w-6 rounded-full object-cover" /> Ask Helios
       </button>
     </div>
   );

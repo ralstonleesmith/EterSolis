@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { ArrowRight, CheckCircle2, FlaskConical, Sparkles } from 'lucide-react';
-import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
 import { getHeliosIntents, heliosGuardrails, type HeliosMode } from '@/lib/helios';
 import { mediaAssets } from '@/lib/media';
 
@@ -32,19 +31,16 @@ export function HeliosPanel({ mode = 'etersolis', context = 'general', compact =
 
   return (
     <section className={`relative isolate overflow-hidden bg-black text-white signal-grid ${compact ? 'py-12' : 'py-24'}`}>
-      <Image src={mediaAssets.hero.src} alt={mediaAssets.hero.alt} fill sizes="100vw" className="object-cover opacity-[0.34]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(252,207,37,0.22),transparent_28rem),radial-gradient(circle_at_80%_10%,rgba(72,187,120,0.16),transparent_30rem),linear-gradient(135deg,rgba(0,0,0,0.92),rgba(0,0,0,0.78))]" aria-hidden="true" />
+      <Image src={mediaAssets.helios.earthSplash.src} alt={mediaAssets.helios.earthSplash.alt} fill sizes="100vw" className="object-cover opacity-[0.5]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(217,165,32,0.22),transparent_28rem),radial-gradient(circle_at_80%_10%,rgba(0,125,121,0.18),transparent_30rem),linear-gradient(135deg,rgba(0,0,0,0.94),rgba(0,0,0,0.72))]" aria-hidden="true" />
       <div className="container-shell relative z-10 grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
         <div>
           <div className="mb-8 flex items-center gap-4">
-            <div className="helios-orb flex h-20 w-20 items-center justify-center rounded-3xl border border-sunshine/25 bg-black/36">
-              {mode === 'kymnis' ? (
-                <Image src="/media/kymnis-logo-mark-only.png" alt="KYMNIS mark" width={62} height={62} className="h-16 w-16 object-contain" />
-              ) : (
-                <EterSolisLogo variant="light" mode="mark" className="h-16 w-auto" title="EterSolis transparent mark" />
-              )}
+            <div className="helios-orb flex h-20 w-20 items-center justify-center overflow-hidden rounded-3xl border border-sunshine/25 bg-black/60">
+              <Image src={mediaAssets.helios.icon.src} alt={mediaAssets.helios.icon.alt} width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-16 w-16 object-contain" priority={!compact} />
             </div>
             <div>
+              <Image src={mediaAssets.helios.wordmark.src} alt={mediaAssets.helios.wordmark.alt} width={mediaAssets.helios.wordmark.width} height={mediaAssets.helios.wordmark.height} className="mb-3 h-auto w-52 max-w-full object-contain" priority={!compact} />
               <p className="font-black uppercase tracking-[0.18em] text-sunshine">{copy.eyebrow}</p>
               <p className="mt-2 text-sm font-bold text-white/58">Guided public routing · Human review required</p>
             </div>
