@@ -44,6 +44,7 @@ Copy `.env.example` to an environment file managed outside the repository. Do no
 Required for production lead capture:
 
 - `DATABASE_URL`
+- `IP_HASH_SECRET`
 - `SMTP_HOST`
 - `SMTP_PORT`
 - `SMTP_USER`
@@ -57,6 +58,8 @@ Optional:
 - `CRM_WEBHOOK_URL`
 - `CRM_WEBHOOK_SECRET`
 - `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+
+`IP_HASH_SECRET` should be a long random value. The application stores an HMAC hash of client IPs for lead-submission audit correlation instead of storing raw IP addresses.
 
 ## Database Setup
 

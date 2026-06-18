@@ -15,7 +15,7 @@ test.describe('logo audit', () => {
       const headerBox = await header!.boundingBox();
       const logoBox = await logo!.boundingBox();
       if (!headerBox || !logoBox) {
-        test.fail(true, { message: 'Could not read bounding boxes' });
+        test.fail(true, 'Could not read bounding boxes');
         return;
       }
 

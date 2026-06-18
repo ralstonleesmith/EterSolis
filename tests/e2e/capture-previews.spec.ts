@@ -21,12 +21,20 @@ function htmlIndex(entries: Array<{ route: string; htmlFile: string; pngFile: st
 
 test('capture current page previews', async ({ page, baseURL }) => {
   await ensureDir(PREVIEWS_DIR);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   const entries: Array<{ route: string; htmlFile: string; pngFile: string }> = [];
 
   for (const route of routes) {
     await page.goto(`${baseURL ?? ''}${route}`, { waitUntil: 'load' });
     await page.waitForLoadState('networkidle').catch(() => undefined);
     await page.evaluate(() => document.fonts && document.fonts.ready).catch(() => undefined);
+    await page.locator('body').evaluate((body) => {
+      body.querySelectorAll('[style*="opacity"], [style*="transform"]').forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+      });
+    });
     await page.waitForTimeout(500);
 
     const htmlFile = filenameFor(route, 'html');

@@ -6,16 +6,7 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
-
-const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/sell-waste', label: 'Sell Waste' },
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/industries', label: 'Industries' },
-  { href: '/about', label: 'About' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/contact', label: 'Contact' }
-];
+import { navItems } from '@/lib/siteContent';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -32,8 +23,8 @@ export function Header() {
         <Link href="/" className="brand-no-background flex items-center" aria-label="EterSolis home" onClick={() => setOpen(false)}>
           <EterSolisLogo variant="dark" mode="mark" className="max-h-12 w-auto sm:hidden dark:hidden flex-none object-contain" />
           <EterSolisLogo variant="light" mode="mark" className="hidden max-h-12 w-auto dark:block sm:dark:hidden flex-none object-contain" />
-          <EterSolisLogo variant="dark" mode="full" className="hidden max-h-14 w-auto sm:block dark:hidden flex-none object-contain" />
-          <EterSolisLogo variant="light" mode="full" className="hidden max-h-14 w-auto sm:dark:block flex-none object-contain" />
+          <EterSolisLogo variant="dark" mode="full" className="hidden h-14 text-3xl sm:flex dark:hidden flex-none" />
+          <EterSolisLogo variant="light" mode="full" className="hidden h-14 text-3xl sm:dark:flex flex-none" />
         </Link>
         <nav className="hidden items-center gap-6 text-sm font-bold text-coal lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (

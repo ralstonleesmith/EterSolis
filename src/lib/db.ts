@@ -68,3 +68,11 @@ export async function storeLeadSubmission(payload: Record<string, unknown>) {
     client.release();
   }
 }
+
+export async function recordAuditEvent(eventType: string, metadata: Record<string, unknown> = {}, leadSubmissionId?: string) {
+  await getPool().query(
+    `insert into audit_events (id, event_type, lead_submission_id, metadata, created_at)
+     values ($1, $2, $3, $4::jsonb, now())`,
+    [crypto.randomUUID(), eventType, leadSubmissionId ?? null, JSON.stringify(metadata)]
+  );
+}
