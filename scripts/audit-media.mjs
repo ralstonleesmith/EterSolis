@@ -55,6 +55,15 @@ if (!existsSync(creditsPath)) {
 }
 
 const credits = JSON.parse(readFileSync(creditsPath, 'utf8'));
+const blockedAssetLabels = [
+  /\b0\d[_-]/i,
+  /icon[_ -]only/i,
+  /wordmark[_ -]with[_ -]tagline/i,
+  /logo[_ -]palette/i,
+  /color variants/i,
+  /monochrome variants/i,
+  /dark light backgrounds/i
+];
 
 for (const asset of credits.assets ?? []) {
   const required = ['id', 'path', 'type', 'title', 'credit', 'sourceUrl', 'license', 'licenseUrl', 'alt'];
@@ -86,6 +95,13 @@ for (const asset of credits.assets ?? []) {
 
   if (asset.dimensions?.width !== dimensions.width || asset.dimensions?.height !== dimensions.height) {
     fail(`${asset.id} metadata dimensions ${asset.dimensions?.width}x${asset.dimensions?.height} do not match file ${dimensions.width}x${dimensions.height}`);
+  }
+
+  if (asset.path.includes('/helios/') || asset.path.includes('/kymnis')) {
+    const searchable = `${asset.id} ${asset.path}`;
+    for (const blocked of blockedAssetLabels) {
+      if (blocked.test(searchable)) fail(`${asset.id} appears to reference a labeled variant board instead of a cropped production asset`);
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
 const globals = fs.readFileSync('src/app/globals.css', 'utf8');
-const requiredTokens = ['--surface', '--surface-muted', '--surface-strong', '--text-primary', '--text-muted', '--kymnis-green'];
+const requiredTokens = ['--surface', '--surface-muted', '--surface-strong', '--text-primary', '--text-muted', '--kymnis-teal', '--kymnis-gold', '--kymnis-ink', '--kymnis-white'];
 const failures = [];
 
 for (const token of requiredTokens) {
@@ -19,4 +19,3 @@ if (failures.length > 0) {
 }
 
 console.log('theme audit passed');
-

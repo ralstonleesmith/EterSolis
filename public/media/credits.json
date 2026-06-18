@@ -206,6 +206,66 @@
         "height": 1024
       },
       "alt": "Standalone KYMNIS mark with radiating arrows, circular intelligence rings and central cube."
+    },
+    {
+      "id": "helios-primary-lockup",
+      "path": "/media/helios/helios-primary-lockup.png",
+      "type": "brand-asset",
+      "title": "Helios cropped primary lockup",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 871,
+        "height": 214
+      },
+      "alt": "Cropped Helios logo lockup with orbital mark and wordmark."
+    },
+    {
+      "id": "helios-icon",
+      "path": "/media/helios/helios-icon.png",
+      "type": "brand-asset",
+      "title": "Helios cropped orbital icon",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 270,
+        "height": 234
+      },
+      "alt": "Cropped Helios orbital guidance mark."
+    },
+    {
+      "id": "helios-wordmark-tagline",
+      "path": "/media/helios/helios-wordmark-tagline.png",
+      "type": "brand-asset",
+      "title": "Helios cropped wordmark and tagline",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 394,
+        "height": 85
+      },
+      "alt": "Cropped Helios wordmark and guidance tagline."
+    },
+    {
+      "id": "helios-earth-splash",
+      "path": "/media/helios/helios-earth-splash.png",
+      "type": "brand-asset",
+      "title": "Helios Earth guidance splash",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 1400,
+        "height": 788
+      },
+      "alt": "Helios orbital guidance mark and wordmark over a connected view of Earth."
     }
   ]
 }

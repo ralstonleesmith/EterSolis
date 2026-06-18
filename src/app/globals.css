@@ -17,8 +17,12 @@
   --surface-strong: #f2f2f2;
   --text-primary: #000000;
   --text-muted: rgba(11, 18, 32, 0.78);
-  --kymnis-green: #48bb78;
-  --kymnis-blue: #38bdf8;
+  --kymnis-teal: #007D79;
+  --kymnis-gold: #D9A520;
+  --kymnis-ink: #2D2D2D;
+  --kymnis-white: #FFFFFF;
+  --kymnis-green: var(--kymnis-teal);
+  --kymnis-blue: #007D79;
 }
 
 .dark {
@@ -33,8 +37,12 @@
   --surface-strong: #151515;
   --text-primary: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.84);
-  --kymnis-green: #68d391;
-  --kymnis-blue: #67e8f9;
+  --kymnis-teal: #007D79;
+  --kymnis-gold: #D9A520;
+  --kymnis-ink: #2D2D2D;
+  --kymnis-white: #FFFFFF;
+  --kymnis-green: var(--kymnis-teal);
+  --kymnis-blue: #00A9A4;
 }
 
 * { box-sizing: border-box; }
@@ -180,8 +188,8 @@ a { color: inherit; text-decoration: none; }
 
 .kymnis-glow {
   background:
-    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--kymnis-green) 28%, transparent), transparent 30rem),
-    radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--sunshine) 22%, transparent), transparent 26rem);
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--kymnis-teal) 30%, transparent), transparent 30rem),
+    radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--kymnis-gold) 24%, transparent), transparent 26rem);
 }
 .dark .glass-panel {
   border-color: rgba(255, 255, 255, 0.12);

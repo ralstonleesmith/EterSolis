@@ -35,5 +35,50 @@ export const mediaAssets = {
       alt: 'Environmental lagoon at a modern biofactory and water recovery site.',
       credit: 'Periodista2252 via Wikimedia Commons, CC BY-SA 4.0'
     }
+  },
+  helios: {
+    icon: {
+      src: '/media/helios/helios-icon.png',
+      alt: 'Cropped Helios orbital guidance mark.',
+      width: 270,
+      height: 234,
+      credit: 'Helios controlled brand asset'
+    },
+    lockup: {
+      src: '/media/helios/helios-primary-lockup.png',
+      alt: 'Cropped Helios logo lockup with orbital mark and wordmark.',
+      width: 871,
+      height: 214,
+      credit: 'Helios controlled brand asset'
+    },
+    wordmark: {
+      src: '/media/helios/helios-wordmark-tagline.png',
+      alt: 'Cropped Helios wordmark and guidance tagline.',
+      width: 394,
+      height: 85,
+      credit: 'Helios controlled brand asset'
+    },
+    earthSplash: {
+      src: '/media/helios/helios-earth-splash.png',
+      alt: 'Helios orbital guidance mark and wordmark over a connected view of Earth.',
+      width: 1400,
+      height: 788,
+      credit: 'Helios controlled brand asset'
+    }
+  },
+  kymnis: {
+    mark: {
+      src: '/media/kymnis-logo-mark-only.png',
+      alt: 'KYMNIS standalone mark with radiating arrows, circular intelligence rings and central cube.',
+      width: 1024,
+      height: 1024,
+      credit: 'KYMNIS controlled brand asset'
+    },
+    palette: {
+      teal: '#007D79',
+      gold: '#D9A520',
+      ink: '#2D2D2D',
+      white: '#FFFFFF'
+    }
   }
 } as const;

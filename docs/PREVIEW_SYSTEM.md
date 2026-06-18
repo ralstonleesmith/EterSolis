@@ -18,7 +18,7 @@ Generated previews are preferred for final visual review because they reflect th
 
 ## Required Preview Coverage
 
-The review set must cover Home, Sell Waste, Solutions, Industries, About, Contact, Insights, Helios, Media Credits, Privacy and Terms.
+The review set must cover Home, Sell Waste, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001, Helios, KYMNIS Overview, KYMNIS How It Works, KYMNIS Verification, KYMNIS Resource Recovery, KYMNIS Contact, Media Credits, Privacy and Terms.
 
 ## Preview Update Rules
 
@@ -30,10 +30,12 @@ Update previews in the same pull request when page content, visible copy, hero l
 2. Generate live previews for final rendered review and open `previews/generated/index.html`.
 3. Review desktop and mobile screenshots.
 4. Confirm all pages use official EterSolis branding and transparent logo assets.
-5. Confirm no page is merely whitespace with listed text.
-6. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout.
-7. Confirm Sell Waste and Terms preserve non-binding and no-sample language.
-8. Record the approval decision in the pull request or release checklist.
+5. Confirm Helios and KYMNIS use cropped production assets with no visible variant labels, palette-board annotations or guide text.
+6. Confirm obsolete internal platform-separation terminology is absent from public copy and generated previews.
+7. Confirm no page is merely whitespace with listed text.
+8. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout.
+9. Confirm Sell Waste and Terms preserve non-binding and no-sample language.
+10. Record the approval decision in the pull request or release checklist.
 
 ## Approval States
 

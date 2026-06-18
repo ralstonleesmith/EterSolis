@@ -2,6 +2,26 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.3.2 — 2026-06-18T22:23:15Z
+
+### Scope
+
+- Added cropped production Helios brand assets for the launcher, inline prompt and guided-routing panel.
+- Replaced generic Helios visuals with the approved orbital mark, wordmark and Earth guidance splash.
+- Aligned KYMNIS UI tokens and hero treatment to the official teal, gold, ink and white palette.
+- Reinforced that legacy internal platform-separation terminology is obsolete outside protected disclosure-audit denylist logic.
+- Expanded media, theme and logo-route audits to guard against stale route coverage and source logo-variant board usage.
+
+### Documentation and Tracking
+
+- Updated README brand rules, preview-system review coverage and media-credit registry.
+- Bumped package and lockfile version metadata to `0.3.2`.
+
+### Validation
+
+- Required gates: `npm run check`, `npm audit --audit-level=moderate`, `npm run test:smoke` and `npm run preview:capture`.
+- Server-backed smoke and preview checks must run serially after clearing ignored Next.js/test artifacts.
+
 ## 0.3.1 — 2026-06-18T12:05:00Z
 
 ### Scope
