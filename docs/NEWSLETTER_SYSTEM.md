@@ -31,7 +31,7 @@ Required metadata:
 - Do not publish image-only issues as the primary web experience.
 - Include source notes for public statistics and alignment statements.
 - Avoid unsupported environmental, commercial or technical claims.
-- Do not disclose protected systems, pricing, counterparties or internal operating logic.
+- Do not disclose KYMNIS internal architecture, pricing, counterparties or internal operating logic.
 
 ## Workflow
 

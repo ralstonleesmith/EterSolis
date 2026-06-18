@@ -1,7 +1,22 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const ROUTES = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/insights/introducing-etersolis', '/sell-waste', '/solutions'];
+const ROUTES = [
+  '/',
+  '/about',
+  '/contact',
+  '/helios',
+  '/industries',
+  '/insights',
+  '/insights/introducing-etersolis',
+  '/kymnis',
+  '/kymnis/how-it-works',
+  '/kymnis/verification',
+  '/kymnis/resource-recovery',
+  '/kymnis/contact',
+  '/sell-waste',
+  '/solutions'
+];
 
 for (const route of ROUTES) {
   test(`a11y audit ${route}`, async ({ page, baseURL }) => {

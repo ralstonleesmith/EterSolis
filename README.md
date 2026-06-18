@@ -6,12 +6,12 @@
 
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
-**Status:** Active post-launch production website
-**Version:** 0.2.1
+**Status:** Active post-launch production website<br />
+**Version:** 0.3.1
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
-This repository contains the controlled Next.js website implementation, lead-capture foundation, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
+This repository contains the controlled Next.js website implementation, lead-capture foundation, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
 
 ---
 
@@ -22,7 +22,10 @@ The codebase includes:
 - Next.js App Router with TypeScript.
 - PNG-based EterSolis brand rendering.
 - Light and dark mode with accessible theme toggle.
-- Polished public pages for Sell Waste, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
+- Polished public pages for Sell Waste, Solutions, Industries, About, KYMNIS, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
+- Host-aware same-application routing foundation for `kymnis.com`, with `/kymnis` fallback routes on `etersolis.com`.
+- Helios v2 guided routing available across the website with EterSolis and KYMNIS modes.
+- Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Waste opportunity and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
@@ -62,6 +65,14 @@ Rules:
 /solutions        Resource, waste, carbon and circular economy solutions
 /industries       Industry-specific support
 /about            Company positioning and leadership
+/kymnis           KYMNIS environmental impact registration platform foundation
+/kymnis/how-it-works
+                  KYMNIS registration and improvement pathway
+/kymnis/verification
+                  KYMNIS verification-readiness pathway
+/kymnis/resource-recovery
+                  KYMNIS recovery pathway
+/kymnis/contact   KYMNIS platform interest intake
 /contact          Contact routes and inquiry form
 /insights         Published insight archive
 /insights/introducing-etersolis
@@ -87,7 +98,9 @@ src/components/ui/       Reusable UI primitives
 src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
 src/components/helios/   Helios guided routing interface
+src/components/kymnis/   KYMNIS public foundation components
 src/lib/                 Validation, env, email, CRM, DB, analytics and security utilities
+src/lib/internal/        Internal KYMNIS functionality scaffolding
 content/insights/        Structured Markdown insight and newsletter sources
 public/media/            PNG brand/media assets with documented credits
 previews/                Static executive review previews
@@ -120,6 +133,9 @@ npm run start
 npm run typecheck
 npm run lint
 npm run asset:audit
+npm run disclosure:audit
+npm run routes:check
+npm run theme:audit
 npm run link:audit
 npm run insights:validate
 npm run docs:check
@@ -171,6 +187,8 @@ See:
 
 Do not commit secrets. Use `.env.example` for placeholders.
 
+KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
+
 ---
 
 © 2026 EterSolis. All rights reserved.
@@ -178,7 +196,7 @@ Do not commit secrets. Use `.env.example` for placeholders.
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.2.1
+**Version:** 0.3.1
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
@@ -189,6 +207,11 @@ Do not commit secrets. Use `.env.example` for placeholders.
 - `/solutions` — Resource, waste, carbon and circular economy solutions
 - `/industries` — Industry-specific support
 - `/about` — Company positioning and leadership
+- `/kymnis` — KYMNIS environmental impact registration platform foundation
+- `/kymnis/how-it-works` — KYMNIS registration and improvement pathway
+- `/kymnis/verification` — KYMNIS verification-readiness pathway
+- `/kymnis/resource-recovery` — KYMNIS recovery pathway
+- `/kymnis/contact` — KYMNIS platform interest intake
 - `/contact` — Contact routes and inquiry form
 - `/insights` — Published insight archive
 - `/insights/introducing-etersolis` — EterSolis Newsletter Issue 001
@@ -204,6 +227,9 @@ Do not commit secrets. Use `.env.example` for placeholders.
 - `npm run docs:generate`
 - `npm run docs:check`
 - `npm run release:audit`
+- `npm run disclosure:audit`
+- `npm run routes:check`
+- `npm run theme:audit`
 - `npm run check`
 - `npm run test:smoke`
 - `npm run preview:capture`

@@ -4,7 +4,7 @@ import { mediaAssets } from '@/lib/media';
 
 export const metadata: Metadata = {
   title: 'Helios | EterSolis Guided Inquiry Routing',
-  description: 'Helios v1 routes EterSolis inquiries to the correct next step using controlled guided flows.',
+  description: 'Helios v2 routes EterSolis and KYMNIS inquiries to the correct next step using controlled guided flows.',
   alternates: { canonical: '/helios' },
   openGraph: {
     images: [{ url: '/media/og/etersolis-helios-og.png', width: 1600, height: 900, alt: mediaAssets.wastewater.hero.alt }]
@@ -13,5 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function HeliosPage() {
-  return <HeliosPanel />;
+  return (
+    <>
+      <HeliosPanel context="all" />
+      <HeliosPanel mode="kymnis" context="all" compact />
+    </>
+  );
 }

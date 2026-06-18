@@ -176,6 +176,36 @@
         "height": 900
       },
       "alt": "Optimized cover derivative from approved Issue 001 PDF"
+    },
+    {
+      "id": "kymnis-logo-mark",
+      "path": "/media/kymnis-logo-mark.png",
+      "type": "brand-asset",
+      "title": "KYMNIS logo mark",
+      "credit": "KYMNIS controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "KYMNIS controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "alt": "KYMNIS brand mark with radiating arrows, circular intelligence rings and central cube."
+    },
+    {
+      "id": "kymnis-logo-mark-only",
+      "path": "/media/kymnis-logo-mark-only.png",
+      "type": "brand-asset",
+      "title": "KYMNIS standalone mark",
+      "credit": "KYMNIS controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "KYMNIS controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      },
+      "alt": "Standalone KYMNIS mark with radiating arrows, circular intelligence rings and central cube."
     }
   ]
 }

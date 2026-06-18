@@ -5,7 +5,7 @@ import { PageHero } from '@/components/ui/PageHero';
 
 const principles = [
   ['Practical recovery', 'Waste is assessed through realistic reuse, recycling, recovery, valorization and responsible treatment pathways.'],
-  ['Controlled disclosure', 'Public communication stays commercially useful without exposing protected systems, counterparties or confidential methods.'],
+  ['Controlled disclosure', 'Public communication stays commercially useful without exposing KYMNIS internal architecture, counterparties or confidential methods.'],
   ['Applied science', 'Technical review, documentation discipline and operational feasibility guide the work.'],
   ['Commercial execution', 'EterSolis focuses on practical implementation, not unsupported sustainability claims.']
 ];

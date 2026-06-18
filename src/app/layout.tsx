@@ -3,6 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { HeliosLauncher } from '@/components/helios/HeliosLauncher';
 import { env } from '@/lib/env';
 import { mediaAssets } from '@/lib/media';
 
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a href="#main-content" className="skip-link">Skip to main content</a>
         <Header />
         <main id="main-content" tabIndex={-1}>{children}</main>
+        <HeliosLauncher />
         <div className="page-end-spacer" aria-hidden="true" />
         <Footer />
       </body>

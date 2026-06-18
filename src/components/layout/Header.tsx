@@ -18,7 +18,7 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-coal/10 bg-white/86 backdrop-blur-xl dark:border-white/10 dark:bg-black/78">
+    <header className="sticky top-0 z-50 border-b border-coal/10 bg-white/88 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur-xl dark:border-white/10 dark:bg-black/82">
       <div className="container-shell flex min-h-[78px] items-center justify-between gap-6">
         <Link href="/" className="brand-no-background flex items-center" aria-label="EterSolis home" onClick={() => setOpen(false)}>
           <EterSolisLogo variant="dark" mode="mark" className="max-h-12 w-auto sm:hidden dark:hidden flex-none object-contain" />
@@ -26,14 +26,14 @@ export function Header() {
           <EterSolisLogo variant="dark" mode="full" className="hidden h-14 text-3xl sm:flex dark:hidden flex-none" />
           <EterSolisLogo variant="light" mode="full" className="hidden h-14 text-3xl sm:dark:flex flex-none" />
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-bold text-coal lg:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-4 text-sm font-bold text-coal lg:flex xl:gap-6" aria-label="Primary navigation">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`rounded-full px-1.5 py-1 transition hover:text-carbon dark:hover:text-sunshine ${
-                isActive(item.href) ? 'bg-sunshine/20 text-carbon dark:text-sunshine' : ''
+              className={`rounded-full px-3 py-2 transition hover:bg-cool hover:text-carbon dark:hover:bg-white/10 dark:hover:text-sunshine ${
+                isActive(item.href) ? 'bg-sunshine/22 text-carbon dark:bg-sunshine/16 dark:text-sunshine' : ''
               }`}
             >
               {item.label}
@@ -42,7 +42,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
-          <Link href="/helios" className="hidden text-sm font-black text-coal hover:text-carbon dark:hover:text-sunshine md:inline-flex">
+          <Link href="/helios" className="hidden rounded-full border border-coal/10 px-4 py-3 text-sm font-black text-coal transition hover:border-sunshine hover:text-carbon dark:border-white/10 dark:hover:text-sunshine md:inline-flex">
             Talk to Helios
           </Link>
           <Link href="/sell-waste#waste-form" className="rounded-full bg-sunshine px-4 py-3 text-sm font-black text-black shadow-sm transition hover:translate-y-[-1px] sm:px-5">

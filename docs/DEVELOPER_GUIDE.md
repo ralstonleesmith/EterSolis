@@ -5,8 +5,9 @@ This guide defines collaboration, quality and error-minimization standards for t
 ## Working Principles
 
 - Preserve the public EterSolis position: privately owned waste and carbon management company.
+- Keep KYMNIS public-facing, high-level, non-confidential and non-certifying until a dedicated production platform is approved.
 - Use `EterSolis` as one word everywhere.
-- Do not expose protected systems, pricing logic, confidential counterparties, internal methodology, process conditions or hidden operational logic.
+- Do not expose KYMNIS internal architecture, pricing logic, confidential counterparties, internal methodology, process conditions or hidden operational logic.
 - Do not imply that a website form creates acceptance, purchase approval, transport approval, disposal instruction, technical advice, quote or contract.
 - Keep changes small, reviewable and traceable.
 - Prefer existing dependencies and native platform features before adding new packages.
@@ -36,6 +37,9 @@ Use the lowest-cost command that gives enough confidence for the change:
 npm run typecheck
 npm run lint
 npm run asset:audit
+npm run disclosure:audit
+npm run routes:check
+npm run theme:audit
 npm run link:audit
 npm run build
 npm run check
@@ -60,7 +64,9 @@ src/components/ui/       Reusable page-level UI components
 src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
 src/components/helios/   Helios guided routing interface
+src/components/kymnis/   KYMNIS public foundation components
 src/lib/                 Server utilities, validation, email, CRM, DB, analytics and security
+src/lib/internal/        Internal KYMNIS functionality scaffolding
 public/media/            Self-hosted PNG brand and media assets with credits
 previews/                Executive static review previews
 scripts/                 Low-dependency maintenance, audit and preview helpers
@@ -105,6 +111,7 @@ Before merge, confirm:
 - Previews accurately reflect current pages.
 - README and relevant docs are current.
 - No secret, credential, key, password or restricted operational detail is committed.
+- `npm run disclosure:audit` passes for KYMNIS internal-functionality boundaries.
 - Public wording remains careful, non-promissory and commercially appropriate.
 
 ## Version and Documentation Enforcement

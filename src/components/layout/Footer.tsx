@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
-import { contactRoutes } from '@/lib/siteContent';
+import { contactRoutes, kymnisRoutes } from '@/lib/siteContent';
 
 export function Footer() {
   return (
@@ -14,7 +14,7 @@ export function Footer() {
           <div className="mt-8 flex gap-3">
             <EterSolisLogo variant="light" mode="mark" className="h-14 w-auto object-contain" title="EterSolis mark" />
             <div className="h-16 w-px bg-white/20" />
-            <p className="max-w-sm text-xs font-bold uppercase leading-6 tracking-normal text-sunshine">Official transparent mark usage. No background box.</p>
+            <p className="max-w-sm text-xs font-bold uppercase leading-6 tracking-normal text-sunshine">EterSolis marks, systems, source code and protected operating methods are reserved property.</p>
           </div>
         </div>
         <div>
@@ -33,6 +33,7 @@ export function Footer() {
           <ul className="mt-3 space-y-3 text-sm text-white/76">
             <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
             <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
+            <li><Link href={kymnisRoutes[0]} className="hover:text-white">KYMNIS</Link></li>
             <li><Link href="/insights/introducing-etersolis" className="hover:text-white">Newsletter Issue 001</Link></li>
             <li><Link href="/media-credits" className="hover:text-white">Media Credits</Link></li>
             <li><Link href="/contact#contact-form" className="hover:text-white">Contact</Link></li>
