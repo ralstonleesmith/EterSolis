@@ -71,6 +71,16 @@ test('contact stepper and Helios wizard route users', async ({ page }) => {
   await page.screenshot({ path: 'test-results/screenshots/helios-wizard.png', fullPage: true });
 });
 
+test('KYMNIS public foundation and guided interest intake render', async ({ page }) => {
+  await page.goto('/kymnis');
+  await expect(page.getByRole('heading', { name: /Verified Truth\. Responsible Action\. Measurable Impact\./i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Register interest/i }).first()).toHaveAttribute('href', '/kymnis/contact');
+  await page.goto('/kymnis/contact');
+  await expect(page.getByRole('heading', { name: /Register non-confidential KYMNIS interest/i })).toBeVisible();
+  await expect(page.getByLabel(/Topic/i)).toHaveValue('KYMNIS');
+  await page.screenshot({ path: 'test-results/screenshots/kymnis-contact.png', fullPage: true });
+});
+
 test('insights publishes newsletter issue 001 with PDF and print routes', async ({ page }) => {
   await page.goto('/insights');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i })).toBeVisible();

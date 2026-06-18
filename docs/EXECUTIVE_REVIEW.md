@@ -45,7 +45,7 @@ Confirm:
 - EterSolis is described as a privately owned waste and carbon management company.
 - Public language emphasizes practical problem solving, service reliability, responsible resource recovery and environmental protection.
 - Copy avoids unsupported impact claims, greenwashing and public-authority positioning.
-- Copy does not disclose protected systems, formulas, pricing logic, confidential partners or internal process details.
+- Copy does not disclose KYMNIS internal architecture, formulas, pricing logic, confidential partners or internal process details.
 
 ## Waste Submission Review
 

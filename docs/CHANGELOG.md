@@ -2,6 +2,47 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.3.1 — 2026-06-18T12:05:00Z
+
+### Scope
+
+- Upgraded Helios visual hierarchy, mode-specific copy, routing cards, guardrail presentation and launcher responsiveness.
+- Added a stronger inline Helios prompt on the homepage and improved KYMNIS/EterSolis routing presentation.
+- Refined shared UI surfaces with lift transitions, signal-grid texture, polished header active states and stronger dark/light presentation.
+- Fixed KYMNIS light-mode contrast issues found by Playwright accessibility scans.
+- Updated Helios route coverage so the full assistant page exposes all EterSolis and KYMNIS route options.
+- Updated smoke tests after KYMNIS copy changes.
+
+### Validation
+
+- Required gates: `npm run check`, `npm run test:smoke`, `npm run preview:capture` and `npm audit --audit-level=moderate`.
+- `npm run check` passed after the Helios/UI and documentation updates.
+- `npm run preview:capture` completed once and generated refreshed local previews under `previews/generated/`; a later rerun was blocked by local sandbox port permissions after contrast/test copy fixes.
+- `npm run test:smoke` found KYMNIS contrast and stale-copy test issues, which were fixed; rerun was blocked by local sandbox port permissions.
+- `npm audit --audit-level=moderate` currently reports the known Nodemailer advisory requiring a breaking `nodemailer@9.0.1` upgrade; network access is required to fetch and validate that dependency update.
+- Changelog entry created with ISO UTC timestamp for release traceability.
+
+## 0.3.0 — 2026-06-18T11:30:00Z
+
+### Scope
+
+- Added the KYMNIS platform foundation route family for overview, simple reporting pathway, verification, resource recovery and platform interest intake.
+- Added host-aware same-application routing so `kymnis.com` can resolve to the KYMNIS public foundation while retaining `/kymnis` fallback routes.
+- Upgraded Helios to v2 with shared guided-routing intents, KYMNIS mode, inline prompts and a sitewide launcher.
+- Added internal KYMNIS functionality scaffolding under `src/lib/internal/` with public disclosure guardrails.
+- Expanded contact routing with KYMNIS inquiry handling and environment configuration.
+
+### Documentation and Tracking
+
+- Updated README, developer guidance, versioning guidance and internal implementation notes.
+- Added disclosure, route and theme audits to the required quality gate.
+- Expanded preview and Playwright route coverage to include KYMNIS pages.
+
+### Validation
+
+- Required gates: `npm run check`, `npm run test:smoke`, `npm run preview:capture` and `npm audit --audit-level=moderate`.
+- Changelog entry created with ISO UTC timestamp for release traceability.
+
 ## 0.2.1 — 2026-06-18T10:13:00Z
 
 ### Scope
@@ -90,7 +131,7 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 - Upgraded Helios v0 from simple link chips into a branded guided-routing panel.
 - Added transparent EterSolis mark usage.
 - Added route icons and clear guardrail chips.
-- Reinforced no-pricing, no-acceptance, no-hazardous-instructions, and no-protected-system-disclosure guardrails.
+- Reinforced no-pricing, no-acceptance, no-hazardous-instructions, and no-internal-architecture-disclosure guardrails.
 
 ### Executive HTML Previews
 

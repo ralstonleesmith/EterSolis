@@ -4,6 +4,7 @@ import { contactLeadSchema } from '@/lib/validators';
 
 function routeForTopic(topic: string) {
   if (topic === 'Partnership') return { route: env.partnershipsRouteEmail, prefix: '[EterSolis Partnership Inquiry]' };
+  if (topic === 'KYMNIS') return { route: env.kymnisRouteEmail, prefix: '[KYMNIS Inquiry]' };
   if (topic === 'Executive') return { route: env.ceoRouteEmail, prefix: '[EterSolis Executive Inquiry]' };
   if (topic === 'Scientific / CSO') return { route: env.csoRouteEmail, prefix: '[EterSolis CSO Inquiry]' };
   if (topic === 'Careers / Associate') return { route: env.csoRouteEmail, prefix: '[EterSolis Talent Inquiry]' };

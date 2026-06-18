@@ -17,6 +17,11 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/solutions\` — Resource, waste, carbon and circular economy solutions
 - \`/industries\` — Industry-specific support
 - \`/about\` — Company positioning and leadership
+- \`/kymnis\` — KYMNIS environmental impact registration platform foundation
+- \`/kymnis/how-it-works\` — KYMNIS registration and improvement pathway
+- \`/kymnis/verification\` — KYMNIS verification-readiness pathway
+- \`/kymnis/resource-recovery\` — KYMNIS recovery pathway
+- \`/kymnis/contact\` — KYMNIS platform interest intake
 - \`/contact\` — Contact routes and inquiry form
 - \`/insights\` — Published insight archive
 - \`/insights/introducing-etersolis\` — EterSolis Newsletter Issue 001
@@ -32,6 +37,9 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`npm run docs:generate\`
 - \`npm run docs:check\`
 - \`npm run release:audit\`
+- \`npm run disclosure:audit\`
+- \`npm run routes:check\`
+- \`npm run theme:audit\`
 - \`npm run check\`
 - \`npm run test:smoke\`
 - \`npm run preview:capture\`

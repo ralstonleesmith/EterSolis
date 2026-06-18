@@ -1,7 +1,17 @@
 import type { MetadataRoute } from 'next';
-import { siteRoutes } from '@/lib/siteContent';
+import { kymnisRoutes, siteRoutes } from '@/lib/siteContent';
 
-const routes = ['', ...siteRoutes.filter((route) => route !== '/'), '/helios', '/insights/introducing-etersolis', '/media-credits', '/privacy', '/terms'];
+const siteRouteSet = new Set<string>(siteRoutes);
+const routes = [
+  '',
+  ...siteRoutes.filter((route) => route !== '/'),
+  ...kymnisRoutes.filter((route) => !siteRouteSet.has(route)),
+  '/helios',
+  '/insights/introducing-etersolis',
+  '/media-credits',
+  '/privacy',
+  '/terms'
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BriefcaseBusiness, Crown, FlaskConical, Handshake, Mail, Scale, Send } from 'lucide-react';
+import { BriefcaseBusiness, Crown, FlaskConical, Handshake, Mail, Network, Scale, Send } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { PageHero } from '@/components/ui/PageHero';
 import { ReviewPrinciples } from '@/components/sections/ReviewPrinciples';
@@ -10,6 +10,7 @@ const routeIcons = {
   waste: Send,
   general: Mail,
   partnerships: Handshake,
+  kymnis: Network,
   ceo: Crown,
   cso: FlaskConical,
   privacy: Scale,

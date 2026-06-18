@@ -6,6 +6,7 @@ import { ProblemOrbit } from '@/components/sections/ProblemOrbit';
 import { IndustryMosaic } from '@/components/sections/IndustryMosaic';
 import { WastewaterTreatmentFeature } from '@/components/sections/WastewaterTreatmentFeature';
 import { ReviewPrinciples } from '@/components/sections/ReviewPrinciples';
+import { HeliosPrompt } from '@/components/helios/HeliosPrompt';
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <ReviewPrinciples />
       <ProblemOrbit />
       <SolutionGrid />
+      <HeliosPrompt context="recovery" title="Need the fastest safe route into EterSolis?" />
       <IndustryMosaic />
       <HeliosPanel />
     </>

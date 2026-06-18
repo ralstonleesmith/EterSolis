@@ -19,9 +19,12 @@ EterSolis uses PR-level SemVer. Every merged pull request, including small docum
 1. Run `npm run version:bump -- --patch` unless a minor or major bump is explicitly justified.
 2. Update `docs/CHANGELOG.md` with `## x.y.z — YYYY-MM-DDTHH:MM:SSZ`.
 3. Update README and relevant docs when routes, scripts, content, deployment, forms or public behavior change.
-4. Run `npm run check` before pushing.
-5. Record preview status and validation commands in the changelog.
+4. Run `npm run docs:generate` when README generated sections are affected.
+5. Run `npm run check` before pushing.
+6. Record preview status and validation commands in the changelog.
 
 ## Enforcement
 
 `npm run release:audit` fails when package and lockfile versions diverge, the changelog entry is missing, the timestamp format is invalid or source/content changes omit README updates.
+
+`npm run check` also runs disclosure, route and theme audits. These checks protect KYMNIS internal functionality, confirm public route coverage and prevent visual-token regressions.
