@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const ROUTES = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/sell-waste', '/solutions'];
+const ROUTES = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/insights/introducing-etersolis', '/sell-waste', '/solutions'];
 
 test.describe('logo audit', () => {
   for (const route of ROUTES) {

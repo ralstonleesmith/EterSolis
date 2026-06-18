@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { siteRoutes } from '@/lib/siteContent';
 
-const routes = ['', ...siteRoutes.filter((route) => route !== '/'), '/helios', '/media-credits', '/privacy', '/terms'];
+const routes = ['', ...siteRoutes.filter((route) => route !== '/'), '/helios', '/insights/introducing-etersolis', '/media-credits', '/privacy', '/terms'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({

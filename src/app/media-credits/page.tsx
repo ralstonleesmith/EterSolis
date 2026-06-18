@@ -21,6 +21,7 @@ function previewPathFor(assetId: string, fallback: string) {
   if (assetId === 'wastewater-aeration-tank-bengaluru') return mediaAssets.wastewater.aeration.previewSrc;
   if (assetId === 'wastewater-stp-aerial-bengaluru') return mediaAssets.wastewater.aerial.previewSrc;
   if (assetId === 'biofactoria-santiago-lagoon') return mediaAssets.wastewater.lagoon.previewSrc;
+  if (assetId === 'etersolis-newsletter-issue-001-pdf') return '/media/newsletters/issue-001/cover.jpg';
   return fallback;
 }
 
@@ -78,7 +79,7 @@ export default function MediaCreditsPage() {
                     </div>
                     <div>
                       <dt className="font-black text-carbon dark:text-white">Dimensions</dt>
-                      <dd>{asset.dimensions.width} × {asset.dimensions.height}</dd>
+                      <dd>{asset.dimensions.width && asset.dimensions.height ? `${asset.dimensions.width} × ${asset.dimensions.height}` : 'Document asset'}</dd>
                     </div>
                   </dl>
                   <div className="mt-6 flex flex-wrap gap-3">

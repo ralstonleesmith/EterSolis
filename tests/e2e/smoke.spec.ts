@@ -70,3 +70,14 @@ test('contact stepper and Helios wizard route users', async ({ page }) => {
   await expect(page.getByRole('link', { name: /Request wastewater assessment/i })).toHaveAttribute('href', '/contact#contact-form');
   await page.screenshot({ path: 'test-results/screenshots/helios-wizard.png', fullPage: true });
 });
+
+test('insights publishes newsletter issue 001 with PDF and print routes', async ({ page }) => {
+  await page.goto('/insights');
+  await expect(page.getByRole('heading', { name: /Introducing EterSolis/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Read the issue/i })).toHaveAttribute('href', '/insights/introducing-etersolis');
+  await page.goto('/insights/introducing-etersolis');
+  await expect(page.getByRole('heading', { name: /Introducing EterSolis/i }).first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: /The EterSolis Resource Hierarchy/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Download original PDF/i })).toHaveAttribute('href', '/media/newsletters/issue-001/etersolis-newsletter-issue-001.pdf');
+  await expect(page.getByRole('link', { name: /Print view/i })).toHaveAttribute('href', '/insights/introducing-etersolis/print');
+});

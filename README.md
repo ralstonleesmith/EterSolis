@@ -6,11 +6,12 @@
 
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
-**Status:** Active production-quality website upgrade
+**Status:** Active post-launch production website
+**Version:** 0.2.1
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
-This repository contains the controlled Next.js website implementation, lead-capture foundation, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
+This repository contains the controlled Next.js website implementation, lead-capture foundation, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
 
 ---
 
@@ -21,7 +22,8 @@ The codebase includes:
 - Next.js App Router with TypeScript.
 - PNG-based EterSolis brand rendering.
 - Light and dark mode with accessible theme toggle.
-- Polished public pages for Sell Waste, Solutions, Industries, About, Contact, Insights, Helios, Media Credits, Privacy and Terms.
+- Polished public pages for Sell Waste, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
+- Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Waste opportunity and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
 - Self-hosting and deployment documentation.
@@ -61,7 +63,9 @@ Rules:
 /industries       Industry-specific support
 /about            Company positioning and leadership
 /contact          Contact routes and inquiry form
-/insights         Controlled insight library shell
+/insights         Published insight archive
+/insights/introducing-etersolis
+                  EterSolis Newsletter Issue 001
 /helios           Guided routing assistant
 /media-credits    Website media attribution
 /privacy          Privacy notice
@@ -84,6 +88,7 @@ src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
 src/components/helios/   Helios guided routing interface
 src/lib/                 Validation, env, email, CRM, DB, analytics and security utilities
+content/insights/        Structured Markdown insight and newsletter sources
 public/media/            PNG brand/media assets with documented credits
 previews/                Static executive review previews
 tests/e2e/               Smoke, accessibility, visual and preview capture tests
@@ -116,12 +121,28 @@ npm run typecheck
 npm run lint
 npm run asset:audit
 npm run link:audit
+npm run insights:validate
+npm run docs:check
+npm run release:audit
 npm run build
 npm run check
 npm run test:smoke
 npm run test:visual
 npm run preview:capture
+npm run newsletter:export -- --slug introducing-etersolis
 ```
+
+## Versioning and Change Tracking
+
+Every pull request must update the project version, changelog and relevant documentation. The default change is a SemVer patch bump.
+
+```bash
+npm run version:bump -- --patch
+npm run docs:generate
+npm run check
+```
+
+See [`docs/VERSIONING.md`](./docs/VERSIONING.md).
 
 ---
 
@@ -139,6 +160,8 @@ See:
 - [`docs/PREVIEW_SYSTEM.md`](./docs/PREVIEW_SYSTEM.md)
 - [`docs/EXECUTIVE_REVIEW.md`](./docs/EXECUTIVE_REVIEW.md)
 - [`docs/DEVELOPER_GUIDE.md`](./docs/DEVELOPER_GUIDE.md)
+- [`docs/NEWSLETTER_SYSTEM.md`](./docs/NEWSLETTER_SYSTEM.md)
+- [`docs/VERSIONING.md`](./docs/VERSIONING.md)
 - [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md)
 - [`docs/ci-cost-optimizations.md`](./docs/ci-cost-optimizations.md)
 
@@ -151,3 +174,37 @@ Do not commit secrets. Use `.env.example` for placeholders.
 ---
 
 © 2026 EterSolis. All rights reserved.
+
+<!-- DOCS:GENERATED START -->
+## Generated Project Index
+
+**Version:** 0.2.1
+**Content system:** Structured Markdown insights in `content/insights/*.md`
+**Primary quality gate:** `npm run check`
+
+### Current Public Routes
+
+- `/` — Homepage
+- `/sell-waste` — Waste opportunity intake
+- `/solutions` — Resource, waste, carbon and circular economy solutions
+- `/industries` — Industry-specific support
+- `/about` — Company positioning and leadership
+- `/contact` — Contact routes and inquiry form
+- `/insights` — Published insight archive
+- `/insights/introducing-etersolis` — EterSolis Newsletter Issue 001
+- `/helios` — Guided routing assistant
+- `/media-credits` — Website media attribution
+- `/privacy` — Privacy notice
+- `/terms` — Website terms and non-binding submission notices
+
+### Required Change-Control Scripts
+
+- `npm run version:bump -- --patch`
+- `npm run insights:validate`
+- `npm run docs:generate`
+- `npm run docs:check`
+- `npm run release:audit`
+- `npm run check`
+- `npm run test:smoke`
+- `npm run preview:capture`
+<!-- DOCS:GENERATED END -->

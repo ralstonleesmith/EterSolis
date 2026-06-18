@@ -9,7 +9,7 @@ export function Footer() {
         <div className="md:col-span-2">
           <EterSolisLogo variant="light" mode="full" className="flex h-20 text-3xl" />
           <p className="mt-5 max-w-xl text-sm leading-7 text-white/76">
-            Waste & Carbon Management. Resource Recovery | Wastewater Treatment | Circular Economy | Carbon Management | Waste Valorization | Industrial Decarbonization.
+            Resource-first thinking, applied science, practical stewardship and long-term value for waste, water, materials and circular economy systems.
           </p>
           <div className="mt-8 flex gap-3">
             <EterSolisLogo variant="light" mode="mark" className="h-14 w-auto object-contain" title="EterSolis mark" />
@@ -33,6 +33,7 @@ export function Footer() {
           <ul className="mt-3 space-y-3 text-sm text-white/76">
             <li><Link href="/privacy" className="hover:text-white">Privacy</Link></li>
             <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
+            <li><Link href="/insights/introducing-etersolis" className="hover:text-white">Newsletter Issue 001</Link></li>
             <li><Link href="/media-credits" className="hover:text-white">Media Credits</Link></li>
             <li><Link href="/contact#contact-form" className="hover:text-white">Contact</Link></li>
             <li><Link href="/sell-waste#waste-form" className="hover:text-white">Sell Waste</Link></li>

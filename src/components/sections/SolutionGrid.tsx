@@ -21,7 +21,7 @@ export function SolutionGrid() {
           <SectionHeader
             eyebrow="Core solutions"
             title="A commercial architecture for recovery, carbon and circular execution."
-            description="Each solution is framed around a practical problem, a disciplined EterSolis response, the data needed for review and a controlled next step."
+            description="Each solution follows the Issue 001 operating standard: science-based review, systems thinking, circularity, practicality and long-term stewardship."
             invert
           />
           <Link href="/solutions" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-black text-carbon transition hover:bg-sunshine">

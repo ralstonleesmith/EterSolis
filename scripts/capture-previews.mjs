@@ -12,6 +12,7 @@ const routes = [
   '/helios',
   '/industries',
   '/insights',
+  '/insights/introducing-etersolis',
   '/media-credits',
   '/privacy',
   '/sell-waste',

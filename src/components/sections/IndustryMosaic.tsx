@@ -22,7 +22,7 @@ export function IndustryMosaic() {
           <SectionHeader
             eyebrow="Industries served"
             title="Built for organizations with real material flow."
-            description="EterSolis supports public, industrial and commercial operators where waste, resources and carbon exposure intersect."
+            description="EterSolis supports operators with material flows that need characterization, hierarchy-based routing and practical recovery decisions."
           />
           <Link href="/industries" className="inline-flex items-center gap-2 rounded-full border border-coal/30 bg-white px-5 py-3 text-sm font-black text-carbon transition hover:border-sunshine">
             View industries <ArrowUpRight className="h-4 w-4" />

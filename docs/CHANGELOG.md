@@ -2,6 +2,26 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.2.1 — 2026-06-18T10:13:00Z
+
+### Scope
+
+- Published EterSolis Newsletter Issue 001 as an accessible HTML insight with the approved PDF retained for download.
+- Added a deterministic structured-Markdown newsletter source system and print/export route.
+- Added PR-level versioning, release audit, documentation checks and newsletter validation.
+- Replaced the Insights placeholder with a real issue archive and featured newsletter entry.
+
+### Documentation and Tracking
+
+- Added `docs/VERSIONING.md` with SemVer patch-per-PR rules, timestamped changelog requirements and enforcement notes.
+- Added `docs/NEWSLETTER_SYSTEM.md` with editorial, accessibility, metadata and export standards.
+- Updated README generated sections to list current routes, scripts and version-control commands.
+
+### Validation
+
+- Planned required gates: `npm run check`, `npm run test:smoke`, `npm run preview:capture` and `npm audit --audit-level=moderate`.
+- Changelog entry created with ISO UTC timestamp for release traceability.
+
 ## 2026-06-15 — Repository Audit, Documentation, Brand Asset, and Preview-System Pass
 
 ### Repository Inspection
