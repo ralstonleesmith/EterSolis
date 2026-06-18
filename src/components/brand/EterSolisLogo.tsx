@@ -20,8 +20,8 @@ export function EterSolisLogo({ variant = 'dark', mode = 'full', className, titl
   }
 
   return (
-    <div className={`inline-flex items-center gap-3 ${className ?? ''}`} aria-label={title}>
-      <Image src={MARK_SRC} alt="" width={64} height={122} priority />
+    <div className={`brand-no-background items-center gap-3 ${className ?? ''}`} aria-label={title}>
+      <Image src={MARK_SRC} alt="" width={64} height={122} className="h-full w-auto object-contain" priority />
       <span className={`font-black tracking-wide ${textClass}`}>EterSolis</span>
     </div>
   );

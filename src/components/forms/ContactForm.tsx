@@ -4,10 +4,10 @@ import { FormEvent, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, CheckCircle2, Send } from 'lucide-react';
 import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 import { useDraftedForm } from '@/components/forms/useDraftedForm';
+import { contactTopics } from '@/lib/siteContent';
 
 const fieldClass = 'rounded-lg border border-coal/20 bg-white px-4 py-3 text-carbon shadow-sm transition placeholder:text-coal/45 focus:border-sunshine dark:border-white/10 dark:bg-black/45 dark:text-white dark:placeholder:text-white/35';
 const labelClass = 'grid gap-2 text-sm font-black text-carbon dark:text-white';
-const topics = ['Consultation / Assessment', 'Wastewater Treatment', 'Partnership', 'Executive', 'Scientific / CSO', 'Careers / Associate', 'Privacy', 'General'];
 const steps = ['Route', 'Identity', 'Message'];
 
 export function ContactForm() {
@@ -114,7 +114,7 @@ export function ContactForm() {
       </div>
 
       <section data-form-step="0" className={step === 0 ? 'grid gap-5' : 'hidden'}>
-        <label className={labelClass}>Topic<select name="topic" required className={fieldClass}>{topics.map((topic) => <option key={topic}>{topic}</option>)}</select></label>
+        <label className={labelClass}>Topic<select name="topic" required className={fieldClass}>{contactTopics.map((topic) => <option key={topic}>{topic}</option>)}</select></label>
       </section>
 
       <section data-form-step="1" className={step === 1 ? 'grid gap-5 md:grid-cols-2' : 'hidden'}>

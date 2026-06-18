@@ -1,20 +1,13 @@
 import Link from 'next/link';
 import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
-
-const routes = [
-  ['Waste opportunities', 'waste@etersolis.com'],
-  ['General inquiries', 'info@etersolis.com'],
-  ['Partnerships', 'partnerships@etersolis.com'],
-  ['Founder & CEO', 'smith@etersolis.com'],
-  ['Chief Scientific Officer', 'cso@etersolis.com']
-];
+import { contactRoutes } from '@/lib/siteContent';
 
 export function Footer() {
   return (
     <footer className="dark-gradient text-white">
       <div className="container-shell grid gap-10 py-20 md:grid-cols-4">
         <div className="md:col-span-2">
-          <EterSolisLogo variant="light" mode="full" className="h-20 w-auto" />
+          <EterSolisLogo variant="light" mode="full" className="flex h-20 text-3xl" />
           <p className="mt-5 max-w-xl text-sm leading-7 text-white/76">
             Waste & Carbon Management. Resource Recovery | Wastewater Treatment | Circular Economy | Carbon Management | Waste Valorization | Industrial Decarbonization.
           </p>
@@ -27,7 +20,7 @@ export function Footer() {
         <div>
           <p className="font-black text-white">Routes</p>
           <ul className="mt-3 space-y-3 text-sm text-white/76">
-            {routes.map(([label, email]) => (
+            {contactRoutes.slice(0, 5).map(({ label, email }) => (
               <li key={email}>
                 <span className="block text-xs font-black uppercase tracking-wide text-sunshine">{label}</span>
                 <a href={`mailto:${email}`} className="hover:text-white">{email}</a>

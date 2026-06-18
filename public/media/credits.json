@@ -14,7 +14,7 @@
   "assets": [
     {
       "id": "etersolis-resource-recovery-hero",
-      "path": "/media/generated/etersolis-resource-recovery-hero.png",
+      "path": "/media/heroes/etersolis-resource-recovery-hero.png",
       "type": "ai-generated",
       "title": "EterSolis resource recovery facility hero",
       "credit": "Generated with OpenAI image generation for EterSolis",
@@ -29,7 +29,7 @@
     },
     {
       "id": "etersolis-wastewater-treatment-hero",
-      "path": "/media/generated/etersolis-wastewater-treatment-hero.png",
+      "path": "/media/heroes/etersolis-wastewater-treatment-hero.png",
       "type": "ai-generated",
       "title": "EterSolis wastewater treatment facility hero",
       "credit": "Generated with OpenAI image generation for EterSolis",

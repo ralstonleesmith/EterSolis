@@ -4,16 +4,17 @@ import { ContactForm } from '@/components/forms/ContactForm';
 import { PageHero } from '@/components/ui/PageHero';
 import { ReviewPrinciples } from '@/components/sections/ReviewPrinciples';
 import { mediaAssets } from '@/lib/media';
+import { contactRoutes } from '@/lib/siteContent';
 
-const routes = [
-  { icon: Send, label: 'Waste opportunities', email: 'waste@etersolis.com', purpose: 'Waste purchase, material stream, by-product and recovery inquiries.' },
-  { icon: Mail, label: 'General inquiries', email: 'info@etersolis.com', purpose: 'General contact and low-specificity website inquiries.' },
-  { icon: Handshake, label: 'Partnerships', email: 'partnerships@etersolis.com', purpose: 'Recovery partners, universities, logistics, labs, technology and commercial partners.' },
-  { icon: Crown, label: 'Founder and CEO', email: 'smith@etersolis.com', purpose: 'Executive, strategic, investor and high-value commercial inquiries.' },
-  { icon: FlaskConical, label: 'Chief Scientific Officer', email: 'cso@etersolis.com', purpose: 'Technical, scientific, disclosure, talent and controlled documentation matters.' },
-  { icon: Scale, label: 'Privacy/legal', email: 'privacy@etersolis.com', purpose: 'Privacy requests, data subject requests and website policy contacts.' },
-  { icon: BriefcaseBusiness, label: 'Talent inquiries', email: 'careers@etersolis.com', purpose: 'Career and Associate Program inquiries when public intake is activated.' }
-];
+const routeIcons = {
+  waste: Send,
+  general: Mail,
+  partnerships: Handshake,
+  ceo: Crown,
+  cso: FlaskConical,
+  privacy: Scale,
+  talent: BriefcaseBusiness
+} as const;
 
 export const metadata: Metadata = {
   title: 'Contact EterSolis | Wastewater, Waste Opportunities, Assessments and Partnerships',
@@ -44,7 +45,9 @@ export default function ContactPage() {
         <div className="container-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
             <div className="grid gap-4">
-              {routes.map(({ icon: Icon, label, email, purpose }) => (
+              {contactRoutes.map(({ key, label, email, purpose }) => {
+                const Icon = routeIcons[key];
+                return (
                 <article key={email} className="card-hover rounded-lg border border-coal/10 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
                   <div className="flex gap-4">
                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-sunshine text-black"><Icon className="h-5 w-5" /></div>
@@ -55,7 +58,8 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
           </div>
           <div id="contact-form" className="scroll-mt-28">

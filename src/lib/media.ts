@@ -1,6 +1,6 @@
 export const mediaAssets = {
   hero: {
-    src: '/media/generated/etersolis-resource-recovery-hero.png',
+    src: '/media/heroes/etersolis-resource-recovery-hero.png',
     ogSrc: '/media/og/etersolis-home-og.png',
     alt: 'A clean modern materials recovery facility with conveyors carrying sorted recyclable material.',
     credit: 'Generated with OpenAI image generation for EterSolis'
@@ -13,7 +13,7 @@ export const mediaAssets = {
   },
   wastewater: {
     hero: {
-      src: '/media/generated/etersolis-wastewater-treatment-hero.png',
+      src: '/media/heroes/etersolis-wastewater-treatment-hero.png',
       alt: 'A clean modern wastewater treatment facility with clarifiers, aeration basins and professional water recovery infrastructure.',
       credit: 'Generated with OpenAI image generation for EterSolis'
     },

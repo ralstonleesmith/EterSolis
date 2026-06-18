@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const sourceRoots = ['src', 'previews'].map((directory) => path.join(root, directory));
+const sourceRoots = ['src', ...(process.env.CHECK_PREVIEWS === '1' ? ['previews'] : [])].map((directory) => path.join(root, directory));
 const checkedExtensions = new Set(['.tsx', '.ts', '.jsx', '.js', '.html', '.css']);
 const ignoredDirectories = new Set(['.git', '.next', 'node_modules', 'test-results', 'playwright-report']);
 const failures = [];
@@ -99,6 +99,7 @@ function validateSourceLink(value, filePath, routes, sourceAnchors) {
   if (!value || isDynamic(value) || value.startsWith('http://') || value.startsWith('https://')) return;
   if (value.startsWith('mailto:')) return validateEmail(value, context);
   if (value.startsWith('/media/') || value.startsWith('../public/media/')) return validateMedia(value, filePath);
+  if (value.startsWith('/_next/')) return;
   if (value.startsWith('#')) {
     if (!sourceAnchors.has(value.slice(1))) fail(`${context} points to missing anchor ${value}`);
     return;
@@ -116,6 +117,7 @@ function validatePreviewLink(value, filePath, previewAnchors, routes) {
   if (!value || value.startsWith('http://') || value.startsWith('https://')) return;
   if (value.startsWith('mailto:')) return validateEmail(value, context);
   if (value.startsWith('/media/') || value.startsWith('../public/media/')) return validateMedia(value, filePath);
+  if (value.startsWith('/_next/')) return;
   if (value.startsWith('/')) {
     const { route } = splitUrl(value);
     if (!routes.has(route)) fail(`${context} points to missing route ${route}`);

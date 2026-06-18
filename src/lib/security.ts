@@ -1,3 +1,5 @@
+import { createHmac } from 'node:crypto';
+
 const memoryBuckets = new Map<string, { count: number; resetAt: number }>();
 
 export function getClientIp(request: Request) {
@@ -52,4 +54,11 @@ export async function enforceRateLimit(ip: string, limit = Number(process.env.RA
 
   current.count += 1;
   return { ok: true, remaining: Math.max(0, limit - current.count), resetAt: current.resetAt };
+}
+
+export function hashClientIp(ip: string) {
+  if (!ip || ip === 'unknown') return 'unknown';
+  const secret = process.env.IP_HASH_SECRET;
+  if (!secret) return 'unconfigured';
+  return createHmac('sha256', secret).update(ip).digest('hex');
 }

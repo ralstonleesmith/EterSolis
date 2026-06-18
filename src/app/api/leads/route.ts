@@ -1,9 +1,5 @@
-import { NextResponse } from 'next/server';
-import { createCrmLead } from '@/lib/crm';
-import { storeLeadSubmission } from '@/lib/db';
-import { sendLeadNotifications } from '@/lib/email';
 import { env } from '@/lib/env';
-import { enforceRateLimit, getClientIp, verifyBotProtection } from '@/lib/security';
+import { handleLeadSubmission } from '@/lib/leadSubmission';
 import { contactLeadSchema } from '@/lib/validators';
 
 function routeForTopic(topic: string) {
@@ -18,29 +14,12 @@ function routeForTopic(topic: string) {
 }
 
 export async function POST(request: Request) {
-  const ip = getClientIp(request);
-  const rateLimit = await enforceRateLimit(ip);
-  if (!rateLimit.ok) return NextResponse.json({ error: 'Too many requests.' }, { status: 429 });
-
-  const formData = await request.formData();
-  const raw = Object.fromEntries(formData.entries());
-  const botCheck = await verifyBotProtection(String(raw.turnstileToken ?? raw['cf-turnstile-response'] ?? ''), ip);
-  if (!botCheck.ok) return NextResponse.json({ error: 'Verification failed.' }, { status: 403 });
-
-  const parsed = contactLeadSchema.safeParse(raw);
-  if (!parsed.success) return NextResponse.json({ error: 'Invalid submission.' }, { status: 400 });
-
-  const route = routeForTopic(parsed.data.topic);
-  const submission = await storeLeadSubmission({ leadType: 'contact', ip, ...parsed.data });
-  await createCrmLead({ leadType: 'contact', submissionId: submission.id, ...parsed.data });
-  await sendLeadNotifications({
-    submissionId: submission.id,
-    route: route.route,
-    subjectPrefix: route.prefix,
-    submitterEmail: parsed.data.email,
+  return handleLeadSubmission(request, {
     leadType: 'contact',
-    summary: `Name: ${parsed.data.name}\nCompany: ${parsed.data.company ?? 'Not provided'}\nTopic: ${parsed.data.topic}`
+    schema: contactLeadSchema,
+    routeFor: (data) => routeForTopic(data.topic),
+    submitterEmail: (data) => data.email,
+    summary: (data) => `Name: ${data.name}\nCompany: ${data.company ?? 'Not provided'}\nTopic: ${data.topic}`,
+    successMessage: 'Inquiry received for EterSolis review.'
   });
-
-  return NextResponse.json({ ok: true, submissionId: submission.id, message: 'Inquiry received for EterSolis review.' });
 }

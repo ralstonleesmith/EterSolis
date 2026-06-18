@@ -11,9 +11,9 @@
     "typecheck": "tsc --noEmit",
     "asset:audit": "node scripts/audit-media.mjs",
     "link:audit": "node scripts/audit-links.mjs",
-    "test:smoke": "playwright test tests/e2e/smoke.spec.ts tests/e2e/a11y.spec.ts --project=chromium",
-    "test:visual": "playwright test tests/e2e/visual.spec.ts --project=chromium",
-    "preview:capture": "playwright test tests/e2e/capture-previews.spec.ts --project=chromium",
+    "test:smoke": "node node_modules/@playwright/test/cli.js test tests/e2e/smoke.spec.ts tests/e2e/a11y.spec.ts --project=chromium",
+    "test:visual": "node node_modules/@playwright/test/cli.js test tests/e2e/visual.spec.ts --project=chromium",
+    "preview:capture": "CI=1 node node_modules/@playwright/test/cli.js test tests/e2e/capture-previews.spec.ts --project=chromium",
     "preview:serve": "node scripts/serve-previews.mjs",
     "screenshots": "npm run preview:capture",
     "docker:build": "docker build -t etersolis-web:local .",
@@ -22,8 +22,6 @@
     "qa": "npm run check && npm run test:smoke"
   },
   "dependencies": {
-    "@hookform/resolvers": "3.10.0",
-    "@supabase/supabase-js": "2.108.1",
     "framer-motion": "11.18.2",
     "lucide-react": "0.468.0",
     "next": "15.5.19",
@@ -31,8 +29,6 @@
     "pg": "8.13.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-hook-form": "7.54.2",
-    "resend": "4.0.1",
     "zod": "3.24.1"
   },
   "devDependencies": {

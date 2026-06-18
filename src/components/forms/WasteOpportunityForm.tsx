@@ -4,12 +4,11 @@ import { FormEvent, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 import { useDraftedForm } from '@/components/forms/useDraftedForm';
+import { wasteFrequencies, wasteMaterialCategories } from '@/lib/siteContent';
 
 const fieldClass = 'rounded-lg border border-coal/20 bg-white px-4 py-3 text-carbon shadow-sm transition placeholder:text-coal/45 focus:border-sunshine dark:border-white/10 dark:bg-black/45 dark:text-white dark:placeholder:text-white/35';
 const labelClass = 'grid gap-2 text-sm font-black text-carbon dark:text-white';
 
-const categories = ['Plastics', 'Paper and cardboard', 'Metals', 'E-waste', 'Organics', 'Industrial by-products', 'Water and wastewater treatment residuals', 'Construction materials', 'Other recoverable resources'];
-const frequencies = ['One-time', 'Weekly', 'Monthly', 'Quarterly', 'Continuous', 'Unknown'];
 const steps = ['Organization', 'Material', 'Safety'];
 
 export function WasteOpportunityForm() {
@@ -129,8 +128,8 @@ export function WasteOpportunityForm() {
 
       <section data-form-step="1" className={step === 1 ? 'grid gap-5' : 'hidden'}>
         <div className="grid gap-5 md:grid-cols-2">
-          <label className={labelClass}>Material category<select name="materialCategory" required className={fieldClass}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label>
-          <label className={labelClass}>Frequency<select name="frequency" required className={fieldClass}>{frequencies.map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label className={labelClass}>Material category<select name="materialCategory" required className={fieldClass}>{wasteMaterialCategories.map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label className={labelClass}>Frequency<select name="frequency" required className={fieldClass}>{wasteFrequencies.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label className={labelClass}>Quantity<input name="quantity" type="number" step="any" min="0" className={fieldClass} /></label>
           <label className={labelClass}>Unit<select name="quantityUnit" className={fieldClass}><option>kg</option><option>tonnes</option><option>m3</option><option>pallets</option><option>containers</option><option>other</option></select></label>
         </div>

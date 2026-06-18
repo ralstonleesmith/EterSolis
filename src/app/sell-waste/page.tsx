@@ -3,6 +3,7 @@ import { AlertTriangle, CheckCircle2, FileSearch, PackageCheck, Route } from 'lu
 import { WasteOpportunityForm } from '@/components/forms/WasteOpportunityForm';
 import { PageHero } from '@/components/ui/PageHero';
 import { mediaAssets } from '@/lib/media';
+import { wasteMaterialCategories } from '@/lib/siteContent';
 
 const reviewSteps = [
   { icon: FileSearch, title: 'Submit material data', text: 'Provide non-confidential material, quantity, location, frequency and handling context.' },
@@ -10,8 +11,6 @@ const reviewSteps = [
   { icon: Route, title: 'Recovery pathway', text: 'EterSolis evaluates responsible recovery, recycling, reuse, valorization or partner pathways.' },
   { icon: PackageCheck, title: 'Commercial review', text: 'Logistics, quality, quantity and feasibility determine whether a commercial discussion should proceed.' }
 ];
-
-const acceptedCategories = ['Plastics', 'Paper and cardboard', 'Metals', 'E-waste', 'Organics', 'Industrial by-products', 'Water and wastewater treatment residuals', 'Construction materials', 'Other recoverable resources'];
 
 export const metadata: Metadata = {
   title: 'Sell Waste To EterSolis | Waste Stream, Wastewater Residual and Recovery Opportunities',
@@ -56,7 +55,7 @@ export default function SellWastePage() {
               </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {acceptedCategories.map((category) => (
+              {wasteMaterialCategories.map((category) => (
                 <div key={category} className="flex items-center gap-3 rounded-lg border border-coal/10 bg-white p-4 text-sm font-black text-carbon shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white">
                   <CheckCircle2 className="h-4 w-4 text-sunshine" /> {category}
                 </div>
