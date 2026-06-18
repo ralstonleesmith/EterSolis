@@ -18,7 +18,7 @@ export function ProblemOrbit() {
           <SectionHeader
             eyebrow="Commercial problem map"
             title="Waste problems are usually value, data and routing problems."
-            description="The immediate EterSolis website positions each inquiry for structured review rather than vague sustainability messaging."
+            description="The EterSolis approach starts with value retention, practical feasibility and disciplined routing before lower-value residual treatment is considered."
           />
         </MotionReveal>
         <MotionReveal className="mt-12 grid gap-5 md:grid-cols-5" delay={0.08}>

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const PREVIEWS_DIR = path.resolve(process.env.PREVIEW_OUTPUT_DIR ?? 'previews/generated');
-const routes = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/media-credits', '/privacy', '/sell-waste', '/solutions', '/terms'];
+const routes = ['/', '/about', '/contact', '/helios', '/industries', '/insights', '/insights/introducing-etersolis', '/media-credits', '/privacy', '/sell-waste', '/solutions', '/terms'];
 
 async function ensureDir(dir: string) {
   await fs.promises.mkdir(dir, { recursive: true });

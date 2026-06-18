@@ -106,3 +106,17 @@ Before merge, confirm:
 - README and relevant docs are current.
 - No secret, credential, key, password or restricted operational detail is committed.
 - Public wording remains careful, non-promissory and commercially appropriate.
+
+## Version and Documentation Enforcement
+
+Every PR must update the project version, changelog and relevant documentation. The default version change is a patch bump.
+
+Required commands before merge:
+
+```bash
+npm run version:bump -- --patch
+npm run docs:generate
+npm run check
+```
+
+`npm run check` includes documentation, release and insight validation. If it fails because README generated sections are stale, run `npm run docs:generate` and commit the result.

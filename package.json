@@ -1,6 +1,6 @@
 {
   "name": "etersolis-web",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "EterSolis public website upgrade for etersolis.com.",
   "scripts": {
@@ -18,8 +18,14 @@
     "screenshots": "npm run preview:capture",
     "docker:build": "docker build -t etersolis-web:local .",
     "deploy:dry-run": "node scripts/deploy-dry-run.mjs",
-    "check": "npm run typecheck && npm run lint && npm run asset:audit && npm run link:audit && npm run build",
-    "qa": "npm run check && npm run test:smoke"
+    "check": "npm run typecheck && npm run lint && npm run insights:validate && npm run docs:check && npm run release:audit && npm run asset:audit && npm run link:audit && npm run build",
+    "qa": "npm run check && npm run test:smoke",
+    "insights:validate": "node scripts/validate-insights.mjs",
+    "docs:generate": "node scripts/generate-docs.mjs",
+    "docs:check": "node scripts/generate-docs.mjs --check",
+    "release:audit": "node scripts/check-release.mjs",
+    "newsletter:export": "node scripts/export-newsletter.mjs",
+    "version:bump": "node scripts/bump-version.mjs"
   },
   "dependencies": {
     "framer-motion": "11.18.2",

@@ -73,6 +73,11 @@ for (const asset of credits.assets ?? []) {
     continue;
   }
 
+  if (asset.type === 'document') {
+    if (!asset.path.endsWith('.pdf')) fail(`${asset.id} document assets must be PDF files`);
+    continue;
+  }
+
   const dimensions = imageDimensions(filePath);
   if (!dimensions) {
     fail(`${asset.id} has an unsupported image format`);

@@ -5,9 +5,9 @@ import { mediaAssets } from '@/lib/media';
 import { MotionReveal } from '@/components/ui/Motion';
 
 const signals = [
-  { icon: ShieldCheck, label: 'Controlled review before commitments' },
-  { icon: Workflow, label: 'Structured intake and routing' },
-  { icon: Zap, label: 'Fast commercial triage' }
+  { icon: ShieldCheck, label: 'Resource-first thinking' },
+  { icon: Workflow, label: 'Applied science and documentation' },
+  { icon: Zap, label: 'Practical stewardship and execution' }
 ];
 
 export function Hero() {
@@ -32,7 +32,7 @@ export function Hero() {
             Waste Is Value Waiting To Be Recovered.
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-8 text-white/85">
-            EterSolis is a privately owned waste and carbon management company helping organizations recover value from waste streams, manage carbon exposure and build practical circular economy solutions.
+            EterSolis connects applied science, resource recovery and practical commercial execution so waste, water, materials and by-products can be reviewed as value-bearing systems.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href="/sell-waste#waste-form" className="group inline-flex items-center justify-center gap-3 rounded-full bg-sunshine px-7 py-4 text-center font-black text-black shadow-soft transition hover:-translate-y-0.5">
@@ -43,6 +43,11 @@ export function Hero() {
             </Link>
             <Link href="/helios" className="inline-flex items-center justify-center rounded-full px-7 py-4 text-center font-black text-white/86 underline-offset-4 transition hover:text-white hover:underline">
               Talk to Helios
+            </Link>
+          </div>
+          <div className="mt-5">
+            <Link href="/insights/introducing-etersolis" className="inline-flex items-center gap-2 text-sm font-black text-sunshine underline-offset-4 hover:underline">
+              Read Newsletter Issue 001: Introducing EterSolis <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </MotionReveal>

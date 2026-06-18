@@ -146,6 +146,36 @@
         "height": 900
       },
       "alt": "Environmental lagoon at a modern biofactory and water recovery site."
+    },
+    {
+      "id": "etersolis-newsletter-issue-001-pdf",
+      "path": "/media/newsletters/issue-001/etersolis-newsletter-issue-001.pdf",
+      "type": "document",
+      "title": "EterSolis Newsletter Issue 001 PDF",
+      "credit": "EterSolis controlled newsletter asset",
+      "sourceUrl": "local-approved-newsletter",
+      "license": "EterSolis controlled website asset",
+      "licenseUrl": "local-approved-newsletter",
+      "dimensions": {
+        "width": 0,
+        "height": 0
+      },
+      "alt": "Approved EterSolis Office of the CSO newsletter PDF"
+    },
+    {
+      "id": "etersolis-newsletter-issue-001-cover",
+      "path": "/media/newsletters/issue-001/cover.jpg",
+      "type": "newsletter-cover",
+      "title": "EterSolis Newsletter Issue 001 cover",
+      "credit": "EterSolis controlled newsletter asset",
+      "sourceUrl": "local-approved-newsletter",
+      "license": "EterSolis controlled website asset",
+      "licenseUrl": "local-approved-newsletter",
+      "dimensions": {
+        "width": 720,
+        "height": 900
+      },
+      "alt": "Optimized cover derivative from approved Issue 001 PDF"
     }
   ]
 }
