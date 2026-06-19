@@ -2,6 +2,25 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.3.3 — 2026-06-19T07:40:52Z
+
+### Scope
+
+- Replaced Helios logo derivatives with optimized transparent assets from the approved Helios logo pack.
+- Updated the Helios page so the Earth splash appears once and the secondary KYMNIS panel uses a plain dark surface.
+- Hid the floating Helios launcher on the Helios route to avoid duplicate controls and overlap.
+- Polished light/dark mode transitions, header contrast, mobile navigation contrast and route-safe launcher spacing.
+- Added layout/theme checks for horizontal overflow, readable theme switching, mobile menu usability and Helios splash duplication.
+
+### Documentation and Tracking
+
+- Updated README brand rules, preview guidance, media credits and version metadata for `0.3.3`.
+- Expanded media and theme audits to prevent raw logo-pack assets, oversized Helios logo derivatives and missing theme-transition safeguards.
+
+### Validation
+
+- Required gates: `npm run check`, `npm run test:layout`, `npm run test:smoke`, `npm run preview:capture` and `npm audit --audit-level=moderate`.
+
 ## 0.3.2 — 2026-06-18T22:23:15Z
 
 ### Scope

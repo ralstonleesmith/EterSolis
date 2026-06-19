@@ -7,7 +7,7 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website<br />
-**Version:** 0.3.2
+**Version:** 0.3.3
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
@@ -25,7 +25,8 @@ The codebase includes:
 - Polished public pages for Sell Waste, Solutions, Industries, About, KYMNIS, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
 - Host-aware same-application routing foundation for `kymnis.com`, with `/kymnis` fallback routes on `etersolis.com`.
 - Helios v2 guided routing available across the website with EterSolis and KYMNIS modes.
-- Cropped production Helios brand assets integrated into launcher, prompt and guided-routing panels.
+- Transparent production Helios brand assets integrated into launcher, prompt and guided-routing panels.
+- Full-site light/dark mode contrast and visual-layout checks for readable text, visible logos and usable navigation.
 - Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Waste opportunity and contact intake forms.
@@ -60,7 +61,9 @@ Rules:
 - Do not synthesize official logo artwork with typed text when an approved PNG logo file is available.
 - Do not place logos on embedded background boxes.
 - Do not commit or render source logo-variant boards with visible labels such as “icon only,” “primary lockup,” “wordmark with tagline,” palette annotations or layout guide text.
+- Do not commit raw Helios logo-pack exports, preview JPGs, white-background logo files or oversized source logo files as production web assets.
 - Use cropped production derivatives for Helios and KYMNIS web surfaces.
+- Ensure light surfaces use dark logo/icon variants and dark surfaces use light, white/gold or full-color variants.
 - Keep EterSolis as one word everywhere.
 - Treat legacy internal platform separation language as obsolete; public and internal repo language should refer to KYMNIS as the unified platform.
 
@@ -205,7 +208,7 @@ KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.2
+**Version:** 0.3.3
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 

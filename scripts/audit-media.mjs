@@ -60,6 +60,10 @@ const blockedAssetLabels = [
   /icon[_ -]only/i,
   /wordmark[_ -]with[_ -]tagline/i,
   /logo[_ -]palette/i,
+  /WhiteBG/i,
+  /PREVIEW/i,
+  /transparent_logo_pack/i,
+  /4096/i,
   /color variants/i,
   /monochrome variants/i,
   /dark light backgrounds/i
@@ -101,6 +105,9 @@ for (const asset of credits.assets ?? []) {
     const searchable = `${asset.id} ${asset.path}`;
     for (const blocked of blockedAssetLabels) {
       if (blocked.test(searchable)) fail(`${asset.id} appears to reference a labeled variant board instead of a cropped production asset`);
+    }
+    if (asset.path.includes('/helios/') && (dimensions.width > 1600 || dimensions.height > 900)) {
+      fail(`${asset.id} is too large for a production Helios logo derivative`);
     }
   }
 }

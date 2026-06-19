@@ -39,23 +39,26 @@ export const mediaAssets = {
   helios: {
     icon: {
       src: '/media/helios/helios-icon.png',
-      alt: 'Cropped Helios orbital guidance mark.',
-      width: 270,
-      height: 234,
+      lightSrc: '/media/helios/helios-icon-light.png',
+      darkSrc: '/media/helios/helios-icon-dark.png',
+      alt: 'Transparent Helios orbital guidance mark.',
+      width: 320,
+      height: 319,
       credit: 'Helios controlled brand asset'
     },
     lockup: {
       src: '/media/helios/helios-primary-lockup.png',
-      alt: 'Cropped Helios logo lockup with orbital mark and wordmark.',
-      width: 871,
-      height: 214,
+      alt: 'Transparent Helios primary lockup with orbital mark, wordmark and tagline.',
+      width: 960,
+      height: 246,
       credit: 'Helios controlled brand asset'
     },
     wordmark: {
       src: '/media/helios/helios-wordmark-tagline.png',
-      alt: 'Cropped Helios wordmark and guidance tagline.',
-      width: 394,
-      height: 85,
+      darkSrc: '/media/helios/helios-wordmark-tagline-dark.png',
+      alt: 'Transparent Helios wordmark and guidance tagline.',
+      width: 560,
+      height: 100,
       credit: 'Helios controlled brand asset'
     },
     earthSplash: {
