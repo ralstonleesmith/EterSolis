@@ -2,6 +2,32 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## Unreleased — 2026-06-26T07:45:00Z
+
+### Scope
+
+- Added a managed-host-compatible `server.js` startup file while preserving the default `next start` production path.
+- Added an operational readiness model and `/api/readiness` endpoint for lead-capture configuration status.
+- Added runtime configuration validation utilities and npm-accessible checks for production configuration and lead-capture operations.
+- Added database and SMTP connectivity verification for controlled pre-launch checks.
+- Hardened deployment dry-run validation to confirm startup, Docker, package, schema, documentation and operational-check assets.
+- Refined the header so the EterSolis logo is the home control, the separate Home button is removed and Sell Waste remains the primary conversion action.
+- Separated header navigation from the full route registry so sitemap and route coverage remain complete while the header stays concise.
+- Expanded GitHub Actions path coverage so scripts, database schema, documentation, Docker, server startup and README changes trigger smoke validation.
+
+### Documentation and Tracking
+
+- Added `docs/LAUNCH_CHECKLIST.md` with a launch record template, rollback criteria and form acceptance-test procedure.
+- Updated README and self-hosting documentation with the readiness endpoint, runtime check and lead-capture check.
+- Updated generated documentation rules so launch-readiness commands remain part of the checked README index.
+- Added smoke-test coverage for logo-home behavior and removal of the duplicate Home navigation item.
+
+### Validation
+
+- Required gates before merge: `npm run docs:check`, `npm run release:audit`, `npm run check`, `npm run test:smoke`, `npm run deploy:dry-run`.
+- Required production gates before public lead capture: `npm run runtime:check -- --env-file=/etc/etersolis-web.env`, `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`, `/api/health`, `/api/readiness`, `/contact` test submission and `/sell-waste` test submission.
+- Version bump remains governed by `docs/VERSIONING.md`; package and lockfile versions must remain aligned before merge.
+
 ## 0.3.3 — 2026-06-19T07:40:52Z
 
 ### Scope
@@ -237,6 +263,3 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 - Added self-hosting documentation, Dockerfile and Docker Compose example.
 
 ## 2026-06-12 — Documentation and Protection
-
-- Populated README.md with the website upgrade scope, architecture, routes, design rules, security controls and launch plan.
-- Added proprietary LICENSE.md to protect EterSolis source code and software.
