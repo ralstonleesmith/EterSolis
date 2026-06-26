@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -H 0.0.0.0 -p 3000",
-    "start:node": "node server.js",
+    "start": "node ./server.js",
+    "start:next": "next start -H 0.0.0.0 -p 3000",
+    "start:node": "node ./server.js",
     "lint": "eslint src --ext .ts,.tsx --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "asset:audit": "node scripts/audit-media.mjs",
