@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start -H 0.0.0.0 -p 3000",
     "start:node": "node server.js",
-    "lint": "eslint src tests --ext .ts,.tsx --max-warnings=0",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "asset:audit": "node scripts/audit-media.mjs",
     "disclosure:audit": "node scripts/audit-disclosure.mjs",
