@@ -35,8 +35,8 @@ export function Header() {
         >
           <EterSolisLogo variant="dark" mode="mark" className="max-h-11 w-auto sm:hidden dark:hidden flex-none object-contain" />
           <EterSolisLogo variant="light" mode="mark" className="hidden max-h-11 w-auto dark:block sm:dark:hidden flex-none object-contain" />
-          <EterSolisLogo variant="dark" mode="full" className="hidden h-13 text-3xl sm:flex dark:hidden flex-none" />
-          <EterSolisLogo variant="light" mode="full" className="hidden h-13 text-3xl sm:dark:flex flex-none" />
+          <EterSolisLogo variant="dark" mode="full" className="hidden h-14 text-3xl sm:flex dark:hidden flex-none" />
+          <EterSolisLogo variant="light" mode="full" className="hidden h-14 text-3xl sm:dark:flex flex-none" />
         </Link>
 
         <nav className="hidden items-center gap-1 rounded-full border border-coal/10 bg-white/72 p-1 text-sm font-black text-coal shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/6 dark:text-white lg:flex" aria-label="Primary navigation">
