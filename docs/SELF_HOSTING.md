@@ -6,15 +6,17 @@ This project is designed for EterSolis-managed hosting on EterSolis-controlled i
 
 - Reverse proxy: Nginx or Caddy terminating HTTPS.
 - Application runtime: Node.js 20 LTS or later.
-- Process manager: systemd or PM2.
+- Process manager: systemd, PM2, Docker, Docker Compose or an approved hosting-provider application manager.
 - Database: PostgreSQL 15 or later.
 - Mail: EterSolis-approved SMTP server or transactional mail relay.
 - Bot protection: Cloudflare Turnstile or equivalent public challenge provider.
 - Backups: daily PostgreSQL dump with off-server retention.
 - Access: SSH key authentication only; no password login.
-- Admin security: MFA on DNS, GitHub, mail, database, and server administration.
+- Admin security: MFA on DNS, GitHub, mail, database and server administration.
 
 ## Build and Run
+
+Standard self-hosted production path:
 
 ```bash
 npm ci
@@ -22,6 +24,16 @@ npm run check
 npm run build
 PORT=3000 npm run start
 ```
+
+Managed hosting path, only where the host requires a single Node startup file:
+
+```bash
+npm ci
+npm run build
+NODE_ENV=production PORT=3000 npm run start:node
+```
+
+The default application command remains `npm run start`. `server.js` exists for Passenger-style or hosting-panel environments that cannot start the application through `next start` directly.
 
 ## Local Quality Gates
 
@@ -39,10 +51,11 @@ The smoke suite starts a local Next server through Playwright and captures deskt
 
 ## Environment
 
-Copy `.env.example` to an environment file managed outside the repository. Do not commit production secrets.
+Copy `.env.example` to an environment file managed outside the repository. Do not commit production runtime values.
 
 Required for production lead capture:
 
+- `NEXT_PUBLIC_SITE_URL`
 - `DATABASE_URL`
 - `IP_HASH_SECRET`
 - `SMTP_HOST`
@@ -52,14 +65,30 @@ Required for production lead capture:
 - `MAIL_FROM`
 - `TURNSTILE_SECRET_KEY`
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+- `WASTE_ROUTE_EMAIL`
+- `INFO_ROUTE_EMAIL`
+- `PARTNERSHIPS_ROUTE_EMAIL`
+- `KYMNIS_ROUTE_EMAIL`
+- `PRIVACY_ROUTE_EMAIL`
+- `CEO_ROUTE_EMAIL`
+- `CSO_ROUTE_EMAIL`
 
 Optional:
 
 - `CRM_WEBHOOK_URL`
 - `CRM_WEBHOOK_SECRET`
+- `ANALYTICS_WEBHOOK_URL`
+- `ANALYTICS_WEBHOOK_SECRET`
 - `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+- `READINESS_EXPOSE_DETAILS`
 
 `IP_HASH_SECRET` should be a long random value. The application stores an HMAC hash of client IPs for lead-submission audit correlation instead of storing raw IP addresses.
+
+Run the configuration check before deployment:
+
+```bash
+npm run runtime:check -- --env-file=/etc/etersolis-web.env
+```
 
 ## Database Setup
 
@@ -70,6 +99,27 @@ psql "$DATABASE_URL" -f database/schema.sql
 ```
 
 Use a dedicated least-privilege database user for the website application.
+
+After the schema is applied, run:
+
+```bash
+npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
+```
+
+This confirms runtime configuration, database connectivity, required tables and SMTP connectivity. Use `--skip-smtp` only for non-production staging environments where SMTP cannot be reached from the test network.
+
+## Readiness Endpoints
+
+`/api/health` is the liveness endpoint. It confirms the application process is running.
+
+`/api/readiness` is the operational readiness endpoint. It confirms that full lead-capture configuration is present and valid enough for the application to accept production submissions.
+
+```bash
+curl --fail http://127.0.0.1:3000/api/health
+curl --fail http://127.0.0.1:3000/api/readiness
+```
+
+In production, detailed readiness output is suppressed unless `READINESS_EXPOSE_DETAILS=true` is set. Do not enable detailed readiness output on public production unless explicitly required for a controlled launch window.
 
 ## Nginx Reverse Proxy Example
 
@@ -131,13 +181,14 @@ WantedBy=multi-user.target
 
 ## Production Security Requirements
 
-- Do not store secrets in GitHub.
+- Do not store runtime values in GitHub.
 - Keep `.env` files outside the repository.
 - Run the app as a non-root user.
 - Enable HTTPS before public launch.
 - Apply `database/schema.sql` before enabling forms.
 - Configure Turnstile before enabling public forms in production.
 - Configure SMTP before enabling public forms in production.
+- Run `npm run runtime:check` and `npm run lead-capture:check` before public launch.
 - Restrict database access to localhost or private network.
 - Back up the database daily.
 - Review logs for errors without storing sensitive form payloads in logs.
@@ -148,11 +199,16 @@ WantedBy=multi-user.target
 2. Install dependencies with `npm ci`.
 3. Run `npm run check`.
 4. Run `npm run deploy:dry-run`.
-5. Build or pull the reviewed Docker image if using container deployment.
+5. Run `npm run runtime:check -- --env-file=/etc/etersolis-web.env`.
 6. Apply database migrations if required.
-7. Restart the systemd, PM2 or Docker Compose service.
-8. Verify `/api/health`.
-9. Submit test lead forms using non-sensitive test data.
-10. Confirm internal notification email and submitter confirmation email.
-11. Confirm database records were created.
-12. Record the released commit hash in the deployment log.
+7. Run `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`.
+8. Build or pull the reviewed Docker image if using container deployment.
+9. Restart the systemd, PM2, Docker Compose or hosting-provider service.
+10. Verify `/api/health`.
+11. Verify `/api/readiness`.
+12. Submit test lead forms using non-sensitive test data.
+13. Confirm internal notification email and submitter confirmation email.
+14. Confirm database records were created.
+15. Record the released commit hash in the deployment log.
+
+See [`docs/LAUNCH_CHECKLIST.md`](./LAUNCH_CHECKLIST.md) for the complete launch record template.
