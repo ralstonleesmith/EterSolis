@@ -6,16 +6,32 @@ on:
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'scripts/**'
+      - 'database/**'
+      - 'docs/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'playwright.config.ts'
+      - 'next.config.mjs'
+      - 'Dockerfile'
+      - 'server.js'
+      - 'README.md'
       - '.github/workflows/**'
   pull_request:
     branches: [ main ]
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'scripts/**'
+      - 'database/**'
+      - 'docs/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'playwright.config.ts'
+      - 'next.config.mjs'
+      - 'Dockerfile'
+      - 'server.js'
+      - 'README.md'
       - '.github/workflows/**'
 
 permissions:
