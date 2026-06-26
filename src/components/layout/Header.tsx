@@ -39,7 +39,7 @@ export function Header() {
           <EterSolisLogo variant="light" mode="full" className="hidden h-14 text-3xl sm:dark:flex flex-none" />
         </Link>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-coal/10 bg-white/72 p-1 text-sm font-black text-coal shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/6 dark:text-white lg:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-1 rounded-full border border-coal/10 bg-white/72 p-1 text-sm font-black text-coal shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/10 dark:text-white lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -56,7 +56,7 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <ThemeToggle />
-          <Link href={actionItems[0].href} className="hidden rounded-full border border-coal/10 bg-white/70 px-4 py-3 text-sm font-black text-coal shadow-sm transition hover:border-sunshine hover:text-carbon focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine dark:border-white/10 dark:bg-white/6 dark:text-white dark:hover:text-sunshine md:inline-flex">
+          <Link href={actionItems[0].href} className="hidden rounded-full border border-coal/10 bg-white/70 px-4 py-3 text-sm font-black text-coal shadow-sm transition hover:border-sunshine hover:text-carbon focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:text-sunshine md:inline-flex">
             {actionItems[0].label}
           </Link>
           <Link href={actionItems[1].href} className="rounded-full bg-sunshine px-4 py-3 text-sm font-black text-black shadow-sm transition hover:translate-y-[-1px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-carbon sm:px-5">
