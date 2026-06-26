@@ -29,6 +29,8 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/media-credits\` — Website media attribution
 - \`/privacy\` — Privacy notice
 - \`/terms\` — Website terms and non-binding submission notices
+- \`/api/health\` — Liveness endpoint
+- \`/api/readiness\` — Operational lead-capture readiness endpoint
 
 ### Required Change-Control Scripts
 
@@ -40,6 +42,8 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`npm run disclosure:audit\`
 - \`npm run routes:check\`
 - \`npm run theme:audit\`
+- \`npm run runtime:check -- --env-file=/etc/etersolis-web.env\`
+- \`npm run lead-capture:check -- --env-file=/etc/etersolis-web.env\`
 - \`npm run check\`
 - \`npm run test:smoke\`
 - \`npm run preview:capture\`
