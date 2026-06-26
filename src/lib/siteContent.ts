@@ -10,7 +10,12 @@ export const navItems = [
 export const siteRoutes = [
   '/',
   '/sell-waste',
-  ...navItems.map((item) => item.href)
+  '/solutions',
+  '/industries',
+  '/kymnis',
+  '/insights',
+  '/about',
+  '/contact'
 ] as const;
 
 export const kymnisRoutes = [
