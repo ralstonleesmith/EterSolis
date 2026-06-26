@@ -16,6 +16,17 @@ test('homepage renders media hero and dark mode', async ({ page }) => {
   await page.screenshot({ path: 'test-results/screenshots/home-desktop.png', fullPage: false });
 });
 
+test('header uses logo as home and avoids duplicate home navigation', async ({ page }) => {
+  await page.goto('/solutions');
+  const header = page.getByRole('banner');
+  const logoHome = header.getByRole('link', { name: /EterSolis home/i });
+  await expect(logoHome).toHaveAttribute('href', '/');
+  await expect(header.getByRole('navigation', { name: /Primary navigation/i }).getByRole('link', { name: /^Home$/i })).toHaveCount(0);
+  await expect(header.getByRole('link', { name: /^Sell Waste$/i })).toHaveAttribute('href', '/sell-waste#waste-form');
+  await logoHome.click();
+  await expect(page).toHaveURL(/\/$/);
+});
+
 test('homepage primary and footer links resolve', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('link', { name: /Sell Waste To EterSolis/i }).first()).toHaveAttribute('href', '/sell-waste#waste-form');
@@ -37,6 +48,7 @@ test('mobile navigation opens primary routes', async ({ page }) => {
   const industriesLink = page.getByRole('navigation', { name: /Mobile navigation/i }).getByRole('link', { name: 'Industries' });
   await expect(industriesLink).toBeVisible();
   await expect(industriesLink).toHaveAttribute('href', '/industries');
+  await expect(page.getByRole('navigation', { name: /Mobile navigation/i }).getByRole('link', { name: /^Home$/i })).toHaveCount(0);
   await page.goto('/industries');
   await expect(page).toHaveURL(/\/industries$/);
   await page.screenshot({ path: 'test-results/screenshots/home-mobile-nav.png', fullPage: true });
