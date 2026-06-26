@@ -1,15 +1,17 @@
 export const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/sell-waste', label: 'Sell Waste' },
   { href: '/solutions', label: 'Solutions' },
   { href: '/industries', label: 'Industries' },
-  { href: '/about', label: 'About' },
   { href: '/kymnis', label: 'KYMNIS' },
   { href: '/insights', label: 'Insights' },
+  { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' }
 ] as const;
 
-export const siteRoutes = navItems.map((item) => item.href);
+export const siteRoutes = [
+  '/',
+  '/sell-waste',
+  ...navItems.map((item) => item.href)
+] as const;
 
 export const kymnisRoutes = [
   '/kymnis',
