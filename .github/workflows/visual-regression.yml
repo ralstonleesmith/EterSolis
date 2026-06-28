@@ -5,6 +5,16 @@ on:
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'scripts/**'
+      - 'docs/**'
+      - 'public/media/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'playwright.config.ts'
+      - 'next.config.mjs'
+      - 'Dockerfile'
+      - 'server.js'
+      - 'README.md'
       - '.github/workflows/**'
 
 jobs:

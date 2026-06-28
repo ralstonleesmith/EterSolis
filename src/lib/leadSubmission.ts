@@ -55,23 +55,39 @@ export async function handleLeadSubmission<Schema extends z.ZodTypeAny>(request:
   };
   const submission = await storeLeadSubmission(payload);
 
-  const deliveryResults = await Promise.allSettled([
-    createCrmLead({ leadType: config.leadType, submissionId: submission.id, ...parsed.data }),
-    sendLeadNotifications({
-      submissionId: submission.id,
-      route: route.route,
-      subjectPrefix: route.prefix,
-      submitterEmail: config.submitterEmail(parsed.data),
-      leadType: config.leadType,
-      summary: config.summary(parsed.data)
-    })
-  ]);
+  const deliveries = [
+    {
+      provider: 'crm',
+      eventType: 'crm_delivery_failed',
+      destination: process.env.CRM_WEBHOOK_URL ? 'configured-crm-webhook' : 'not-configured',
+      run: () => createCrmLead({ leadType: config.leadType, submissionId: submission.id, ...parsed.data })
+    },
+    {
+      provider: 'email',
+      eventType: 'email_delivery_failed',
+      destination: route.route,
+      run: () => sendLeadNotifications({
+        submissionId: submission.id,
+        route: route.route,
+        subjectPrefix: route.prefix,
+        submitterEmail: config.submitterEmail(parsed.data),
+        leadType: config.leadType,
+        summary: config.summary(parsed.data)
+      })
+    }
+  ] as const;
+
+  const deliveryResults = await Promise.allSettled(deliveries.map((delivery) => delivery.run()));
 
   await Promise.all(
     deliveryResults.map((result, index) => {
       if (result.status === 'fulfilled') return undefined;
-      return auditFailure(index === 0 ? 'crm_delivery_failed' : 'email_delivery_failed', {
+      const delivery = deliveries[index];
+      return auditFailure(delivery.eventType, {
+        submissionId: submission.id,
         leadType: config.leadType,
+        provider: delivery.provider,
+        destination: delivery.destination,
         error: result.reason instanceof Error ? result.reason.message : 'Unknown delivery failure'
       }, submission.id);
     })

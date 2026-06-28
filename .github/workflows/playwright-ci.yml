@@ -2,20 +2,36 @@ name: Playwright Smoke Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, upgrade/kymnis-platform-foundation, launch-readiness-operational-lead-capture ]
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'scripts/**'
+      - 'database/**'
+      - 'docs/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'playwright.config.ts'
+      - 'next.config.mjs'
+      - 'Dockerfile'
+      - 'server.js'
+      - 'README.md'
       - '.github/workflows/**'
   pull_request:
     branches: [ main ]
     paths:
       - 'src/**'
       - 'tests/**'
+      - 'scripts/**'
+      - 'database/**'
+      - 'docs/**'
       - 'package.json'
+      - 'package-lock.json'
       - 'playwright.config.ts'
+      - 'next.config.mjs'
+      - 'Dockerfile'
+      - 'server.js'
+      - 'README.md'
       - '.github/workflows/**'
 
 permissions:
@@ -53,6 +69,9 @@ jobs:
 
       - name: Run Playwright smoke tests
         run: npm run test:smoke -- --reporter=list
+
+      - name: Run layout and theme tests
+        run: npm run test:layout -- --reporter=list
 
       - name: Upload Playwright report
         if: failure()

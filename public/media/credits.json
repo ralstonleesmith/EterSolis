@@ -217,10 +217,10 @@
       "license": "Helios controlled website asset",
       "licenseUrl": "local-approved-brand-asset",
       "dimensions": {
-        "width": 871,
-        "height": 214
+        "width": 960,
+        "height": 246
       },
-      "alt": "Cropped Helios logo lockup with orbital mark and wordmark."
+      "alt": "Transparent Helios primary lockup with orbital mark, wordmark and tagline."
     },
     {
       "id": "helios-icon",
@@ -232,10 +232,10 @@
       "license": "Helios controlled website asset",
       "licenseUrl": "local-approved-brand-asset",
       "dimensions": {
-        "width": 270,
-        "height": 234
+        "width": 320,
+        "height": 319
       },
-      "alt": "Cropped Helios orbital guidance mark."
+      "alt": "Transparent Helios orbital guidance mark."
     },
     {
       "id": "helios-wordmark-tagline",
@@ -247,10 +247,10 @@
       "license": "Helios controlled website asset",
       "licenseUrl": "local-approved-brand-asset",
       "dimensions": {
-        "width": 394,
-        "height": 85
+        "width": 560,
+        "height": 100
       },
-      "alt": "Cropped Helios wordmark and guidance tagline."
+      "alt": "Transparent Helios wordmark and guidance tagline."
     },
     {
       "id": "helios-earth-splash",
@@ -266,6 +266,51 @@
         "height": 788
       },
       "alt": "Helios orbital guidance mark and wordmark over a connected view of Earth."
+    },
+    {
+      "id": "helios-icon-light",
+      "path": "/media/helios/helios-icon-light.png",
+      "type": "brand-asset",
+      "title": "Helios transparent light orbital icon",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 320,
+        "height": 319
+      },
+      "alt": "Transparent light Helios orbital guidance mark for dark surfaces."
+    },
+    {
+      "id": "helios-icon-dark",
+      "path": "/media/helios/helios-icon-dark.png",
+      "type": "brand-asset",
+      "title": "Helios transparent dark orbital icon",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 320,
+        "height": 320
+      },
+      "alt": "Transparent dark Helios orbital guidance mark for light surfaces."
+    },
+    {
+      "id": "helios-wordmark-tagline-dark",
+      "path": "/media/helios/helios-wordmark-tagline-dark.png",
+      "type": "brand-asset",
+      "title": "Helios transparent dark wordmark and tagline",
+      "credit": "Helios controlled brand asset",
+      "sourceUrl": "local-approved-brand-asset",
+      "license": "Helios controlled website asset",
+      "licenseUrl": "local-approved-brand-asset",
+      "dimensions": {
+        "width": 560,
+        "height": 96
+      },
+      "alt": "Transparent dark Helios wordmark and guidance tagline for light surfaces."
     }
   ]
 }

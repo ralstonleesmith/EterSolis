@@ -22,7 +22,17 @@ const modeCopy = {
   }
 } as const;
 
-export function HeliosPanel({ mode = 'etersolis', context = 'general', compact = false }: { mode?: HeliosMode; context?: string; compact?: boolean }) {
+export function HeliosPanel({
+  mode = 'etersolis',
+  context = 'general',
+  compact = false,
+  backgroundStyle = 'splash'
+}: {
+  mode?: HeliosMode;
+  context?: string;
+  compact?: boolean;
+  backgroundStyle?: 'splash' | 'plain';
+}) {
   const [selected, setSelected] = useState(0);
   const routes = getHeliosIntents(mode, context);
   const route = routes[selected];
@@ -31,8 +41,17 @@ export function HeliosPanel({ mode = 'etersolis', context = 'general', compact =
 
   return (
     <section className={`relative isolate overflow-hidden bg-black text-white signal-grid ${compact ? 'py-12' : 'py-24'}`}>
-      <Image src={mediaAssets.helios.earthSplash.src} alt={mediaAssets.helios.earthSplash.alt} fill sizes="100vw" className="object-cover opacity-[0.5]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(217,165,32,0.22),transparent_28rem),radial-gradient(circle_at_80%_10%,rgba(0,125,121,0.18),transparent_30rem),linear-gradient(135deg,rgba(0,0,0,0.94),rgba(0,0,0,0.72))]" aria-hidden="true" />
+      {backgroundStyle === 'splash' ? (
+        <Image src={mediaAssets.helios.earthSplash.src} alt={mediaAssets.helios.earthSplash.alt} fill sizes="100vw" className="object-cover opacity-[0.5]" />
+      ) : null}
+      <div
+        className={
+          backgroundStyle === 'splash'
+            ? 'absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(217,165,32,0.22),transparent_28rem),radial-gradient(circle_at_80%_10%,rgba(0,125,121,0.18),transparent_30rem),linear-gradient(135deg,rgba(0,0,0,0.94),rgba(0,0,0,0.72))]'
+            : 'absolute inset-0 bg-[radial-gradient(circle_at_18%_0%,rgba(217,165,32,0.15),transparent_25rem),radial-gradient(circle_at_86%_10%,rgba(0,125,121,0.18),transparent_27rem),linear-gradient(135deg,#020202_0%,#071010_52%,#111111_100%)]'
+        }
+        aria-hidden="true"
+      />
       <div className="container-shell relative z-10 grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
         <div>
           <div className="mb-8 flex items-center gap-4">
@@ -40,7 +59,7 @@ export function HeliosPanel({ mode = 'etersolis', context = 'general', compact =
               <Image src={mediaAssets.helios.icon.src} alt={mediaAssets.helios.icon.alt} width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-16 w-16 object-contain" priority={!compact} />
             </div>
             <div>
-              <Image src={mediaAssets.helios.wordmark.src} alt={mediaAssets.helios.wordmark.alt} width={mediaAssets.helios.wordmark.width} height={mediaAssets.helios.wordmark.height} className="mb-3 h-auto w-52 max-w-full object-contain" priority={!compact} />
+              <Image src={mediaAssets.helios.wordmark.src} alt={mediaAssets.helios.wordmark.alt} width={mediaAssets.helios.wordmark.width} height={mediaAssets.helios.wordmark.height} className="mb-3 h-auto w-56 max-w-full object-contain" priority={!compact} />
               <p className="font-black uppercase tracking-[0.18em] text-sunshine">{copy.eyebrow}</p>
               <p className="mt-2 text-sm font-bold text-white/58">Guided public routing · Human review required</p>
             </div>

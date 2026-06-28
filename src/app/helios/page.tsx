@@ -16,7 +16,7 @@ export default function HeliosPage() {
   return (
     <>
       <HeliosPanel context="all" />
-      <HeliosPanel mode="kymnis" context="all" compact />
+      <HeliosPanel mode="kymnis" context="all" compact backgroundStyle="plain" />
     </>
   );
 }

@@ -22,14 +22,17 @@ export function HeliosLauncher() {
   const mode: HeliosMode = pathname.startsWith('/kymnis') ? 'kymnis' : 'etersolis';
   const intents = getHeliosIntents(mode, contextForPath(pathname)).slice(0, 4);
 
+  if (pathname === '/helios') return null;
+
   return (
-    <div className="fixed inset-x-4 bottom-4 z-40 sm:inset-x-auto sm:right-5 sm:max-w-[calc(100vw-2rem)]">
+    <div className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 sm:inset-x-auto sm:right-5 sm:max-w-[calc(100vw-2rem)]">
       {open ? (
         <div className="mb-3 w-full rounded-[2rem] border border-coal/10 bg-white/96 p-4 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-[#070707]/96 sm:w-[24rem]">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-coal/70 dark:text-sunshine">
-                <Image src={mediaAssets.helios.icon.src} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-5 w-5 rounded-full object-cover" /> Helios
+                <Image src={mediaAssets.helios.icon.darkSrc} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-5 w-5 object-contain dark:hidden" />
+                <Image src={mediaAssets.helios.icon.lightSrc} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="hidden h-5 w-5 object-contain dark:block" /> Helios
               </p>
               <h2 className="mt-1 text-lg font-black text-carbon dark:text-white">Guided next-step routing</h2>
               <p className="mt-1 text-xs font-bold text-coal/70 dark:text-white/58">{mode === 'kymnis' ? 'KYMNIS mode' : 'EterSolis mode'}</p>
@@ -60,7 +63,7 @@ export function HeliosLauncher() {
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
       >
-        <Image src={mediaAssets.helios.icon.src} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-6 w-6 rounded-full object-cover" /> Ask Helios
+        <Image src={mediaAssets.helios.icon.darkSrc} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-6 w-6 object-contain" /> Ask Helios
       </button>
     </div>
   );

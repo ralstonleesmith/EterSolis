@@ -6,8 +6,8 @@
 
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
-**Status:** Active post-launch production website<br />
-**Version:** 0.3.2
+**Status:** Active post-launch production website with operational launch-readiness controls<br />
+**Version:** 0.3.3
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
@@ -25,11 +25,14 @@ The codebase includes:
 - Polished public pages for Sell Waste, Solutions, Industries, About, KYMNIS, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
 - Host-aware same-application routing foundation for `kymnis.com`, with `/kymnis` fallback routes on `etersolis.com`.
 - Helios v2 guided routing available across the website with EterSolis and KYMNIS modes.
-- Cropped production Helios brand assets integrated into launcher, prompt and guided-routing panels.
+- Transparent production Helios brand assets integrated into launcher, prompt and guided-routing panels.
+- Full-site light/dark mode contrast and visual-layout checks for readable text, visible logos and usable navigation.
 - Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Waste opportunity and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
+- Runtime configuration checks and operational lead-capture verification commands.
+- Liveness and readiness endpoints for deployment verification.
 - Self-hosting and deployment documentation.
 - Media credit registry and image audit tooling.
 - Link audit, asset audit, Playwright smoke tests, accessibility scans, visual preview capture and static executive previews.
@@ -60,7 +63,9 @@ Rules:
 - Do not synthesize official logo artwork with typed text when an approved PNG logo file is available.
 - Do not place logos on embedded background boxes.
 - Do not commit or render source logo-variant boards with visible labels such as “icon only,” “primary lockup,” “wordmark with tagline,” palette annotations or layout guide text.
+- Do not commit raw Helios logo-pack exports, preview JPGs, white-background logo files or oversized source logo files as production web assets.
 - Use cropped production derivatives for Helios and KYMNIS web surfaces.
+- Ensure light surfaces use dark logo/icon variants and dark surfaces use light, white/gold or full-color variants.
 - Keep EterSolis as one word everywhere.
 - Treat legacy internal platform separation language as obsolete; public and internal repo language should refer to KYMNIS as the unified platform.
 
@@ -91,6 +96,7 @@ Rules:
 /privacy          Privacy notice
 /terms            Website terms and non-binding submission notices
 /api/health       Health check
+/api/readiness    Operational lead-capture readiness check
 /api/leads        Contact lead endpoint
 /api/waste        Waste opportunity endpoint
 ```
@@ -108,13 +114,13 @@ src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
 src/components/helios/   Helios guided routing interface
 src/components/kymnis/   KYMNIS public foundation components
-src/lib/                 Validation, env, email, CRM, DB, analytics and security utilities
+src/lib/                 Validation, env, email, CRM, DB, analytics, readiness and security utilities
 src/lib/internal/        Internal KYMNIS functionality scaffolding
 content/insights/        Structured Markdown insight and newsletter sources
 public/media/            PNG brand/media assets with documented credits
 previews/                Static executive review previews
 tests/e2e/               Smoke, accessibility, visual and preview capture tests
-scripts/                 Audit, preview and deployment helper scripts
+scripts/                 Audit, preview, readiness and deployment helper scripts
 docs/                    Operating documentation
 ```
 
@@ -134,6 +140,38 @@ npm run build
 npm run start
 ```
 
+Managed-host startup file, only where the hosting platform requires a single Node entry file:
+
+```bash
+NODE_ENV=production PORT=3000 npm run start:node
+```
+
+---
+
+## Operational Lead-Capture Readiness
+
+The website can render public pages without production services, but full operational lead capture requires the production runtime configuration, PostgreSQL schema, SMTP delivery and Turnstile verification to be in place.
+
+Configuration check:
+
+```bash
+npm run runtime:check -- --env-file=/etc/etersolis-web.env
+```
+
+Operational lead-capture check:
+
+```bash
+npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
+```
+
+Readiness endpoint:
+
+```bash
+curl --fail http://127.0.0.1:3000/api/readiness
+```
+
+See [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md) and [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md).
+
 ---
 
 ## Quality Commands
@@ -149,8 +187,11 @@ npm run link:audit
 npm run insights:validate
 npm run docs:check
 npm run release:audit
+npm run runtime:check -- --env-file=/etc/etersolis-web.env
+npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
 npm run build
 npm run check
+npm run launch:check
 npm run test:smoke
 npm run test:visual
 npm run preview:capture
@@ -188,15 +229,18 @@ See:
 - [`docs/NEWSLETTER_SYSTEM.md`](./docs/NEWSLETTER_SYSTEM.md)
 - [`docs/VERSIONING.md`](./docs/VERSIONING.md)
 - [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md)
+- [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md)
 - [`docs/ci-cost-optimizations.md`](./docs/ci-cost-optimizations.md)
 
 ---
 
 ## Environment Variables
 
-Do not commit secrets. Use `.env.example` for placeholders.
+Do not commit live runtime values. Use `.env.example` for placeholders and keep production configuration in the server-managed environment file.
 
 KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
+
+Full operational lead capture requires the configuration groups documented in [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md) and [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md).
 
 ---
 
@@ -205,7 +249,7 @@ KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.2
+**Version:** 0.3.3
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
@@ -228,6 +272,8 @@ KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
 - `/media-credits` — Website media attribution
 - `/privacy` — Privacy notice
 - `/terms` — Website terms and non-binding submission notices
+- `/api/health` — Liveness endpoint
+- `/api/readiness` — Operational lead-capture readiness endpoint
 
 ### Required Change-Control Scripts
 
@@ -239,7 +285,11 @@ KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
 - `npm run disclosure:audit`
 - `npm run routes:check`
 - `npm run theme:audit`
+- `npm run runtime:check -- --env-file=/etc/etersolis-web.env`
+- `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`
 - `npm run check`
+- `npm run launch:check`
 - `npm run test:smoke`
+- `npm run test:layout`
 - `npm run preview:capture`
 <!-- DOCS:GENERATED END -->

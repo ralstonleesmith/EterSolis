@@ -31,11 +31,13 @@ Update previews in the same pull request when page content, visible copy, hero l
 3. Review desktop and mobile screenshots.
 4. Confirm all pages use official EterSolis branding and transparent logo assets.
 5. Confirm Helios and KYMNIS use cropped production assets with no visible variant labels, palette-board annotations or guide text.
-6. Confirm obsolete internal platform-separation terminology is absent from public copy and generated previews.
-7. Confirm no page is merely whitespace with listed text.
-8. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout.
-9. Confirm Sell Waste and Terms preserve non-binding and no-sample language.
-10. Record the approval decision in the pull request or release checklist.
+6. Confirm light mode uses dark readable text and appropriate dark logo/icon variants.
+7. Confirm dark mode uses light readable text and appropriate light, white/gold or full-color logo/icon variants.
+8. Confirm obsolete internal platform-separation terminology is absent from public copy and generated previews.
+9. Confirm no page is merely whitespace with listed text.
+10. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout.
+11. Confirm Sell Waste and Terms preserve non-binding and no-sample language.
+12. Record the approval decision in the pull request or release checklist.
 
 ## Approval States
 

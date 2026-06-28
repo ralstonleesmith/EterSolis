@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - upgrade/kymnis-platform-foundation
+      - launch-readiness-operational-lead-capture
   pull_request:
     branches:
       - main
@@ -32,3 +34,5 @@ jobs:
         run: npm ci --no-audit --prefer-offline
       - name: Check
         run: npm run check
+      - name: Deploy dry run
+        run: npm run deploy:dry-run
