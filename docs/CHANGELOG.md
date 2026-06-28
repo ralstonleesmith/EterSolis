@@ -2,7 +2,7 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
-## Unreleased — 2026-06-26T07:45:00Z
+## Unreleased — 2026-06-28T06:33:10Z
 
 ### Scope
 
@@ -11,9 +11,10 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 - Added runtime configuration validation utilities and npm-accessible checks for production configuration and lead-capture operations.
 - Added database and SMTP connectivity verification for controlled pre-launch checks.
 - Hardened deployment dry-run validation to confirm startup, Docker, package, schema, documentation and operational-check assets.
+- Added `npm run launch:check` as the local launch gate for environments where GitHub Actions cannot run because of account budget or billing limits.
 - Refined the header so the EterSolis logo is the home control, the separate Home button is removed and Sell Waste remains the primary conversion action.
 - Separated header navigation from the full route registry so sitemap and route coverage remain complete while the header stays concise.
-- Expanded GitHub Actions path coverage so scripts, database schema, documentation, Docker, server startup and README changes trigger smoke validation.
+- Expanded GitHub Actions branch and path coverage so launch branches, scripts, database schema, documentation, Docker, server startup and README changes trigger validation when GitHub Actions are available.
 
 ### Documentation and Tracking
 
@@ -21,10 +22,13 @@ This changelog records controlled website upgrade work for `etersolis.com`.
 - Updated README and self-hosting documentation with the readiness endpoint, runtime check and lead-capture check.
 - Updated generated documentation rules so launch-readiness commands remain part of the checked README index.
 - Added smoke-test coverage for logo-home behavior and removal of the duplicate Home navigation item.
+- Updated PR #12 metadata and branch alignment so it points at the same launch-readiness commit as `upgrade/kymnis-platform-foundation`.
 
 ### Validation
 
-- Required gates before merge: `npm run docs:check`, `npm run release:audit`, `npm run check`, `npm run test:smoke`, `npm run deploy:dry-run`.
+- Required local gate before merge: `npm run launch:check`.
+- Supporting local checks: `npm run docs:check`, `npm run release:audit`, `npm run deploy:dry-run` and `npm audit --omit=dev`.
+- GitHub Actions are configured for the launch branches, but current GitHub runs fail before job startup because account billing or spending-limit state prevents hosted runners from starting.
 - Required production gates before public lead capture: `npm run runtime:check -- --env-file=/etc/etersolis-web.env`, `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`, `/api/health`, `/api/readiness`, `/contact` test submission and `/sell-waste` test submission.
 - Version bump remains governed by `docs/VERSIONING.md`; package and lockfile versions must remain aligned before merge.
 

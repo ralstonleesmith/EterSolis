@@ -152,6 +152,8 @@ NODE_ENV=production PORT=3000 npm run start:node
 
 The website can render public pages without production services, but full operational lead capture requires the production runtime configuration, PostgreSQL schema, SMTP delivery and Turnstile verification to be in place.
 
+When GitHub-hosted Actions cannot start because of account billing or spending-limit state, use `npm run launch:check` as the repository launch gate and record the external CI blocker in the launch record. Hosted CI should be rerun once the account issue is resolved.
+
 Configuration check:
 
 ```bash
