@@ -26,7 +26,7 @@ if (pkg.version !== lock.version || pkg.version !== lock.packages?.['']?.version
   failures.push('package.json and package-lock.json root versions must match');
 }
 if (!pkg.engines?.node?.includes('20')) failures.push('package.json must declare Node 20 runtime support');
-for (const script of ['build', 'start', 'start:node', 'runtime:check', 'lead-capture:check', 'check', 'test:smoke', 'test:layout']) {
+for (const script of ['build', 'start', 'start:node', 'runtime:check', 'lead-capture:check', 'check', 'test:smoke', 'test:layout', 'launch:check']) {
   if (!pkg.scripts?.[script]) failures.push(`package.json is missing script: ${script}`);
 }
 
@@ -47,9 +47,7 @@ if (failures.length) {
 console.log('deploy dry run passed');
 console.log('Recommended release commands:');
 console.log('  npm ci');
-console.log('  npm run check');
-console.log('  npm run test:smoke');
-console.log('  npm run test:layout');
+console.log('  npm run launch:check');
 console.log('  npm run runtime:check -- --env-file=/etc/etersolis-web.env');
 console.log('  npm run lead-capture:check -- --env-file=/etc/etersolis-web.env');
 console.log('  npm run docker:build');

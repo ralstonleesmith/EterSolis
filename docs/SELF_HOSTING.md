@@ -41,11 +41,8 @@ GitHub Actions may remain as a passive repository check, but production release 
 
 ```bash
 npm ci
-npm run check
-npm run test:smoke
-npm run test:layout
+npm run launch:check
 npm run docker:build
-npm run deploy:dry-run
 ```
 
 The smoke suite starts a local Next server through Playwright and captures desktop/mobile screenshots under `test-results/screenshots`.
@@ -198,20 +195,17 @@ WantedBy=multi-user.target
 
 1. Pull the reviewed commit to the server.
 2. Install dependencies with `npm ci`.
-3. Run `npm run check`.
-4. Run `npm run test:smoke`.
-5. Run `npm run test:layout`.
-6. Run `npm run deploy:dry-run`.
-7. Run `npm run runtime:check -- --env-file=/etc/etersolis-web.env`.
-8. Apply database migrations if required.
-9. Run `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`.
-10. Build or pull the reviewed Docker image if using container deployment.
-11. Restart the systemd, PM2, Docker Compose or hosting-provider service.
-12. Verify `/api/health`.
-13. Verify `/api/readiness`.
-14. Submit test lead forms using non-sensitive test data.
-15. Confirm internal notification email and submitter confirmation email.
-16. Confirm database records were created.
-17. Record the released commit hash in the deployment log.
+3. Run `npm run launch:check`.
+4. Run `npm run runtime:check -- --env-file=/etc/etersolis-web.env`.
+5. Apply database migrations if required.
+6. Run `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`.
+7. Build or pull the reviewed Docker image if using container deployment.
+8. Restart the systemd, PM2, Docker Compose or hosting-provider service.
+9. Verify `/api/health`.
+10. Verify `/api/readiness`.
+11. Submit test lead forms using non-sensitive test data.
+12. Confirm internal notification email and submitter confirmation email.
+13. Confirm database records were created.
+14. Record the released commit hash in the deployment log.
 
 See [`docs/LAUNCH_CHECKLIST.md`](./LAUNCH_CHECKLIST.md) for the complete launch record template.

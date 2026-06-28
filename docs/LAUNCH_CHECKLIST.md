@@ -82,13 +82,10 @@ Run the controlled gates:
 
 ```bash
 npm ci
-npm run check
-npm run test:smoke
-npm run test:layout
-npm run deploy:dry-run
+npm run launch:check
 ```
 
-The release is not operationally ready if any gate fails.
+`npm run launch:check` runs the production quality gate, smoke tests, layout/theme tests and deployment dry run. The release is not operationally ready if any gate fails.
 
 ## 7. Production Start and Verification
 

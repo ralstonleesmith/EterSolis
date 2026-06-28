@@ -45,6 +45,7 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`npm run runtime:check -- --env-file=/etc/etersolis-web.env\`
 - \`npm run lead-capture:check -- --env-file=/etc/etersolis-web.env\`
 - \`npm run check\`
+- \`npm run launch:check\`
 - \`npm run test:smoke\`
 - \`npm run test:layout\`
 - \`npm run preview:capture\`

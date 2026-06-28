@@ -26,6 +26,7 @@
     "deploy:dry-run": "node scripts/deploy-dry-run.mjs",
     "runtime:check": "node scripts/check-runtime-config.mjs",
     "lead-capture:check": "node scripts/check-lead-capture.mjs",
+    "launch:check": "npm run check && npm run test:smoke && npm run test:layout && npm run deploy:dry-run",
     "check": "npm run typecheck && npm run lint && npm run insights:validate && npm run docs:check && npm run release:audit && npm run disclosure:audit && npm run routes:check && npm run theme:audit && npm run asset:audit && npm run link:audit && npm run build",
     "qa": "npm run check && npm run test:smoke",
     "insights:validate": "node scripts/validate-insights.mjs",

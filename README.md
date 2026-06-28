@@ -191,6 +191,7 @@ npm run runtime:check -- --env-file=/etc/etersolis-web.env
 npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
 npm run build
 npm run check
+npm run launch:check
 npm run test:smoke
 npm run test:visual
 npm run preview:capture
@@ -287,6 +288,7 @@ Full operational lead capture requires the configuration groups documented in [`
 - `npm run runtime:check -- --env-file=/etc/etersolis-web.env`
 - `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`
 - `npm run check`
+- `npm run launch:check`
 - `npm run test:smoke`
 - `npm run test:layout`
 - `npm run preview:capture`

@@ -173,6 +173,18 @@ const requirements: Requirement[] = [
     description: 'Optional GA4 measurement ID for public analytics.'
   },
   {
+    key: 'ANALYTICS_WEBHOOK_URL',
+    area: 'analytics',
+    required: false,
+    description: 'Optional analytics webhook destination for server-side operational events.'
+  },
+  {
+    key: 'ANALYTICS_WEBHOOK_SECRET',
+    area: 'analytics',
+    required: false,
+    description: 'Optional bearer token or shared secret for analytics webhook delivery.'
+  },
+  {
     key: 'READINESS_EXPOSE_DETAILS',
     area: 'operations',
     required: false,
