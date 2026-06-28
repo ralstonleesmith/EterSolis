@@ -1,20 +1,53 @@
-**Smoke Tests — Run Summary**
+# Local Launch Validation Summary
 
-- **Status:** All smoke tests passed (10/10) on main.
-- **Report:** Playwright HTML report served locally at http://localhost:9323
-- **Primary artifact:** screenshot of the failing-then-passing step: [test-results/screenshots/sell-waste-stepper.png](test-results/screenshots/sell-waste-stepper.png)
-- **Notes:** A single failure was observed earlier for the `sell waste` stepper (`Confidentiality level` select hidden) but re-running with tracing produced a passing run; trace and screenshot captured for inspection.
+**Commit:** `307d48eb73851c672b7d5b4aed954894cdc8da0a`
+**Branch:** `upgrade/kymnis-platform-foundation`
+**Run timestamp:** 2026-06-28T21:57:39Z
+**Status:** Local repository launch gate passed.
 
-Next steps implemented:
+This record is the local validation evidence for the launch-readiness branch while GitHub-hosted Actions are unavailable because the GitHub account billing or spending-limit state prevents jobs from starting.
 
-- Add a CI workflow to run Playwright visual checks on PRs (see .github/workflows/visual-regression.yml).
+## Passed
 
-How to view artifacts locally:
+- `npm run docs:check`
+- `npm run release:audit`
+- `npm run deploy:dry-run`
+- `npm audit --omit=dev`
+- `npm run launch:check`
 
-1. Start the Playwright report server:
+`npm run launch:check` includes:
 
-```bash
-npx playwright show-report test-results
-```
+- TypeScript typecheck.
+- ESLint.
+- Insight validation.
+- Generated documentation check.
+- Release audit.
+- KYMNIS disclosure audit.
+- Route registry check.
+- Theme audit.
+- Media audit.
+- Link audit.
+- Production `next build`.
+- Playwright smoke and accessibility suite: 22 tests passed.
+- Playwright layout/theme suite: 10 tests passed.
+- Deployment dry run.
 
-2. Open the URL printed (default: http://localhost:9323) in your browser.
+## Expected Local Non-Passes
+
+These are not code failures:
+
+- `npm run runtime:check -- --env-file=.env.example` fails because `.env.example` intentionally contains placeholders and blank production values.
+- `npm run lead-capture:check -- --env-file=.env.example` fails for the same reason before attempting database or SMTP connectivity.
+- `npm run docker:build` cannot run on this workstation because the `docker` CLI is not installed.
+
+## External Production Evidence Still Required
+
+Before public lead capture is enabled, complete the production checks in `docs/LAUNCH_CHECKLIST.md` with the real server-managed runtime file:
+
+- `npm run runtime:check -- --env-file=/etc/etersolis-web.env`
+- `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`
+- `npm run docker:build` on a Docker-enabled host, if container deployment is used.
+- Apply `database/schema.sql` to the production PostgreSQL database if it has not already been applied.
+- Verify live `/api/health` and `/api/readiness`.
+- Submit non-sensitive `/contact` and `/sell-waste` test records.
+- Confirm internal routing email and submitter confirmation email.

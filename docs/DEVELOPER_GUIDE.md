@@ -44,6 +44,8 @@ npm run link:audit
 npm run build
 npm run check
 npm run test:smoke
+npm run test:layout
+npm run launch:check
 npm run preview:capture
 ```
 
@@ -53,6 +55,7 @@ Suggested order:
 2. Styling or page change: `npm run check`.
 3. Form, navigation, accessibility or interaction change: `npm run check && npm run test:smoke`.
 4. Visual approval change: `npm run preview:capture` and inspect generated previews.
+5. Launch readiness change: `npm run launch:check`.
 
 ## Code Organization
 
@@ -108,6 +111,7 @@ Before merge, confirm:
 
 - `npm run check` passes.
 - Interaction or form changes pass Playwright smoke/a11y tests.
+- Launch readiness changes pass `npm run launch:check`.
 - Previews accurately reflect current pages.
 - README and relevant docs are current.
 - No secret, credential, key, password or restricted operational detail is committed.
