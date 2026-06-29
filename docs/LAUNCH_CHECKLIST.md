@@ -13,6 +13,7 @@ This checklist is the controlled release record for bringing `etersolis.com` to 
 
 - Use Node.js 20 LTS or later.
 - Install dependencies with `npm ci`, not `npm install`, on production servers.
+- For Google Cloud hosting, use the Cloud Run procedure in [`docs/GCLOUD_HOSTING.md`](./GCLOUD_HOSTING.md), including Artifact Registry, Secret Manager, Cloud SQL, health/readiness checks and form acceptance tests.
 - Use the default production command for standard Node hosting:
 
 ```bash
