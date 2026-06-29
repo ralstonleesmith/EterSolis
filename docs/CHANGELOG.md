@@ -2,7 +2,7 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
-## Unreleased — 2026-06-28T06:33:10Z
+## 0.3.4 — 2026-06-29T06:50:08Z
 
 ### Scope
 

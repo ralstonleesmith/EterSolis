@@ -7,7 +7,7 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.3.3
+**Version:** 0.3.4
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
@@ -251,7 +251,7 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.3
+**Version:** 0.3.4
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
