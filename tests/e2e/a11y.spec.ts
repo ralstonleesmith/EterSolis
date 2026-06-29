@@ -30,7 +30,14 @@ for (const route of ROUTES) {
     if (violations.length > 0) {
       console.log(
         `A11Y violations on ${route}:`,
-        violations.map((violation) => ({ id: violation.id, impact: violation.impact, nodes: violation.nodes.length }))
+        violations.map((violation) => ({
+          id: violation.id,
+          impact: violation.impact,
+          nodes: violation.nodes.map((node) => ({
+            target: node.target,
+            html: node.html
+          }))
+        }))
       );
     }
 
