@@ -1,7 +1,7 @@
 # Local Launch Validation Summary
 
-**Commit:** `307d48eb73851c672b7d5b4aed954894cdc8da0a`
-**Branch:** `upgrade/kymnis-platform-foundation`
+**Validated commit:** `307d48eb73851c672b7d5b4aed954894cdc8da0a`
+**Validated branch:** `upgrade/kymnis-platform-foundation`
 **Run timestamp:** 2026-06-28T21:57:39Z
 **Status:** Local repository launch gate passed.
 
@@ -51,3 +51,12 @@ Before public lead capture is enabled, complete the production checks in `docs/L
 - Verify live `/api/health` and `/api/readiness`.
 - Submit non-sensitive `/contact` and `/sell-waste` test records.
 - Confirm internal routing email and submitter confirmation email.
+
+## Live Endpoint Check
+
+On 2026-06-29, local network access to `etersolis.com` initially failed under sandbox DNS restrictions. With approved network access, both production endpoint checks returned HTTP 404:
+
+- `curl --fail https://etersolis.com/api/health`
+- `curl --fail https://etersolis.com/api/readiness`
+
+That result means the current launch-ready application and readiness endpoints are not yet verified on the public production domain. Treat public deployment verification as incomplete until those endpoints return success after deployment.
