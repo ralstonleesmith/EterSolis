@@ -7,7 +7,7 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.3.3
+**Version:** 0.3.4
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
@@ -174,6 +174,8 @@ curl --fail http://127.0.0.1:3000/api/readiness
 
 See [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md) and [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md).
 
+For Google Cloud deployments, use the Cloud Run path in [`docs/GCLOUD_HOSTING.md`](./docs/GCLOUD_HOSTING.md).
+
 ---
 
 ## Quality Commands
@@ -231,6 +233,7 @@ See:
 - [`docs/NEWSLETTER_SYSTEM.md`](./docs/NEWSLETTER_SYSTEM.md)
 - [`docs/VERSIONING.md`](./docs/VERSIONING.md)
 - [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md)
+- [`docs/GCLOUD_HOSTING.md`](./docs/GCLOUD_HOSTING.md)
 - [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md)
 - [`docs/ci-cost-optimizations.md`](./docs/ci-cost-optimizations.md)
 
@@ -242,7 +245,7 @@ Do not commit live runtime values. Use `.env.example` for placeholders and keep 
 
 KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
 
-Full operational lead capture requires the configuration groups documented in [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md) and [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md).
+Full operational lead capture requires the configuration groups documented in [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md), [`docs/GCLOUD_HOSTING.md`](./docs/GCLOUD_HOSTING.md) and [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md).
 
 ---
 
@@ -251,7 +254,7 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.3
+**Version:** 0.3.4
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 

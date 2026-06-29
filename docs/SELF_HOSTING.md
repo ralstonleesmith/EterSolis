@@ -14,6 +14,8 @@ This project is designed for EterSolis-managed hosting on EterSolis-controlled i
 - Access: SSH key authentication only; no password login.
 - Admin security: MFA on DNS, GitHub, mail, database and server administration.
 
+For Google Cloud deployments, use Cloud Run with the repository Dockerfile and the dedicated guide in [`docs/GCLOUD_HOSTING.md`](./GCLOUD_HOSTING.md).
+
 ## Build and Run
 
 Standard self-hosted production path:
