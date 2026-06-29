@@ -45,6 +45,8 @@ npm run launch:check
 npm run docker:build
 ```
 
+If GitHub Actions cannot start because of GitHub billing, payment or spending-limit state, do not treat the failed hosted run as a code failure. Record the blocker and keep the release decision tied to local `npm run launch:check`, production runtime checks and production form acceptance evidence.
+
 The smoke suite starts a local Next server through Playwright and captures desktop/mobile screenshots under `test-results/screenshots`.
 
 ## Environment

@@ -87,6 +87,8 @@ npm run launch:check
 
 `npm run launch:check` runs the production quality gate, smoke tests, layout/theme tests and deployment dry run. The release is not operationally ready if any gate fails.
 
+If GitHub Actions cannot start because of account billing, payment or spending-limit state, record that external blocker in the launch record and use the local `npm run launch:check` result as the repository quality evidence until hosted runners are available again. Do not mark GitHub Actions as passed when jobs did not start.
+
 ## 7. Production Start and Verification
 
 Restart through the approved process manager: systemd, PM2, Docker or the hosting provider application manager.
