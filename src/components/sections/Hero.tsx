@@ -60,7 +60,7 @@ export function Hero() {
           ))}
         </MotionReveal>
       </div>
-      <div className="container-shell absolute inset-x-0 bottom-7 z-10 hidden text-xs font-black uppercase tracking-normal text-white/58 md:block">
+      <div className="container-shell absolute inset-x-0 bottom-7 z-10 hidden text-xs font-black uppercase tracking-normal text-on-dark-subtle md:block">
         Structured intake, controlled review and practical recovery pathways
       </div>
     </section>

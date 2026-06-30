@@ -46,10 +46,10 @@ export default function PrivacyPage() {
       <section className="section-padding bg-white dark:bg-black">
         <div className="container-shell grid gap-5 md:grid-cols-2">
           {sections.map(({ icon: Icon, title, text }) => (
-            <article key={title} className="card-hover rounded-lg border border-coal/10 bg-[#FAFAF7] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
+            <article key={title} className="card-hover rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-sunshine text-black"><Icon className="h-5 w-5" /></div>
               <h2 className="mt-6 text-2xl font-black text-carbon dark:text-white">{title}</h2>
-              <p className="mt-4 leading-8 text-coal dark:text-white/72">{text}</p>
+              <p className="mt-4 leading-8 text-coal dark:text-on-dark-muted">{text}</p>
             </article>
           ))}
         </div>
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
         <div className="container-shell rounded-lg border border-sunshine/60 bg-sunshine/10 p-7 dark:bg-sunshine/8">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-normal text-coal/70 dark:text-sunshine">Privacy requests</p>
+              <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Privacy requests</p>
               <p className="mt-2 text-lg font-black text-carbon dark:text-white">Send privacy requests to privacy@etersolis.com.</p>
             </div>
             <a href="mailto:privacy@etersolis.com" className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black">

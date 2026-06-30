@@ -9,6 +9,7 @@ const ROUTES = [
   '/industries',
   '/insights',
   '/insights/introducing-etersolis',
+  '/insights/technical-intelligence-brief',
   '/kymnis',
   '/kymnis/how-it-works',
   '/kymnis/verification',
@@ -30,14 +31,14 @@ for (const route of ROUTES) {
     if (violations.length > 0) {
       console.log(
         `A11Y violations on ${route}:`,
-        violations.map((violation) => ({
+        JSON.stringify(violations.map((violation) => ({
           id: violation.id,
           impact: violation.impact,
           nodes: violation.nodes.map((node) => ({
             target: node.target,
             html: node.html
           }))
-        }))
+        })), null, 2)
       );
     }
 

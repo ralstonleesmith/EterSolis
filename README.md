@@ -7,11 +7,13 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.3.4
+**Version:** 0.3.6
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
 This repository contains the controlled Next.js website implementation, lead-capture foundation, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
+
+The master operating standard is [`docs/WEBSITE_CODEBASE_SOP.md`](./docs/WEBSITE_CODEBASE_SOP.md). All design, contrast, header, theme, release and production operations must remain aligned with that SOP.
 
 ---
 
@@ -21,12 +23,12 @@ The codebase includes:
 
 - Next.js App Router with TypeScript.
 - PNG-based EterSolis brand rendering.
-- Light and dark mode with accessible theme toggle.
+- Light and dark mode with accessible, persistent theme switching and semantic contrast tokens.
 - Polished public pages for Sell Waste, Solutions, Industries, About, KYMNIS, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
 - Host-aware same-application routing foundation for `kymnis.com`, with `/kymnis` fallback routes on `etersolis.com`.
 - Helios v2 guided routing available across the website with EterSolis and KYMNIS modes.
 - Transparent production Helios brand assets integrated into launcher, prompt and guided-routing panels.
-- Full-site light/dark mode contrast and visual-layout checks for readable text, visible logos and usable navigation.
+- Full-site light/dark mode contrast and visual-layout checks for readable text, visible logos, header behavior and usable navigation.
 - Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Waste opportunity and contact intake forms.
@@ -91,6 +93,8 @@ Rules:
 /insights         Published insight archive
 /insights/introducing-etersolis
                   EterSolis Newsletter Issue 001
+/insights/technical-intelligence-brief
+                  Technical Intelligence Brief publication path
 /helios           Guided routing assistant
 /media-credits    Website media attribution
 /privacy          Privacy notice
@@ -229,6 +233,7 @@ See:
 
 - [`docs/PREVIEW_SYSTEM.md`](./docs/PREVIEW_SYSTEM.md)
 - [`docs/EXECUTIVE_REVIEW.md`](./docs/EXECUTIVE_REVIEW.md)
+- [`docs/WEBSITE_CODEBASE_SOP.md`](./docs/WEBSITE_CODEBASE_SOP.md)
 - [`docs/DEVELOPER_GUIDE.md`](./docs/DEVELOPER_GUIDE.md)
 - [`docs/NEWSLETTER_SYSTEM.md`](./docs/NEWSLETTER_SYSTEM.md)
 - [`docs/VERSIONING.md`](./docs/VERSIONING.md)
@@ -254,7 +259,7 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.4
+**Version:** 0.3.6
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
@@ -273,6 +278,7 @@ Full operational lead capture requires the configuration groups documented in [`
 - `/contact` — Contact routes and inquiry form
 - `/insights` — Published insight archive
 - `/insights/introducing-etersolis` — EterSolis Newsletter Issue 001
+- `/insights/technical-intelligence-brief` — Technical Intelligence Brief publication path
 - `/helios` — Guided routing assistant
 - `/media-credits` — Website media attribution
 - `/privacy` — Privacy notice

@@ -27,32 +27,32 @@ export function HeliosLauncher() {
   return (
     <div className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 sm:inset-x-auto sm:right-5 sm:max-w-[calc(100vw-2rem)]">
       {open ? (
-        <div className="mb-3 w-full rounded-[2rem] border border-coal/10 bg-white/96 p-4 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-[#070707]/96 sm:w-[24rem]">
+        <div className="ui-surface mb-3 w-full rounded-lg p-4 shadow-soft backdrop-blur-xl sm:w-[24rem]">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.18em] text-coal/70 dark:text-sunshine">
+              <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">
                 <Image src={mediaAssets.helios.icon.darkSrc} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-5 w-5 object-contain dark:hidden" />
                 <Image src={mediaAssets.helios.icon.lightSrc} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="hidden h-5 w-5 object-contain dark:block" /> Helios
               </p>
-              <h2 className="mt-1 text-lg font-black text-carbon dark:text-white">Guided next-step routing</h2>
-              <p className="mt-1 text-xs font-bold text-coal/70 dark:text-white/58">{mode === 'kymnis' ? 'KYMNIS mode' : 'EterSolis mode'}</p>
+              <h2 className="mt-1 text-lg font-black text-body">Guided next-step routing</h2>
+              <p className="mt-1 text-xs font-bold text-subtle">{mode === 'kymnis' ? 'KYMNIS mode' : 'EterSolis mode'}</p>
             </div>
-            <button type="button" className="rounded-full border border-coal/10 p-2 text-carbon dark:border-white/10 dark:text-white" onClick={() => setOpen(false)} aria-label="Close Helios launcher">
+            <button type="button" className="ui-control rounded-full p-2" onClick={() => setOpen(false)} aria-label="Close Helios launcher">
               <X className="h-4 w-4" />
             </button>
           </div>
           <div className="mt-4 grid gap-2">
             {intents.map((intent) => (
-              <Link key={intent.id} href={intent.href} className="group rounded-2xl border border-coal/10 bg-cool p-3 text-sm font-black text-carbon transition hover:-translate-y-0.5 hover:border-sunshine dark:border-white/10 dark:bg-white/6 dark:text-white" onClick={() => setOpen(false)}>
+              <Link key={intent.id} href={intent.href} className="ui-surface-muted group rounded-lg p-3 text-sm font-black transition hover:-translate-y-0.5 hover:border-sunshine" onClick={() => setOpen(false)}>
                 <span className="flex items-center justify-between gap-3">
                   {intent.label}
                   <ArrowRight className="h-4 w-4 text-sunshine transition group-hover:translate-x-0.5" />
                 </span>
-                <span className="mt-1 block text-xs font-bold leading-5 text-coal/70 dark:text-white/68">{intent.description}</span>
+                <span className="mt-1 block text-xs font-bold leading-5 text-muted">{intent.description}</span>
               </Link>
             ))}
           </div>
-          <p className="mt-4 text-xs font-bold leading-5 text-coal/65 dark:text-white/55">
+          <p className="mt-4 text-xs font-bold leading-5 text-subtle">
             Public routing only. KYMNIS review required before commitments.
           </p>
         </div>

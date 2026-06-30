@@ -12,7 +12,7 @@ const principles = [
 
 export function ReviewPrinciples({ compact = false }: { compact?: boolean }) {
   return (
-    <section className={`section-padding ${compact ? 'bg-white dark:bg-[#050505]' : 'bg-[#FAFAF7] dark:bg-black'}`}>
+    <section className={`section-padding ${compact ? 'bg-white dark:bg-[var(--surface)]' : 'bg-[var(--surface-muted)] dark:bg-black'}`}>
       <div className="container-shell">
         <MotionReveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeader
@@ -31,7 +31,7 @@ export function ReviewPrinciples({ compact = false }: { compact?: boolean }) {
                 <Icon className="h-5 w-5" />
               </div>
               <h3 className="mt-6 text-xl font-black text-carbon dark:text-white">{title}</h3>
-              <p className="mt-3 text-sm leading-7 text-coal dark:text-white/70">{text}</p>
+              <p className="mt-3 text-sm leading-7 text-coal dark:text-on-dark-muted">{text}</p>
             </article>
           ))}
         </MotionReveal>

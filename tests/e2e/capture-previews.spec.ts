@@ -11,6 +11,7 @@ const routes = [
   '/industries',
   '/insights',
   '/insights/introducing-etersolis',
+  '/insights/technical-intelligence-brief',
   '/kymnis',
   '/kymnis/how-it-works',
   '/kymnis/verification',

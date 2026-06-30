@@ -11,7 +11,7 @@ test('homepage renders media hero and dark mode', async ({ page }) => {
   await expect(page.getByAltText(/clean modern materials recovery facility/i).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: /Wastewater treatment is a resource/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Request Wastewater Assessment/i }).first()).toHaveAttribute('href', '/contact#contact-form');
-  await page.getByLabel(/Toggle light and dark mode/i).click();
+  await page.getByLabel(/Switch to dark mode/i).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.screenshot({ path: 'test-results/screenshots/home-desktop.png', fullPage: false });
 });
@@ -71,7 +71,8 @@ test('sell waste stepper advances through intake flow', async ({ page }) => {
 });
 
 test('contact stepper and Helios wizard route users', async ({ page }) => {
-  await page.goto('/contact');
+  await page.goto('/contact?topic=Wastewater%20Treatment#contact-form');
+  await expect(page.getByLabel(/Topic/i)).toHaveValue('Wastewater Treatment');
   await page.getByLabel(/Topic/i).selectOption('Wastewater Treatment');
   await page.getByRole('button', { name: /Continue/i }).click();
   await expect(page.getByLabel(/Name/i)).toBeVisible();
@@ -79,8 +80,73 @@ test('contact stepper and Helios wizard route users', async ({ page }) => {
   await page.goto('/helios');
   await page.getByRole('button', { name: /Wastewater treatment/i }).click();
   await expect(page.getByRole('heading', { name: /Wastewater treatment/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Request wastewater assessment/i })).toHaveAttribute('href', '/contact#contact-form');
+  await expect(page.getByRole('link', { name: /Request wastewater assessment/i })).toHaveAttribute('href', '/contact?topic=Wastewater%20Treatment#contact-form');
   await page.screenshot({ path: 'test-results/screenshots/helios-wizard.png', fullPage: true });
+});
+
+test('lead forms show success and error states with mocked API responses', async ({ page }) => {
+  await page.route('**/api/leads', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ ok: true, submissionId: 'lead-test-001', message: 'Mock inquiry received.' })
+    });
+  });
+
+  await page.goto('/contact?topic=Partnership#contact-form');
+  await expect(page.getByLabel(/Topic/i)).toHaveValue('Partnership');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Name/i).fill('Lead Capture Reviewer');
+  await page.getByLabel(/Company/i).fill('EterSolis QA');
+  await page.getByLabel(/^Email$/i).fill('review@example.com');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Message/i).fill('This is a non-confidential mocked partnership inquiry for lead capture acceptance testing.');
+  await page.getByLabel(/I consent to EterSolis contacting me/i).check();
+  await page.getByRole('button', { name: /Submit Inquiry/i }).click();
+  await expect(page.getByRole('heading', { name: /Your inquiry has been routed for review/i })).toBeVisible();
+  await expect(page.getByText(/Mock inquiry received/i)).toBeVisible();
+
+  await page.unroute('**/api/leads');
+  await page.route('**/api/leads', async (route) => {
+    await route.fulfill({
+      status: 500,
+      contentType: 'application/json',
+      body: JSON.stringify({ error: 'Mock delivery failure.' })
+    });
+  });
+
+  await page.goto('/contact#contact-form');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Name/i).fill('Lead Capture Reviewer');
+  await page.getByLabel(/^Email$/i).fill('review@example.com');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Message/i).fill('This mocked inquiry verifies visible API failure handling.');
+  await page.getByLabel(/I consent to EterSolis contacting me/i).check();
+  await page.getByRole('button', { name: /Submit Inquiry/i }).click();
+  await expect(page.getByText(/Mock delivery failure/i)).toBeVisible();
+});
+
+test('waste opportunity form submits through mocked lead capture route', async ({ page }) => {
+  await page.route('**/api/waste', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ ok: true, submissionId: 'waste-test-001', message: 'Mock waste opportunity received.' })
+    });
+  });
+
+  await page.goto('/sell-waste#waste-form');
+  await page.getByLabel(/Company name/i).fill('EterSolis Test Company');
+  await page.getByLabel(/Contact name/i).fill('Waste Reviewer');
+  await page.getByLabel(/^Email$/i).fill('waste-review@example.com');
+  await page.getByLabel(/Country/i).fill('South Africa');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Material description/i).fill('Clean recoverable cardboard and plastic packaging from a controlled test stream.');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/I consent to EterSolis contacting me about this submission/i).check();
+  await page.getByRole('button', { name: /Submit Waste Opportunity/i }).click();
+  await expect(page.getByRole('heading', { name: /Your opportunity is queued for controlled review/i })).toBeVisible();
+  await expect(page.getByText(/Mock waste opportunity received/i)).toBeVisible();
 });
 
 test('KYMNIS public foundation and guided interest intake render', async ({ page }) => {
@@ -97,9 +163,14 @@ test('insights publishes newsletter issue 001 with PDF and print routes', async 
   await page.goto('/insights');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Read the issue/i })).toHaveAttribute('href', '/insights/introducing-etersolis');
+  await expect(page.getByRole('link', { name: /View publication path/i })).toHaveAttribute('href', '/insights/technical-intelligence-brief');
   await page.goto('/insights/introducing-etersolis');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i }).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: /The EterSolis Resource Hierarchy/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Download original PDF/i })).toHaveAttribute('href', '/media/newsletters/issue-001/etersolis-newsletter-issue-001.pdf');
   await expect(page.getByRole('link', { name: /Print view/i })).toHaveAttribute('href', '/insights/introducing-etersolis/print');
+  await page.goto('/insights/technical-intelligence-brief');
+  await expect(page.getByRole('heading', { name: /^Technical Intelligence Brief$/i })).toBeVisible();
+  await expect(page.getByText(/PDF upload pending/i)).toBeVisible();
+  await expect(page.getByText(/public\/media\/technical-intelligence-brief\/technical-intelligence-brief-001\.pdf/i)).toBeVisible();
 });

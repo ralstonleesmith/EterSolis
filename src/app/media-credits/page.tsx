@@ -40,7 +40,7 @@ export default function MediaCreditsPage() {
         imageAlt={mediaAssets.wastewater.aerial.alt}
       />
 
-      <section className="section-padding bg-[#FAFAF7] dark:bg-black">
+      <section className="section-padding bg-[var(--surface-muted)] dark:bg-black">
         <div className="container-shell">
           <div className="grid gap-5 md:grid-cols-3">
             {[
@@ -53,7 +53,7 @@ export default function MediaCreditsPage() {
                   <Icon className="h-5 w-5" />
                 </div>
                 <h2 className="mt-5 text-xl font-black text-carbon dark:text-white">{title}</h2>
-                <p className="mt-3 text-sm leading-7 text-coal dark:text-white/70">{text}</p>
+                <p className="mt-3 text-sm leading-7 text-coal dark:text-on-dark-muted">{text}</p>
               </article>
             ))}
           </div>
@@ -65,10 +65,10 @@ export default function MediaCreditsPage() {
                   <Image src={previewPathFor(asset.id, asset.path)} alt={asset.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
                 </div>
                 <div className="p-6">
-                  <p className="text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">{asset.type}</p>
+                  <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">{asset.type}</p>
                   <h2 className="mt-3 text-2xl font-black text-carbon dark:text-white">{asset.title}</h2>
-                  <p className="mt-3 text-sm leading-7 text-coal dark:text-white/70">{asset.alt}</p>
-                  <dl className="mt-5 grid gap-3 text-sm text-coal dark:text-white/72">
+                  <p className="mt-3 text-sm leading-7 text-coal dark:text-on-dark-muted">{asset.alt}</p>
+                  <dl className="mt-5 grid gap-3 text-sm text-coal dark:text-on-dark-muted">
                     <div>
                       <dt className="font-black text-carbon dark:text-white">Credit</dt>
                       <dd>{asset.credit}</dd>

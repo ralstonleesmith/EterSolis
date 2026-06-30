@@ -25,6 +25,7 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/contact\` — Contact routes and inquiry form
 - \`/insights\` — Published insight archive
 - \`/insights/introducing-etersolis\` — EterSolis Newsletter Issue 001
+- \`/insights/technical-intelligence-brief\` — Technical Intelligence Brief publication path
 - \`/helios\` — Guided routing assistant
 - \`/media-credits\` — Website media attribution
 - \`/privacy\` — Privacy notice

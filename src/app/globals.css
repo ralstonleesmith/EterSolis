@@ -17,6 +17,16 @@
   --surface-strong: #f2f2f2;
   --text-primary: #000000;
   --text-muted: rgba(11, 18, 32, 0.78);
+  --text-subtle: rgba(11, 18, 32, 0.7);
+  --text-inverse: #ffffff;
+  --text-inverse-muted: rgba(255, 255, 255, 0.84);
+  --text-inverse-subtle: rgba(255, 255, 255, 0.76);
+  --header-bg: rgba(255, 255, 255, 0.94);
+  --header-panel: rgba(255, 255, 255, 0.78);
+  --header-border: rgba(86, 86, 86, 0.16);
+  --control-bg: rgba(255, 255, 255, 0.92);
+  --control-hover: #f2f2f2;
+  --field-bg: #ffffff;
   --kymnis-teal: #007D79;
   --kymnis-gold: #D9A520;
   --kymnis-ink: #2D2D2D;
@@ -37,6 +47,16 @@
   --surface-strong: #151515;
   --text-primary: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.84);
+  --text-subtle: rgba(255, 255, 255, 0.76);
+  --text-inverse: #000000;
+  --text-inverse-muted: rgba(11, 18, 32, 0.82);
+  --text-inverse-subtle: rgba(11, 18, 32, 0.72);
+  --header-bg: rgba(0, 0, 0, 0.9);
+  --header-panel: rgba(255, 255, 255, 0.1);
+  --header-border: rgba(255, 255, 255, 0.14);
+  --control-bg: rgba(255, 255, 255, 0.1);
+  --control-hover: rgba(255, 255, 255, 0.16);
+  --field-bg: rgba(0, 0, 0, 0.45);
   --kymnis-teal: #007D79;
   --kymnis-gold: #D9A520;
   --kymnis-ink: #2D2D2D;
@@ -57,7 +77,7 @@ body {
   background:
     radial-gradient(circle at top left, rgba(252, 207, 37, 0.18), transparent 32rem),
     linear-gradient(180deg, var(--aero) 0%, var(--mist) 42%, var(--aero) 100%);
-  color: var(--coal);
+  color: var(--text-muted);
   font-family: Aptos, Inter, ui-sans-serif, system-ui, sans-serif;
 }
 .dark body {
@@ -92,6 +112,74 @@ a { color: inherit; text-decoration: none; }
 .bg-sunshine-10 a, .bg-sunshine-10 button { color: var(--coal-strong); }
 .overlay--sunshine-contrast { background: linear-gradient(rgba(11,18,32,0.6), rgba(11,18,32,0.6)); }
 .text-accessible { color: var(--coal-strong) !important; }
+
+.text-body { color: var(--text-primary); }
+.text-muted { color: var(--text-muted); }
+.text-subtle { color: var(--text-subtle); }
+.text-inverse { color: var(--text-inverse); }
+.text-inverse-muted { color: var(--text-inverse-muted); }
+.text-inverse-subtle { color: var(--text-inverse-subtle); }
+.text-on-dark { color: #ffffff; }
+.text-on-dark-muted { color: rgba(255, 255, 255, 0.84); }
+.text-on-dark-subtle { color: rgba(255, 255, 255, 0.76); }
+.dark .dark\:text-on-dark { color: #ffffff; }
+.dark .dark\:text-on-dark-muted { color: rgba(255, 255, 255, 0.84); }
+.dark .dark\:text-on-dark-subtle { color: rgba(255, 255, 255, 0.76); }
+
+.site-header {
+  border-bottom: 1px solid var(--header-border);
+  background: var(--header-bg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(18px);
+}
+
+.site-header-panel {
+  border: 1px solid var(--header-border);
+  background: var(--header-panel);
+  color: var(--text-primary);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.dark .site-header-panel {
+  color: #ffffff;
+}
+
+.ui-control {
+  border: 1px solid var(--header-border);
+  background: var(--control-bg);
+  color: var(--text-primary);
+}
+
+.ui-control:hover { background: var(--control-hover); border-color: rgba(252,207,37,0.7); }
+
+.ui-surface {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.ui-surface-muted {
+  border: 1px solid var(--line);
+  background: var(--surface-muted);
+  color: var(--text-primary);
+}
+
+.ui-field {
+  border: 1px solid var(--line);
+  background: var(--field-bg);
+  color: var(--text-primary);
+}
+
+.ui-field::placeholder {
+  color: var(--text-subtle);
+  opacity: 1;
+}
+
+.dark-section {
+  background: #000000;
+  color: var(--text-inverse);
+}
 
 /* Apply accessible text color for common descendants on sunshine backgrounds */
 .bg-sunshine, .bg-sunshine-10, .overlay--sunshine-contrast {
@@ -195,6 +283,13 @@ a { color: inherit; text-decoration: none; }
   background:
     radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--kymnis-teal) 30%, transparent), transparent 30rem),
     radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--kymnis-gold) 24%, transparent), transparent 26rem);
+}
+
+.kymnis-hero-bg {
+  background:
+    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--kymnis-teal) 34%, transparent), transparent 32rem),
+    radial-gradient(circle at 86% 18%, color-mix(in srgb, var(--kymnis-gold) 26%, transparent), transparent 28rem),
+    linear-gradient(135deg, #020617 0%, #101f1f 48%, var(--kymnis-ink) 100%);
 }
 .dark .glass-panel {
   border-color: rgba(255, 255, 255, 0.12);

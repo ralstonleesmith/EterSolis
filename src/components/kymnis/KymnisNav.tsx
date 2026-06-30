@@ -12,14 +12,14 @@ const labels: Record<(typeof kymnisRoutes)[number], string> = {
 
 export function KymnisNav({ active }: { active: (typeof kymnisRoutes)[number] }) {
   return (
-    <nav className="container-shell -mt-8 mb-12 rounded-2xl border border-coal/10 bg-white/88 p-3 shadow-soft backdrop-blur dark:border-white/10 dark:bg-white/6" aria-label="KYMNIS navigation">
+    <nav className="container-shell -mt-8 mb-12 rounded-lg border border-coal/10 bg-white/88 p-3 shadow-soft backdrop-blur dark:border-white/10 dark:bg-white/6" aria-label="KYMNIS navigation">
       <div className="grid gap-2 md:grid-cols-5">
         {kymnisRoutes.map((href) => (
           <Link
             key={href}
             href={href}
             aria-current={href === active ? 'page' : undefined}
-            className={`inline-flex items-center justify-between gap-2 rounded-xl px-4 py-3 text-sm font-black transition ${
+            className={`inline-flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-sm font-black transition ${
               href === active
                 ? 'bg-sunshine text-black'
                 : 'text-carbon hover:bg-cool dark:text-white dark:hover:bg-white/10'

@@ -42,7 +42,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5">
-        <div className="container-shell text-xs text-white/62">
+        <div className="container-shell text-xs text-on-dark-subtle">
           © 2026 EterSolis. All rights reserved. Proprietary and confidential source code.
         </div>
       </div>

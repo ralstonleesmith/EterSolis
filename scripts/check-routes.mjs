@@ -9,6 +9,7 @@ const requiredRoutes = [
   '/industries',
   '/insights',
   '/insights/introducing-etersolis',
+  '/insights/technical-intelligence-brief',
   '/kymnis',
   '/kymnis/how-it-works',
   '/kymnis/verification',
@@ -50,4 +51,3 @@ if (failures.length > 0) {
 }
 
 console.log('route check passed');
-

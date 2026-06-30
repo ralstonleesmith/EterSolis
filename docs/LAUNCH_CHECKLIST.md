@@ -118,6 +118,9 @@ curl --fail https://etersolis.com/api/readiness
 Submit non-sensitive test records through:
 
 - `/contact`
+- `/contact?topic=Partnership#contact-form`
+- `/contact?topic=Wastewater%20Treatment#contact-form`
+- `/kymnis/contact`
 - `/sell-waste`
 
 Confirm every test submission produces:
@@ -128,6 +131,8 @@ Confirm every test submission produces:
 - an internal routing email;
 - a submitter confirmation email;
 - no raw client IP stored in the lead payload.
+- the selected contact topic routes to the expected inbox.
+- visible success and failure states remain readable in light and dark mode.
 
 ## 9. Rollback Criteria
 
