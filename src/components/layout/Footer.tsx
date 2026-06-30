@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
 import { contactRoutes, kymnisRoutes } from '@/lib/siteContent';
+import { technicalBrief } from '@/lib/technicalBrief';
 
 export function Footer() {
   return (
@@ -35,6 +36,7 @@ export function Footer() {
             <li><Link href="/terms" className="hover:text-white">Terms</Link></li>
             <li><Link href={kymnisRoutes[0]} className="hover:text-white">KYMNIS</Link></li>
             <li><Link href="/insights/introducing-etersolis" className="hover:text-white">Newsletter Issue 001</Link></li>
+            <li><Link href={technicalBrief.canonicalPath} className="hover:text-white">Technical Intelligence Brief</Link></li>
             <li><Link href="/media-credits" className="hover:text-white">Media Credits</Link></li>
             <li><Link href="/contact#contact-form" className="hover:text-white">Contact</Link></li>
             <li><Link href="/sell-waste#waste-form" className="hover:text-white">Sell Waste</Link></li>

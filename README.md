@@ -7,7 +7,7 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.3.6
+**Version:** 0.3.7
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
@@ -31,6 +31,7 @@ The codebase includes:
 - Full-site light/dark mode contrast and visual-layout checks for readable text, visible logos, header behavior and usable navigation.
 - Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
+- Published CEPA Technical Intelligence Brief route with source-of-record PDF download.
 - Waste opportunity and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
 - Runtime configuration checks and operational lead-capture verification commands.
@@ -94,7 +95,7 @@ Rules:
 /insights/introducing-etersolis
                   EterSolis Newsletter Issue 001
 /insights/technical-intelligence-brief
-                  Technical Intelligence Brief publication path
+                  Published CEPA Technical Intelligence Brief
 /helios           Guided routing assistant
 /media-credits    Website media attribution
 /privacy          Privacy notice
@@ -259,7 +260,7 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.6
+**Version:** 0.3.7
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
@@ -278,7 +279,7 @@ Full operational lead capture requires the configuration groups documented in [`
 - `/contact` — Contact routes and inquiry form
 - `/insights` — Published insight archive
 - `/insights/introducing-etersolis` — EterSolis Newsletter Issue 001
-- `/insights/technical-intelligence-brief` — Technical Intelligence Brief publication path
+- `/insights/technical-intelligence-brief` — Published CEPA Technical Intelligence Brief
 - `/helios` — Guided routing assistant
 - `/media-credits` — Website media attribution
 - `/privacy` — Privacy notice
