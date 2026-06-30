@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160" role="img" aria-labelledby="title desc">
+<title id="title">EterSolis coming soon splash image</title>
+<desc id="desc">Premium dark 4K coming soon splash artwork for EterSolis, using graphite, white and sunshine yellow technical circular motifs.</desc>
+<defs>
+  <radialGradient id="g" cx="62%" cy="43%" r="75%">
+    <stop offset="0" stop-color="#3f3f3f"/>
+    <stop offset="0.45" stop-color="#1b1b1b"/>
+    <stop offset="1" stop-color="#070707"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FCCF25"/>
+    <stop offset="1" stop-color="#a98100"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="3840" height="2160" fill="url(#g)"/>
+<circle cx="2419" cy="1037" r="760" fill="none" stroke="#FCCF25" stroke-opacity=".23" stroke-width="8" stroke-dasharray="720 180 120 260"/>
+<circle cx="2419" cy="1037" r="960" fill="none" stroke="#fff" stroke-opacity=".09" stroke-width="5" stroke-dasharray="460 260 120 200"/>
+<circle cx="2419" cy="1037" r="1120" fill="none" stroke="#FCCF25" stroke-opacity=".13" stroke-width="4" stroke-dasharray="340 280 240 300"/>
+<path d="M1480 1300 C1900 520 2650 360 3250 820" fill="none" stroke="#FCCF25" stroke-opacity=".33" stroke-width="10"/>
+<path d="M1560 1400 C2050 650 2720 560 3320 980" fill="none" stroke="#FCCF25" stroke-opacity=".18" stroke-width="6"/>
+<g opacity=".11">
+  <path d="M-240 2160 L300 2160 L1740 0 L1200 0 Z" fill="#fff"/>
+  <path d="M720 2160 L1260 2160 L2700 0 L2160 0 Z" fill="#fff"/>
+  <path d="M1680 2160 L2220 2160 L3660 0 L3120 0 Z" fill="#fff"/>
+</g>
+<rect x="260" y="390" width="1810" height="1315" rx="64" fill="#000" fill-opacity=".38" stroke="#fff" stroke-opacity=".16"/>
+<rect x="290" y="420" width="1750" height="1255" rx="50" fill="none" stroke="#FCCF25" stroke-opacity=".28" stroke-width="2"/>
+<rect x="340" y="500" width="555" height="60" rx="30" fill="#FCCF25"/>
+<text x="372" y="540" font-family="Arial, Helvetica, sans-serif" font-size="27" letter-spacing="2" fill="#111">WASTE • CARBON • CIRCULAR VALUE</text>
+<text x="335" y="795" font-family="Arial, Helvetica, sans-serif" font-size="164" font-weight="700" fill="#fff">EterSolis</text>
+<rect x="345" y="858" width="660" height="12" rx="6" fill="#FCCF25"/>
+<rect x="1030" y="858" width="210" height="12" rx="6" fill="#fff" opacity=".35"/>
+<text x="335" y="1045" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="700" fill="#FCCF25">Coming Soon</text>
+<text x="340" y="1170" font-family="Arial, Helvetica, sans-serif" font-size="42" fill="#f2f2f2" opacity=".92">A practical platform for waste opportunity intake,</text>
+<text x="340" y="1232" font-family="Arial, Helvetica, sans-serif" font-size="42" fill="#f2f2f2" opacity=".92">carbon management, circular economy solutions,</text>
+<text x="340" y="1294" font-family="Arial, Helvetica, sans-serif" font-size="42" fill="#f2f2f2" opacity=".92">and industrial resource recovery.</text>
+<rect x="340" y="1438" width="770" height="88" rx="44" fill="#fff" fill-opacity=".07" stroke="#fff" stroke-opacity=".18"/>
+<text x="382" y="1498" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#fff">etersolis.com</text>
+<circle cx="1046" cy="1483" r="22" fill="#FCCF25"/>
+</svg>
