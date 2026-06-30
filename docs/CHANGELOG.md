@@ -2,6 +2,25 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.3.7 — 2026-06-30T19:30:50Z
+
+### CEPA Technical Intelligence Brief
+
+- Published the CEPA Technical Intelligence Brief Color & Chemicals Industry Edition Issue 001 at `/insights/technical-intelligence-brief`.
+- Added the approved 40-page flagship PDF as the public source-of-record download.
+- Promoted CEPA and EterSolis publication assets into public media and registered them in media credits.
+- Added the CEPA publication standard as controlled supporting documentation for future issue production.
+
+### Documentation and Tracking
+
+- Updated Insights, footer discoverability, generated route docs, README references and publication tests for the released brief.
+- Refined the public presentation with direct on-page reading, executive publication copy and public-facing responsible-use language.
+- Bumped the website package version to `0.3.7`.
+
+### Validation
+
+- Required gates: `npm run check`, `npm run test:layout`, `npm run test:smoke`, `npm run preview:capture` and `npm audit`.
+
 ## 0.3.6 — 2026-06-30T12:01:47Z
 
 ### Scope

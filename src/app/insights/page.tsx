@@ -74,12 +74,13 @@ export default function InsightsPage() {
 
           <article className="mt-10 grid gap-6 rounded-lg border border-sunshine/50 bg-sunshine/10 p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8">
             <div>
-              <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">{technicalBrief.status}</p>
+              <p className="text-xs font-black uppercase tracking-normal text-subtle">{technicalBrief.status} · {technicalBrief.edition} · Issue {technicalBrief.issueNumber}</p>
               <h2 className="mt-3 text-3xl font-black text-body">{technicalBrief.title}</h2>
               <p className="mt-3 max-w-3xl leading-7 text-muted">{technicalBrief.summary}</p>
+              <p className="mt-3 text-sm font-black text-body">{technicalBrief.documentCode}</p>
             </div>
             <Link href={technicalBrief.canonicalPath} className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
-              View publication path <ArrowRight className="h-4 w-4" />
+              Read flagship brief <ArrowRight className="h-4 w-4" />
             </Link>
           </article>
         </div>

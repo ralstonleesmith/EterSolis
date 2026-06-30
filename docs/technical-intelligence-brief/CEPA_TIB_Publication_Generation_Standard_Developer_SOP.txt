@@ -1,0 +1,1893 @@
+CEPA TECHNICAL INTELLIGENCE BRIEF PUBLICATION GENERATION STANDARD
+Developer SOP for Automated CEPA Technical Intelligence Brief Production
+Flagship Release-Aligned Developer Edition
+SOP Version: 2.1
+Alignment Baseline: CEPA Technical Intelligence Brief | Color & Chemicals Industry Edition | Issue 001 | 5 July 2026 | Flagship Release
+Last Updated: 2026-06-30
+
+Document purpose:
+This SOP defines the standardized, automation-first method for generating CEPA Technical Intelligence Briefs and related CEPA publications at consistent expert quality. It is designed for developers building or maintaining the CEPA publication engine.
+
+This version upgrades the prior developer SOP to match the final flagship release workflow. It adds controlled finalization, PDF outline/bookmark generation, clickable resource links, duplicate footer text-layer protection, QR crop validation, metadata hardening, external-source spot-check protocol, and QA report generation.
+
+Governing principle:
+CEPA publications must be generated from structured content, reusable templates, deterministic layout rules, automated audits, and manual rendered-page review. The final PDF must never be manually assembled page by page.
+
+Controlled exception:
+A controlled post-processing/finalization layer is permitted after deterministic PDF generation only when it performs release hardening actions that are themselves scripted, auditable, and repeatable. Approved finalization actions include:
+- removing duplicated footer text-layer artifacts from legacy or imported PDFs;
+- adding or rebuilding PDF bookmarks/outlines;
+- adding clickable link annotations over approved QR/resource blocks;
+- setting or correcting PDF metadata;
+- linearizing or normalizing the PDF structure where supported;
+- generating a final release QA report.
+
+The finalization layer must never rewrite substantive page content, alter claims, move design elements manually, or conceal visual defects.
+
+Target standard:
+- A4 portrait, fixed-layout publication quality.
+- 40 pages for flagship issues unless explicitly approved otherwise.
+- CEPA master header and footer.
+- One and only one generated footer identity line per page in the visible text layer.
+- No clipped logos.
+- No distorted logos.
+- No visible version labels.
+- Version retained only in PDF metadata.
+- No overlapping text or visuals.
+- No cutoff content.
+- No duplicated footer text.
+- No broken QR code.
+- QR codes on cover and back cover decode from final rendered PDF.
+- Clickable link regions over cover/back-cover resource blocks.
+- Complete PDF bookmarks for every page.
+- No unresolved source codes.
+- Complete source register.
+- No draft language.
+- No obsolete naming.
+- Full render audit before release.
+- Final QA report produced with release evidence.
+
+
+================================================================================
+1. CORE PRODUCTION WORKFLOW
+================================================================================
+
+Required flagship pipeline:
+
+research sources
+        |
+        v
+structured issue YAML / JSON
+        |
+        v
+content validator
+        |
+        v
+claim-source validator
+        |
+        v
+PDF generator
+        |
+        v
+controlled PDF finalizer
+        |
+        v
+rendered PNG audit
+        |
+        v
+text / metadata / footer / source audit
+        |
+        v
+outline and link annotation audit
+        |
+        v
+QR full-page and crop validation
+        |
+        v
+external-source spot-check for flagship issues
+        |
+        v
+visual contact sheet review
+        |
+        v
+critical page rendered review
+        |
+        v
+final QA report
+        |
+        v
+final PDF release package
+
+Rules:
+1. Do not manually place final PDF elements outside the template system.
+2. Do not perform ad hoc PDF patching. Use only scripted finalization functions.
+3. Every visual element must be controlled by reusable components and coordinates.
+4. Every factual claim must map to a source code.
+5. Every source code must resolve in the source register.
+6. The build must fail if any release gate fails.
+7. The finalizer may repair technical PDF structure, but it may not compensate for bad design generation.
+8. A flagship release is not complete until the final QA report and release manifest exist.
+
+
+================================================================================
+2. REQUIRED REPOSITORY STRUCTURE
+================================================================================
+
+Use this repository structure:
+
+cepa-publications/
+  README.md
+  requirements.txt
+  Makefile
+
+  .github/
+    workflows/
+      build-cepa-publication.yml
+
+  assets/
+    logos/
+      cepa_horizontal.png
+      cepa_horizontal_padded.png
+      cepa_stamp.png
+      cepa_stamp_padded.png
+      etersolis_mark.png
+    qr/
+      etersolis_qr.png
+    fonts/
+      README_DO_NOT_COMMIT_FONTS.md
+
+  content/
+    color_chemicals_issue_001/
+      issue.yaml
+      pages.yaml
+      sources.yaml
+      claims.yaml
+      source_spotchecks.yaml
+      qa_notes.yaml
+
+  src/
+    cepa_theme.py
+    cepa_layout.py
+    cepa_components.py
+    build_publication.py
+    finalize_pdf.py
+    validate_content.py
+    audit_pdf.py
+    audit_visual.py
+    audit_qr.py
+    audit_sources.py
+    audit_claims.py
+    audit_bookmarks_links.py
+    audit_external_sources.py
+    make_contact_sheet.py
+    generate_qa_report.py
+    package_release.py
+
+  build/
+    drafts/
+    finalized/
+    renders/
+    audit/
+      contact_sheets/
+      guide_overlays/
+      qr_crops/
+      source_spotchecks/
+      reports/
+    final/
+      release_package/
+
+Repository rules:
+- Content belongs in content/<issue>/.
+- Layout belongs in src/cepa_layout.py and src/cepa_components.py.
+- Theme values belong in src/cepa_theme.py.
+- Generated files belong in build/.
+- Do not commit proprietary font files.
+- Do not store final layout coordinates in content YAML.
+- Do not create final PDF manually in design software unless approved as an exception.
+- Do not manually edit final PDFs. Use src/finalize_pdf.py.
+- Any release artifact must have a SHA-256 hash recorded in the release manifest.
+
+
+================================================================================
+3. FIXED PUBLICATION IDENTITY RULES
+================================================================================
+
+Every issue must define identity metadata in:
+
+content/<issue>/issue.yaml
+
+Example:
+
+series_name: "CEPA Technical Intelligence Brief"
+edition_name: "Color & Chemicals Industry Edition"
+issue_number: "001"
+issue_date_display: "5 July 2026"
+issue_date_iso: "2026-07-05"
+document_code: "CEPA-TIB-COLCHEM-001-20260705"
+
+publisher: "CEPA"
+prepared_by: "EterSolis Waste & Carbon Management"
+prepared_by_url: "etersolis.com"
+
+main_handle: "@CEPAIntel"
+edition_handle: "@CEPAColorIntel"
+
+public_url: "https://etersolis.com"
+visible_version: false
+metadata_version: "v2.0"
+release_tier: "Flagship"
+
+draft_output_filename: "CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Draft.pdf"
+final_output_filename: "CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf"
+
+Non-negotiable identity rules:
+1. Version must not appear visibly in the PDF body, cover, footer, source register, or back cover.
+2. Version may appear only in PDF metadata.
+3. Release tier may appear in the file name and QA report, but not in the visible PDF body unless explicitly approved.
+4. The document code must appear consistently.
+5. Prepared-by line must always include etersolis.com.
+6. Footer must be generated once by the master-page function only.
+7. Never duplicate footer text inside page content.
+8. Never use obsolete names such as "CEPA Executive Technical Brief" or "CEPA-ETB" unless intentionally discussing historical naming in an internal document.
+9. For release packages, do not include v2.0 or similar version text in the public file name unless explicitly requested.
+
+
+================================================================================
+4. PAGE GEOMETRY AND SAFE ZONES
+================================================================================
+
+Use A4 portrait:
+
+PAGE_W_MM = 210
+PAGE_H_MM = 297
+
+Hard safe zones:
+
+SAFE_LEFT_MM = 16
+SAFE_RIGHT_MM = 194
+SAFE_TOP_MM = 10
+BODY_BOTTOM_MM = 268
+FOOTER_RULE_MM = 274
+FOOTER_TOP_MM = 276
+FOOTER_BOTTOM_MM = 297
+
+Rules:
+1. No body content may enter the footer zone.
+2. No table, chart, card, diagram, QR code, logo, or callout may enter y=276-297 mm.
+3. Bottom callouts must sit above y=268 mm.
+4. Header assets must have at least 2 mm clearance from page edges and header rule.
+5. All logos must preserve aspect ratio.
+6. No asset may be stretched, compressed, cropped, or clipped.
+7. Link annotations may overlap QR/resource blocks but must not create visible rectangles.
+8. Bookmarks/outlines must not affect page geometry.
+
+
+================================================================================
+5. MASTER GRID
+================================================================================
+
+Use this master layout for every normal interior page:
+
+Header logo zone:
+  x=16 mm, y=12 mm, w=70 mm, h=16 mm
+
+Header stamp zone:
+  x=180 mm, y=12 mm, w=16 mm, h=16 mm
+
+Color dots zone:
+  x=150 mm, y=15 mm, w=25 mm, h=5 mm
+
+Header rule:
+  x=16 mm, y=31 mm, w=178 mm, h=0.35 pt
+
+Title panel:
+  x=16 mm, y=40 mm, w=150 mm, h=34-42 mm
+
+Subtitle zone:
+  x=16 mm, y=82 mm, w=178 mm, h=18 mm
+
+Accent rule:
+  x=16 mm, y=102 mm, w=45 mm, h=1.2 mm
+
+Body zone:
+  x=16 mm, y=112 mm, w=178 mm, h=145 mm
+
+Bottom callout zone:
+  x=16 mm, y=250 mm, w=178 mm, h=18 mm
+
+Footer rule:
+  x=16 mm, y=274 mm, w=178 mm, h=0.35 pt
+
+Footer zone:
+  x=16 mm, y=279 mm, w=178 mm, h=10 mm
+
+Flagship release note:
+The flagship Color & Chemicals release proved that the footer identity line must be master-generated only. Imported, legacy, or rendered-from-PDF sources may contain duplicate footer text layers even when visually clean. Therefore, the audit must count extracted footer identity lines, not merely inspect visual output.
+
+
+================================================================================
+6. LOGO HANDLING STANDARD
+================================================================================
+
+The CEPA horizontal logo must be padded before placement.
+
+Required source assets:
+- assets/logos/cepa_horizontal.png
+- assets/logos/cepa_horizontal_padded.png
+- assets/logos/cepa_stamp.png
+- assets/logos/cepa_stamp_padded.png
+
+Padding rule:
+- Add 8-12% transparent padding on all sides.
+- Lock aspect ratio.
+- Never crop.
+- Never stretch.
+- Never place at page edge.
+- Use padded assets only in headers and small stamp positions.
+
+Header logo rule:
+- Use cepa_horizontal_padded.png.
+- Position: x=16 mm, y=12 mm.
+- Max width: 70 mm.
+- Max height: 16 mm.
+- preserveAspectRatio=True.
+- mask="auto".
+
+Stamp logo rule:
+- Use cepa_stamp_padded.png.
+- Position: x=180 mm, y=12 mm.
+- Max width: 16 mm.
+- Max height: 16 mm.
+- preserveAspectRatio=True.
+- mask="auto".
+
+Logo audit rule:
+The rendered logo must be visually sharp at 200 DPI and 300 DPI. The horizontal logo and stamp must not be clipped in rendered PNGs, in page thumbnails, or in final PDF viewers.
+
+
+================================================================================
+7. TITLE PAGE STANDARD
+================================================================================
+
+The title page must use a premium, restrained, institutional layout.
+
+Header:
+  CEPA horizontal logo: x=16, y=12, w=70, h=16
+  Color dots:           x=150, y=15, w=25, h=5
+  Stamp:                x=180, y=12, w=16, h=16
+
+Main title panel:
+  x=16, y=64, w=168, h=128
+  background: #F2F5F7
+  no overlap with resource block
+
+Title:
+  x=24, y=86, w=132, h=42
+
+Subtitle:
+  x=24, y=132, w=132, h=18
+
+Metadata table:
+  x=24, y=158, w=132, h=28
+
+Bottom-left strapline:
+  x=20, y=220, w=100, h=26
+
+Bottom-right resource block:
+  x=144, y=202, w=42, h=58
+
+Title-page QR / stamp block:
+Use one vertical block. Do not float the stamp and QR separately.
+
+Block outer box:
+  x=144 mm, y=202 mm, w=42 mm, h=58 mm
+  border: #D9E1E8, 0.45 pt
+  background: white
+
+Top accent line:
+  x=148 mm, y=206 mm, w=34 mm, h=0.8 mm
+  color: #FDBA12
+
+Label:
+  text: "CEPA RESOURCE ACCESS"
+  x=148 mm, y=211 mm, w=34 mm, h=5 mm
+  size: 6.8 pt
+  uppercase
+  centered
+
+Stamp logo:
+  x=155 mm, y=219 mm, w=20 mm, h=20 mm
+
+QR code:
+  x=153 mm, y=242 mm, w=24 mm, h=24 mm
+  quiet zone included in QR image
+
+Caption:
+  text: "Scan for CEPA resources"
+  x=148 mm, y=268 mm, w=34 mm, h=4 mm
+  size: 5.8 pt
+  centered
+
+Rules:
+1. Do not place the QR code in the main title panel.
+2. Do not let the resource block cross the footer rule.
+3. Do not use a heavy QR frame that competes with the cover.
+4. QR must decode from the final PDF render.
+5. The stamp and QR must align vertically to the same visual centerline.
+6. A transparent clickable link annotation must be placed over the full resource block on the final PDF.
+
+
+================================================================================
+8. BACK COVER STANDARD
+================================================================================
+
+The back cover must close the publication with participation, correction, and resource-access controls.
+
+Back cover required content:
+- CEPA identity.
+- Publication title or closing invitation.
+- Participation routes.
+- Correction policy.
+- Prepared-by line.
+- QR/resource block.
+- Footer.
+
+Recommended zones:
+  CEPA mark / title area: x=16, y=20, w=178, h=52
+  Participation block:   x=16, y=86, w=112, h=86
+  QR resource block:     x=142, y=94, w=42, h=58
+  Correction policy:     x=16, y=190, w=178, h=34
+  Prepared-by line:      x=16, y=244, w=178, h=12
+  Footer guard:          x=0, y=276, w=210, h=21
+
+Back cover QR rule:
+- The QR must decode from the final rendered PDF.
+- The QR block must have a transparent clickable link annotation.
+- The correction policy must not collide with the QR block or footer.
+- The back cover must be included in the PDF outline/bookmarks.
+
+
+================================================================================
+9. PAGE 2 STANDARD: IDENTITY, SCOPE, EVIDENCE
+================================================================================
+
+Page 2 is the control page. It must never be crowded.
+
+Required layout:
+
+Title panel:
+  "Publication Identity, Scope & Evidence Standard"
+
+Subtitle:
+  "Definition, boundary and claim confidence for public use"
+
+Identity table:
+  x=16, y=112, w=102, h=48
+
+Issue explanation:
+  x=126, y=112, w=68, h=48
+
+Evidence cards:
+  3 columns x 2 rows
+  x positions: 16, 74, 132
+  y positions: 172, 200
+  card size: w=50, h=20
+
+Control boxes:
+  Claim control standard: x=16, y=226, w=178, h=12
+  Not covered:            x=16, y=241, w=178, h=12
+  Boundary note:          x=16, y=256, w=178, h=12
+
+Evidence rule callout:
+  Prefer x=16, y=252, w=178, h=18 only if the control boxes are shortened.
+  Do not place any content at y=270+ unless verified clear of footer.
+
+Page 2 rules:
+1. Do not duplicate footer text.
+2. Do not allow evidence cards to overlap control boxes.
+3. Do not allow text to touch card borders.
+4. Do not compress text below minimum readable size.
+5. If page 2 is too dense, remove or shorten a control box rather than crowding.
+6. Page 2 must pass the extracted-text footer count audit because it is vulnerable to duplicate footer artifacts in legacy inputs.
+
+
+================================================================================
+10. PAGE 29 STANDARD: DISCLOSURE COMPARABILITY LIMITS
+================================================================================
+
+Page 29 must be table-led and alignment-led.
+
+Required layout:
+
+Title panel:
+  "Disclosure Comparability Limits"
+
+Subtitle:
+  "Public reporting is useful; benchmarking requires common boundaries"
+
+Main disclosure table:
+  x=16, y=112, w=178, h=72
+
+Denominator table:
+  x=16, y=198, w=178, h=48
+
+Formula / principle box:
+  x=20, y=252, w=170, h=14
+  text centered
+  no overlap with callout
+
+Bottom callout:
+  x=16, y=258, w=178, h=14
+  only if formula box is omitted or enough space remains
+
+Recommended flow:
+1. Disclosure comparability table.
+2. Denominator table.
+3. One centered formula box:
+   "Comparable benchmark = common denominator + common boundary + common product family + common reporting period + route evidence + confidence level"
+4. Short callout only if there is at least 10 mm vertical separation from the formula box.
+
+Rules:
+1. Do not stack the formula box and callout if they cannot fit.
+2. Do not allow table rows to drift out of alignment.
+3. Do not allow the denominator table to collide with the formula box.
+4. Use only one bottom emphasis element if vertical space is tight.
+
+
+================================================================================
+11. TYPOGRAPHY STANDARD
+================================================================================
+
+Preferred fonts:
+- Inter
+- Aptos
+- Helvetica Neue
+- Arial
+- Helvetica fallback
+
+Font sizes:
+
+FONT_TITLE = 28
+FONT_TITLE_LONG = 24
+FONT_SUBTITLE = 14
+FONT_BODY = 8.3
+FONT_TABLE = 6.8
+FONT_TABLE_HEADER = 6.8
+FONT_CARD_TITLE = 8.8
+FONT_CARD_BODY = 7.2
+FONT_FOOTER = 5.8
+
+Typography rules:
+1. Never reduce body text below 6.5 pt.
+2. Never horizontally scale text.
+3. Never place body text over images.
+4. If a table does not fit, shorten text or split the page.
+5. Do not let titles exceed two lines unless a page-specific template explicitly supports it.
+6. Do not use decorative fonts.
+7. Do not mix typefaces within the same issue unless approved.
+8. Keep title case consistent.
+9. Use plain, expert-facing language.
+10. Avoid marketing tone.
+11. Extracted text must not contain hidden duplicate lines, hidden draft text, or obsolete naming.
+
+
+================================================================================
+12. COLOR SYSTEM
+================================================================================
+
+Use only the following palette:
+
+CEPA_BLUE       = "#0047AB"
+CEPA_NAVY       = "#08264A"
+CEPA_COBALT     = "#174EA6"
+CEPA_GREEN      = "#1FA33A"
+CEPA_DEEP_GREEN = "#0B5D4C"
+CEPA_GOLD       = "#FDBA12"
+TEAL            = "#007C89"
+RED             = "#B3261E"
+
+TEXT            = "#111111"
+GRAPHITE        = "#3F454A"
+SLATE           = "#69737D"
+BORDER          = "#D9E1E8"
+PANEL           = "#F2F5F7"
+WHITE           = "#FFFFFF"
+
+Usage rules:
+- Blue = institutional identity / documented evidence.
+- Green = recovery / reported / improvement.
+- Gold = energy / estimated / caution.
+- Teal = observed / process signal.
+- Red = failure / warning only.
+- Grey = support only.
+
+Do not introduce new colors without updating cepa_theme.py and the audit checklist.
+
+
+================================================================================
+13. STANDARD 40-PAGE ARCHITECTURE
+================================================================================
+
+Use this architecture for flagship CEPA Technical Intelligence Briefs:
+
+01 Cover
+02 Publication identity, scope, evidence standard
+03 Executive technical intelligence summary
+04 Market scale, boundary and materiality
+05 Operating model
+06 Segment loss profiles
+07 Adjacent segment / materials profile
+08 Formulation, batch discipline and changeover loss
+09 Material loss map
+10 Commercial exposure map
+11 Material balance and loss accounting
+12 CEPA Material Loss Index I
+13 CEPA Material Loss Index II
+14 Minimum dataset
+15 Benchmark eligibility test
+16 False comparability failure modes
+17 Waste stream taxonomy
+18 Wastewater route selection matrix
+19 Sludge and solids routing logic
+20 Solvent operating model
+21 VOC and application-loss intelligence
+22 Packaging, leftover product and end-of-life discipline
+23 Product stewardship systems
+24 Adjacent wet-processing / parallel industry page
+25 Carbon boundary
+26 LCA data quality and product claims
+27 Supplier data and procurement intelligence
+28 Peer market and disclosure signals
+29 Disclosure comparability limits
+30 Association and benchmarking precedents
+31 EMS and standards controls
+32 CEPA maturity model
+33 Resource value index
+34 Recovery hierarchy
+35 Compliance and technical governance
+36 Shared industry language
+37 Role-specific decision map
+38 Technical recommendations
+39 Source register
+40 Back cover / participation / correction policy / QR
+
+Future issues may be 32-40 pages, but the flagship Technical Intelligence Brief format should remain 40 pages unless approved otherwise.
+
+Bookmark rule:
+The PDF outline must include one top-level bookmark for each page, using the page number and the page title, for example:
+"01 Cover"
+"02 Publication Identity, Scope & Evidence Standard"
+"39 Source Register"
+"40 Participate / Correction Policy"
+
+
+================================================================================
+14. STRUCTURED CONTENT SCHEMA
+================================================================================
+
+14.1 issue.yaml
+
+Required fields:
+series_name
+edition_name
+issue_number
+issue_date_display
+issue_date_iso
+document_code
+publisher
+prepared_by
+prepared_by_url
+main_handle
+edition_handle
+public_url
+visible_version
+metadata_version
+release_tier
+draft_output_filename
+final_output_filename
+
+Example:
+series_name: "CEPA Technical Intelligence Brief"
+edition_name: "Color & Chemicals Industry Edition"
+issue_number: "001"
+issue_date_display: "5 July 2026"
+issue_date_iso: "2026-07-05"
+document_code: "CEPA-TIB-COLCHEM-001-20260705"
+publisher: "CEPA"
+prepared_by: "EterSolis Waste & Carbon Management"
+prepared_by_url: "etersolis.com"
+main_handle: "@CEPAIntel"
+edition_handle: "@CEPAColorIntel"
+public_url: "https://etersolis.com"
+visible_version: false
+metadata_version: "v2.0"
+release_tier: "Flagship"
+draft_output_filename: "CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Draft.pdf"
+final_output_filename: "CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf"
+
+14.2 pages.yaml
+
+Example:
+
+pages:
+  - page: 1
+    template: cover
+    title: "Waste, Carbon & Resource Value Across the Global Color & Chemicals Economy"
+    bookmark_title: "Cover"
+    subtitle: "Material loss, route evidence, carbon boundary, recoverable value and benchmark readiness for expert decision-makers."
+    strapline: "DATA . INSIGHT . IMPACT"
+
+  - page: 2
+    template: identity_scope_evidence
+    title: "Publication Identity, Scope & Evidence Standard"
+    bookmark_title: "Publication Identity, Scope & Evidence Standard"
+    subtitle: "Definition, boundary and claim confidence for public use"
+
+  - page: 29
+    template: disclosure_comparability
+    title: "Disclosure Comparability Limits"
+    bookmark_title: "Disclosure Comparability Limits"
+    subtitle: "Public reporting is useful; benchmarking requires common boundaries"
+
+14.3 sources.yaml
+
+Every source must include:
+code
+category
+title
+publisher
+year
+url_or_reference
+access_date
+evidence_class
+claim_supported
+caveat
+pages
+
+Example:
+
+sources:
+  - code: R01
+    category: market_scale
+    title: "Global paint and coatings market source"
+    publisher: "Source publisher"
+    year: "2024"
+    url_or_reference: "Full source URL or formal reference"
+    access_date: "2026-06-30"
+    evidence_class: "Estimated"
+    claim_supported: "Global paint and coatings market scale"
+    caveat: "Market scale only; not a waste or carbon estimate."
+    pages: [4]
+
+14.4 claims.yaml
+
+Every claim must include:
+id
+page
+claim
+source_codes
+evidence_class
+caveat_required
+
+Example:
+
+claims:
+  - id: C001
+    page: 4
+    claim: "Market scale establishes materiality but does not authorize extrapolation to global waste volume."
+    source_codes: ["R01"]
+    evidence_class: "Estimated"
+    caveat_required: true
+
+14.5 source_spotchecks.yaml
+
+Flagship issues must include source spot-check records for the most material public claims.
+
+Example:
+
+spotchecks:
+  - code: R01
+    claim_checked: "2024 global paint and coatings market scale."
+    source_url: "https://example.com/source"
+    checked_utc: "2026-06-30T00:00:00Z"
+    result: "pass"
+    note: "Claim matched source context; used as market-materiality anchor only."
+
+  - code: R11
+    claim_checked: "PaintCare cumulative gallons collected and drop-off network."
+    source_url: "https://example.com/source"
+    checked_utc: "2026-06-30T00:00:00Z"
+    result: "pass"
+    note: "Program disclosure; jurisdictional and not a universal benchmark."
+
+
+================================================================================
+15. REQUIREMENTS FILE
+================================================================================
+
+requirements.txt:
+
+reportlab
+pymupdf
+pypdf
+pillow
+pyyaml
+qrcode[pil]
+opencv-python
+numpy
+pandas
+beautifulsoup4
+requests
+
+Notes:
+- requests and beautifulsoup4 are used only for optional external-source spot-check utilities.
+- The publication build must not depend on live web access unless explicitly running source spot-check mode.
+- Do not commit proprietary font files.
+
+
+================================================================================
+16. MAKEFILE
+================================================================================
+
+Makefile:
+
+ISSUE=color_chemicals_issue_001
+DRAFT_PDF=build/drafts/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Draft.pdf
+FINAL_PDF=build/final/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf
+
+.PHONY: all clean validate build finalize render audit contact qa package
+
+all: clean validate build finalize render audit contact qa package
+
+clean:
+	rm -rf build/drafts build/finalized build/renders build/audit build/final
+	mkdir -p build/drafts build/finalized build/renders build/audit/contact_sheets build/audit/qr_crops build/audit/reports build/final
+
+validate:
+	python src/validate_content.py --issue content/$(ISSUE)
+	python src/audit_claims.py --issue content/$(ISSUE)
+
+build:
+	python src/build_publication.py --issue content/$(ISSUE) --out $(DRAFT_PDF)
+
+finalize:
+	python src/finalize_pdf.py --issue content/$(ISSUE) --infile $(DRAFT_PDF) --outfile $(FINAL_PDF)
+
+render:
+	python src/audit_visual.py --pdf $(FINAL_PDF) --out build/renders --dpi 200
+	python src/audit_visual.py --pdf $(FINAL_PDF) --out build/audit/renders_300dpi --dpi 300
+
+audit:
+	python src/audit_pdf.py --pdf $(FINAL_PDF)
+	python src/audit_sources.py --issue content/$(ISSUE) --pdf $(FINAL_PDF)
+	python src/audit_bookmarks_links.py --issue content/$(ISSUE) --pdf $(FINAL_PDF)
+	python src/audit_qr.py --pdf $(FINAL_PDF) --expected https://etersolis.com --out build/audit/qr_crops
+
+contact:
+	python src/make_contact_sheet.py --renders build/renders --out build/audit/contact_sheets/contact_sheet_200dpi.jpg --cols 5
+	python src/make_contact_sheet.py --renders build/audit/renders_300dpi --out build/audit/contact_sheets/contact_sheet_300dpi.jpg --cols 4
+
+qa:
+	python src/generate_qa_report.py --issue content/$(ISSUE) --pdf $(FINAL_PDF) --out build/audit/reports/CEPA_TIB_Color_Chemicals_Flagship_QA_Report.txt
+
+package:
+	python src/package_release.py --pdf $(FINAL_PDF) --issue content/$(ISSUE) --qa build/audit/reports/CEPA_TIB_Color_Chemicals_Flagship_QA_Report.txt
+
+
+================================================================================
+17. THEME SCRIPT
+================================================================================
+
+File: src/cepa_theme.py
+
+from reportlab.lib.colors import HexColor
+from reportlab.lib.units import mm
+
+PAGE_W = 210 * mm
+PAGE_H = 297 * mm
+
+SAFE_LEFT = 16 * mm
+SAFE_RIGHT = 194 * mm
+SAFE_TOP = 10 * mm
+BODY_BOTTOM = 268 * mm
+FOOTER_RULE = 274 * mm
+FOOTER_TOP = 276 * mm
+
+CEPA_BLUE = HexColor("#0047AB")
+CEPA_NAVY = HexColor("#08264A")
+CEPA_COBALT = HexColor("#174EA6")
+CEPA_GREEN = HexColor("#1FA33A")
+CEPA_DEEP_GREEN = HexColor("#0B5D4C")
+CEPA_GOLD = HexColor("#FDBA12")
+TEAL = HexColor("#007C89")
+RED = HexColor("#B3261E")
+
+TEXT = HexColor("#111111")
+GRAPHITE = HexColor("#3F454A")
+SLATE = HexColor("#69737D")
+BORDER = HexColor("#D9E1E8")
+PANEL = HexColor("#F2F5F7")
+WHITE = HexColor("#FFFFFF")
+
+FONT_REG = "Helvetica"
+FONT_BOLD = "Helvetica-Bold"
+
+TITLE_SIZE = 28
+TITLE_LONG_SIZE = 24
+SUBTITLE_SIZE = 14
+BODY_SIZE = 8.3
+TABLE_SIZE = 6.8
+TABLE_HEADER_SIZE = 6.8
+CARD_TITLE_SIZE = 8.8
+CARD_BODY_SIZE = 7.2
+FOOTER_SIZE = 5.8
+
+
+================================================================================
+18. LAYOUT SCRIPT
+================================================================================
+
+File: src/cepa_layout.py
+
+from reportlab.lib.units import mm
+from cepa_theme import *
+
+def rect_mm(x, y, w, h):
+    return x * mm, PAGE_H - (y + h) * mm, w * mm, h * mm
+
+def wrap_title(title, max_chars=34):
+    words = title.split()
+    lines = []
+    cur = ""
+    for word in words:
+        if len((cur + " " + word).strip()) <= max_chars:
+            cur = (cur + " " + word).strip()
+        else:
+            if cur:
+                lines.append(cur)
+            cur = word
+    if cur:
+        lines.append(cur)
+    return lines
+
+def draw_header(c, issue):
+    # Header logos must use padded images.
+    c.drawImage(
+        "assets/logos/cepa_horizontal_padded.png",
+        16 * mm,
+        PAGE_H - 28 * mm,
+        width=70 * mm,
+        height=16 * mm,
+        preserveAspectRatio=True,
+        mask="auto",
+    )
+
+    c.setFillColor(CEPA_GREEN)
+    c.circle(150 * mm, PAGE_H - 18 * mm, 1.6 * mm, fill=1, stroke=0)
+    c.setFillColor(CEPA_GOLD)
+    c.circle(156 * mm, PAGE_H - 18 * mm, 1.6 * mm, fill=1, stroke=0)
+    c.setFillColor(CEPA_BLUE)
+    c.circle(162 * mm, PAGE_H - 18 * mm, 1.6 * mm, fill=1, stroke=0)
+
+    c.drawImage(
+        "assets/logos/cepa_stamp_padded.png",
+        180 * mm,
+        PAGE_H - 28 * mm,
+        width=16 * mm,
+        height=16 * mm,
+        preserveAspectRatio=True,
+        mask="auto",
+    )
+
+    c.setStrokeColor(BORDER)
+    c.setLineWidth(0.35)
+    c.line(16 * mm, PAGE_H - 32 * mm, 194 * mm, PAGE_H - 32 * mm)
+
+def draw_footer(c, issue, page_num):
+    # Footer must be generated exactly once per page.
+    c.setStrokeColor(BORDER)
+    c.setLineWidth(0.35)
+    c.line(16 * mm, PAGE_H - 274 * mm, 194 * mm, PAGE_H - 274 * mm)
+
+    c.setFont(FONT_BOLD, FOOTER_SIZE)
+    c.setFillColor(SLATE)
+    line1 = (
+        f"{issue['series_name']} | {issue['edition_name']} | "
+        f"{issue['main_handle']} | {issue['edition_handle']} | Page {page_num:02d}"
+    )
+    c.drawString(16 * mm, PAGE_H - 282 * mm, line1)
+
+    c.setFont(FONT_REG, FOOTER_SIZE - 0.4)
+    line2 = (
+        f"Prepared by {issue['prepared_by']} | {issue['prepared_by_url']} | "
+        f"{issue['document_code']}"
+    )
+    c.drawString(16 * mm, PAGE_H - 288 * mm, line2)
+
+def draw_title_panel(c, title, label="CEPA TECHNICAL INTELLIGENCE BRIEF"):
+    x, y, w, h = rect_mm(16, 40, 150, 34)
+    c.setFillColor(PANEL)
+    c.roundRect(x, y, w, h, 5 * mm, fill=1, stroke=0)
+
+    c.setFillColor(SLATE)
+    c.setFont(FONT_BOLD, 6.8)
+    c.drawString(21 * mm, PAGE_H - 49 * mm, label)
+
+    c.setFillColor(CEPA_NAVY)
+    size = TITLE_LONG_SIZE if len(title) > 48 else TITLE_SIZE
+    c.setFont(FONT_BOLD, size)
+
+    lines = wrap_title(title, max_chars=34)
+    ty = PAGE_H - 61 * mm
+    for line in lines[:2]:
+        c.drawString(21 * mm, ty, line)
+        ty -= size * 1.05
+
+def draw_subtitle(c, subtitle):
+    c.setFont(FONT_REG, SUBTITLE_SIZE)
+    c.setFillColor(CEPA_COBALT)
+    y = PAGE_H - 88 * mm
+    for line in wrap_title(subtitle, max_chars=72)[:2]:
+        c.drawString(16 * mm, y, line)
+        y -= 6 * mm
+
+    c.setStrokeColor(CEPA_GREEN)
+    c.setLineWidth(1.1)
+    c.line(16 * mm, PAGE_H - 102 * mm, 40 * mm, PAGE_H - 102 * mm)
+    c.setStrokeColor(CEPA_GOLD)
+    c.line(40 * mm, PAGE_H - 102 * mm, 62 * mm, PAGE_H - 102 * mm)
+
+
+================================================================================
+19. PDF BUILD SKELETON
+================================================================================
+
+File: src/build_publication.py
+
+The PDF builder creates the draft PDF from structured content. It must not create bookmarks or link annotations unless the implementation guarantees they survive every export mode. Bookmarks, link annotations, and metadata hardening should normally be done in src/finalize_pdf.py.
+
+Required builder behavior:
+- Generate A4 pages.
+- Draw one footer per page.
+- Use padded logo assets.
+- Never display version labels.
+- Use only page templates and reusable components.
+- Set basic metadata.
+- Save draft PDF to build/drafts.
+
+Critical implementation rule:
+draw_footer(c, issue, page_num) must be called exactly once for each page. Do not duplicate footer text inside the page content structure.
+
+
+================================================================================
+20. CONTROLLED PDF FINALIZER
+================================================================================
+
+File: src/finalize_pdf.py
+
+Purpose:
+Apply deterministic release hardening to the generated draft PDF.
+
+Required finalizer actions:
+1. Open draft PDF.
+2. Confirm page count.
+3. Confirm A4 portrait pages.
+4. Set metadata:
+   - title
+   - author
+   - subject
+   - creator
+   - keywords including document_code and metadata_version
+5. Add or rebuild PDF outline/bookmarks using pages.yaml.
+6. Add clickable link annotations to cover and back-cover QR/resource block rectangles.
+7. Optionally clean duplicated footer text-layer artifacts only if processing legacy/imported source PDFs.
+8. Save final PDF.
+
+Implementation skeleton:
+
+import argparse
+import fitz
+import yaml
+from pathlib import Path
+
+A4_W_PT = 595.276
+A4_H_PT = 841.890
+TOL = 3
+
+def load_yaml(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+def mm_to_rect(x, y, w, h, page_height_pt=A4_H_PT):
+    mm = 72 / 25.4
+    return fitz.Rect(
+        x * mm,
+        y * mm,
+        (x + w) * mm,
+        (y + h) * mm,
+    )
+
+def build_toc(pages):
+    toc = []
+    for p in pages:
+        page_num = p["page"]
+        label = p.get("bookmark_title") or p.get("title") or f"Page {page_num:02d}"
+        toc.append([1, f"{page_num:02d} {label}", page_num])
+    return toc
+
+def add_resource_links(doc, url):
+    # Cover resource block.
+    cover_rect = mm_to_rect(144, 202, 42, 58)
+    doc[0].insert_link({"kind": fitz.LINK_URI, "from": cover_rect, "uri": url})
+
+    # Back-cover resource block.
+    last_rect = mm_to_rect(142, 94, 42, 58)
+    doc[-1].insert_link({"kind": fitz.LINK_URI, "from": last_rect, "uri": url})
+
+def finalize(issue_dir, infile, outfile):
+    issue = load_yaml(Path(issue_dir) / "issue.yaml")
+    pages = load_yaml(Path(issue_dir) / "pages.yaml")["pages"]
+
+    doc = fitz.open(infile)
+
+    if len(doc) != len(pages):
+        raise RuntimeError(f"Page count mismatch: PDF has {len(doc)}, pages.yaml has {len(pages)}")
+
+    for i, page in enumerate(doc, start=1):
+        rect = page.rect
+        if abs(rect.width - A4_W_PT) > TOL or abs(rect.height - A4_H_PT) > TOL:
+            raise RuntimeError(f"Page {i} is not A4 portrait.")
+
+    doc.set_toc(build_toc(pages))
+    add_resource_links(doc, issue["public_url"])
+
+    meta = doc.metadata or {}
+    meta.update({
+        "title": issue["series_name"],
+        "author": issue["prepared_by"],
+        "subject": issue["edition_name"],
+        "creator": "CEPA automated publication generator + controlled finalizer",
+        "keywords": f"{issue['document_code']}; {issue.get('metadata_version', '')}; CEPA; EterSolis; {issue.get('release_tier', '')}",
+    })
+    doc.set_metadata(meta)
+
+    doc.save(outfile, garbage=4, deflate=True, clean=True)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--issue", required=True)
+    parser.add_argument("--infile", required=True)
+    parser.add_argument("--outfile", required=True)
+    args = parser.parse_args()
+    finalize(args.issue, args.infile, args.outfile)
+
+
+================================================================================
+21. CONTENT VALIDATOR
+================================================================================
+
+File: src/validate_content.py
+
+Required validation:
+- Required YAML files exist.
+- Required issue fields exist.
+- Series name is correct.
+- Prepared-by URL includes etersolis.com.
+- Page numbers are continuous.
+- Flagship issue has exactly 40 pages unless release_tier is not Flagship.
+- Forbidden visible terms do not appear in issue, pages, sources, or claims.
+- visible_version is false.
+- metadata_version exists.
+- final_output_filename does not include visible version text.
+- Every page has a title and bookmark title.
+
+Forbidden visible terms:
+CEPA Executive Technical Brief
+Executive Technical Brief
+CEPA-ETB
+CEPA_Executive_Technical_Brief
+DRAFT
+draft
+placeholder
+lorem ipsum
+v1.0
+v1.1
+v1.2
+v1.3
+v1.4
+v1.5
+v1.6
+v1.7
+v1.8
+v1.9
+v2.0
+
+Important:
+The version string may exist in metadata fields only. It must not exist in page content, source register display content, visible footer text, or final public file name unless explicitly authorized.
+
+
+================================================================================
+22. PDF TEXT / METADATA / FOOTER AUDIT
+================================================================================
+
+File: src/audit_pdf.py
+
+Required audit:
+- PDF opens.
+- PDF is not encrypted.
+- Page count matches expected.
+- Every page is A4 portrait.
+- Required visible identity text exists.
+- Forbidden visible text does not exist.
+- Each page has exactly one footer identity line in extracted text.
+- Each page has correct page marker.
+- Metadata contains metadata_version.
+- Visible text does not contain metadata_version.
+- No duplicated footer artifacts remain.
+- No obsolete naming remains.
+
+Footer count logic:
+For each page:
+  footer_count = text.count("CEPA Technical Intelligence Brief | Color & Chemicals Industry Edition")
+  if footer_count != 1: fail
+
+Metadata logic:
+- metadata keywords must include document_code.
+- metadata keywords must include metadata_version.
+- metadata title must equal series name.
+- metadata subject must equal edition name.
+
+Flagship release note:
+The final Color & Chemicals flagship pass required removal of duplicate footer text-layer artifacts. This audit is therefore mandatory even when the rendered pages look clean.
+
+
+================================================================================
+23. VISUAL AUDIT SCRIPT
+================================================================================
+
+File: src/audit_visual.py
+
+Required behavior:
+- Render every page at 200 DPI.
+- Render every page at 300 DPI for extra-strict review.
+- Save plain renders.
+- Save guide overlays showing:
+  - safe left line
+  - safe right line
+  - body bottom line
+  - footer guard
+- Do not use OCR as the primary audit mechanism.
+- Do not declare visual pass from automated rendering alone; a human must review the contact sheet.
+
+Output:
+build/renders/page-01.png through page-40.png
+build/audit/renders_300dpi/page-01.png through page-40.png
+build/audit/guide_overlays/page-01_guides.png through page-40_guides.png
+
+
+================================================================================
+24. CONTACT SHEET SCRIPT
+================================================================================
+
+File: src/make_contact_sheet.py
+
+Required behavior:
+- Generate one contact sheet at 200 DPI renders.
+- Generate one contact sheet at 300 DPI renders.
+- Default 200 DPI contact sheet: 5 columns.
+- Default 300 DPI contact sheet: 4 columns.
+- Include visible page file names above each thumbnail.
+- Exclude guide overlays from default contact sheets.
+- Save output in build/audit/contact_sheets/.
+
+Manual review must inspect:
+- page 1 cover;
+- page 2 control page;
+- page 11 material balance;
+- page 15 benchmark eligibility;
+- page 22 packaging/process flow;
+- page 29 disclosure comparability;
+- page 39 source register;
+- page 40 back cover.
+
+
+================================================================================
+25. QR AUDIT SCRIPT
+================================================================================
+
+File: src/audit_qr.py
+
+Required behavior:
+- Render page 1 and page 40 at 300 DPI.
+- Try full-page QR decode first.
+- If full-page decode fails, crop the known QR/resource block regions and decode the crop.
+- Save QR crops to build/audit/qr_crops/.
+- Fail if decoded URL is not expected.
+- Fail if neither cover nor back-cover QR decodes.
+- Prefer both cover and back-cover QR codes to decode.
+
+Known QR regions:
+Cover resource block:
+  x=144 mm, y=202 mm, w=42 mm, h=58 mm
+
+Back-cover resource block:
+  x=142 mm, y=94 mm, w=42 mm, h=58 mm
+
+Expected destination:
+https://etersolis.com
+
+Implementation note:
+Some QR detectors miss full-page QR codes when the page has large whitespace and dense graphics. Cropped region validation is the controlled fallback used for flagship release QA.
+
+
+================================================================================
+26. BOOKMARK AND LINK AUDIT
+================================================================================
+
+File: src/audit_bookmarks_links.py
+
+Required audit:
+- PDF has at least one outline/bookmark entry per page.
+- Flagship 40-page releases must have exactly 40 top-level page bookmarks unless extra section bookmarks are intentionally configured.
+- Bookmark page targets must resolve correctly.
+- Page 1 must contain a URI link annotation to public_url.
+- Page 40 must contain a URI link annotation to public_url.
+- Link annotations must not be visible rectangles.
+- Link annotations must not point to a draft or local file.
+
+Implementation skeleton:
+
+import argparse
+import sys
+import fitz
+import yaml
+from pathlib import Path
+
+def fail(msg):
+    print(f"FAIL: {msg}")
+    sys.exit(1)
+
+def load_yaml(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+def audit(issue_dir, pdf_path):
+    issue = load_yaml(Path(issue_dir) / "issue.yaml")
+    pages = load_yaml(Path(issue_dir) / "pages.yaml")["pages"]
+    expected_url = issue["public_url"]
+
+    doc = fitz.open(pdf_path)
+    toc = doc.get_toc()
+
+    if len(toc) < len(pages):
+        fail(f"Expected at least {len(pages)} bookmarks, found {len(toc)}")
+
+    top_level = [entry for entry in toc if entry[0] == 1]
+    if issue.get("release_tier") == "Flagship" and len(top_level) < 40:
+        fail("Flagship release must include page-level bookmarks for all 40 pages.")
+
+    for page_index in [0, len(doc) - 1]:
+        links = doc[page_index].get_links()
+        uris = [l.get("uri") for l in links if l.get("kind") == fitz.LINK_URI]
+        if expected_url not in uris:
+            fail(f"Page {page_index + 1} missing expected URI link: {expected_url}")
+
+    print("PASS: bookmark and link annotation audit complete.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--issue", required=True)
+    parser.add_argument("--pdf", required=True)
+    args = parser.parse_args()
+    audit(args.issue, args.pdf)
+
+
+================================================================================
+27. SOURCE AND CLAIM AUDITS
+================================================================================
+
+File: src/audit_sources.py
+
+Required audit:
+- Every R-code visible in the PDF resolves in sources.yaml.
+- Every R-code in sources.yaml is used in the PDF or explicitly marked reserve:false/unused_allowed:true.
+- Every source has:
+  - code
+  - category
+  - title
+  - publisher
+  - year or access_date
+  - url_or_reference
+  - evidence_class
+  - claim_supported
+  - caveat
+  - pages
+- Every source page reference is valid.
+- Source register is readable in rendered page 39.
+- Source register does not contain unresolved placeholders.
+
+File: src/audit_claims.py
+
+Required audit:
+- Every claim references one or more source codes.
+- Every claim source code exists.
+- Every claim page is valid.
+- Every claim has evidence_class.
+- Claims requiring caveats have caveat_required:true.
+- No unsupported market, waste-volume, carbon-intensity, sludge-volume, or wastewater-intensity claim is allowed.
+
+Source register rule:
+For flagship release, page 39 must be reviewed manually at 200% zoom because automated text validation cannot guarantee readability of dense source tables.
+
+
+================================================================================
+28. EXTERNAL SOURCE SPOT-CHECK PROTOCOL
+================================================================================
+
+File: src/audit_external_sources.py
+
+Purpose:
+For flagship issues, verify that the most material public claims still match their cited public source context at release time.
+
+Required spot-check categories:
+- Market scale anchor.
+- Official regulatory/process guidance.
+- Stewardship program statistics.
+- Carbon/LCA standards.
+- Company or association disclosure examples.
+- Any claim likely to change after the last research date.
+
+Rules:
+1. Do not rely only on memory for public facts.
+2. Spot-check high-impact public claims shortly before release.
+3. Record the check in source_spotchecks.yaml.
+4. If a source cannot be accessed, mark result as "unable_to_verify" and either remove the claim or add a caveat.
+5. Spot-checking is not a substitute for full source-register discipline.
+6. If using public web access is not available in CI, run this audit manually and store the results in source_spotchecks.yaml.
+
+Spot-check result statuses:
+- pass
+- pass_with_caveat
+- unable_to_verify
+- fail
+
+A flagship issue cannot release with a "fail" spot-check for a material claim.
+
+
+================================================================================
+29. FINAL QA REPORT GENERATION
+================================================================================
+
+File: src/generate_qa_report.py
+
+Purpose:
+Generate a human-readable release QA report that records exactly what was checked.
+
+Required QA report sections:
+1. Publication identity.
+2. Input files.
+3. Output PDF.
+4. SHA-256 hash.
+5. Page count and page size.
+6. Metadata audit result.
+7. Visible version audit result.
+8. Obsolete naming audit result.
+9. Footer uniqueness audit result.
+10. QR audit result.
+11. Bookmark audit result.
+12. Link annotation audit result.
+13. Source register audit result.
+14. External spot-check summary.
+15. Render/contact sheet audit locations.
+16. Critical page review checklist.
+17. Known limitations, if any.
+18. Release verdict.
+
+Required verdict language:
+- PASS - FLAGSHIP RELEASE READY
+- PASS WITH CAVEAT - REVIEW BEFORE PUBLIC DISTRIBUTION
+- FAIL - DO NOT RELEASE
+
+The QA report must not claim that checks were performed unless the relevant script ran or a human review entry is present in qa_notes.yaml.
+
+
+================================================================================
+30. RELEASE PACKAGING SCRIPT
+================================================================================
+
+File: src/package_release.py
+
+Required release package contents:
+- Final PDF.
+- QA report.
+- release_manifest.json.
+- SHA-256 hash of final PDF.
+- SHA-256 hash of QA report.
+- Contact sheet(s).
+- QR crop images.
+- Rendered page 1, page 39, and page 40.
+- Source spot-check record, if available.
+
+release_manifest.json must include:
+- pdf filename.
+- pdf sha256.
+- qa report filename.
+- qa report sha256.
+- issue directory.
+- document code.
+- metadata version.
+- release tier.
+- release time UTC.
+- public URL.
+- audit list.
+- tool versions where available.
+
+The final public PDF should be copied to:
+build/final/<final_output_filename>
+
+The release package should be copied to:
+build/final/release_package/
+
+
+================================================================================
+31. GITHUB ACTIONS CI
+================================================================================
+
+File: .github/workflows/build-cepa-publication.yml
+
+name: Build CEPA Publication
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-publication:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate content
+        run: make validate
+
+      - name: Build PDF
+        run: make build
+
+      - name: Finalize PDF
+        run: make finalize
+
+      - name: Render PDF
+        run: make render
+
+      - name: Run audits
+        run: make audit
+
+      - name: Build contact sheets
+        run: make contact
+
+      - name: Generate QA report
+        run: make qa
+
+      - name: Package release
+        run: make package
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cepa-publication-release
+          path: |
+            build/final/**
+            build/audit/contact_sheets/**
+            build/audit/qr_crops/**
+            build/audit/reports/**
+            build/renders/page-01.png
+            build/renders/page-02.png
+            build/renders/page-29.png
+            build/renders/page-39.png
+            build/renders/page-40.png
+
+CI must fail on:
+- Wrong page count.
+- Non-A4 page.
+- Visible version string.
+- Duplicated footer.
+- Missing footer.
+- Missing document code.
+- Missing handle.
+- Missing metadata version.
+- Missing bookmarks.
+- Missing cover/back-cover URI links.
+- Wrong QR destination.
+- Unresolved source code.
+- Unused source code unless explicitly allowed.
+- Forbidden draft wording.
+- Obsolete CEPA naming.
+- Missing QA report.
+- Missing release manifest.
+- Missing SHA-256 hash.
+
+
+================================================================================
+32. MANUAL VISUAL AUDIT CHECKLIST
+================================================================================
+
+Audit every release at:
+- 100% zoom.
+- 200% zoom.
+- Full-page thumbnail/contact sheet.
+- Rendered PNG page view.
+- Printed or print-preview mode where practical.
+
+Check every page for:
+1. CEPA header logo not clipped.
+2. Stamp logo not clipped.
+3. No visible version labels.
+4. No footer duplication.
+5. No footer collision.
+6. No title panel collision.
+7. No table cutoff.
+8. No chart/card overlap.
+9. No body content below y=268 mm.
+10. No broken word wrapping.
+11. No malformed QR code.
+12. No stretched logos.
+13. No disproportionate white space unless intentional.
+14. No body text below 6.5 pt.
+15. No source code without source register entry.
+16. No source register entry unused unless explicitly allowed.
+17. No obsolete naming.
+18. No hidden draft text in extracted PDF text.
+19. No black boxes or rendering artifacts.
+20. No compressed or distorted visual components.
+21. Page bookmarks appear in the PDF navigation pane.
+22. Cover and back-cover resource blocks are clickable.
+23. Page 39 source register remains readable.
+24. Page 40 correction policy and QR block are visually clean.
+
+Pages requiring extra scrutiny:
+- Page 1: cover composition, CEPA resource block, QR/stamp alignment, clickable link region.
+- Page 2: identity table, evidence cards, control boxes, footer uniqueness.
+- Page 11: formula, flow diagram, table, metric cards.
+- Page 15: benchmark eligibility cards.
+- Page 22: process flow labels.
+- Page 29: disclosure table, denominator table, formula alignment.
+- Page 39: source register readability.
+- Page 40: back cover QR, participation block, correction policy, clickable link region.
+
+
+================================================================================
+33. RELEASE GATES
+================================================================================
+
+A CEPA publication is releasable only when all gates pass:
+
+Gate 1: Content validation passes.
+Gate 2: Claim-source mapping passes.
+Gate 3: Source register audit passes.
+Gate 4: PDF text audit passes.
+Gate 5: Footer uniqueness audit passes.
+Gate 6: Metadata audit passes.
+Gate 7: QR audit passes from rendered final PDF.
+Gate 8: Bookmark and link annotation audit passes.
+Gate 9: Render audit completed at 200 DPI.
+Gate 10: Render audit completed at 300 DPI for flagship releases.
+Gate 11: Contact sheets generated.
+Gate 12: Critical pages individually inspected.
+Gate 13: External-source spot-check completed for material public claims.
+Gate 14: Metadata version present; visible version absent.
+Gate 15: Final QA report generated.
+Gate 16: Release package generated with SHA-256 manifest.
+
+Any defect greater than zero blocks release.
+
+
+================================================================================
+34. PRODUCTION COMMAND SEQUENCE
+================================================================================
+
+Standard flagship release build:
+
+cd cepa-publications
+
+make clean
+make validate
+make build
+make finalize
+make render
+make audit
+make contact
+make qa
+make package
+
+Extra-strict audit:
+
+python src/audit_visual.py \
+  --pdf build/final/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf \
+  --out build/audit/renders_300dpi \
+  --dpi 300
+
+python src/make_contact_sheet.py \
+  --renders build/audit/renders_300dpi \
+  --out build/audit/contact_sheets/contact_sheet_300dpi.jpg \
+  --cols 4
+
+Manual post-build release review:
+1. Open final PDF.
+2. Confirm bookmarks.
+3. Click cover QR/resource block.
+4. Click back-cover QR/resource block.
+5. Inspect contact sheets.
+6. Inspect pages 1, 2, 11, 15, 22, 29, 39, and 40.
+7. Read QA report.
+8. Confirm release_manifest.json hashes.
+
+
+================================================================================
+35. RETROFIT WORKFLOW FOR LEGACY OR PREVIOUSLY GENERATED PDFs
+================================================================================
+
+Use this workflow only when a prior PDF must be upgraded to flagship release quality without regenerating from structured content.
+
+Allowed retrofit actions:
+- remove duplicate text-layer footer artifacts;
+- normalize metadata;
+- add bookmarks;
+- add clickable link annotations;
+- validate QR codes;
+- generate QA report;
+- package release.
+
+Prohibited retrofit actions:
+- rewriting substantive page content by hand;
+- moving page elements manually;
+- covering defects with white boxes;
+- changing factual claims without updating claims.yaml and sources.yaml;
+- hiding visible version labels by rasterizing the entire PDF;
+- flattening a PDF solely to evade text audit failures.
+
+Retrofit command pattern:
+
+python src/finalize_pdf.py \
+  --issue content/color_chemicals_issue_001 \
+  --infile build/drafts/legacy_input.pdf \
+  --outfile build/final/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf
+
+python src/audit_pdf.py --pdf build/final/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf
+python src/audit_bookmarks_links.py --issue content/color_chemicals_issue_001 --pdf build/final/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf
+python src/audit_qr.py --pdf build/final/CEPA_Technical_Intelligence_Brief_Color_Chemicals_Issue_001_2026-07-05_Flagship.pdf --expected https://etersolis.com --out build/audit/qr_crops
+
+Retrofit release caveat:
+A retrofitted PDF can be released only if the QA report clearly states that the finalizer was used and all release gates passed.
+
+
+================================================================================
+36. STANDARD INTERNAL PROMPT FOR FUTURE CEPA ISSUES
+================================================================================
+
+Use this as the generation instruction for each future CEPA issue:
+
+Generate a CEPA Technical Intelligence Brief using the standardized CEPA publication engine.
+
+Do not manually place elements outside the template system.
+Use A4 portrait.
+Use the CEPA master header, padded CEPA horizontal logo, padded CEPA stamp, and single generated footer.
+Do not display versioning anywhere in the body.
+Place version only in PDF metadata.
+Use the 40-page CEPA Technical Intelligence Brief architecture unless otherwise approved.
+Every factual claim must have an R-code.
+Every R-code must resolve in the source register.
+Every page must pass the core editorial test:
+where the exposure occurs, what causes it operationally, what should be measured, what decision the metric supports, and what evidence supports the claim.
+Render every page to PNG.
+Run content, claim, source, QR, footer, metadata, bookmark, link, page-size, and forbidden-word audits.
+Generate 200 DPI and 300 DPI contact sheets.
+Validate QR codes from rendered final PDF and saved QR crops.
+Add page-level PDF bookmarks.
+Add clickable link annotations over cover and back-cover resource blocks.
+Generate the final QA report.
+Fix all visual defects before final export.
+No clipped logos.
+No duplicated footers.
+No overlaps.
+No cutoff.
+No unresolved source codes.
+No draft language.
+No obsolete naming.
+No visible version label.
+No release without QA report and SHA-256 manifest.
+
+
+================================================================================
+37. FLAGSHIP RELEASE ACCEPTANCE PROFILE
+================================================================================
+
+A flagship CEPA Technical Intelligence Brief must satisfy the following acceptance profile:
+
+Publication file:
+- Final filename contains no visible version number.
+- Final filename may include release tier, e.g. "_Flagship".
+- PDF opens normally in standard PDF viewers.
+- PDF is A4 portrait.
+- PDF has 40 pages.
+- PDF is not encrypted.
+
+Navigation:
+- PDF includes page-level bookmarks for all pages.
+- Bookmarks use page numbers and clean page titles.
+- Cover and back-cover resource blocks contain clickable URL annotations.
+
+Metadata:
+- Metadata title: CEPA Technical Intelligence Brief.
+- Metadata subject: edition name.
+- Metadata author: EterSolis Waste & Carbon Management.
+- Metadata keywords include document code and metadata version.
+- Version appears only in metadata.
+
+Text layer:
+- No obsolete naming.
+- No draft text.
+- No visible version label.
+- One footer identity line per page.
+- Correct page marker per page.
+
+QR:
+- Cover QR decodes to public_url.
+- Back-cover QR decodes to public_url.
+- QR crop images saved.
+
+Sources:
+- Every visible R-code resolves.
+- Every source-register R-code is used or explicitly allowed.
+- Material public claims are spot-checked.
+
+Visual:
+- No overlaps.
+- No cutoffs.
+- No clipped logos.
+- No footer collisions.
+- Page 39 readable.
+- Contact sheet approved.
+
+Release package:
+- Final PDF.
+- QA report.
+- release_manifest.json.
+- SHA-256 hashes.
+- Contact sheets.
+- QR crops.
+- Critical page renders.
+
+
+================================================================================
+38. QUALITY OPERATING RULE
+================================================================================
+
+The CEPA publication system is a controlled technical publishing pipeline, not a freeform design task.
+
+Required mindset:
+- Structured content first.
+- Template-controlled layout second.
+- Controlled finalization third.
+- Automated audit fourth.
+- Manual render review fifth.
+- Final QA report sixth.
+- Final release package last.
+
+The system must prioritize repeatability, evidence discipline, visual consistency, navigability, release traceability, and zero-defect publication readiness over stylistic experimentation.
+
+End of SOP.

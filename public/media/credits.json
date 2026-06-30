@@ -178,6 +178,66 @@
       "alt": "Optimized cover derivative from approved Issue 001 PDF"
     },
     {
+      "id": "cepa-technical-intelligence-brief-issue-001-pdf",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf",
+      "type": "document",
+      "title": "CEPA Technical Intelligence Brief Color & Chemicals Issue 001 PDF",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 0,
+        "height": 0
+      },
+      "alt": "Approved CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001 PDF"
+    },
+    {
+      "id": "cepa-horizontal-logo",
+      "path": "/media/technical-intelligence-brief/cepa-horizontal-logo.png",
+      "type": "brand-asset",
+      "title": "CEPA horizontal logo",
+      "credit": "CEPA controlled publication asset",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1317,
+        "height": 349
+      },
+      "alt": "CEPA horizontal publication logo."
+    },
+    {
+      "id": "cepa-stamp-logo",
+      "path": "/media/technical-intelligence-brief/cepa-stamp-logo.png",
+      "type": "brand-asset",
+      "title": "CEPA stamp logo",
+      "credit": "CEPA controlled publication asset",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1254,
+        "height": 1254
+      },
+      "alt": "CEPA circular stamp publication logo."
+    },
+    {
+      "id": "etersolis-mark-square-technical-brief",
+      "path": "/media/technical-intelligence-brief/etersolis-mark-square.png",
+      "type": "brand-asset",
+      "title": "EterSolis square mark for CEPA technical brief",
+      "credit": "EterSolis controlled publication asset",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "EterSolis controlled website asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 800,
+        "height": 800
+      },
+      "alt": "EterSolis square mark used in the CEPA technical intelligence brief release."
+    },
+    {
       "id": "kymnis-logo-mark",
       "path": "/media/kymnis-logo-mark.png",
       "type": "brand-asset",

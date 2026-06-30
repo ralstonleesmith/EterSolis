@@ -36,6 +36,7 @@ test('homepage primary and footer links resolve', async ({ page }) => {
 
   await page.goto('/');
   await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Media Credits' })).toHaveAttribute('href', '/media-credits');
+  await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Technical Intelligence Brief' })).toHaveAttribute('href', '/insights/technical-intelligence-brief');
   await page.goto('/media-credits', { waitUntil: 'domcontentloaded' });
   await expect(page).toHaveURL(/\/media-credits$/);
   await expect(page.getByRole('heading', { name: /Professional visual assets with documented sources/i })).toBeVisible();
@@ -163,14 +164,19 @@ test('insights publishes newsletter issue 001 with PDF and print routes', async 
   await page.goto('/insights');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Read the issue/i })).toHaveAttribute('href', '/insights/introducing-etersolis');
-  await expect(page.getByRole('link', { name: /View publication path/i })).toHaveAttribute('href', '/insights/technical-intelligence-brief');
+  await expect(page.getByText(/Published .* Color & Chemicals Industry Edition .* Issue 001/i)).toBeVisible();
+  await expect(page.getByRole('link', { name: /Read flagship brief/i })).toHaveAttribute('href', '/insights/technical-intelligence-brief');
   await page.goto('/insights/introducing-etersolis');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i }).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: /The EterSolis Resource Hierarchy/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Download original PDF/i })).toHaveAttribute('href', '/media/newsletters/issue-001/etersolis-newsletter-issue-001.pdf');
   await expect(page.getByRole('link', { name: /Print view/i })).toHaveAttribute('href', '/insights/introducing-etersolis/print');
   await page.goto('/insights/technical-intelligence-brief');
-  await expect(page.getByRole('heading', { name: /^Technical Intelligence Brief$/i })).toBeVisible();
-  await expect(page.getByText(/PDF upload pending/i)).toBeVisible();
-  await expect(page.getByText(/public\/media\/technical-intelligence-brief\/technical-intelligence-brief-001\.pdf/i)).toBeVisible();
+  await expect(page.getByRole('heading', { name: /^CEPA Technical Intelligence Brief$/i })).toBeVisible();
+  await expect(page.getByText('Color & Chemicals Industry Edition', { exact: true })).toBeVisible();
+  await expect(page.getByText('CEPA-TIB-COLCHEM-001-20260705', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Read on this page/i })).toHaveAttribute('href', '#brief-reader');
+  await expect(page.locator('object[aria-label="CEPA Technical Intelligence Brief PDF reader"]')).toHaveAttribute('data', /cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05\.pdf/);
+  await expect(page.getByRole('link', { name: /^Download PDF/i }).first()).toHaveAttribute('href', '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf');
+  await expect(page.getByText(/PDF upload pending|SOP|developer|stored at|file path|draft/i)).toHaveCount(0);
 });
