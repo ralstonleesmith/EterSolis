@@ -8,8 +8,8 @@ import { contactTopics } from '@/lib/siteContent';
 
 type ContactTopic = (typeof contactTopics)[number];
 
-const fieldClass = 'rounded-lg border border-coal/20 bg-white px-4 py-3 text-carbon shadow-sm transition placeholder:text-coal/45 focus:border-sunshine dark:border-white/10 dark:bg-black/45 dark:text-white dark:placeholder:text-white/35';
-const labelClass = 'grid gap-2 text-sm font-black text-carbon dark:text-white';
+const fieldClass = 'ui-field rounded-lg px-4 py-3 shadow-sm transition focus:border-sunshine';
+const labelClass = 'grid gap-2 text-sm font-black text-body';
 const steps = ['Route', 'Identity', 'Message'];
 
 export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = {}) {
@@ -35,13 +35,14 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
     event.preventDefault();
     if (!validateStep()) return;
 
+    const form = event.currentTarget;
     setSubmitState('submitting');
     setSubmitMessage('');
 
     try {
-      const response = await fetch(event.currentTarget.action, {
+      const response = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(event.currentTarget),
+        body: new FormData(form),
         headers: { Accept: 'application/json' }
       });
       const payload = await response.json().catch(() => ({}));
@@ -49,7 +50,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
       if (!response.ok) throw new Error(payload.error || 'Submission failed.');
 
       clearDraft();
-      event.currentTarget.reset();
+      form.reset();
       setStep(0);
       setSubmitState('success');
       setSubmitMessage(payload.message || 'Inquiry received for EterSolis review.');
@@ -61,11 +62,11 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
 
   if (submitState === 'success') {
     return (
-      <div className="rounded-lg border border-sunshine/70 bg-white p-7 shadow-soft dark:bg-white/5">
+      <div className="ui-surface rounded-lg border-sunshine/70 p-7 shadow-soft">
         <CheckCircle2 className="h-10 w-10 text-sunshine" />
-        <p className="mt-5 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">Inquiry submitted</p>
-        <h2 className="mt-3 text-3xl font-black text-carbon dark:text-white">Your inquiry has been routed for review.</h2>
-        <p className="mt-4 leading-7 text-coal dark:text-white/72">{submitMessage}</p>
+        <p className="mt-5 text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Inquiry submitted</p>
+        <h2 className="mt-3 text-3xl font-black text-body">Your inquiry has been routed for review.</h2>
+        <p className="mt-4 leading-7 text-muted">{submitMessage}</p>
         <button type="button" className="mt-6 rounded-full bg-sunshine px-6 py-3 font-black text-black" onClick={() => setSubmitState('idle')}>
           Submit another inquiry
         </button>
@@ -77,17 +78,17 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
     <form
       ref={formRef}
       noValidate
-      className="grid gap-6 rounded-lg border border-coal/10 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-white/5"
+      className="ui-surface grid gap-6 rounded-lg p-6 shadow-soft"
       action="/api/leads"
       method="post"
       onChange={persistDraft}
       onSubmit={handleSubmit}
     >
       <div>
-        <p className="text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">Controlled contact</p>
-        <h2 className="mt-3 text-2xl font-black text-carbon dark:text-white">Route your inquiry</h2>
-        <p className="mt-2 text-sm leading-6 text-coal dark:text-white/68">Choose the right path, then submit a concise non-confidential summary.</p>
-        <p className="mt-2 text-xs font-bold text-coal/60 dark:text-white/45">Drafts save locally in this browser until submitted or cleared.</p>
+        <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Controlled contact</p>
+        <h2 className="mt-3 text-2xl font-black text-body">Route your inquiry</h2>
+        <p className="mt-2 text-sm leading-6 text-muted">Choose the right path, then submit a concise non-confidential summary.</p>
+        <p className="mt-2 text-xs font-bold text-subtle">Drafts save locally in this browser until submitted or cleared.</p>
       </div>
 
       <div className="grid gap-3">
@@ -104,8 +105,8 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
                 index === step
                   ? 'border-sunshine bg-sunshine text-black'
                   : index < step
-                    ? 'border-coal/10 bg-cool text-carbon dark:border-white/10 dark:bg-white/10 dark:text-white'
-                    : 'border-coal/10 bg-white text-coal/55 dark:border-white/10 dark:bg-black/20 dark:text-white/45'
+                    ? 'ui-surface-muted text-body'
+                    : 'ui-surface text-subtle'
               }`}
               aria-current={index === step ? 'step' : undefined}
             >
@@ -126,9 +127,9 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
       </section>
 
       <section data-form-step="2" className={step === 2 ? 'grid gap-5' : 'hidden'}>
-        <div className="grid gap-3 rounded-lg border border-coal/10 bg-cool p-5 text-sm dark:border-white/10 dark:bg-black/45">
-          <p className="font-black text-carbon dark:text-white">Review route before submitting</p>
-          <div className="grid gap-2 text-coal dark:text-white/72 sm:grid-cols-2">
+        <div className="ui-surface-muted grid gap-3 rounded-lg p-5 text-sm">
+          <p className="font-black text-body">Review route before submitting</p>
+          <div className="grid gap-2 text-muted sm:grid-cols-2">
             <span><b>Topic:</b> {valueFor('topic')}</span>
             <span><b>Name:</b> {valueFor('name')}</span>
             <span><b>Company:</b> {valueFor('company')}</span>
@@ -136,7 +137,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
           </div>
         </div>
         <label className={labelClass}>Message<textarea name="message" required minLength={10} maxLength={2000} rows={6} className={fieldClass} placeholder="Use a clear, non-confidential summary." /></label>
-        <label className="flex gap-3 rounded-lg border border-coal/10 bg-cool p-5 text-sm font-black text-carbon dark:border-white/10 dark:bg-black/45 dark:text-white/82"><input name="consentToContact" type="checkbox" required /> I consent to EterSolis contacting me about this inquiry.</label>
+        <label className="ui-surface-muted flex gap-3 rounded-lg p-5 text-sm font-black text-body"><input name="consentToContact" type="checkbox" required /> I consent to EterSolis contacting me about this inquiry.</label>
         <TurnstileWidget />
       </section>
 
@@ -148,7 +149,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: ContactTopic } = 
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-coal/20 px-6 py-3 font-black text-carbon transition hover:border-sunshine dark:border-white/15 dark:text-white"
+          className="ui-control inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-black transition disabled:cursor-not-allowed disabled:opacity-50"
           type="button"
           onClick={() => setStep((current) => Math.max(current - 1, 0))}
           disabled={step === 0}

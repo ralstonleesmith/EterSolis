@@ -35,21 +35,21 @@ export default function KymnisResourceRecoveryPage() {
       <section className="section-padding">
         <div className="container-shell grid gap-6 md:grid-cols-3">
           {recoveryAreas.map(({ icon: Icon, title, description }) => (
-            <article key={title} className="card-hover rounded-3xl border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+            <article key={title} className="card-hover rounded-lg border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
               <Icon className="h-7 w-7 text-sunshine" />
               <h2 className="mt-5 text-2xl font-black text-carbon dark:text-white">{title}</h2>
-              <p className="mt-3 leading-7 text-coal dark:text-white/72">{description}</p>
+              <p className="mt-3 leading-7 text-coal dark:text-on-dark-muted">{description}</p>
             </article>
           ))}
         </div>
       </section>
       <section className="section-padding bg-mist dark:bg-black">
-        <div className="container-shell rounded-3xl border border-coal/10 bg-white p-7 shadow-sm dark:border-white/10 dark:bg-white/5">
+        <div className="container-shell rounded-lg border border-coal/10 bg-white p-7 shadow-sm dark:border-white/10 dark:bg-white/5">
           <p className="eyebrow">Collection flow</p>
-          <h2 className="mt-4 text-4xl font-black tracking-[-0.04em] text-carbon dark:text-white">Green Bag for recoverable resources. Red Bag for hazardous resources.</h2>
+          <h2 className="mt-4 text-4xl font-black tracking-normal text-carbon dark:text-white">Green Bag for recoverable resources. Red Bag for hazardous resources.</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {collectionFlow.map((step, index) => (
-              <div key={step} className="rounded-2xl border border-coal/10 bg-cool p-5 dark:border-white/10 dark:bg-black/40">
+              <div key={step} className="rounded-lg border border-coal/10 bg-cool p-5 dark:border-white/10 dark:bg-black/40">
                 <span className="text-sm font-black text-carbon dark:text-sunshine">0{index + 1}</span>
                 <p className="mt-3 font-black text-carbon dark:text-white">{step}</p>
               </div>

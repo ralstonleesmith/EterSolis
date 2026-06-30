@@ -38,7 +38,7 @@ export function PageHero({
           <h1 className="mt-6 text-5xl font-black leading-tight tracking-normal text-white md:text-7xl">
             {title}
           </h1>
-          <p className="mt-6 max-w-3xl text-xl leading-9 text-white/82">{description}</p>
+          <p className="mt-6 max-w-3xl text-xl leading-9 text-on-dark-muted">{description}</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href={primaryHref} className="group inline-flex items-center justify-center gap-3 rounded-full bg-sunshine px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5">
               {primaryLabel} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />

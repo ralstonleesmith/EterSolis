@@ -36,7 +36,7 @@ export default function IndustriesPage() {
         imageAlt={mediaAssets.wastewater.aerial.alt}
       />
       <WastewaterTreatmentFeature />
-      <section className="section-padding bg-[#FAFAF7] dark:bg-black">
+      <section className="section-padding bg-[var(--surface-muted)] dark:bg-black">
         <div className="container-shell">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {industries.map(({ icon: Icon, title, description, focus }, index) => (
@@ -44,10 +44,10 @@ export default function IndustriesPage() {
                 <div className="relative flex h-12 w-12 items-center justify-center rounded-lg bg-sunshine text-black">
                   <Icon className="h-5 w-5" />
                 </div>
-                <p className="mt-8 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-white/45">Sector focus</p>
+                <p className="mt-8 text-xs font-black uppercase tracking-normal text-subtle dark:text-on-dark-subtle">Sector focus</p>
                 <h2 className="mt-3 text-2xl font-black text-carbon dark:text-white">{title}</h2>
-                <p className="mt-4 leading-7 text-coal dark:text-white/72">{description}</p>
-                <div className="mt-6 rounded-lg bg-cool p-4 text-sm font-bold leading-6 text-carbon dark:bg-black/40 dark:text-white/80">{focus}</div>
+                <p className="mt-4 leading-7 text-coal dark:text-on-dark-muted">{description}</p>
+                <div className="mt-6 rounded-lg bg-cool p-4 text-sm font-bold leading-6 text-carbon dark:bg-black/40 dark:text-on-dark-muted">{focus}</div>
               </article>
             ))}
           </div>

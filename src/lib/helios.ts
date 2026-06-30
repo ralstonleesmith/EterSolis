@@ -48,7 +48,7 @@ export const heliosIntents: readonly HeliosIntent[] = [
     icon: ShieldAlert,
     label: 'Request assessment',
     description: 'Waste, carbon, circular economy or industrial resource review.',
-    href: '/contact',
+    href: '/contact?topic=Consultation%20%2F%20Assessment#contact-form',
     action: 'Route assessment',
     contexts: ['general', 'contact']
   },
@@ -58,7 +58,7 @@ export const heliosIntents: readonly HeliosIntent[] = [
     icon: Droplets,
     label: 'Wastewater treatment',
     description: 'Treatment residuals, water recovery infrastructure questions or wastewater-linked by-products.',
-    href: '/contact#contact-form',
+    href: '/contact?topic=Wastewater%20Treatment#contact-form',
     action: 'Request wastewater assessment',
     contexts: ['water', 'wastewater', 'recovery']
   },
@@ -78,7 +78,7 @@ export const heliosIntents: readonly HeliosIntent[] = [
     icon: Handshake,
     label: 'Partner inquiry',
     description: 'Recycler, logistics, lab, university, technology or commercial collaboration.',
-    href: '/contact',
+    href: '/contact?topic=Partnership#contact-form',
     action: 'Contact partnerships',
     contexts: ['partnership', 'general']
   },
@@ -88,7 +88,7 @@ export const heliosIntents: readonly HeliosIntent[] = [
     icon: BriefcaseBusiness,
     label: 'Talent route',
     description: 'Careers, Associate Program interest or controlled talent inquiry.',
-    href: '/contact',
+    href: '/contact?topic=Careers%20%2F%20Associate#contact-form',
     action: 'Contact EterSolis',
     contexts: ['talent', 'general']
   },
@@ -98,7 +98,7 @@ export const heliosIntents: readonly HeliosIntent[] = [
     icon: Crown,
     label: 'Executive or CSO',
     description: 'CEO, CSO, strategic, scientific or controlled documentation matter.',
-    href: '/contact',
+    href: '/contact?topic=Executive#contact-form',
     action: 'Route executive inquiry',
     contexts: ['executive', 'science', 'general']
   },

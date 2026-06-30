@@ -19,7 +19,7 @@ const photos = [
 
 export function WastewaterTreatmentFeature() {
   return (
-    <section className="section-padding bg-white dark:bg-[#050505]">
+    <section className="section-padding bg-white dark:bg-[var(--surface)]">
       <div className="container-shell">
         <div className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-stretch">
           <MotionReveal className="relative min-h-[34rem] overflow-hidden rounded-lg bg-black shadow-soft">
@@ -42,7 +42,7 @@ export function WastewaterTreatmentFeature() {
             </div>
           </MotionReveal>
 
-          <MotionReveal className="flex flex-col justify-between gap-8 rounded-lg border border-coal/10 bg-[#FAFAF7] p-7 shadow-soft dark:border-white/10 dark:bg-white/5" delay={0.08}>
+          <MotionReveal className="flex flex-col justify-between gap-8 rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/10 dark:bg-white/5" delay={0.08}>
             <SectionHeader
               eyebrow="Wastewater treatment"
               title="Add wastewater-linked material streams to the same disciplined intake path."
@@ -57,7 +57,7 @@ export function WastewaterTreatmentFeature() {
                     </div>
                     <div>
                       <h3 className="font-black text-carbon dark:text-white">{label}</h3>
-                      <p className="mt-2 text-sm leading-6 text-coal dark:text-white/70">{text}</p>
+                      <p className="mt-2 text-sm leading-6 text-coal dark:text-on-dark-muted">{text}</p>
                     </div>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ export function WastewaterTreatmentFeature() {
               <div className="relative aspect-[16/10] bg-black">
                 <Image src={photo.previewSrc} alt={photo.alt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-cover transition duration-500 hover:scale-[1.03]" />
               </div>
-              <figcaption className="p-4 text-xs font-bold leading-5 text-coal dark:text-white/62">
+              <figcaption className="p-4 text-xs font-bold leading-5 text-coal dark:text-on-dark-subtle">
                 {photo.credit}
               </figcaption>
             </figure>

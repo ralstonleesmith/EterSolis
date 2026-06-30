@@ -8,6 +8,7 @@ const routes = [
   ...kymnisRoutes.filter((route) => !siteRouteSet.has(route)),
   '/helios',
   '/insights/introducing-etersolis',
+  '/insights/technical-intelligence-brief',
   '/media-credits',
   '/privacy',
   '/terms'

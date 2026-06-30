@@ -3,22 +3,58 @@
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 
+const STORAGE_KEY = 'etersolis-theme';
+
+function systemPrefersDark() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+
+function readTheme() {
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+  return stored === 'dark' || (!stored && systemPrefersDark());
+}
+
+function applyTheme(enabled: boolean) {
+  document.documentElement.classList.toggle('dark', enabled);
+}
+
 export function ThemeToggle() {
   const [dark, setDark] = useState(false);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem('etersolis-theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const enabled = stored ? stored === 'dark' : prefersDark;
-    document.documentElement.classList.toggle('dark', enabled);
+    const enabled = readTheme();
+    applyTheme(enabled);
     setDark(enabled);
+
+    function syncFromStorage(event: StorageEvent) {
+      if (event.key === STORAGE_KEY) {
+        const next = event.newValue === 'dark' || (!event.newValue && systemPrefersDark());
+        applyTheme(next);
+        setDark(next);
+      }
+    }
+
+    const preference = window.matchMedia('(prefers-color-scheme: dark)');
+    function syncFromSystem(event: MediaQueryListEvent) {
+      if (!window.localStorage.getItem(STORAGE_KEY)) {
+        applyTheme(event.matches);
+        setDark(event.matches);
+      }
+    }
+
+    window.addEventListener('storage', syncFromStorage);
+    preference.addEventListener('change', syncFromSystem);
+    return () => {
+      window.removeEventListener('storage', syncFromStorage);
+      preference.removeEventListener('change', syncFromSystem);
+    };
   }, []);
 
   function toggleTheme() {
     const next = !dark;
     document.documentElement.dataset.themeChanging = 'true';
-    document.documentElement.classList.toggle('dark', next);
-    window.localStorage.setItem('etersolis-theme', next ? 'dark' : 'light');
+    applyTheme(next);
+    window.localStorage.setItem(STORAGE_KEY, next ? 'dark' : 'light');
     setDark(next);
     window.setTimeout(() => {
       delete document.documentElement.dataset.themeChanging;
@@ -29,8 +65,9 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="group inline-flex h-11 w-11 items-center justify-center rounded-full border border-coal/20 bg-white/90 text-carbon shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-sunshine hover:bg-white dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/16"
-      aria-label="Toggle light and dark mode"
+      className="group ui-control inline-flex h-11 w-11 items-center justify-center rounded-full shadow-sm backdrop-blur transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine"
+      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-pressed={dark}
     >
       {dark ? <Sun className="h-4 w-4 text-sunshine transition group-hover:rotate-12" /> : <Moon className="h-4 w-4 transition group-hover:-rotate-12" />}
     </button>

@@ -16,7 +16,7 @@ const industries = [
 
 export function IndustryMosaic() {
   return (
-    <section className="section-padding bg-[#FAFAF7]">
+    <section className="section-padding bg-[--surface-muted]">
       <div className="container-shell">
         <MotionReveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeader
@@ -24,16 +24,16 @@ export function IndustryMosaic() {
             title="Built for organizations with real material flow."
             description="EterSolis supports operators with material flows that need characterization, hierarchy-based routing and practical recovery decisions."
           />
-          <Link href="/industries" className="inline-flex items-center gap-2 rounded-full border border-coal/30 bg-white px-5 py-3 text-sm font-black text-carbon transition hover:border-sunshine">
+          <Link href="/industries" className="ui-control inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-black transition">
             View industries <ArrowUpRight className="h-4 w-4" />
           </Link>
         </MotionReveal>
         <MotionReveal className="mt-12 grid gap-4 md:grid-cols-4" delay={0.08}>
           {industries.map(([title, description], index) => (
-            <article key={title} className={`card-hover rounded-lg border border-coal/10 bg-white p-6 shadow-sm ${index === 0 || index === 2 ? 'md:col-span-2' : ''}`}>
-              <p className="text-xs font-black uppercase tracking-normal text-coal/60">Sector</p>
-              <h3 className="mt-4 text-2xl font-black text-carbon">{title}</h3>
-              <p className="mt-4 leading-7 text-coal">{description}</p>
+            <article key={title} className={`ui-surface card-hover rounded-lg p-6 shadow-sm ${index === 0 || index === 2 ? 'md:col-span-2' : ''}`}>
+              <p className="text-xs font-black uppercase tracking-normal text-subtle">Sector</p>
+              <h3 className="mt-4 text-2xl font-black text-body">{title}</h3>
+              <p className="mt-4 leading-7 text-muted">{description}</p>
             </article>
           ))}
         </MotionReveal>

@@ -6,8 +6,8 @@ import { TurnstileWidget } from '@/components/forms/TurnstileWidget';
 import { useDraftedForm } from '@/components/forms/useDraftedForm';
 import { wasteFrequencies, wasteMaterialCategories } from '@/lib/siteContent';
 
-const fieldClass = 'rounded-lg border border-coal/20 bg-white px-4 py-3 text-carbon shadow-sm transition placeholder:text-coal/45 focus:border-sunshine dark:border-white/10 dark:bg-black/45 dark:text-white dark:placeholder:text-white/35';
-const labelClass = 'grid gap-2 text-sm font-black text-carbon dark:text-white';
+const fieldClass = 'ui-field rounded-lg px-4 py-3 shadow-sm transition focus:border-sunshine';
+const labelClass = 'grid gap-2 text-sm font-black text-body';
 
 const steps = ['Organization', 'Material', 'Safety'];
 
@@ -34,13 +34,14 @@ export function WasteOpportunityForm() {
     event.preventDefault();
     if (!validateStep()) return;
 
+    const form = event.currentTarget;
     setSubmitState('submitting');
     setSubmitMessage('');
 
     try {
-      const response = await fetch(event.currentTarget.action, {
+      const response = await fetch(form.action, {
         method: 'POST',
-        body: new FormData(event.currentTarget),
+        body: new FormData(form),
         headers: { Accept: 'application/json' }
       });
       const payload = await response.json().catch(() => ({}));
@@ -48,7 +49,7 @@ export function WasteOpportunityForm() {
       if (!response.ok) throw new Error(payload.error || 'Submission failed.');
 
       clearDraft();
-      event.currentTarget.reset();
+      form.reset();
       setStep(0);
       setSubmitState('success');
       setSubmitMessage(payload.message || 'Submission received for non-binding EterSolis review.');
@@ -60,11 +61,11 @@ export function WasteOpportunityForm() {
 
   if (submitState === 'success') {
     return (
-      <div className="rounded-lg border border-sunshine/70 bg-white p-7 shadow-soft dark:bg-white/5">
+      <div className="ui-surface rounded-lg border-sunshine/70 p-7 shadow-soft">
         <CheckCircle2 className="h-10 w-10 text-sunshine" />
-        <p className="mt-5 text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">Waste submission routed</p>
-        <h2 className="mt-3 text-3xl font-black text-carbon dark:text-white">Your opportunity is queued for controlled review.</h2>
-        <p className="mt-4 leading-7 text-coal dark:text-white/72">{submitMessage}</p>
+        <p className="mt-5 text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Waste submission routed</p>
+        <h2 className="mt-3 text-3xl font-black text-body">Your opportunity is queued for controlled review.</h2>
+        <p className="mt-4 leading-7 text-muted">{submitMessage}</p>
         <button type="button" className="mt-6 rounded-full bg-sunshine px-6 py-3 font-black text-black" onClick={() => setSubmitState('idle')}>
           Submit another opportunity
         </button>
@@ -76,17 +77,17 @@ export function WasteOpportunityForm() {
     <form
       ref={formRef}
       noValidate
-      className="grid gap-6 rounded-lg border border-coal/10 bg-white p-6 shadow-soft dark:border-white/10 dark:bg-white/5"
+      className="ui-surface grid gap-6 rounded-lg p-6 shadow-soft"
       action="/api/waste"
       method="post"
       onChange={persistDraft}
       onSubmit={handleSubmit}
     >
       <div>
-        <p className="text-xs font-black uppercase tracking-normal text-coal/60 dark:text-sunshine">Structured intake</p>
-        <h2 className="mt-3 text-2xl font-black text-carbon dark:text-white">Waste opportunity review</h2>
-        <p className="mt-2 text-sm leading-6 text-coal dark:text-white/68">Submit non-confidential material data for controlled EterSolis review.</p>
-        <p className="mt-2 text-xs font-bold text-coal/60 dark:text-white/45">Drafts save locally in this browser until submitted or cleared.</p>
+        <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Structured intake</p>
+        <h2 className="mt-3 text-2xl font-black text-body">Waste opportunity review</h2>
+        <p className="mt-2 text-sm leading-6 text-muted">Submit non-confidential material data for controlled EterSolis review.</p>
+        <p className="mt-2 text-xs font-bold text-subtle">Drafts save locally in this browser until submitted or cleared.</p>
       </div>
 
       <div className="grid gap-3">
@@ -103,8 +104,8 @@ export function WasteOpportunityForm() {
                 index === step
                   ? 'border-sunshine bg-sunshine text-black'
                   : index < step
-                    ? 'border-coal/10 bg-cool text-carbon dark:border-white/10 dark:bg-white/10 dark:text-white'
-                    : 'border-coal/10 bg-white text-coal/55 dark:border-white/10 dark:bg-black/20 dark:text-white/45'
+                    ? 'ui-surface-muted text-body'
+                    : 'ui-surface text-subtle'
               }`}
               aria-current={index === step ? 'step' : undefined}
             >
@@ -137,9 +138,9 @@ export function WasteOpportunityForm() {
       </section>
 
       <section data-form-step="2" className={step === 2 ? 'grid gap-5' : 'hidden'}>
-        <div className="grid gap-3 rounded-lg border border-coal/10 bg-cool p-5 text-sm dark:border-white/10 dark:bg-black/45">
-          <p className="font-black text-carbon dark:text-white">Review opportunity before submitting</p>
-          <div className="grid gap-2 text-coal dark:text-white/72 sm:grid-cols-2">
+        <div className="ui-surface-muted grid gap-3 rounded-lg p-5 text-sm">
+          <p className="font-black text-body">Review opportunity before submitting</p>
+          <div className="grid gap-2 text-muted sm:grid-cols-2">
             <span><b>Company:</b> {valueFor('companyName')}</span>
             <span><b>Contact:</b> {valueFor('contactName')}</span>
             <span><b>Location:</b> {valueFor('country')} / {valueFor('region')}</span>
@@ -148,14 +149,14 @@ export function WasteOpportunityForm() {
             <span><b>Quantity:</b> {valueFor('quantity')} {valueFor('quantityUnit')}</span>
           </div>
         </div>
-        <div className="grid gap-4 rounded-lg border border-coal/10 bg-cool p-5 text-sm text-carbon dark:border-white/10 dark:bg-black/45 dark:text-white/82">
+        <div className="ui-surface-muted grid gap-4 rounded-lg p-5 text-sm text-body">
           <label className="flex gap-3"><input name="hazardFlag" type="checkbox" /> Hazardous, regulated, biological, chemical, medical, radioactive or unknown material flag</label>
           <label className="flex gap-3"><input name="safetyDocumentsAvailable" type="checkbox" /> Safety documents are available</label>
           <label className="grid gap-2 font-black">Confidentiality level<select name="confidentialityLevel" required className={fieldClass}><option>Public</option><option>Potential confidential</option><option>NDA required</option></select></label>
           <label className="flex gap-3 font-black"><input name="consentToContact" type="checkbox" required /> I consent to EterSolis contacting me about this submission.</label>
         </div>
         <TurnstileWidget />
-        <p className="rounded-lg border border-sunshine/70 bg-sunshine/10 p-4 text-sm font-bold leading-7 text-carbon dark:text-white">
+        <p className="rounded-lg border border-sunshine/70 bg-sunshine/10 p-4 text-sm font-bold leading-7 text-body">
           Submitting a waste opportunity is non-binding. Do not send physical samples unless EterSolis provides written intake instructions.
         </p>
       </section>
@@ -168,7 +169,7 @@ export function WasteOpportunityForm() {
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <button
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-coal/20 px-6 py-3 font-black text-carbon transition hover:border-sunshine dark:border-white/15 dark:text-white"
+          className="ui-control inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-black transition disabled:cursor-not-allowed disabled:opacity-50"
           type="button"
           onClick={() => setStep((current) => Math.max(current - 1, 0))}
           disabled={step === 0}

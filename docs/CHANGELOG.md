@@ -2,6 +2,45 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.3.6 — 2026-06-30T12:01:47Z
+
+### Scope
+
+- Added the public Technical Intelligence Brief publication path at `/insights/technical-intelligence-brief`.
+- Added controlled publication readiness metadata for the first Technical Intelligence Brief without exposing a draft PDF or unsupported claims.
+- Updated Helios contact intents to route directly into the correct contact-form topic.
+- Expanded route, preview and smoke coverage for the Technical Intelligence Brief path and lead-capture flows.
+- Reinforced lead-capture acceptance around route-specific contact topics, mocked successful submissions, and error states.
+
+### Documentation and Tracking
+
+- Updated README and generated documentation route indexes for the Technical Intelligence Brief path.
+- Extended sitemap, route checks and generated preview capture coverage for the new publication route.
+
+### Validation
+
+- Required gates: `npm run check`, `npm run test:layout`, `npm run test:smoke`, `npm run preview:capture` and `npm audit`.
+
+## 0.3.5 — 2026-06-30T09:13:25Z
+
+### Scope
+
+- Adopted `docs/WEBSITE_CODEBASE_SOP.md` as the master website and codebase operating standard.
+- Added semantic theme utilities for readable text, surfaces, fields, controls and header states across light and dark mode.
+- Reworked the header and theme toggle for persistent binary theme switching, active route clarity, mobile menu control linkage and Escape-key closure.
+- Migrated high-risk Helios, KYMNIS, form and marketing surfaces away from brittle low-opacity contrast patterns.
+- Expanded layout/theme testing to inspect visible text contrast, first-load theme preference, header states and theme persistence.
+
+### Documentation and Tracking
+
+- Updated README to link the SOP and reflect the hardened light/dark contrast and header quality standard.
+- Updated theme audit requirements so semantic tokens, SOP documentation and contrast-test coverage are enforced.
+
+### Validation
+
+- Required gates: `npm run check`, `npm run test:layout`, `npm run test:smoke` and `npm run preview:capture`.
+- Contrast checks now inspect visible text elements in both themes rather than only comparing body colors.
+
 ## 0.3.4 — 2026-06-29T06:50:08Z
 
 ### Scope

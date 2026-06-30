@@ -28,10 +28,10 @@ export default function KymnisVerificationPage() {
       <section className="section-padding bg-mist dark:bg-black">
         <div className="container-shell grid gap-6 md:grid-cols-3">
           {checks.map(({ icon: Icon, title, description }) => (
-            <article key={title} className="rounded-3xl border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
+            <article key={title} className="rounded-lg border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
               <Icon className="h-7 w-7 text-sunshine" />
               <h2 className="mt-5 text-2xl font-black text-carbon dark:text-white">{title}</h2>
-              <p className="mt-3 leading-7 text-coal dark:text-white/72">{description}</p>
+              <p className="mt-3 leading-7 text-coal dark:text-on-dark-muted">{description}</p>
             </article>
           ))}
         </div>
