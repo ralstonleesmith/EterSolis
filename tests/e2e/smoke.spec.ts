@@ -45,11 +45,15 @@ test('homepage primary and footer links resolve', async ({ page }) => {
 test('mobile navigation opens primary routes', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await page.getByLabel(/Open navigation menu/i).click();
-  const industriesLink = page.getByRole('navigation', { name: /Mobile navigation/i }).getByRole('link', { name: 'Industries' });
+  const menuButton = page.getByRole('button', { name: /Open navigation menu/i });
+  await expect(menuButton).toBeVisible();
+  await menuButton.click();
+  const mobileNavigation = page.getByRole('navigation', { name: /Mobile navigation/i });
+  await expect(mobileNavigation).toBeVisible();
+  const industriesLink = mobileNavigation.getByRole('link', { name: 'Industries' });
   await expect(industriesLink).toBeVisible();
   await expect(industriesLink).toHaveAttribute('href', '/industries');
-  await expect(page.getByRole('navigation', { name: /Mobile navigation/i }).getByRole('link', { name: /^Home$/i })).toHaveCount(0);
+  await expect(mobileNavigation.getByRole('link', { name: /^Home$/i })).toHaveCount(0);
   await page.goto('/industries');
   await expect(page).toHaveURL(/\/industries$/);
   await page.screenshot({ path: 'test-results/screenshots/home-mobile-nav.png', fullPage: true });
@@ -160,12 +164,22 @@ test('KYMNIS public foundation and guided interest intake render', async ({ page
   await page.screenshot({ path: 'test-results/screenshots/kymnis-contact.png', fullPage: true });
 });
 
-test('insights publishes newsletter issue 001 with PDF and print routes', async ({ page }) => {
+test('insights prioritizes the technical brief with readable and print routes', async ({ page }) => {
   await page.goto('/insights');
+  const briefHeading = page.getByRole('heading', { name: /^CEPA Technical Intelligence Brief$/i }).first();
+  const newsletterHeading = page.getByRole('heading', { name: /Introducing EterSolis/i }).first();
+  await expect(briefHeading).toBeVisible();
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i })).toBeVisible();
+  const briefBox = await briefHeading.boundingBox();
+  const newsletterBox = await newsletterHeading.boundingBox();
+  expect(briefBox?.y ?? 0).toBeLessThan(newsletterBox?.y ?? 0);
+  await expect(page.getByRole('link', { name: /^Read brief/i }).first()).toHaveAttribute('href', '/insights/technical-intelligence-brief');
+  await expect(page.getByRole('link', { name: /^Print view/i }).first()).toHaveAttribute('href', '/insights/technical-intelligence-brief/print');
+  await expect(page.getByRole('link', { name: /^Download PDF/i }).first()).toHaveAttribute('href', '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf');
+  await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
   await expect(page.getByRole('link', { name: /Read the issue/i })).toHaveAttribute('href', '/insights/introducing-etersolis');
   await expect(page.getByText(/Published .* Color & Chemicals Industry Edition .* Issue 001/i)).toBeVisible();
-  await expect(page.getByRole('link', { name: /Read flagship brief/i })).toHaveAttribute('href', '/insights/technical-intelligence-brief');
+
   await page.goto('/insights/introducing-etersolis');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i }).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: /The EterSolis Resource Hierarchy/i })).toBeVisible();
@@ -176,7 +190,19 @@ test('insights publishes newsletter issue 001 with PDF and print routes', async 
   await expect(page.getByText('Color & Chemicals Industry Edition', { exact: true })).toBeVisible();
   await expect(page.getByText('CEPA-TIB-COLCHEM-001-20260705', { exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: /Read on this page/i })).toHaveAttribute('href', '#brief-reader');
-  await expect(page.locator('object[aria-label="CEPA Technical Intelligence Brief PDF reader"]')).toHaveAttribute('data', /cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05\.pdf/);
+  await expect(page.locator('object[aria-label="CEPA Technical Intelligence Brief PDF reader"]')).toHaveCount(0);
+  await expect(page.locator('img[src*="cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png"]').first()).toBeVisible();
+  await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
+  await expect(page.getByRole('link', { name: /^Print view/i }).first()).toHaveAttribute('href', '/insights/technical-intelligence-brief/print');
   await expect(page.getByRole('link', { name: /^Download PDF/i }).first()).toHaveAttribute('href', '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf');
+
+  await page.goto('/insights/technical-intelligence-brief/print');
+  await expect(page.getByRole('heading', { name: /^CEPA Technical Intelligence Brief$/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Print brief/i })).toBeVisible();
+  await expect(page.locator('img[src*="cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png"]').first()).toBeVisible();
+  await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
   await expect(page.getByText(/PDF upload pending|SOP|developer|stored at|file path|draft/i)).toHaveCount(0);
+
+  await page.goto('/media-credits');
+  await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
 });

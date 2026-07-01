@@ -30,7 +30,7 @@ export function KymnisHero({
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-on-dark-muted">{description ?? kymnisBrand.description}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/kymnis/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-[--kymnis-gold] px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+            <Link href="/kymnis/contact" className="inline-flex items-center justify-center gap-2 rounded-full border border-white bg-white px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5 hover:border-[--kymnis-gold]">
               Register interest <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/kymnis/how-it-works" className="inline-flex items-center justify-center rounded-full border border-white/18 px-7 py-4 font-black text-white transition hover:border-[--kymnis-gold]">

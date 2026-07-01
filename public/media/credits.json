@@ -208,6 +208,21 @@
       "alt": "CEPA horizontal publication logo."
     },
     {
+      "id": "cepa-logo-mark",
+      "path": "/media/technical-intelligence-brief/cepa-logo-mark.png",
+      "type": "brand-asset",
+      "title": "CEPA logo mark",
+      "credit": "CEPA controlled publication asset",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "alt": "CEPA publication logo mark."
+    },
+    {
       "id": "cepa-stamp-logo",
       "path": "/media/technical-intelligence-brief/cepa-stamp-logo.png",
       "type": "brand-asset",
@@ -221,6 +236,21 @@
         "height": 1254
       },
       "alt": "CEPA circular stamp publication logo."
+    },
+    {
+      "id": "cepa-technical-intelligence-brief-issue-001-image",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png",
+      "type": "publication-image",
+      "title": "CEPA Technical Intelligence Brief Color & Chemicals Issue 001 readable image",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 2480,
+        "height": 3507
+      },
+      "alt": "Readable CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001."
     },
     {
       "id": "etersolis-mark-square-technical-brief",

@@ -40,7 +40,11 @@ export function PageHero({
           </h1>
           <p className="mt-6 max-w-3xl text-xl leading-9 text-on-dark-muted">{description}</p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href={primaryHref} className="group inline-flex items-center justify-center gap-3 rounded-full bg-sunshine px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+            <Link
+              href={primaryHref}
+              className="group inline-flex items-center justify-center gap-3 rounded-full border border-white px-7 py-4 font-black shadow-soft transition hover:-translate-y-0.5 hover:border-sunshine"
+              style={{ backgroundColor: '#ffffff', color: '#000000' }}
+            >
               {primaryLabel} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <Link href={secondaryHref} className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/12 px-7 py-4 font-black text-white backdrop-blur transition hover:border-sunshine hover:bg-white/18">

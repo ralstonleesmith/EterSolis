@@ -126,6 +126,16 @@ a { color: inherit; text-decoration: none; }
 .dark .dark\:text-on-dark-muted { color: rgba(255, 255, 255, 0.84); }
 .dark .dark\:text-on-dark-subtle { color: rgba(255, 255, 255, 0.76); }
 
+.text-coal,
+.text-subtle {
+  color: #0b1220 !important;
+}
+
+.dark .text-coal,
+.dark .text-subtle {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
 .site-header {
   border-bottom: 1px solid var(--header-border);
   background: var(--header-bg);
@@ -326,6 +336,39 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 768px) {
   .section-padding { padding-block: 5.25rem; }
+}
+
+@media print {
+  @page { margin: 0.35in; }
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .site-header,
+  footer,
+  .skip-link,
+  .page-end-spacer,
+  .print-hidden,
+  [aria-label="Ask Helios"] {
+    display: none !important;
+  }
+  main,
+  article,
+  section,
+  div {
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+  .technical-brief-print-page {
+    padding: 0 !important;
+  }
+  .technical-brief-print-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 0 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 }
 
 /* Stabilize full-page screenshots: deterministic page-end spacer (0 height) */

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const ROUTES = ['/', '/helios', '/kymnis', '/sell-waste', '/contact', '/about', '/insights', '/insights/technical-intelligence-brief', '/media-credits'];
+const ROUTES = ['/', '/helios', '/kymnis', '/sell-waste', '/contact', '/about', '/insights', '/insights/technical-intelligence-brief', '/insights/technical-intelligence-brief/print', '/media-credits'];
 
 async function assertNoHorizontalOverflow(page: import('@playwright/test').Page) {
   const metrics = await page.evaluate(() => ({

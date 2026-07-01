@@ -38,14 +38,14 @@ export default function KymnisResourceRecoveryPage() {
             <article key={title} className="card-hover rounded-lg border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
               <Icon className="h-7 w-7 text-sunshine" />
               <h2 className="mt-5 text-2xl font-black text-carbon dark:text-white">{title}</h2>
-              <p className="mt-3 leading-7 text-coal dark:text-on-dark-muted">{description}</p>
+              <p className="mt-3 leading-7 text-carbon dark:text-on-dark-muted">{description}</p>
             </article>
           ))}
         </div>
       </section>
       <section className="section-padding bg-mist dark:bg-black">
         <div className="container-shell rounded-lg border border-coal/10 bg-white p-7 shadow-sm dark:border-white/10 dark:bg-white/5">
-          <p className="eyebrow">Collection flow</p>
+          <p className="text-xs font-black uppercase tracking-normal text-carbon dark:text-on-dark-muted">Collection flow</p>
           <h2 className="mt-4 text-4xl font-black tracking-normal text-carbon dark:text-white">Green Bag for recoverable resources. Red Bag for hazardous resources.</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-4">
             {collectionFlow.map((step, index) => (
