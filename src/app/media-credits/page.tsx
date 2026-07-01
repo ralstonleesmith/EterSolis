@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/media-credits' }
 };
 
-const visibleAssets = credits.assets.filter((asset) => asset.type !== 'open-license-photo-derivative');
+const visibleAssets = credits.assets.filter((asset) => asset.type !== 'open-license-photo-derivative' && asset.id !== 'cepa-horizontal-logo');
 
 function previewPathFor(assetId: string, fallback: string) {
   if (assetId === 'etersolis-resource-recovery-hero') return mediaAssets.hero.ogSrc;

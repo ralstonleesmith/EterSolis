@@ -44,7 +44,7 @@ export function HeliosPrompt({
               <p className="mt-4 text-xs font-black uppercase tracking-normal text-sunshine">Recommended</p>
               <h3 className="mt-2 text-2xl font-black text-white">{recommended.label}</h3>
               <p className="mt-2 leading-7 text-on-dark-muted">{recommended.description}</p>
-              <Link href={recommended.href} className="mt-5 inline-flex items-center gap-2 rounded-full bg-sunshine px-5 py-3 font-black text-black transition hover:-translate-y-0.5">
+              <Link href={recommended.href} className="mt-5 inline-flex items-center gap-2 rounded-full border border-white bg-white px-5 py-3 font-black text-black transition hover:-translate-y-0.5 hover:border-sunshine hover:bg-sunshine">
                 {recommended.action} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

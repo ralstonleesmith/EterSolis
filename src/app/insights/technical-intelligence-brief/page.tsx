@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, Download, FileText, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Download, FileText, Printer, ShieldCheck } from 'lucide-react';
 import { technicalBrief } from '@/lib/technicalBrief';
 
 export const metadata: Metadata = {
@@ -31,8 +31,9 @@ export default function TechnicalIntelligenceBriefPage() {
       <section className="section-padding bg-black text-white signal-grid">
         <div className="container-shell grid gap-10 lg:grid-cols-[0.78fr_0.42fr] lg:items-end">
           <div>
-            <div className="inline-flex items-center gap-4 rounded-lg border border-white/12 bg-white/8 px-5 py-3 shadow-soft backdrop-blur">
-              <Image src={technicalBrief.cepaLogoPath} alt="CEPA publication logo" width={188} height={50} className="h-8 w-auto object-contain" priority />
+            <div className="inline-flex items-center gap-4 rounded-lg border border-white/12 bg-white/8 px-4 py-3 shadow-soft backdrop-blur">
+              <Image src={technicalBrief.cepaStampPath} alt="CEPA stamp logo" width={72} height={72} className="h-12 w-12 rounded-lg bg-white object-contain p-1" priority />
+              <Image src={technicalBrief.cepaLogoMarkPath} alt="CEPA logo mark" width={144} height={96} className="h-12 w-auto object-contain" priority />
               <div className="h-9 w-px bg-white/18" />
               <Image src={technicalBrief.etersolisMarkPath} alt="EterSolis mark" width={44} height={44} className="h-9 w-9 rounded-lg object-contain" priority />
             </div>
@@ -47,7 +48,10 @@ export default function TechnicalIntelligenceBriefPage() {
               <a href="#brief-reader" className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
                 Read on this page <FileText className="h-4 w-4" />
               </a>
-              <a href={technicalBrief.pdfPath} className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+              <Link href={technicalBrief.printPath} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 px-6 py-3 font-black text-on-dark transition hover:border-sunshine">
+                Print view <Printer className="h-4 w-4" />
+              </Link>
+              <a href={technicalBrief.pdfPath} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 px-6 py-3 font-black text-on-dark transition hover:border-sunshine">
                 {technicalBrief.downloadLabel} <Download className="h-4 w-4" />
               </a>
               <Link href="/insights" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 px-6 py-3 font-black text-on-dark transition hover:border-sunshine">
@@ -76,30 +80,23 @@ export default function TechnicalIntelligenceBriefPage() {
                 The complete issue is embedded below for direct review. The downloadable PDF remains available for offline reading and formal citation.
               </p>
             </div>
-            <a href={technicalBrief.pdfPath} className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+            <Link href={technicalBrief.printPath} className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+              Print view <Printer className="h-4 w-4" />
+            </Link>
+            <a href={technicalBrief.pdfPath} className="inline-flex items-center justify-center gap-2 rounded-full border border-coal/20 bg-white px-6 py-3 font-black text-carbon transition hover:border-sunshine dark:border-white/15 dark:bg-white/10 dark:text-white">
               Open PDF <Download className="h-4 w-4" />
             </a>
           </div>
-          <div className="ui-surface overflow-hidden rounded-lg shadow-soft">
-            <object
-              data={`${technicalBrief.pdfPath}#view=FitH`}
-              type="application/pdf"
-              className="h-[78vh] min-h-[620px] w-full bg-white"
-              aria-label={`${technicalBrief.title} PDF reader`}
-            >
-              <div className="grid min-h-[420px] place-items-center bg-white p-8 text-center text-black">
-                <div>
-                  <FileText className="mx-auto h-10 w-10 text-sunshine" />
-                  <h3 className="mt-4 text-2xl font-black text-black">PDF preview unavailable in this browser.</h3>
-                  <p className="mt-3 max-w-xl text-sm font-bold leading-7 text-coal">
-                    Use the download link to read the approved publication.
-                  </p>
-                  <a href={technicalBrief.pdfPath} className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black">
-                    Download PDF <Download className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-            </object>
+          <div className="ui-surface overflow-hidden rounded-lg bg-white p-3 shadow-soft md:p-5 dark:bg-black">
+            <Image
+              src={technicalBrief.briefImagePath}
+              alt="Readable CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001"
+              width={2480}
+              height={3507}
+              className="mx-auto h-auto w-full max-w-5xl rounded-md border border-coal/10 bg-white shadow-sm dark:border-white/10"
+              sizes="(min-width: 1280px) 960px, 100vw"
+              unoptimized
+            />
           </div>
         </div>
       </section>

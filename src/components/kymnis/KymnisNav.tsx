@@ -21,7 +21,7 @@ export function KymnisNav({ active }: { active: (typeof kymnisRoutes)[number] })
             aria-current={href === active ? 'page' : undefined}
             className={`inline-flex items-center justify-between gap-2 rounded-lg px-4 py-3 text-sm font-black transition ${
               href === active
-                ? 'bg-sunshine text-black'
+                ? 'bg-carbon text-white dark:bg-white dark:text-black'
                 : 'text-carbon hover:bg-cool dark:text-white dark:hover:bg-white/10'
             }`}
           >
@@ -33,4 +33,3 @@ export function KymnisNav({ active }: { active: (typeof kymnisRoutes)[number] })
     </nav>
   );
 }
-

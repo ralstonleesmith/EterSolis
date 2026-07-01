@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Download, FileText, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Download, FileText, Printer, ShieldCheck } from 'lucide-react';
 import { PageHero } from '@/components/ui/PageHero';
 import { getPublishedInsightIssues } from '@/lib/content/insights';
 import { technicalBrief } from '@/lib/technicalBrief';
@@ -20,17 +20,54 @@ export default function InsightsPage() {
     <>
       <PageHero
         eyebrow="Insights"
-        title="Published EterSolis thinking for resource recovery and circular execution."
-        description="Responsible public insight from the Office of the CSO: practical, source-aware and designed to explain value without overpromising outcomes."
-        primaryHref={featured?.canonicalPath ?? '/contact'}
-        primaryLabel={featured ? 'Read Issue 001' : 'Request Assessment'}
-        secondaryHref="/sell-waste"
-        secondaryLabel="Submit Waste Stream"
+        title="Technical intelligence for waste, carbon and resource recovery decisions."
+        description="CEPA and EterSolis publications for executive review: source-aware, accessible and designed to support practical sustainability decisions without overpromising outcomes."
+        primaryHref={technicalBrief.canonicalPath}
+        primaryLabel="Read Technical Brief"
+        secondaryHref={technicalBrief.printPath}
+        secondaryLabel="Print View"
       />
       <section className="section-padding bg-white dark:bg-black">
         <div className="container-shell">
+          <article className="overflow-hidden rounded-lg border border-coal/10 bg-[var(--surface-muted)] shadow-soft dark:border-white/10 dark:bg-white/5">
+            <div className="grid gap-0 lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="bg-black p-6 text-white signal-grid md:p-8">
+                <div className="flex items-center gap-4">
+                  <Image src={technicalBrief.cepaStampPath} alt="CEPA stamp logo" width={96} height={96} className="h-16 w-16 rounded-lg bg-white object-contain p-1" priority />
+                  <Image src={technicalBrief.cepaLogoMarkPath} alt="CEPA logo mark" width={180} height={120} className="h-16 w-auto object-contain" priority />
+                </div>
+                <p className="mt-8 text-xs font-black uppercase tracking-normal text-sunshine">{technicalBrief.status} · {technicalBrief.edition} · Issue {technicalBrief.issueNumber}</p>
+                <h2 className="mt-4 max-w-3xl text-4xl font-black tracking-normal text-on-dark md:text-6xl">{technicalBrief.title}</h2>
+                <p className="mt-5 text-xl font-bold leading-8 text-on-dark-muted">{technicalBrief.subtitle}</p>
+                <p className="mt-5 max-w-3xl leading-8 text-on-dark-muted">{technicalBrief.summary}</p>
+                <p className="mt-5 text-sm font-black text-on-dark">{technicalBrief.documentCode}</p>
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                  <Link href={technicalBrief.canonicalPath} className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+                    Read brief <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link href={technicalBrief.printPath} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 px-6 py-3 font-black text-on-dark transition hover:border-sunshine">
+                    Print view <Printer className="h-4 w-4" />
+                  </Link>
+                  <a href={technicalBrief.pdfPath} className="inline-flex items-center justify-center gap-2 rounded-full border border-white/18 px-6 py-3 font-black text-on-dark transition hover:border-sunshine">
+                    Download PDF <Download className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+              <Link href={technicalBrief.canonicalPath} className="relative block min-h-[520px] bg-white p-4 dark:bg-black md:p-6" aria-label="Read the CEPA Technical Intelligence Brief">
+                <div className="relative mx-auto h-full min-h-[500px] max-w-[520px] overflow-hidden rounded-lg border border-coal/10 bg-white shadow-soft dark:border-white/10">
+                  <Image src={technicalBrief.briefImagePath} alt="Readable cover image of the CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001" fill sizes="(min-width: 1024px) 42vw, 100vw" className="object-cover object-top transition duration-500 hover:scale-[1.01]" priority unoptimized />
+                </div>
+              </Link>
+            </div>
+          </article>
+
+          <div className="mt-12">
+            <div className="mb-6">
+              <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Latest newsletter</p>
+              <h2 className="mt-3 text-3xl font-black text-body md:text-4xl">Additional EterSolis insight</h2>
+            </div>
           {featured ? (
-            <article className="grid gap-8 rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-6 shadow-soft md:grid-cols-[0.72fr_1fr] md:p-8 dark:border-white/10 dark:bg-white/5">
+            <article className="grid gap-8 rounded-lg border border-coal/10 bg-white p-6 shadow-sm md:grid-cols-[0.5fr_1fr] md:p-8 dark:border-white/10 dark:bg-white/5">
               <Link href={featured.canonicalPath} className="relative block overflow-hidden rounded-lg border border-coal/10 bg-white shadow-sm dark:border-white/10 dark:bg-black">
                 <Image src={featured.coverImage} alt={`${featured.title} cover`} width={720} height={900} className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]" priority />
               </Link>
@@ -53,6 +90,7 @@ export default function InsightsPage() {
               </div>
             </article>
           ) : null}
+          </div>
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             <article className="rounded-lg border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
@@ -72,17 +110,6 @@ export default function InsightsPage() {
             </article>
           </div>
 
-          <article className="mt-10 grid gap-6 rounded-lg border border-sunshine/50 bg-sunshine/10 p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8">
-            <div>
-              <p className="text-xs font-black uppercase tracking-normal text-subtle">{technicalBrief.status} · {technicalBrief.edition} · Issue {technicalBrief.issueNumber}</p>
-              <h2 className="mt-3 text-3xl font-black text-body">{technicalBrief.title}</h2>
-              <p className="mt-3 max-w-3xl leading-7 text-muted">{technicalBrief.summary}</p>
-              <p className="mt-3 text-sm font-black text-body">{technicalBrief.documentCode}</p>
-            </div>
-            <Link href={technicalBrief.canonicalPath} className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
-              Read flagship brief <ArrowRight className="h-4 w-4" />
-            </Link>
-          </article>
         </div>
       </section>
     </>

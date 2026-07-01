@@ -10,6 +10,7 @@ const ROUTES = [
   '/insights',
   '/insights/introducing-etersolis',
   '/insights/technical-intelligence-brief',
+  '/insights/technical-intelligence-brief/print',
   '/kymnis',
   '/kymnis/how-it-works',
   '/kymnis/verification',
