@@ -14,9 +14,6 @@ export const metadata: Metadata = {
 
 export default function HeliosPage() {
   return (
-    <>
-      <HeliosPanel context="all" />
-      <HeliosPanel mode="kymnis" context="all" compact backgroundStyle="plain" />
-    </>
+    <HeliosPanel context="all" />
   );
 }

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/media-credits' }
 };
 
-const visibleAssets = credits.assets.filter((asset) => asset.type !== 'open-license-photo-derivative' && asset.id !== 'cepa-horizontal-logo');
+const visibleAssets = credits.assets.filter((asset) => asset.type !== 'open-license-photo-derivative');
 
 function previewPathFor(assetId: string, fallback: string) {
   if (assetId === 'etersolis-resource-recovery-hero') return mediaAssets.hero.ogSrc;
@@ -22,6 +22,8 @@ function previewPathFor(assetId: string, fallback: string) {
   if (assetId === 'wastewater-stp-aerial-bengaluru') return mediaAssets.wastewater.aerial.previewSrc;
   if (assetId === 'biofactoria-santiago-lagoon') return mediaAssets.wastewater.lagoon.previewSrc;
   if (assetId === 'etersolis-newsletter-issue-001-pdf') return '/media/newsletters/issue-001/cover.jpg';
+  if (assetId === 'cepa-technical-intelligence-brief-issue-001-pdf') return '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05-cover.png';
+  if (assetId === 'cepa-technical-intelligence-brief-issue-001-image') return '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05-cover.png';
   return fallback;
 }
 

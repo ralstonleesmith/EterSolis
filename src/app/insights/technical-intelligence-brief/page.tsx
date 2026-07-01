@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, Download, FileText, Printer, ShieldCheck } from 'lucide-react';
+import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
 import { technicalBrief } from '@/lib/technicalBrief';
 
 export const metadata: Metadata = {
@@ -28,14 +29,15 @@ function MetadataItem({ label, value }: { label: string; value: string }) {
 export default function TechnicalIntelligenceBriefPage() {
   return (
     <article className="bg-white dark:bg-black">
-      <section className="section-padding bg-black text-white signal-grid">
+      <section className="relative isolate overflow-hidden bg-black py-24 text-white">
+        <Image src={technicalBrief.mainHeroPath} alt="" fill sizes="100vw" className="object-cover opacity-45" priority />
+        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,0,0,0.95)_0%,rgba(0,0,0,0.78)_48%,rgba(0,0,0,0.44)_100%)]" aria-hidden="true" />
         <div className="container-shell grid gap-10 lg:grid-cols-[0.78fr_0.42fr] lg:items-end">
-          <div>
-            <div className="inline-flex items-center gap-4 rounded-lg border border-white/12 bg-white/8 px-4 py-3 shadow-soft backdrop-blur">
-              <Image src={technicalBrief.cepaStampPath} alt="CEPA stamp logo" width={72} height={72} className="h-12 w-12 rounded-lg bg-white object-contain p-1" priority />
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-4 rounded-lg border border-white/12 bg-black/36 px-4 py-3 shadow-soft backdrop-blur">
               <Image src={technicalBrief.cepaLogoMarkPath} alt="CEPA logo mark" width={144} height={96} className="h-12 w-auto object-contain" priority />
               <div className="h-9 w-px bg-white/18" />
-              <Image src={technicalBrief.etersolisMarkPath} alt="EterSolis mark" width={44} height={44} className="h-9 w-9 rounded-lg object-contain" priority />
+              <EterSolisLogo variant="light" mode="full" className="flex h-12 text-2xl" />
             </div>
             <p className="mt-8 text-xs font-black uppercase tracking-normal text-sunshine">{technicalBrief.eyebrow}</p>
             <h1 className="mt-5 max-w-5xl text-5xl font-black leading-tight tracking-normal text-on-dark md:text-7xl">
@@ -59,13 +61,20 @@ export default function TechnicalIntelligenceBriefPage() {
               </Link>
             </div>
           </div>
-          <aside className="rounded-lg border border-white/12 bg-white/8 p-6 shadow-soft backdrop-blur">
-            <Image src={technicalBrief.cepaStampPath} alt="CEPA stamp logo" width={112} height={112} className="h-20 w-20 object-contain" priority />
-            <p className="mt-6 text-xs font-black uppercase tracking-normal text-on-dark-subtle">Publication status</p>
+          <aside className="relative z-10 rounded-lg border border-white/12 bg-white/8 p-5 shadow-soft backdrop-blur">
+            <div className="relative aspect-[5/7] overflow-hidden rounded-lg border border-white/12 bg-white">
+              <Image src={technicalBrief.issueCoverPath} alt="CEPA Technical Intelligence Brief Issue 001 cover" fill sizes="(min-width: 1024px) 28vw, 90vw" className="object-cover object-top" priority unoptimized />
+            </div>
+            <div className="mt-5 flex items-start gap-4 rounded-lg border border-white/12 bg-black/28 p-4">
+              <Image src={technicalBrief.cepaStampPath} alt="CEPA stamp logo" width={112} height={112} className="h-16 w-16 shrink-0 object-contain" priority />
+              <div>
+            <p className="text-xs font-black uppercase tracking-normal text-on-dark-subtle">Publication status</p>
             <h2 className="mt-2 text-3xl font-black text-on-dark">{technicalBrief.status} flagship issue</h2>
             <p className="mt-4 text-sm leading-7 text-on-dark-muted">
               Issue {technicalBrief.issueNumber} is available to read on this page, with the approved PDF available for download.
             </p>
+              </div>
+            </div>
           </aside>
         </div>
       </section>

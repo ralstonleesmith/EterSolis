@@ -193,21 +193,6 @@
       "alt": "Approved CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001 PDF"
     },
     {
-      "id": "cepa-horizontal-logo",
-      "path": "/media/technical-intelligence-brief/cepa-horizontal-logo.png",
-      "type": "brand-asset",
-      "title": "CEPA horizontal logo",
-      "credit": "CEPA controlled publication asset",
-      "sourceUrl": "local-approved-cepa-publication",
-      "license": "CEPA controlled publication asset",
-      "licenseUrl": "local-approved-cepa-publication",
-      "dimensions": {
-        "width": 1317,
-        "height": 349
-      },
-      "alt": "CEPA horizontal publication logo."
-    },
-    {
       "id": "cepa-logo-mark",
       "path": "/media/technical-intelligence-brief/cepa-logo-mark.png",
       "type": "brand-asset",
@@ -236,6 +221,81 @@
         "height": 1254
       },
       "alt": "CEPA circular stamp publication logo."
+    },
+    {
+      "id": "cepa-technical-intelligence-brief-main-hero-no-logo",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-main-hero-no-logo.png",
+      "type": "publication-hero",
+      "title": "CEPA Technical Intelligence Brief main hero without logo",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "alt": "Executive technical intelligence publication scene for the CEPA color and chemicals brief without logo treatment."
+    },
+    {
+      "id": "cepa-technical-intelligence-brief-main-hero-logo",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-main-hero-logo.png",
+      "type": "publication-hero",
+      "title": "CEPA Technical Intelligence Brief main hero with logo",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "alt": "Executive technical intelligence publication scene for the CEPA color and chemicals brief with logo treatment."
+    },
+    {
+      "id": "cepa-technical-intelligence-brief-color-chemicals-edition-cover",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-edition-cover.png",
+      "type": "publication-cover",
+      "title": "CEPA Technical Intelligence Brief Color & Chemicals Edition cover",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1024,
+        "height": 1536
+      },
+      "alt": "CEPA Technical Intelligence Brief Color and Chemicals Industry Edition cover."
+    },
+    {
+      "id": "cepa-technical-intelligence-brief-color-chemicals-edition-hero",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-edition-hero.png",
+      "type": "publication-hero",
+      "title": "CEPA Technical Intelligence Brief Color & Chemicals Edition hero",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 1672,
+        "height": 941
+      },
+      "alt": "Color and chemicals edition hero artwork for the CEPA Technical Intelligence Brief."
+    },
+    {
+      "id": "cepa-technical-intelligence-brief-issue-001-cover",
+      "path": "/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05-cover.png",
+      "type": "publication-cover",
+      "title": "CEPA Technical Intelligence Brief Color & Chemicals Issue 001 cover",
+      "credit": "CEPA controlled publication asset prepared by EterSolis Waste & Carbon Management",
+      "sourceUrl": "local-approved-cepa-publication",
+      "license": "CEPA controlled publication asset",
+      "licenseUrl": "local-approved-cepa-publication",
+      "dimensions": {
+        "width": 2480,
+        "height": 3507
+      },
+      "alt": "Cover for CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001."
     },
     {
       "id": "cepa-technical-intelligence-brief-issue-001-image",

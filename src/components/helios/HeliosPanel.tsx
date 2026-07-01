@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight, CheckCircle2, FlaskConical, Sparkles } from 'lucide-react';
 import { getHeliosIntents, heliosGuardrails, type HeliosMode } from '@/lib/helios';
 import { mediaAssets } from '@/lib/media';
@@ -33,11 +33,24 @@ export function HeliosPanel({
   compact?: boolean;
   backgroundStyle?: 'splash' | 'plain';
 }) {
+  const [activeMode, setActiveMode] = useState<HeliosMode>(mode);
+  const [activeCategory, setActiveCategory] = useState('All');
   const [selected, setSelected] = useState(0);
-  const routes = getHeliosIntents(mode, context);
+  const allRoutes = useMemo(() => getHeliosIntents(activeMode, context), [activeMode, context]);
+  const categories = useMemo(() => ['All', ...Array.from(new Set(allRoutes.map((intent) => intent.category)))], [allRoutes]);
+  const filteredRoutes = activeCategory === 'All' ? allRoutes : allRoutes.filter((intent) => intent.category === activeCategory);
+  const routes = filteredRoutes.length > 0 ? filteredRoutes : allRoutes;
   const route = routes[selected];
   const Icon = route.icon;
-  const copy = modeCopy[mode];
+  const copy = modeCopy[activeMode];
+
+  useEffect(() => {
+    setSelected(0);
+  }, [activeMode, activeCategory]);
+
+  useEffect(() => {
+    if (!categories.includes(activeCategory)) setActiveCategory('All');
+  }, [activeCategory, categories]);
 
   return (
     <section className={`relative isolate overflow-hidden bg-black text-white signal-grid ${compact ? 'py-12' : 'py-24'}`}>
@@ -66,6 +79,21 @@ export function HeliosPanel({
           </div>
           <h2 className="text-4xl font-black leading-tight tracking-normal text-on-dark md:text-6xl">{copy.title}</h2>
           <p className="mt-5 max-w-3xl leading-8 text-on-dark-muted">{copy.description}</p>
+          <div className="mt-7 inline-grid grid-cols-2 rounded-full border border-white/12 bg-white/8 p-1">
+            {(['etersolis', 'kymnis'] as const).map((nextMode) => (
+              <button
+                key={nextMode}
+                type="button"
+                onClick={() => setActiveMode(nextMode)}
+                className={`rounded-full px-5 py-2 text-sm font-black transition ${
+                  activeMode === nextMode ? 'bg-white text-black' : 'text-on-dark-muted hover:text-white'
+                }`}
+                aria-pressed={activeMode === nextMode}
+              >
+                {nextMode === 'etersolis' ? 'EterSolis' : 'KYMNIS'}
+              </button>
+            ))}
+          </div>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {heliosGuardrails.map((guardrail) => (
               <span key={guardrail} className="flex items-center gap-2 rounded-lg border border-white/12 bg-white/8 px-4 py-3 text-xs font-black uppercase tracking-normal text-on-dark-muted">
@@ -76,6 +104,21 @@ export function HeliosPanel({
         </div>
 
         <div className="grid gap-4">
+          <div className="flex gap-2 overflow-x-auto rounded-lg border border-white/12 bg-black/34 p-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                className={`shrink-0 rounded-full px-4 py-2 text-sm font-black transition ${
+                  activeCategory === category ? 'bg-sunshine text-black' : 'bg-white/8 text-on-dark-muted hover:text-white'
+                }`}
+                aria-pressed={activeCategory === category}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
           <div className="grid gap-3 md:grid-cols-2">
             {routes.map(({ id, icon: RouteIcon, label, description }, index) => (
               <button
@@ -107,7 +150,21 @@ export function HeliosPanel({
                 </p>
                 <h3 className="mt-2 text-2xl font-black text-on-dark">{route.label}</h3>
                 <p className="mt-3 leading-7 text-on-dark-muted">{route.description}</p>
-                <Link href={route.href} className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black transition hover:-translate-y-0.5">
+                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-normal text-sunshine">What to prepare</p>
+                    <ul className="mt-3 grid gap-2 text-sm font-bold leading-6 text-on-dark-muted">
+                      {route.prepare.map((item) => <li key={item}>• {item}</li>)}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-normal text-sunshine">Helios cannot decide</p>
+                    <ul className="mt-3 grid gap-2 text-sm font-bold leading-6 text-on-dark-muted">
+                      {route.cannotDecide.map((item) => <li key={item}>• {item}</li>)}
+                    </ul>
+                  </div>
+                </div>
+                <Link href={route.href} className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 font-black text-black transition hover:-translate-y-0.5">
                   {route.action} <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>

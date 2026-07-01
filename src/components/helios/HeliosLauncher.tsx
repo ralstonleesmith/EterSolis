@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { ArrowRight, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowRight, Minus, X } from 'lucide-react';
 import { getHeliosIntents, type HeliosMode } from '@/lib/helios';
 import { mediaAssets } from '@/lib/media';
 
@@ -19,15 +19,29 @@ function contextForPath(pathname: string) {
 export function HeliosLauncher() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const mode: HeliosMode = pathname.startsWith('/kymnis') ? 'kymnis' : 'etersolis';
+  const [mode, setMode] = useState<HeliosMode>(pathname.startsWith('/kymnis') ? 'kymnis' : 'etersolis');
   const intents = getHeliosIntents(mode, contextForPath(pathname)).slice(0, 4);
+  const formSensitive = pathname.includes('contact') || pathname.includes('sell-waste');
+
+  useEffect(() => {
+    setOpen(false);
+    setMode(pathname.startsWith('/kymnis') ? 'kymnis' : 'etersolis');
+  }, [pathname]);
+
+  useEffect(() => {
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') setOpen(false);
+    }
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, []);
 
   if (pathname === '/helios') return null;
 
   return (
-    <div className="fixed inset-x-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-40 sm:inset-x-auto sm:right-5 sm:max-w-[calc(100vw-2rem)]">
+    <div className={`fixed inset-x-4 z-40 sm:inset-x-auto sm:right-5 sm:max-w-[calc(100vw-2rem)] ${formSensitive ? 'bottom-[calc(4.75rem+env(safe-area-inset-bottom))]' : 'bottom-[calc(1rem+env(safe-area-inset-bottom))]'}`}>
       {open ? (
-        <div className="ui-surface mb-3 w-full rounded-lg p-4 shadow-soft backdrop-blur-xl sm:w-[24rem]">
+        <div className="ui-surface mb-3 max-h-[min(72vh,38rem)] w-full overflow-y-auto rounded-lg p-4 shadow-soft backdrop-blur-xl sm:w-[25rem]">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">
@@ -37,9 +51,29 @@ export function HeliosLauncher() {
               <h2 className="mt-1 text-lg font-black text-body">Guided next-step routing</h2>
               <p className="mt-1 text-xs font-bold text-subtle">{mode === 'kymnis' ? 'KYMNIS mode' : 'EterSolis mode'}</p>
             </div>
-            <button type="button" className="ui-control rounded-full p-2" onClick={() => setOpen(false)} aria-label="Close Helios launcher">
-              <X className="h-4 w-4" />
-            </button>
+            <div className="flex gap-2">
+              <button type="button" className="ui-control rounded-full p-2" onClick={() => setOpen(false)} aria-label="Minimize Helios launcher">
+                <Minus className="h-4 w-4" />
+              </button>
+              <button type="button" className="ui-control rounded-full p-2" onClick={() => setOpen(false)} aria-label="Close Helios launcher">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-2 rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-1 dark:border-white/10">
+            {(['etersolis', 'kymnis'] as const).map((nextMode) => (
+              <button
+                key={nextMode}
+                type="button"
+                onClick={() => setMode(nextMode)}
+                className={`rounded-lg px-3 py-2 text-sm font-black transition ${
+                  mode === nextMode ? 'bg-carbon text-white dark:bg-white dark:text-black' : 'text-muted hover:bg-white/70 dark:hover:bg-white/10'
+                }`}
+                aria-pressed={mode === nextMode}
+              >
+                {nextMode === 'etersolis' ? 'EterSolis' : 'KYMNIS'}
+              </button>
+            ))}
           </div>
           <div className="mt-4 grid gap-2">
             {intents.map((intent) => (
@@ -55,6 +89,9 @@ export function HeliosLauncher() {
           <p className="mt-4 text-xs font-bold leading-5 text-subtle">
             Public routing only. KYMNIS review required before commitments.
           </p>
+          <Link href="/helios" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-carbon px-5 py-3 font-black text-white dark:bg-white dark:text-black" onClick={() => setOpen(false)}>
+            Open full Helios <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       ) : null}
       <button
