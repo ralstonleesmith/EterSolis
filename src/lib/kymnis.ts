@@ -83,3 +83,83 @@ export const kymnisUserJourney = [
   'The problem improved.',
   'The impact was measured.'
 ] as const;
+
+export const kymnisPathways = [
+  {
+    label: 'Report Impact',
+    audience: 'Citizens, workers, visitors and communities',
+    description: 'Capture a simple observation with photo or video evidence, location context and a plain-language category.',
+    action: 'Review report flow',
+    href: '/kymnis/how-it-works'
+  },
+  {
+    label: 'Verification',
+    audience: 'Technical reviewers and responsible organizations',
+    description: 'Frame what is known, what is uncertain and what evidence is needed before any public claim is treated as verified.',
+    action: 'Review verification',
+    href: '/kymnis/verification'
+  },
+  {
+    label: 'Resource Collection',
+    audience: 'Recovery teams, sites and participating users',
+    description: 'Route recoverable or hazardous resources through simple collection, QR records and controlled review.',
+    action: 'Review recovery',
+    href: '/kymnis/resource-recovery'
+  },
+  {
+    label: 'Organization Participation',
+    audience: 'Companies, campuses, municipalities and operators',
+    description: 'Register non-confidential interest in platform participation, improvement pathways or responsible reporting.',
+    action: 'Register interest',
+    href: '/kymnis/contact'
+  },
+  {
+    label: 'Partner Review',
+    audience: 'Labs, recovery partners, universities and implementation partners',
+    description: 'Route partnership interest toward structured human review without exposing internal architecture or confidential methods.',
+    action: 'Contact KYMNIS',
+    href: '/kymnis/contact'
+  }
+] as const;
+
+export const kymnisAppExperience = [
+  {
+    title: 'Simple capture',
+    description: 'The user records what they can see, where it is and why it matters. The interface avoids technical jargon at the point of reporting.',
+    detail: 'Photo, video, location, category and short note.'
+  },
+  {
+    title: 'Evidence review',
+    description: 'KYMNIS separates observation from verified truth so reports can be reviewed without overclaiming.',
+    detail: 'Known facts, uncertainty, missing proof and review status.'
+  },
+  {
+    title: 'Status tracking',
+    description: 'Users need to know whether a report was received, reviewed, routed, resolved or measured.',
+    detail: 'Received, reviewing, routed, action pending, improved.'
+  },
+  {
+    title: 'Recovery routing',
+    description: 'Where impact connects to material, water or resource value, KYMNIS routes users toward controlled recovery pathways.',
+    detail: 'Green Bag, Red Bag, QR scan and collection context.'
+  }
+] as const;
+
+export const kymnisOutcomeSignals = [
+  'Verified environmental knowledge',
+  'Responsible action pathway',
+  'Resource recovery opportunity',
+  'Measured improvement signal',
+  'Human benefit context',
+  'Public claim discipline'
+] as const;
+
+export const kymnisSectionLinks = [
+  { href: '#overview', label: 'Overview' },
+  { href: '#pathway', label: 'Pathway' },
+  { href: '#app-experience', label: 'App Experience' },
+  { href: '#verification', label: 'Verification' },
+  { href: '#recovery', label: 'Recovery' },
+  { href: '#guardrails', label: 'Guardrails' },
+  { href: '#interest', label: 'Interest' }
+] as const;

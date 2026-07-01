@@ -59,6 +59,18 @@ test('mobile navigation opens primary routes', async ({ page }) => {
   await page.screenshot({ path: 'test-results/screenshots/home-mobile-nav.png', fullPage: true });
 });
 
+test('Ask Helios popout stays compact and routes safely', async ({ page }) => {
+  await page.goto('/contact');
+  await page.getByRole('button', { name: /Ask Helios/i }).click();
+  await expect(page.getByRole('heading', { name: /Guided next-step routing/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'EterSolis' })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'KYMNIS' }).click();
+  await expect(page.getByText(/KYMNIS mode/i)).toBeVisible();
+  await expect(page.getByRole('link', { name: /Open full Helios/i })).toHaveAttribute('href', '/helios');
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('heading', { name: /Guided next-step routing/i })).toHaveCount(0);
+});
+
 test('sell waste stepper advances through intake flow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/sell-waste');
@@ -83,9 +95,15 @@ test('contact stepper and Helios wizard route users', async ({ page }) => {
   await expect(page.getByLabel(/Name/i)).toBeVisible();
 
   await page.goto('/helios');
+  await expect(page.getByRole('button', { name: 'EterSolis' })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Water', exact: true }).click();
   await page.getByRole('button', { name: /Wastewater treatment/i }).click();
+  await expect(page.getByText(/What to prepare/i)).toBeVisible();
+  await expect(page.getByText(/Helios cannot decide/i)).toBeVisible();
   await expect(page.getByRole('heading', { name: /Wastewater treatment/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Request wastewater assessment/i })).toHaveAttribute('href', '/contact?topic=Wastewater%20Treatment#contact-form');
+  await page.getByRole('button', { name: 'KYMNIS' }).click();
+  await expect(page.getByRole('button', { name: 'Verification', exact: true })).toBeVisible();
   await page.screenshot({ path: 'test-results/screenshots/helios-wizard.png', fullPage: true });
 });
 
@@ -157,6 +175,10 @@ test('waste opportunity form submits through mocked lead capture route', async (
 test('KYMNIS public foundation and guided interest intake render', async ({ page }) => {
   await page.goto('/kymnis');
   await expect(page.getByRole('heading', { name: /Verified Truth\. Responsible Action\. Measurable Impact\./i })).toBeVisible();
+  await expect(page.getByRole('navigation', { name: /KYMNIS page sections/i }).getByRole('link', { name: 'App Experience' })).toHaveAttribute('href', '#app-experience');
+  await expect(page.getByRole('heading', { name: /The next step should be obvious/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Show the problem\. Track the path\. Understand the outcome\./i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Review verification/i }).first()).toHaveAttribute('href', '/kymnis/verification');
   await expect(page.getByRole('link', { name: /Register interest/i }).first()).toHaveAttribute('href', '/kymnis/contact');
   await page.goto('/kymnis/contact');
   await expect(page.getByRole('heading', { name: /Register non-confidential KYMNIS interest/i })).toBeVisible();
@@ -177,8 +199,10 @@ test('insights prioritizes the technical brief with readable and print routes', 
   await expect(page.getByRole('link', { name: /^Print view/i }).first()).toHaveAttribute('href', '/insights/technical-intelligence-brief/print');
   await expect(page.getByRole('link', { name: /^Download PDF/i }).first()).toHaveAttribute('href', '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf');
   await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
+  await expect(page.locator('img[src*="cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05-cover.png"]').first()).toBeVisible();
+  await expect(page.locator('img[src*="cepa-technical-intelligence-brief-main-hero-logo.png"]').first()).toBeVisible();
   await expect(page.getByRole('link', { name: /Read the issue/i })).toHaveAttribute('href', '/insights/introducing-etersolis');
-  await expect(page.getByText(/Published .* Color & Chemicals Industry Edition .* Issue 001/i)).toBeVisible();
+  await expect(page.getByText(/Flagship publication .* Color & Chemicals Industry Edition .* Issue 001/i)).toBeVisible();
 
   await page.goto('/insights/introducing-etersolis');
   await expect(page.getByRole('heading', { name: /Introducing EterSolis/i }).first()).toBeVisible();
@@ -192,6 +216,8 @@ test('insights prioritizes the technical brief with readable and print routes', 
   await expect(page.getByRole('link', { name: /Read on this page/i })).toHaveAttribute('href', '#brief-reader');
   await expect(page.locator('object[aria-label="CEPA Technical Intelligence Brief PDF reader"]')).toHaveCount(0);
   await expect(page.locator('img[src*="cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png"]').first()).toBeVisible();
+  await expect(page.locator('section').first().locator('img[src*="cepa-stamp-logo"]')).toHaveCount(1);
+  await expect(page.locator('section').first().locator('img[alt="CEPA logo mark"]')).toBeVisible();
   await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
   await expect(page.getByRole('link', { name: /^Print view/i }).first()).toHaveAttribute('href', '/insights/technical-intelligence-brief/print');
   await expect(page.getByRole('link', { name: /^Download PDF/i }).first()).toHaveAttribute('href', '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf');

@@ -18,7 +18,7 @@ Imported files:
 Published public media files:
 
 - `public/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf`
-- `public/media/technical-intelligence-brief/cepa-horizontal-logo.png`
+- `public/media/technical-intelligence-brief/cepa-logo-mark.png`
 - `public/media/technical-intelligence-brief/cepa-stamp-logo.png`
 - `public/media/technical-intelligence-brief/etersolis-mark-square.png`
 
