@@ -277,6 +277,7 @@ Full operational intake requires the configuration groups documented in [`docs/S
 - `/certificates/verify` — Public certificate verification
 - `/certificates/verify/[certificateId]` — Public certificate verification result
 - `/portal` — Customer portal preview for cases, quotations, invoices, uploads, scheduling and certificates
+- `/portal/login` — Customer and administrator portal access preview
 - `/portal/cases` — Customer case history and QR status preview
 - `/portal/quotations` — Customer quotation review preview
 - `/portal/invoices` — Customer invoice and EFT reference preview

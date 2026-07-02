@@ -17,6 +17,7 @@ Start here when you need an answer quickly.
 | How does the admin portal work? | [Admin Portal SOP](./ADMIN_PORTAL_SOP.md) |
 | What is the case lifecycle? | [Case Lifecycle SOP](./CASE_LIFECYCLE_SOP.md) |
 | How do quotation, invoice and payment controls work? | [Quotation SOP](./QUOTATION_SOP.md), [Invoice SOP](./INVOICE_SOP.md), [Payment Reconciliation SOP](./PAYMENT_RECONCILIATION_SOP.md) |
+| Where are bank-transfer payment instructions configured? | [Payment Bank Configuration](./PAYMENT_BANK_CONFIGURATION.md) |
 | How are files and evidence handled? | [File Upload Security SOP](./FILE_UPLOAD_SECURITY_SOP.md) |
 | How are receiving, stockpile and processing handled? | [Receiving SOP](./RECEIVING_SOP.md), [Stockpile SOP](./STOCKPILE_SOP.md), [Processing SOP](./PROCESSING_SOP.md) |
 | How are certificates controlled? | [Certificate SOP](./CERTIFICATE_SOP.md) |
@@ -60,11 +61,12 @@ Read these in order:
 4. [Quotation SOP](./QUOTATION_SOP.md)
 5. [Invoice SOP](./INVOICE_SOP.md)
 6. [Payment Reconciliation SOP](./PAYMENT_RECONCILIATION_SOP.md)
-7. [Scheduling SOP](./SCHEDULING_SOP.md)
-8. [Receiving SOP](./RECEIVING_SOP.md)
-9. [Stockpile SOP](./STOCKPILE_SOP.md)
-10. [Processing SOP](./PROCESSING_SOP.md)
-11. [Certificate SOP](./CERTIFICATE_SOP.md)
+7. [Payment Bank Configuration](./PAYMENT_BANK_CONFIGURATION.md)
+8. [Scheduling SOP](./SCHEDULING_SOP.md)
+9. [Receiving SOP](./RECEIVING_SOP.md)
+10. [Stockpile SOP](./STOCKPILE_SOP.md)
+11. [Processing SOP](./PROCESSING_SOP.md)
+12. [Certificate SOP](./CERTIFICATE_SOP.md)
 
 ## Governance, Security And Recovery
 

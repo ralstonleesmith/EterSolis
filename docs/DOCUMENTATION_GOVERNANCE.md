@@ -22,6 +22,7 @@ Documentation in this repository is part of the product. It must make the EterSo
 - API contracts: [API Standard](./API_STANDARD.md)
 - Database change control: [Database Migrations](./DATABASE_MIGRATIONS.md)
 - Portal operations: [User Portal SOP](./USER_PORTAL_SOP.md), [Admin Portal SOP](./ADMIN_PORTAL_SOP.md), [Case Lifecycle SOP](./CASE_LIFECYCLE_SOP.md)
+- Payment setup: [Payment Bank Configuration](./PAYMENT_BANK_CONFIGURATION.md)
 - Launch and validation: [Launch Checklist](./LAUNCH_CHECKLIST.md), [Testing SOP](./TESTING_SOP.md)
 
 ## Obsolete And Historical Records

@@ -9,9 +9,10 @@ test('homepage renders media hero and dark mode', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Waste, Resource Recovery and Carbon Operations with Commercial Control/i })).toBeVisible();
   await expect(page.getByAltText(/clean modern materials recovery facility/i).first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: /^Case traceability$/i })).toBeVisible();
   await expect(page.getByRole('heading', { name: /Every service request becomes a trackable operational case/i })).toBeVisible();
-  await expect(page.getByRole('heading', { name: /EterSolis routes materials through the right operational pathway/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Start Service Intake/i }).first()).toHaveAttribute('href', '/get-started');
+  await expect(page.getByRole('heading', { name: /A commercial architecture for recovery, carbon and circular execution/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Start Controlled Intake/i }).first()).toHaveAttribute('href', '/get-started');
   await page.getByLabel(/Switch to dark mode/i).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.screenshot({ path: 'test-results/screenshots/home-desktop.png', fullPage: false });
@@ -43,11 +44,26 @@ test('public positioning presents full EterSolis scope before wastewater specifi
 
 test('header uses logo as home and avoids duplicate home navigation', async ({ page }) => {
   await page.goto('/solutions');
+  await page.evaluate(() => window.localStorage.removeItem('etersolis-account-preview'));
   const header = page.getByRole('banner');
   const logoHome = header.getByRole('link', { name: /EterSolis home/i });
   await expect(logoHome).toHaveAttribute('href', '/');
   await expect(header.getByRole('navigation', { name: /Primary navigation/i }).getByRole('link', { name: /^Home$/i })).toHaveCount(0);
   await expect(header.getByRole('link', { name: /^Get Started$/i }).first()).toHaveAttribute('href', '/get-started');
+  const accountButton = header.getByRole('button', { name: /Login \/ Sign up/i });
+  await expect(accountButton).toBeVisible();
+  await accountButton.click();
+  await expect(page.getByRole('menuitem', { name: /User login \/ sign up/i })).toHaveAttribute('href', '/portal/login');
+  await expect(page.getByRole('menuitem', { name: /Admin login/i })).toHaveAttribute('href', '/admin/login');
+  await page.getByRole('menuitem', { name: /Preview signed-in account/i }).click();
+  await expect(header.getByRole('button', { name: /Account/i })).toBeVisible();
+  await header.getByRole('button', { name: /Account/i }).click();
+  await expect(page.getByRole('menuitem', { name: /User\/Admin Profile/i })).toHaveAttribute('href', '/portal/profile');
+  await expect(page.getByRole('menuitem', { name: /Account settings/i })).toHaveAttribute('href', '/portal/profile#account-settings');
+  await expect(page.getByRole('menuitem', { name: /^User Portal$/i })).toHaveAttribute('href', '/portal');
+  await expect(page.getByRole('menuitem', { name: /^Admin Portal$/i })).toHaveAttribute('href', '/admin');
+  await page.getByRole('menuitem', { name: /Sign out/i }).click();
+  await expect(header.getByRole('button', { name: /Login \/ Sign up/i })).toBeVisible();
   await logoHome.click();
   await expect(page).toHaveURL(/\/$/);
 });

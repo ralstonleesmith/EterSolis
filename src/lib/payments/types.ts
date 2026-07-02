@@ -25,4 +25,14 @@ export type CheckoutResult = {
   status: 'manual_invoice_required' | 'created';
   checkoutUrl?: string;
   reference: string;
+  paymentInstructions?: Array<{
+    allocationPercent: number;
+    currency: 'ZAR' | 'USD';
+    bankName: string;
+    accountNumberMasked: string;
+    accountNumberConfigured: boolean;
+    branchCode?: string;
+    swiftCode?: string;
+    routingNumberConfigured?: boolean;
+  }>;
 };

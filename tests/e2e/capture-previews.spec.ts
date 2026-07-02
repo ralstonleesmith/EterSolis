@@ -28,6 +28,7 @@ const previewRoutes = [
   { route: '/privacy', title: 'Privacy', category: 'public' },
   { route: '/terms', title: 'Terms', category: 'public' },
   { route: '/portal', title: 'Customer Portal', category: 'portal' },
+  { route: '/portal/login', title: 'Portal Login', category: 'portal' },
   { route: '/portal/cases', title: 'Portal Cases', category: 'portal' },
   { route: '/portal/quotations', title: 'Portal Quotations', category: 'portal' },
   { route: '/portal/invoices', title: 'Portal Invoices', category: 'portal' },

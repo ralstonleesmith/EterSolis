@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
+import { AccountAccess } from '@/components/layout/AccountAccess';
 import { navItems } from '@/lib/siteContent';
 
 const actionItems = [
@@ -68,9 +69,10 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-2">
           <ThemeToggle />
-          <Link href={actionItems[0].href} className="ui-control hidden rounded-full px-4 py-3 text-sm font-black shadow-sm transition hover:text-[var(--text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine md:inline-flex">
+          <AccountAccess />
+          <Link href={actionItems[0].href} className="ui-control hidden rounded-full px-4 py-3 text-sm font-black shadow-sm transition hover:text-[var(--text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine 2xl:inline-flex">
             {actionItems[0].label}
           </Link>
           <Link href={actionItems[1].href} className="rounded-full bg-sunshine px-4 py-3 text-sm font-black text-black shadow-sm transition hover:translate-y-[-1px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-carbon sm:px-5">
@@ -105,6 +107,13 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-2 grid gap-2 border-t border-[--header-border] pt-3">
+              <Link
+                href="/portal/login"
+                className="rounded-lg border border-coal/15 bg-white px-3 py-3 text-carbon transition hover:border-sunshine dark:border-white/15 dark:bg-white/10 dark:text-white"
+                onClick={() => setOpen(false)}
+              >
+                Login / Sign up
+              </Link>
               {actionItems.map((item) => (
                 <Link
                   key={item.href}
