@@ -2,7 +2,7 @@ import { Pool } from 'pg';
 
 let pool: Pool | undefined;
 
-function getPool() {
+export function getPool() {
   if (!process.env.DATABASE_URL) {
     throw new Error('DATABASE_URL is not configured. Set it on the EterSolis server before enabling public form submissions.');
   }
@@ -74,5 +74,13 @@ export async function recordAuditEvent(eventType: string, metadata: Record<strin
     `insert into audit_events (id, event_type, lead_submission_id, metadata, created_at)
      values ($1, $2, $3, $4::jsonb, now())`,
     [crypto.randomUUID(), eventType, leadSubmissionId ?? null, JSON.stringify(metadata)]
+  );
+}
+
+export async function recordServiceAuditEvent(eventType: string, metadata: Record<string, unknown> = {}, serviceRequestId?: string) {
+  await getPool().query(
+    `insert into audit_events (id, event_type, service_request_id, metadata, created_at)
+     values ($1, $2, $3, $4::jsonb, now())`,
+    [crypto.randomUUID(), eventType, serviceRequestId ?? null, JSON.stringify(metadata)]
   );
 }

@@ -11,7 +11,7 @@ Confirm that the website is professional, commercially useful, visually polished
 Review these areas on desktop and mobile:
 
 - Homepage
-- Sell Waste
+- Get Started
 - Solutions
 - Industries
 - About
@@ -51,7 +51,7 @@ Confirm:
 
 Confirm:
 
-- Sell Waste remains highly visible.
+- Get Started remains highly visible.
 - The waste submission notice is clearly non-binding.
 - The site does not imply acceptance, purchase, transport approval, disposal instruction, quote or contract.
 - The site instructs users not to send physical samples unless EterSolis gives written intake instructions.

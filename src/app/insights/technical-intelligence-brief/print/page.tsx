@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 export default function TechnicalBriefPrintPage() {
   return (
     <article className="technical-brief-print-page bg-white px-4 py-8 text-carbon md:px-8 print:p-0">
-      <div className="print-hidden mx-auto mb-8 flex max-w-5xl flex-col gap-4 rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-5 shadow-sm md:flex-row md:items-center md:justify-between">
+      <div className="print-hidden mx-auto mb-8 flex max-w-5xl flex-col gap-4 rounded-lg border border-coal/10 bg-white p-5 text-carbon shadow-sm md:flex-row md:items-center md:justify-between dark:bg-white dark:text-carbon">
         <div>
-          <p className="text-xs font-black uppercase tracking-normal text-subtle">Print view · {technicalBrief.documentCode}</p>
-          <h1 className="mt-2 text-2xl font-black text-body md:text-3xl">{technicalBrief.title}</h1>
-          <p className="mt-2 text-sm font-bold leading-6 text-muted">{technicalBrief.edition} · Issue {technicalBrief.issueNumber} · {technicalBrief.issueDateDisplay}</p>
+          <p className="text-accessible text-xs font-black uppercase tracking-normal">Print view · {technicalBrief.documentCode}</p>
+          <h1 className="mt-2 text-2xl font-black text-carbon md:text-3xl">{technicalBrief.title}</h1>
+          <p className="text-accessible mt-2 text-sm font-bold leading-6">{technicalBrief.edition} · Issue {technicalBrief.issueNumber} · {technicalBrief.issueDateDisplay}</p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
           <PrintButton label="Print brief" />

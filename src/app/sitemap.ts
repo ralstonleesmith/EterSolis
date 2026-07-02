@@ -19,6 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `https://etersolis.com${route}`,
     lastModified: new Date(),
     changeFrequency: route === '' ? 'weekly' : 'monthly',
-    priority: route === '' || route === '/sell-waste' ? 1 : 0.7
+    priority: route === '' || route === '/get-started' ? 1 : 0.7
   }));
 }

@@ -4,12 +4,12 @@ import { SectionHeader } from '@/components/ui/SectionHeader';
 import { MotionReveal } from '@/components/ui/Motion';
 
 const solutions = [
-  { icon: Recycle, title: 'Resource Recovery', description: 'Recover value from waste streams through responsible reuse, recycling, recovery and valorization pathways.', cta: 'Assess Recovery Potential', href: '/sell-waste#waste-form' },
+  { icon: Recycle, title: 'Resource Recovery', description: 'Recover value from material streams through responsible reuse, recycling, recovery and valorization pathways.', cta: 'Request Recovery Assessment', href: '/get-started/assessment' },
   { icon: ShieldCheck, title: 'Waste Management', description: 'Develop structured waste and material management programs that reduce cost, risk and operational friction.', cta: 'Discuss Waste Program', href: '/contact#contact-form' },
   { icon: Droplets, title: 'Wastewater Treatment', description: 'Route wastewater-linked residuals, recovery questions and treatment by-products through controlled commercial review.', cta: 'Request Wastewater Assessment', href: '/contact#contact-form' },
   { icon: LineChart, title: 'Carbon Management', description: 'Support carbon measurement, reduction planning and practical decarbonization actions linked to resource and waste systems.', cta: 'Request Carbon Review', href: '/contact#contact-form' },
   { icon: Workflow, title: 'Circular Economy', description: 'Design pathways that keep materials in productive use and reduce unnecessary disposal.', cta: 'Build Circular Program', href: '/contact#contact-form' },
-  { icon: Leaf, title: 'Waste Valorization', description: 'Identify suitable routes to convert selected waste and by-products into economic, operational or environmental value.', cta: 'Submit Valorization Opportunity', href: '/sell-waste#waste-form' },
+  { icon: Leaf, title: 'Resource Valorization', description: 'Identify suitable routes to convert selected by-products and residuals into economic, operational or environmental value.', cta: 'Request Repurpose Review', href: '/get-started' },
   { icon: Factory, title: 'Industrial Decarbonization', description: 'Help industrial operators reduce material losses, waste-linked emissions and resource inefficiency.', cta: 'Request Industrial Assessment', href: '/contact#contact-form' }
 ];
 

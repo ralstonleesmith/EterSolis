@@ -2,6 +2,25 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.4.0 — 2026-07-02T00:00:00Z
+
+### Backend Operating System Foundation
+
+- Repositioned the public conversion model from “Sell Waste” to “Get Started” and redirected `/sell-waste` to `/get-started`.
+- Added the EterSolis service-request wizard for pickup, delivery, assessment, recurring service, certificate, repurpose, destruction and selected purchase-eligibility review pathways.
+- Added the operations domain modules for service types, departments, commercial pathways, risk scoring, data quality, analytics events, certificate controls and payment-provider abstraction.
+- Added service-request API routes, public status routes, certificate verification routes, manual-invoice payment foundation and MVP admin routes.
+- Added the operational PostgreSQL migration covering customers, contacts, sites, service requests, material profiles, risk assessments, pickup/delivery records, payments, analytics, admin actions and certificate-ready records.
+
+### Documentation and Tracking
+
+- Updated README route maps, runtime language and operational intake terminology.
+- Extended runtime readiness requirements with operational, department, certificate, payment and admin configuration.
+
+### Validation
+
+- Required gates: `npm run typecheck`, `npm run lint`, `npm run routes:check`, `npm run link:audit`, `npm run build`, `npm run test:smoke` and `npm run test:layout`.
+
 ## 0.3.7 — 2026-06-30T19:30:50Z
 
 ### CEPA Technical Intelligence Brief

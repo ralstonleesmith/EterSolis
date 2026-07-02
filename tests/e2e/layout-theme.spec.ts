@@ -143,7 +143,7 @@ test.describe('layout and theme polish', () => {
   test('header theme state persists and remains operable after reload', async ({ page, baseURL }) => {
     await page.goto(`${baseURL ?? ''}/solutions`);
     const header = page.getByRole('banner');
-    await expect(header.getByRole('navigation', { name: /Primary navigation/i }).getByRole('link', { name: 'Solutions' })).toHaveAttribute('aria-current', 'page');
+    await expect(header.getByRole('navigation', { name: /Primary navigation/i }).getByRole('link', { name: 'Services' })).toHaveAttribute('aria-current', 'page');
     await page.getByLabel(/Switch to dark mode/i).click();
     await expect(page.locator('html')).toHaveClass(/dark/);
     await expect(page.getByLabel(/Switch to light mode/i)).toHaveAttribute('aria-pressed', 'true');

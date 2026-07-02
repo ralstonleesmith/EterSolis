@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BriefcaseBusiness, Crown, FlaskConical, Handshake, Mail, Network, Scale, Send } from 'lucide-react';
+import { BriefcaseBusiness, Crown, FlaskConical, Handshake, Mail, Network, Route, Scale, Send, Settings2 } from 'lucide-react';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { PageHero } from '@/components/ui/PageHero';
 import { ReviewPrinciples } from '@/components/sections/ReviewPrinciples';
@@ -7,6 +7,8 @@ import { mediaAssets } from '@/lib/media';
 import { contactRoutes, contactTopics } from '@/lib/siteContent';
 
 const routeIcons = {
+  service: Route,
+  operations: Settings2,
   waste: Send,
   general: Mail,
   partnerships: Handshake,
@@ -50,8 +52,8 @@ export default async function ContactPage({
         description="Use the appropriate route so waste, wastewater, partnership, technical, executive, privacy and general inquiries reach the correct review path."
         primaryHref="#contact-form"
         primaryLabel="Submit Inquiry"
-        secondaryHref="/sell-waste"
-        secondaryLabel="Sell Waste"
+        secondaryHref="/get-started"
+        secondaryLabel="Get Started"
         imageSrc={mediaAssets.wastewater.lagoon.previewSrc}
         imageAlt={mediaAssets.wastewater.lagoon.alt}
       />

@@ -39,7 +39,8 @@ export function Footer() {
             <li><Link href={technicalBrief.canonicalPath} className="hover:text-white">Technical Intelligence Brief</Link></li>
             <li><Link href="/media-credits" className="hover:text-white">Media Credits</Link></li>
             <li><Link href="/contact#contact-form" className="hover:text-white">Contact</Link></li>
-            <li><Link href="/sell-waste#waste-form" className="hover:text-white">Sell Waste</Link></li>
+            <li><Link href="/get-started" className="hover:text-white">Get Started</Link></li>
+            <li><Link href="/certificates/verify" className="hover:text-white">Verify Certificate</Link></li>
           </ul>
         </div>
       </div>

@@ -10,7 +10,7 @@ import { navItems } from '@/lib/siteContent';
 
 const actionItems = [
   { href: '/helios', label: 'Helios', tone: 'secondary' },
-  { href: '/sell-waste#waste-form', label: 'Sell Waste', tone: 'primary' }
+  { href: '/get-started', label: 'Get Started', tone: 'primary' }
 ] as const;
 
 export function Header() {
