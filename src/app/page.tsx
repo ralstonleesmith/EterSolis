@@ -7,12 +7,14 @@ import { IndustryMosaic } from '@/components/sections/IndustryMosaic';
 import { WastewaterTreatmentFeature } from '@/components/sections/WastewaterTreatmentFeature';
 import { ReviewPrinciples } from '@/components/sections/ReviewPrinciples';
 import { HeliosPrompt } from '@/components/helios/HeliosPrompt';
+import { OperationalPortalFeature } from '@/components/sections/OperationalPortalFeature';
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <ServiceIntakeBanner />
+      <OperationalPortalFeature />
       <SolutionGrid />
       <IndustryMosaic />
       <ReviewPrinciples />

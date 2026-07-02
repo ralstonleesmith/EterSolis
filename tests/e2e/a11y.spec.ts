@@ -27,6 +27,13 @@ for (const route of ROUTES) {
     await page.goto(`${baseURL ?? ''}${route}`);
     await page.waitForLoadState('networkidle');
     await page.evaluate(() => document.documentElement.classList.remove('dark'));
+    await page.locator('body').evaluate((body) => {
+      body.querySelectorAll('[style*="opacity"], [style*="transform"]').forEach((element) => {
+        if (!(element instanceof HTMLElement)) return;
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+      });
+    });
     await page.waitForTimeout(250);
     const accessibilityScan = await new AxeBuilder({ page }).analyze();
     const violations = accessibilityScan.violations ?? [];

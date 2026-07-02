@@ -33,6 +33,10 @@ const requiredRoutes = [
   'src/app/api/v1/public/kymnis-interest/route.ts',
   'src/app/api/v1/public/helios-events/route.ts',
   'src/app/api/v1/admin/delivery-events/route.ts',
+  'src/app/api/v1/admin/cases/route.ts',
+  'src/app/api/v1/admin/quotations/route.ts',
+  'src/app/api/v1/admin/invoices/route.ts',
+  'src/app/api/v1/admin/payments/reconciliation/route.ts',
   'src/app/api/v1/webhooks/crm/route.ts',
   'src/app/api/v1/webhooks/email/route.ts',
   'src/app/api/v1/webhooks/analytics/route.ts'
@@ -57,7 +61,8 @@ for (const migration of [
   'database/migrations/0005_documents_and_storage.sql',
   'database/migrations/0006_scoring_and_sla.sql',
   'database/migrations/0007_kymnis_internal.sql',
-  'database/migrations/0008_governance_retention.sql'
+  'database/migrations/0008_governance_retention.sql',
+  'database/migrations/0009_operational_portal.sql'
 ]) {
   const sql = file(migration);
   assert.match(sql, /schema_migrations|insert into schema_migrations/i, `${migration} must participate in migration registry`);
@@ -71,6 +76,16 @@ for (const table of ['outbound_events', 'webhook_deliveries', 'crm_sync_records'
 const rbacMigration = file('database/migrations/0004_admin_auth_rbac.sql');
 for (const role of ['super_admin', 'executive', 'commercial_manager', 'technical_reviewer', 'operations_reviewer', 'kymnis_reviewer', 'privacy_officer', 'read_only_auditor']) {
   assert.match(rbacMigration, new RegExp(role), `RBAC migration must include ${role}`);
+}
+
+const portalMigration = file('database/migrations/0009_operational_portal.sql');
+for (const table of ['cases', 'case_events', 'case_qr_codes', 'case_files', 'quotations', 'quotation_acceptances', 'invoices', 'payment_proofs', 'payment_reconciliations', 'receipts', 'refunds', 'appointments', 'stockpile_lots', 'processing_batches', 'workflow_events']) {
+  assert.match(portalMigration, new RegExp(table), `portal migration must include ${table}`);
+}
+
+const finance = file('src/lib/finance.ts');
+for (const contract of ['defaultMarket', 'generateQuotationNumber', 'generateInvoiceNumber', 'paymentReference', 'calculateLineTotals', 'quoteToInvoiceGate']) {
+  assert.match(finance, new RegExp(contract), `finance helper must expose ${contract}`);
 }
 
 const reader = file('src/components/technical-brief/TechnicalBriefReader.tsx');
@@ -90,7 +105,17 @@ for (const route of [
   '/certificates/verify/demo-certificate',
   '/admin/service-requests',
   '/admin/delivery-events',
-  '/admin/analytics'
+  '/admin/analytics',
+  '/portal',
+  '/portal/cases',
+  '/portal/quotations',
+  '/portal/invoices',
+  '/portal/payments',
+  '/admin/cases',
+  '/admin/quotations',
+  '/admin/invoices',
+  '/admin/reconciliation',
+  '/admin/audit'
 ]) {
   assert.match(previewCapture, new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `preview capture must include ${route}`);
 }

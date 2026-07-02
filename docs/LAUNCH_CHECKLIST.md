@@ -2,6 +2,16 @@
 
 This checklist is the controlled release record for bringing `etersolis.com` to full operational intake readiness. Complete it for every production launch or server migration.
 
+## 0.7.0 Portal Release Gate
+
+- Confirm `0009_operational_portal.sql` is present and `npm run migrations:check` passes.
+- Confirm customer portal routes render with deterministic demo values and no production secrets.
+- Confirm admin case, quotation, invoice, reconciliation, refund, receiving, stockpile, processing and audit consoles render.
+- Confirm `/api/v1/admin/cases`, `/api/v1/admin/quotations`, `/api/v1/admin/invoices` and `/api/v1/admin/payments/reconciliation` return the v1 envelope.
+- Confirm quote-before-invoice and proof-before-reconciliation language is visible.
+- Confirm generated previews include portal and admin operational routes in desktop and mobile viewports.
+- Confirm the Technical Brief reader supports search, table of contents, resume, arrows, keyboard, swipe and no auto-advance.
+
 ## 1. Repository and Version Control
 
 - Confirm the release branch is reviewed through a pull request.

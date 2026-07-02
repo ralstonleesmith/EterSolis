@@ -2,6 +2,12 @@
 
 This project is designed for EterSolis-managed hosting on EterSolis-controlled infrastructure. The production server should be treated as a controlled operational system, not as a static marketing deployment.
 
+## 0.7.0 Operational Portal Notes
+
+Self-hosted deployments still run a single Next.js application. Before production restart, run `npm run migrations:check` and apply migrations through `0009_operational_portal.sql` in order. The portal uses Postgres-first records for cases, quotations, invoices, payment proof, reconciliation, appointments, stockpile, processing and workflow events.
+
+No payment-provider secret is required for the MVP portal because the active payment path is internal EFT/bank-transfer ledger control. Future provider integration must remain behind the payment abstraction.
+
 ## Recommended Production Topology
 
 - Reverse proxy: Nginx or Caddy terminating HTTPS.

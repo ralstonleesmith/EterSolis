@@ -1,6 +1,6 @@
 {
   "name": "etersolis-web",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "EterSolis public website upgrade for etersolis.com.",
   "scripts": {
@@ -32,7 +32,7 @@
     "qa": "npm run check && npm run test:smoke",
     "insights:validate": "node scripts/validate-insights.mjs",
     "docs:generate": "node scripts/generate-docs.mjs",
-    "docs:check": "node scripts/generate-docs.mjs --check",
+    "docs:check": "node scripts/generate-docs.mjs --check && node scripts/check-docs-structure.mjs",
     "release:audit": "node scripts/check-release.mjs",
     "newsletter:export": "node scripts/export-newsletter.mjs",
     "brief:pages": "node scripts/generate-technical-brief-pages.mjs",

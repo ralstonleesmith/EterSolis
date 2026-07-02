@@ -7,13 +7,29 @@ test.beforeAll(() => {
 
 test('homepage renders media hero and dark mode', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /Professional Waste, Resource Recovery & Carbon Management Services/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Waste, Resource Recovery and Carbon Operations with Commercial Control/i })).toBeVisible();
   await expect(page.getByAltText(/clean modern materials recovery facility/i).first()).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Every service request becomes a trackable operational case/i })).toBeVisible();
   await expect(page.getByRole('heading', { name: /EterSolis routes materials through the right operational pathway/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Start Service Intake/i }).first()).toHaveAttribute('href', '/get-started');
   await page.getByLabel(/Switch to dark mode/i).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.screenshot({ path: 'test-results/screenshots/home-desktop.png', fullPage: false });
+});
+
+test('customer portal and admin case previews expose the controlled commercial lifecycle', async ({ page }) => {
+  await page.goto('/portal');
+  await expect(page.getByRole('heading', { name: /Every EterSolis case has a commercial and operational history/i })).toBeVisible();
+  await expect(page.getByText(/ES-CASE-DEMO-0001/i)).toBeVisible();
+  await expect(page.getByRole('link', { name: /Quotations/i }).first()).toHaveAttribute('href', '/portal/quotations');
+  await page.goto('/portal/invoices');
+  await expect(page.getByRole('heading', { name: /Invoices/i })).toBeVisible();
+  await expect(page.getByText(/Payment reference/i)).toBeVisible();
+  await page.goto('/admin/cases/ES-CASE-DEMO-0001');
+  await expect(page.getByRole('heading', { name: /ES-CASE-DEMO-0001/i })).toBeVisible();
+  await expect(page.getByText(/Quotation/i).first()).toBeVisible();
+  await expect(page.getByText(/Payment/i).first()).toBeVisible();
+  await expect(page.getByText(/Certificate/i).first()).toBeVisible();
 });
 
 test('public positioning presents full EterSolis scope before wastewater specifics', async ({ page }) => {

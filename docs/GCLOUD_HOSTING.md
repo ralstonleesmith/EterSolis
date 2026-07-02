@@ -2,6 +2,10 @@
 
 This guide defines the approved Google Cloud deployment path for the EterSolis website when using `gcloud`. Cloud Run is the canonical Google Cloud target because this repository already includes a production Dockerfile, health endpoint and container-compatible Next.js server.
 
+## 0.7.0 Operational Portal Notes
+
+Cloud Run remains the recommended application runtime. The 0.7.0 portal pass does not introduce a detached backend service. Apply Cloud SQL migrations through `0009_operational_portal.sql`, keep delivery queue checks enabled, and confirm `/api/readiness` after deployment. Portal previews and admin demo routes use deterministic data and must not be connected to production customer records for visual review.
+
 Do not commit live runtime values. Store secrets in Google Secret Manager and keep operational access limited to approved EterSolis administrators.
 
 ## 1. Required Google Cloud Services

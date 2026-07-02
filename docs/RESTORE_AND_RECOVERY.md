@@ -1,5 +1,9 @@
 # Restore And Recovery
 
+## Portal Recovery
+
+Portal rollback must preserve commercial and audit history. Do not truncate or drop `cases`, `quotations`, `invoices`, `payment_proofs`, `payment_reconciliations`, `receipts`, `refunds`, `stockpile_lots`, `processing_batches` or certificate records during an application rollback. Roll back the app and fix forward with a later migration.
+
 ## Initial Targets
 
 - RPO: 24 hours or better.

@@ -58,8 +58,9 @@ export function Header() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              className={`rounded-full px-3 py-2 transition hover:bg-[var(--control-hover)] hover:text-[var(--text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine xl:px-4 ${
-                isActive(item.href) ? 'bg-sunshine text-black shadow-sm dark:bg-sunshine dark:text-black' : ''
+              style={isActive(item.href) ? { backgroundColor: '#FCCF25', color: '#000000' } : undefined}
+              className={`rounded-full px-3 py-2 text-carbon transition hover:bg-[var(--control-hover)] hover:text-[var(--text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine dark:text-white xl:px-4 ${
+                isActive(item.href) ? 'shadow-sm' : ''
               }`}
             >
               {item.label}
@@ -96,9 +97,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                className={`rounded-lg px-3 py-3 transition hover:bg-[var(--control-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine ${
-                  isActive(item.href) ? 'bg-sunshine text-black dark:bg-sunshine dark:text-black' : ''
-                }`}
+                style={isActive(item.href) ? { backgroundColor: '#FCCF25', color: '#000000' } : undefined}
+                className="rounded-lg px-3 py-3 transition hover:bg-[var(--control-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sunshine"
                 onClick={() => setOpen(false)}
               >
                 {item.label}

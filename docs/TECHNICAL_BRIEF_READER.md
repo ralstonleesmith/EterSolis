@@ -9,6 +9,10 @@ The technical brief reader is image-backed and manually controlled. It must neve
 - Adjacent pages are preloaded only when available.
 - The approved PDF and print view remain available.
 
+## 0.7.0 Reader Controls
+
+The reader also supports compact table-of-contents buttons, page search and local page resume. No auto-advance behavior is allowed.
+
 ## Page Asset Generation
 
 Run:

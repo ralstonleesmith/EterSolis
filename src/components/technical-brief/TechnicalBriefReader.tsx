@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { KeyboardEvent, TouchEvent, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Download, Printer } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Download, Printer, Search } from 'lucide-react';
 import Link from 'next/link';
 
 type PageImage = {
@@ -24,10 +24,17 @@ type Props = {
 export function TechnicalBriefReader({ title, pdfPath, printPath, pageCount, pages }: Props) {
   const availablePages = useMemo(() => pages.length > 0 ? pages : [], [pages]);
   const [pageIndex, setPageIndex] = useState(0);
+  const [query, setQuery] = useState('');
   const touchStartX = useRef<number | null>(null);
   const current = availablePages[pageIndex] ?? availablePages[0];
   const displayPage = current?.page ?? 1;
   const availableCount = availablePages.length;
+  const storageKey = `etersolis-brief-reader:${title}`;
+  const toc = availablePages.map((page) => ({
+    ...page,
+    label: page.page === 1 ? 'Cover and issue metadata' : page.page <= 4 ? 'Executive context' : page.page <= 12 ? 'Industry intelligence' : page.page <= 24 ? 'Technical and operational analysis' : 'Governance, implications and references'
+  }));
+  const visibleToc = toc.filter((page) => `${page.page} ${page.label} ${page.alt}`.toLowerCase().includes(query.toLowerCase().trim()));
 
   function goToIndex(index: number) {
     if (availablePages.length === 0) return;
@@ -75,6 +82,18 @@ export function TechnicalBriefReader({ title, pdfPath, printPath, pageCount, pag
     }
   }, [availablePages, pageIndex]);
 
+  useEffect(() => {
+    const saved = window.localStorage.getItem(storageKey);
+    const savedPage = saved ? Number(saved) : 0;
+    if (Number.isFinite(savedPage) && savedPage > 0) goToIndex(savedPage - 1);
+    // Run once on mount so the reader resumes without auto-advancing.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(storageKey, String(pageIndex + 1));
+  }, [pageIndex, storageKey]);
+
   if (!current) {
     return (
       <div className="ui-surface rounded-lg p-6 shadow-soft">
@@ -98,6 +117,17 @@ export function TechnicalBriefReader({ title, pdfPath, printPath, pageCount, pag
             Page {displayPage} of {pageCount}. {availableCount < pageCount ? `${availableCount} page image${availableCount === 1 ? '' : 's'} currently generated.` : 'All page images generated.'}
           </p>
         </div>
+        <label className="relative min-w-0 flex-1 md:max-w-xs">
+          <span className="sr-only">Search brief pages</span>
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+          <input
+            aria-label="Search brief pages"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search pages"
+            className="ui-field h-11 w-full rounded-full pl-10 pr-4 text-sm"
+          />
+        </label>
         <div className="flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -158,6 +188,23 @@ export function TechnicalBriefReader({ title, pdfPath, printPath, pageCount, pag
       </div>
 
       <div className="grid gap-2 border-t border-coal/10 p-4 dark:border-white/10">
+        <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Brief table of contents">
+          {visibleToc.map((page) => {
+            const index = availablePages.findIndex((item) => item.src === page.src);
+            return (
+              <button
+                key={`toc-${page.src}`}
+                type="button"
+                onClick={() => goToIndex(index)}
+                className={`min-w-48 rounded-lg border px-3 py-2 text-left text-xs font-black ${index === pageIndex ? 'border-sunshine bg-sunshine text-black' : 'border-coal/10 text-body dark:border-white/10'}`}
+                aria-label={`Open ${page.label}, page ${page.page}`}
+              >
+                <span className="block text-[0.7rem] uppercase text-current/70">Page {page.page}</span>
+                {page.label}
+              </button>
+            );
+          })}
+        </div>
         <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Page thumbnails">
           {availablePages.map((page, index) => (
             <button
@@ -173,7 +220,7 @@ export function TechnicalBriefReader({ title, pdfPath, printPath, pageCount, pag
           ))}
         </div>
         <p className="text-xs font-bold leading-5 text-muted">
-          Use arrows, keyboard arrow keys, swipe gestures or the page selector. The reader never auto-advances.
+          Use arrows, keyboard arrow keys, swipe gestures, search, table of contents or the page selector. The reader resumes your page and never auto-advances.
         </p>
       </div>
     </div>

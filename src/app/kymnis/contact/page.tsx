@@ -22,9 +22,9 @@ export default function KymnisContactPage() {
       <section className="section-padding bg-mist dark:bg-black">
         <div className="container-shell grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div className="rounded-lg border border-coal/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5">
-            <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Submission boundary</p>
+            <p className="text-xs font-black uppercase tracking-normal text-body dark:text-white">Submission boundary</p>
             <h2 className="mt-4 text-3xl font-black text-carbon dark:text-white">This is platform interest intake, not an emergency report line.</h2>
-            <p className="mt-4 leading-8 text-coal dark:text-on-dark-muted">
+            <p className="mt-4 font-bold leading-8 text-body">
               Provide a concise, non-confidential summary. KYMNIS review is required before any verification, recovery, commercial or technical action.
             </p>
           </div>

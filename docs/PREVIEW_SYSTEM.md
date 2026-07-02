@@ -18,7 +18,7 @@ Generated previews are preferred for final visual review because they reflect th
 
 ## Required Preview Coverage
 
-The review set must cover Home, Get Started and all Get Started subroutes, legacy `/sell-waste`, demo service status, certificate verification and demo certificate result, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001 and print view, Technical Brief reader and print view, Helios, all KYMNIS public routes, Media Credits, Privacy, Terms and the admin MVP routes.
+The review set must cover Home, Get Started and all Get Started subroutes, legacy `/sell-waste`, demo service status, certificate verification and demo certificate result, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001 and print view, Technical Brief reader and print view, Helios, all KYMNIS public routes, customer portal routes, Media Credits, Privacy, Terms and the admin operational console routes.
 
 ## Preview Update Rules
 
@@ -38,7 +38,8 @@ Update previews in the same pull request when page content, visible copy, hero l
 10. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout at both generated viewports.
 11. Confirm Get Started and Terms preserve non-binding, no-unsolicited-delivery and controlled-review language.
 12. Confirm the Technical Brief reader is manual: arrows, keyboard, swipe and page input work, and the reader never auto-advances.
-13. Record the approval decision in the pull request or release checklist.
+13. Confirm portal previews use deterministic demo references, no production secrets, no private customer records and no live database dependency.
+14. Record the approval decision in the pull request or release checklist.
 
 ## Approval States
 
