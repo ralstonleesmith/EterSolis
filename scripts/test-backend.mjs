@@ -39,6 +39,16 @@ const requiredRoutes = [
 ];
 for (const route of requiredRoutes) file(route);
 
+for (const route of [
+  'src/app/api/v1/public/leads/route.ts',
+  'src/app/api/v1/public/waste-opportunities/route.ts',
+  'src/app/api/v1/public/service-requests/route.ts',
+  'src/app/api/v1/public/kymnis-interest/route.ts'
+]) {
+  const source = file(route);
+  assert.match(source, /apiMode:\s*'v1'|apiMode:\s*"v1"|\{\s*apiMode:\s*'v1'\s*\}/, `${route} must opt into v1 envelopes`);
+}
+
 for (const migration of [
   'database/migrations/0001_current_baseline.sql',
   'database/migrations/0002_operational_entities.sql',
@@ -69,5 +79,24 @@ assert.match(reader, /onTouchEnd/, 'reader must support swipe end');
 assert.match(reader, /ArrowLeft/, 'reader must support keyboard/previous controls');
 assert.match(reader, /ArrowRight/, 'reader must support keyboard/next controls');
 assert.doesNotMatch(reader, /setInterval|setTimeout\(/, 'reader must not auto-advance pages');
+
+const previewCapture = file('tests/e2e/capture-previews.spec.ts');
+for (const route of [
+  '/get-started/pickup',
+  '/get-started/delivery',
+  '/get-started/assessment',
+  '/get-started/certificates',
+  '/status/demo-token',
+  '/certificates/verify/demo-certificate',
+  '/admin/service-requests',
+  '/admin/delivery-events',
+  '/admin/analytics'
+]) {
+  assert.match(previewCapture, new RegExp(route.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `preview capture must include ${route}`);
+}
+assert.match(previewCapture, /name:\s*'desktop'/, 'preview capture must include desktop viewport');
+assert.match(previewCapture, /name:\s*'mobile'/, 'preview capture must include mobile viewport');
+
+file('scripts/check-migrations.mjs');
 
 console.log('backend contract tests passed');

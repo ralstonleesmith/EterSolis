@@ -17,6 +17,17 @@ export async function GET() {
       requiredValid: report.summary.requiredValid,
       requiredTotal: report.summary.requiredTotal,
       optionalConfigured: report.summary.optionalConfigured,
+      postgresFirstRequirements: [
+        'schema_migrations',
+        'service_requests',
+        'outbound_events',
+        'rate_limit_counters',
+        'admin_actions'
+      ],
+      deliveryQueue: {
+        requiredTable: 'outbound_events',
+        retryModel: 'immediate, 1 minute, 5 minutes, 30 minutes, 2 hours'
+      },
       details: exposeDetails
         ? {
             missingRequired: report.summary.missingRequired,

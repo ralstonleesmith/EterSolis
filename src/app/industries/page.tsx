@@ -16,11 +16,11 @@ const industries = [
 ];
 
 export const metadata: Metadata = {
-  title: 'Industries Served | EterSolis Waste, Wastewater and Resource Recovery Solutions',
-  description: 'EterSolis supports manufacturers, municipalities, water and wastewater operators, mining, energy, retail, commercial property, government entities and waste operators.',
+  title: 'Industries Served | EterSolis Resource Recovery, Waste and Carbon Services',
+  description: 'EterSolis supports manufacturers, municipalities, mining, energy, retail, commercial property, government entities, waste operators and industrial material programs.',
   alternates: { canonical: '/industries' },
   openGraph: {
-    images: [{ url: '/media/og/etersolis-industries-og.png', width: 1600, height: 900, alt: mediaAssets.wastewater.aerial.alt }]
+    images: [{ url: '/media/og/etersolis-industries-og.png', width: 1600, height: 900, alt: mediaAssets.facility.alt }]
   },
   twitter: { images: ['/media/og/etersolis-industries-og.png'] }
 };
@@ -32,10 +32,9 @@ export default function IndustriesPage() {
         eyebrow="Industries"
         title="Industry-specific resource recovery and waste solutions."
         description="EterSolis supports organizations with real material flows, practical recovery challenges and measurable waste, carbon and circular economy pressure."
-        imageSrc={mediaAssets.wastewater.aerial.previewSrc}
-        imageAlt={mediaAssets.wastewater.aerial.alt}
+        imageSrc={mediaAssets.facility.previewSrc}
+        imageAlt={mediaAssets.facility.alt}
       />
-      <WastewaterTreatmentFeature />
       <section className="section-padding bg-[var(--surface-muted)] dark:bg-black">
         <div className="container-shell">
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -53,6 +52,7 @@ export default function IndustriesPage() {
           </div>
         </div>
       </section>
+      <WastewaterTreatmentFeature />
     </>
   );
 }

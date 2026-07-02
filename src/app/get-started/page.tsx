@@ -28,8 +28,8 @@ export default function GetStartedPage() {
         primaryHref="#service-request"
         secondaryLabel="Verify Certificate"
         secondaryHref="/certificates/verify"
-        imageSrc={mediaAssets.wastewater.aeration.previewSrc}
-        imageAlt={mediaAssets.wastewater.aeration.alt}
+        imageSrc={mediaAssets.facility.previewSrc}
+        imageAlt={mediaAssets.facility.alt}
       />
       <section className="section-padding bg-[var(--surface-muted)] dark:bg-black">
         <div className="container-shell grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">

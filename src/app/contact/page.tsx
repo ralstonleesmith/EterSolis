@@ -20,11 +20,11 @@ const routeIcons = {
 } as const;
 
 export const metadata: Metadata = {
-  title: 'Contact EterSolis | Wastewater, Waste Opportunities, Assessments and Partnerships',
-  description: 'Contact EterSolis for wastewater treatment review, waste opportunities, assessments, partnerships, executive inquiries, CSO inquiries and privacy requests.',
+  title: 'Contact EterSolis | Service Requests, Resource Recovery, Carbon and Partnerships',
+  description: 'Contact EterSolis for service requests, resource recovery, waste opportunities, carbon review, partnerships, executive inquiries, CSO inquiries and privacy requests.',
   alternates: { canonical: '/contact' },
   openGraph: {
-    images: [{ url: '/media/og/etersolis-contact-og.png', width: 1600, height: 900, alt: mediaAssets.wastewater.lagoon.alt }]
+    images: [{ url: '/media/og/etersolis-contact-og.png', width: 1600, height: 900, alt: mediaAssets.facility.alt }]
   },
   twitter: { images: ['/media/og/etersolis-contact-og.png'] }
 };
@@ -49,13 +49,13 @@ export default async function ContactPage({
       <PageHero
         eyebrow="Contact"
         title="Route your inquiry to the correct EterSolis reviewer."
-        description="Use the appropriate route so waste, wastewater, partnership, technical, executive, privacy and general inquiries reach the correct review path."
+        description="Use the appropriate route so service, recovery, material, carbon, partnership, technical, executive, privacy and general inquiries reach the correct review path."
         primaryHref="#contact-form"
         primaryLabel="Submit Inquiry"
         secondaryHref="/get-started"
         secondaryLabel="Get Started"
-        imageSrc={mediaAssets.wastewater.lagoon.previewSrc}
-        imageAlt={mediaAssets.wastewater.lagoon.alt}
+        imageSrc={mediaAssets.facility.previewSrc}
+        imageAlt={mediaAssets.facility.alt}
       />
       <ReviewPrinciples compact />
       <section className="section-padding bg-white dark:bg-black">

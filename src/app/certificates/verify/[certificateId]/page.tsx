@@ -15,14 +15,21 @@ function titleCase(value: string | null | undefined) {
 
 export default async function CertificateResultPage({ params }: { params: Promise<{ certificateId: string }> }) {
   const resolvedParams = await params;
-  const result = await getPool().query(
-    `select certificate_number, certificate_type, verification_hash, public_token, status, issued_at, created_at
-       from certificates
-      where public_token = $1 or certificate_number = $1
-      limit 1`,
-    [resolvedParams.certificateId]
-  );
-  const certificate = result.rows[0];
+  const certificate = resolvedParams.certificateId === 'demo-certificate'
+    ? {
+        certificate_number: 'ES-CERT-DEMO-0001',
+        certificate_type: 'certificate_of_repurpose',
+        verification_hash: 'demo-verification-hash-preview-only',
+        status: 'issued',
+        issued_at: new Date('2026-07-02T00:00:00Z').toISOString()
+      }
+    : (await getPool().query(
+        `select certificate_number, certificate_type, verification_hash, public_token, status, issued_at, created_at
+           from certificates
+          where public_token = $1 or certificate_number = $1
+          limit 1`,
+        [resolvedParams.certificateId]
+      )).rows[0];
   if (!certificate) notFound();
 
   return (

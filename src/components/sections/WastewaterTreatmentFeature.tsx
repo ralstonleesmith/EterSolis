@@ -1,19 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Droplets, FlaskConical, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BadgeCheck, Droplets, Factory, FlaskConical, Recycle, ShieldCheck } from 'lucide-react';
 import { mediaAssets } from '@/lib/media';
 import { MotionReveal } from '@/components/ui/Motion';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 const proofPoints = [
-  { icon: Droplets, label: 'Treatment residuals', text: 'Structured review for wastewater-linked streams, sludges, screenings and recovery-adjacent outputs.' },
-  { icon: FlaskConical, label: 'Controlled assessment', text: 'Non-confidential intake first, then safety, regulatory, logistics and feasibility screening.' },
+  { icon: Recycle, label: 'Recoverable materials', text: 'Packaging, plastics, paper, metals, organics and other streams route through value-retention review before residual handling.' },
+  { icon: Factory, label: 'Industrial by-products', text: 'Production residues, process outputs and complex materials are screened for safety, logistics, documentation and commercial feasibility.' },
+  { icon: Droplets, label: 'Water-linked outputs', text: 'Wastewater and treatment residuals remain a supported pathway, but as one part of the broader operating system.' },
+  { icon: BadgeCheck, label: 'Certificates and disposition', text: 'Repurpose, destruction and certificate requests require evidence, approval and controlled public verification.' },
+  { icon: FlaskConical, label: 'Assessment discipline', text: 'Non-confidential intake comes first, followed by technical, regulatory, logistics and feasibility screening.' },
   { icon: ShieldCheck, label: 'No unsupported claims', text: 'Public language stays disciplined until EterSolis review confirms the appropriate next step.' }
 ];
 
 const photos = [
+  mediaAssets.facility,
   mediaAssets.wastewater.aerial,
-  mediaAssets.wastewater.aeration,
   mediaAssets.wastewater.lagoon
 ];
 
@@ -24,31 +27,31 @@ export function WastewaterTreatmentFeature() {
         <div className="grid gap-8 lg:grid-cols-[1.06fr_0.94fr] lg:items-stretch">
           <MotionReveal className="relative min-h-[34rem] overflow-hidden rounded-lg bg-black shadow-soft">
             <Image
-              src={mediaAssets.wastewater.hero.src}
-              alt={mediaAssets.wastewater.hero.alt}
+              src={mediaAssets.facility.previewSrc}
+              alt={mediaAssets.facility.alt}
               fill
               sizes="(min-width: 1024px) 54vw, 100vw"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0.76)_100%)]" aria-hidden="true" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-8">
-              <p className="text-xs font-black uppercase tracking-normal text-sunshine">Water recovery infrastructure</p>
+              <p className="text-xs font-black uppercase tracking-normal text-sunshine">Material, carbon and service pathways</p>
               <h2 className="mt-3 max-w-2xl text-3xl font-black leading-tight tracking-normal md:text-5xl">
-                Wastewater treatment is a resource, risk and routing question.
+                EterSolis routes materials through the right operational pathway.
               </h2>
               <p className="mt-4 max-w-2xl leading-7 text-white/76">
-                EterSolis can route water and wastewater-linked opportunities through a controlled commercial review path without making premature technical or acceptance commitments.
+                Resource recovery, assessment, pickup, delivery, repurpose, destruction, certificates, water-linked outputs and selected purchase review all start with controlled intake.
               </p>
             </div>
           </MotionReveal>
 
           <MotionReveal className="flex flex-col justify-between gap-8 rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/10 dark:bg-white/5" delay={0.08}>
             <SectionHeader
-              eyebrow="Wastewater treatment"
-              title="Add wastewater-linked material streams to the same disciplined intake path."
-              description="Use this route for treatment residuals, recovery-adjacent infrastructure questions and commercial review of wastewater-linked by-products. EterSolis review is required before any operational action."
+              eyebrow="Operating pathways"
+              title="One intake system for material, water, carbon and certificate work."
+              description="Use the service-request funnel for recoverable resources, industrial by-products, treatment residuals, recurring services, destruction, certificates and controlled commercial review. EterSolis approval is required before any operational action."
             />
-            <div className="grid gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               {proofPoints.map(({ icon: Icon, label, text }) => (
                 <div key={label} className="rounded-lg border border-coal/10 bg-white p-5 dark:border-white/10 dark:bg-black/30">
                   <div className="flex gap-4">
@@ -64,11 +67,11 @@ export function WastewaterTreatmentFeature() {
               ))}
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact#contact-form" className="group inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
-                Request Wastewater Assessment <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              <Link href="/get-started" className="group inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+                Start Service Intake <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </Link>
               <Link href="/get-started/assessment" className="inline-flex items-center justify-center rounded-full border border-coal/20 bg-white px-6 py-3 font-black text-carbon transition hover:border-sunshine dark:border-white/15 dark:bg-white/10 dark:text-white">
-                Request Service Intake
+                Request Assessment
               </Link>
             </div>
           </MotionReveal>

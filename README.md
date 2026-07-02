@@ -7,11 +7,11 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.5.0
+**Version:** 0.6.0
 
-EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
+EterSolis is a privately owned resource recovery, waste and carbon management company focused on practical operational intake, circular economy services, waste valorization, certificates, repurpose, destruction, selected material review and industrial sustainability solutions.
 
-This repository contains the controlled Next.js website implementation, operational service-request intake foundation, lead-capture compatibility layer, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
+This repository contains the controlled Next.js website implementation, operational service-request intake foundation, lead-capture compatibility layer, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, full-route preview system, visual QA workflow and deployment documentation for `etersolis.com`.
 
 The master operating standard is [`docs/WEBSITE_CODEBASE_SOP.md`](./docs/WEBSITE_CODEBASE_SOP.md). All design, contrast, header, theme, release and production operations must remain aligned with that SOP.
 
@@ -34,7 +34,7 @@ The codebase includes:
 - Published CEPA Technical Intelligence Brief route with source-of-record PDF download.
 - Service-request, pickup, delivery, assessment, certificate and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
-- Runtime configuration checks and operational lead-capture verification commands.
+- Runtime configuration, migration and operational intake verification commands.
 - Liveness and readiness endpoints for deployment verification.
 - Self-hosting and deployment documentation.
 - Media credit registry and image audit tooling.
@@ -208,7 +208,7 @@ Configuration check:
 npm run runtime:check -- --env-file=/etc/etersolis-web.env
 ```
 
-Operational lead-capture compatibility check:
+Operational intake compatibility check:
 
 ```bash
 npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
@@ -246,6 +246,7 @@ npm run check
 npm run launch:check
 npm run test:smoke
 npm run test:backend
+npm run migrations:check
 npm run test:visual
 npm run brief:pages
 npm run preview:capture
@@ -268,7 +269,7 @@ See [`docs/VERSIONING.md`](./docs/VERSIONING.md).
 
 ## Preview and Executive Review
 
-The repository maintains curated static previews in `previews/*.html` and generated live previews in `previews/generated/` captured from the current Next.js application.
+The repository maintains curated static previews in `previews/*.html` and generated live previews in `previews/generated/` captured from the current Next.js application across desktop and mobile viewports for all stable public, KYMNIS, admin, publication and demo dynamic routes.
 
 ```bash
 npm run preview:capture
@@ -306,7 +307,7 @@ Do not commit live runtime values. Use `.env.example` for placeholders and keep 
 
 KYMNIS inquiries use `KYMNIS_ROUTE_EMAIL`, defaulting to `kymnis@etersolis.com`.
 
-Full operational lead capture requires the configuration groups documented in [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md), [`docs/GCLOUD_HOSTING.md`](./docs/GCLOUD_HOSTING.md) and [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md).
+Full operational intake requires the configuration groups documented in [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md), [`docs/GCLOUD_HOSTING.md`](./docs/GCLOUD_HOSTING.md) and [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md).
 
 ---
 
@@ -315,7 +316,7 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.5.0
+**Version:** 0.6.0
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
@@ -330,6 +331,7 @@ Full operational lead capture requires the configuration groups documented in [`
 - `/sell-waste` — Legacy redirect to `/get-started`
 - `/status/[publicToken]` — Public service-request status
 - `/certificates/verify` — Public certificate verification
+- `/certificates/verify/[certificateId]` — Public certificate verification result
 - `/solutions` — Resource, waste, carbon and circular economy solutions
 - `/industries` — Industry-specific support
 - `/about` — Company positioning and leadership
@@ -373,6 +375,7 @@ Full operational lead capture requires the configuration groups documented in [`
 - `npm run routes:check`
 - `npm run theme:audit`
 - `npm run runtime:check -- --env-file=/etc/etersolis-web.env`
+- `npm run migrations:check`
 - `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`
 - `npm run test:backend`
 - `npm run check`

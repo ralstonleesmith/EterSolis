@@ -115,10 +115,11 @@ Run the controlled gates:
 ```bash
 npm ci
 npm run test:backend
+npm run migrations:check
 npm run launch:check
 ```
 
-`npm run launch:check` runs the production quality gate, smoke tests, layout/theme tests and deployment dry run. `npm run test:backend` verifies the backend contract files, migrations, v1 route aliases, delivery queue and reader controls. The release is not operationally ready if any gate fails.
+`npm run launch:check` runs the production quality gate, smoke tests, layout/theme tests and deployment dry run. `npm run test:backend` verifies backend contract files, v1 route aliases, delivery queue, preview coverage and reader controls. `npm run migrations:check` verifies migration order and operational tables when a database is configured. The release is not operationally ready if any gate fails.
 
 If GitHub Actions cannot start because of account billing, payment or spending-limit state, record that external blocker in the launch record and use the local `npm run launch:check` result as the repository quality evidence until hosted runners are available again. Do not mark GitHub Actions as passed when jobs did not start.
 

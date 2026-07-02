@@ -12,7 +12,7 @@ const signals = [
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[calc(88svh-78px)] overflow-hidden bg-black py-28 text-white md:min-h-[calc(86svh-78px)]">
+    <section className="relative isolate flex min-h-[calc(74svh-78px)] overflow-hidden bg-black py-20 text-white sm:min-h-[calc(80svh-78px)] md:min-h-[calc(86svh-78px)] md:py-28">
       <Image
         src={mediaAssets.hero.src}
         alt={mediaAssets.hero.alt}
@@ -25,13 +25,13 @@ export function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/76 to-transparent" aria-hidden="true" />
       <div className="container-shell relative z-10 grid items-end gap-10 lg:grid-cols-[1fr_0.72fr]">
         <MotionReveal>
-          <p className="mb-5 inline-flex max-w-full rounded-full border border-sunshine/70 bg-black/35 px-4 py-2 text-sm font-black text-white shadow-sm backdrop-blur">
+          <p className="mb-5 inline-flex max-w-full rounded-full border border-sunshine/70 bg-black/35 px-4 py-2 text-xs font-black text-white shadow-sm backdrop-blur sm:text-sm">
             Controlled Waste Services | Resource Recovery | Carbon Management | Circular Economy | Industrial Intelligence
           </p>
-          <h1 className="max-w-4xl text-5xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Professional Waste, Resource Recovery & Carbon Management Services.
           </h1>
-          <p className="mt-6 max-w-2xl text-xl leading-8 text-white/85">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
             EterSolis routes waste, water, by-products, residuals and recoverable materials through controlled service pathways for assessment, pickup, delivery, processing, repurpose, destruction, certification and operational intelligence.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">

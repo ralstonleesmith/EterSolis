@@ -33,3 +33,13 @@ Run migrations against staging before production and verify:
 - admin pages load;
 - delivery event tables are writable;
 - readiness still reports expected configuration.
+
+## Non-Destructive Check
+
+Run:
+
+```bash
+npm run migrations:check
+```
+
+Without `DATABASE_URL`, the command verifies the committed numbered migration files and registry conventions. With `DATABASE_URL`, it also verifies required operational tables are present without applying or modifying schema.

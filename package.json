@@ -1,6 +1,6 @@
 {
   "name": "etersolis-web",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "description": "EterSolis public website upgrade for etersolis.com.",
   "scripts": {
@@ -25,6 +25,7 @@
     "docker:build": "docker build -t etersolis-web:local .",
     "deploy:dry-run": "node scripts/deploy-dry-run.mjs",
     "runtime:check": "node scripts/check-runtime-config.mjs",
+    "migrations:check": "node scripts/check-migrations.mjs",
     "lead-capture:check": "node scripts/check-lead-capture.mjs",
     "launch:check": "npm run check && npm run test:smoke && npm run test:layout && npm run deploy:dry-run",
     "check": "npm run typecheck && npm run lint && npm run insights:validate && npm run docs:check && npm run release:audit && npm run disclosure:audit && npm run routes:check && npm run theme:audit && npm run asset:audit && npm run link:audit && npm run build",

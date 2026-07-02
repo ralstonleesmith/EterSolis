@@ -28,13 +28,13 @@ gcloud artifacts repositories create etersolis \
 
 Use the final production region selected by EterSolis operations. The examples use `us-central1`; if a different region is chosen, use that same region consistently for Artifact Registry, Cloud Run and Cloud SQL where possible.
 
-## 2. Build and Publish the v0.5.0 Image
+## 2. Build and Publish the v0.6.0 Image
 
 From the reviewed repository commit, submit the image build through Cloud Build:
 
 ```bash
 gcloud builds submit \
-  --tag us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.5.0
+  --tag us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.6.0
 ```
 
 Replace `PROJECT_ID` with the actual Google Cloud project ID. Record the reviewed git commit SHA and resulting image digest in the launch record.
@@ -114,7 +114,7 @@ Deploy the reviewed image with port `3000` and the approved runtime configuratio
 
 ```bash
 gcloud run deploy etersolis-web \
-  --image us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.5.0 \
+  --image us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.6.0 \
   --region us-central1 \
   --platform managed \
   --allow-unauthenticated \
@@ -139,6 +139,7 @@ Before routing public traffic, run the repository launch gate from a local or CI
 npm ci
 npm run launch:check
 npm run test:backend
+npm run migrations:check
 npm run preview:capture
 ```
 
