@@ -5,9 +5,9 @@ import { mediaAssets } from '@/lib/media';
 import { MotionReveal } from '@/components/ui/Motion';
 
 const signals = [
-  { icon: ShieldCheck, label: 'Resource-first thinking' },
-  { icon: Workflow, label: 'Applied science and documentation' },
-  { icon: Zap, label: 'Practical stewardship and execution' }
+  { icon: ShieldCheck, label: 'Quotation-before-payment control' },
+  { icon: Workflow, label: 'QR-coded case traceability' },
+  { icon: Zap, label: 'Global-ready operating platform' }
 ];
 
 export function Hero() {
@@ -26,16 +26,16 @@ export function Hero() {
       <div className="container-shell relative z-10 grid items-end gap-10 lg:grid-cols-[1fr_0.72fr]">
         <MotionReveal>
           <p className="mb-5 inline-flex max-w-full rounded-full border border-sunshine/70 bg-black/35 px-4 py-2 text-xs font-black text-white shadow-sm backdrop-blur sm:text-sm">
-            Controlled Waste Services | Resource Recovery | Carbon Management | Circular Economy | Industrial Intelligence
+            Controlled Waste Services | Operational Portal | Resource Recovery | Carbon Management | Circular Economy
           </p>
           <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            Professional Waste, Resource Recovery & Carbon Management Services.
+            Waste, Resource Recovery and Carbon Operations with Commercial Control.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
-            EterSolis routes waste, water, by-products, residuals and recoverable materials through controlled service pathways for assessment, pickup, delivery, processing, repurpose, destruction, certification and operational intelligence.
+            EterSolis turns service requests into QR-coded cases with quotation-before-payment discipline, branded invoices, proof reconciliation, scheduling, receiving, processing, certification and permanent operational history.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/get-started" className="group inline-flex items-center justify-center gap-3 rounded-full bg-sunshine px-7 py-4 text-center font-black text-black shadow-soft transition hover:-translate-y-0.5">
+            <Link href="/get-started" style={{ backgroundColor: '#0b1220', color: '#ffffff' }} className="group inline-flex items-center justify-center gap-3 rounded-full border border-white px-7 py-4 text-center font-black shadow-soft transition hover:-translate-y-0.5 hover:border-sunshine">
               Get Started <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <Link href="/get-started/assessment" className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/12 px-7 py-4 text-center font-black text-white backdrop-blur transition hover:border-sunshine hover:bg-white/18">

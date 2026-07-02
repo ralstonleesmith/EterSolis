@@ -20,7 +20,28 @@ const requiredTables = [
   'scoring_events',
   'kymnis_accounts',
   'consent_records',
-  'access_logs'
+  'access_logs',
+  'markets',
+  'market_payment_methods',
+  'bank_accounts',
+  'cases',
+  'case_events',
+  'case_qr_codes',
+  'case_files',
+  'quotations',
+  'quotation_lines',
+  'quotation_acceptances',
+  'invoices',
+  'invoice_lines',
+  'payment_proofs',
+  'payment_reconciliations',
+  'payment_allocations',
+  'receipts',
+  'refunds',
+  'appointments',
+  'stockpile_lots',
+  'processing_batches',
+  'workflow_events'
 ];
 
 const files = fs.readdirSync(migrationDir).filter((file) => /^000\d+_.+\.sql$/.test(file)).sort();
@@ -32,7 +53,8 @@ assert.deepEqual(files, [
   '0005_documents_and_storage.sql',
   '0006_scoring_and_sla.sql',
   '0007_kymnis_internal.sql',
-  '0008_governance_retention.sql'
+  '0008_governance_retention.sql',
+  '0009_operational_portal.sql'
 ], 'numbered migration files must be present in order');
 
 for (const file of files) {

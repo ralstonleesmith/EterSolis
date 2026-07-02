@@ -19,6 +19,18 @@
 
 The EterSolis website must be operated as a controlled production application, not as a manually edited marketing page.
 
+## 0.7 Operational Portal Documentation Standard
+
+Portal behavior must be documented with the relevant SOP before release. Current required SOPs cover user portal, admin portal, case lifecycle, quotation, invoice, payment reconciliation, refund, file upload security, scheduling, receiving, stockpile, processing, certificates, automation, error handling, testing, data retention, privacy/security, deployment and rollback.
+
+Implementation rules:
+
+- Keep service-request and legacy intake compatibility endpoints available.
+- Add database changes through numbered migrations only.
+- Use v1 envelopes for new versioned routes.
+- Use deterministic demo data for previews.
+- Never expose internal notes, proof images, sensitive logistics, private documents or operator notes in public portal or certificate verification views.
+
 The clean operating workflow is:
 
 ```txt

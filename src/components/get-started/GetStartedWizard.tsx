@@ -121,10 +121,10 @@ export function GetStartedWizard({ defaultRequestType = 'pickup' }: { defaultReq
       onSubmit={handleSubmit}
     >
       <div>
-        <p className="text-xs font-black uppercase tracking-normal text-subtle dark:text-sunshine">Controlled service request</p>
+        <p className="text-xs font-black uppercase tracking-normal text-body dark:text-white">Controlled service request</p>
         <h2 className="mt-3 text-2xl font-black text-body">Get Started with EterSolis</h2>
-        <p className="mt-2 text-sm leading-6 text-muted">Most EterSolis pathways are customer-paid services. Selected material purchase, rebate or partnership review is available only after controlled eligibility review.</p>
-        <p className="mt-2 text-xs font-bold text-subtle">Drafts save locally in this browser until submitted or cleared.</p>
+        <p className="mt-2 text-sm font-bold leading-6 text-body">Most EterSolis pathways are customer-paid services. Selected material purchase, rebate or partnership review is available only after controlled eligibility review.</p>
+        <p className="mt-2 text-xs font-bold text-body">Drafts save locally in this browser until submitted or cleared.</p>
       </div>
 
       <div className="grid gap-3">
@@ -139,10 +139,10 @@ export function GetStartedWizard({ defaultRequestType = 'pickup' }: { defaultReq
               onClick={() => (index <= step ? setStep(index) : null)}
               className={`rounded-lg border px-3 py-3 text-left text-xs font-black uppercase tracking-normal transition ${
                 index === step
-                  ? 'border-sunshine bg-sunshine text-black'
+                  ? 'border-carbon bg-carbon text-white dark:border-sunshine dark:bg-sunshine dark:text-black'
                   : index < step
                     ? 'ui-surface-muted text-body'
-                    : 'ui-surface text-subtle'
+                    : 'ui-surface text-body'
               }`}
               aria-current={index === step ? 'step' : undefined}
             >
@@ -314,11 +314,11 @@ export function GetStartedWizard({ defaultRequestType = 'pickup' }: { defaultReq
           <ArrowLeft className="h-4 w-4" /> Back
         </button>
         {step < steps.length - 1 ? (
-          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5" type="button" onClick={nextStep}>
+          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-carbon px-7 py-4 font-black text-white shadow-soft transition hover:-translate-y-0.5 dark:bg-sunshine dark:text-black" type="button" onClick={nextStep}>
             Continue <ArrowRight className="h-4 w-4" />
           </button>
         ) : (
-          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60" type="submit" disabled={submitState === 'submitting'}>
+          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-carbon px-7 py-4 font-black text-white shadow-soft transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sunshine dark:text-black" type="submit" disabled={submitState === 'submitting'}>
             {submitState === 'submitting' ? 'Submitting...' : 'Submit Service Request'}
           </button>
         )}

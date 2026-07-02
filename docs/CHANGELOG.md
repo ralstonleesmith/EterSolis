@@ -2,6 +2,22 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.7.0 — 2026-07-02T00:00:00Z
+
+### Operational Portal Foundation
+
+- Added the customer portal preview for QR-coded case tracking, quotations, invoices, payment proof, uploads, scheduling, certificates and profile/account-claim pathways.
+- Added admin operational consoles for cases, quotations, invoices, payment reconciliation, refunds, receiving, stockpile, processing, audit and detailed case review.
+- Added additive migration `0009_operational_portal.sql` for markets, bank/payment configuration, cases, QR records, case files, quotations, invoices, payment proofs, reconciliation, receipts, refunds, appointments, stockpile lots, processing batches and workflow events.
+- Added finance helpers and v1 admin envelope endpoints for cases, quotations, invoices and reconciliation.
+- Upgraded the homepage to present the operating platform as the first major proof point after service intake.
+- Enhanced the Technical Intelligence Brief reader with search, table-of-contents jumps and page resume while preserving manual arrows, swipe, keyboard and no-auto-advance behavior.
+- Expanded preview, route, smoke, layout and backend contract coverage for the portal release.
+
+### Validation
+
+- Required gates: `npm run test:backend`, `npm run migrations:check`, `npm run typecheck`, `npm run lint`, `npm run docs:check`, `npm run routes:check`, `npm run theme:audit`, `npm run asset:audit`, `npm run link:audit`, `npm run build`, `npm run test:smoke`, `npm run test:layout` and `npm run preview:capture`.
+
 ## 0.6.0 — 2026-07-02T00:00:00Z
 
 ### 10/10 Rebalance and Backend Finalization

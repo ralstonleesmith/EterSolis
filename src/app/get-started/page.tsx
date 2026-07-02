@@ -43,10 +43,10 @@ export default function GetStartedPage() {
             </div>
             <div className="grid gap-3">
               {points.map(({ icon: Icon, title, text }) => (
-                <article key={title} className="rounded-lg border border-coal/10 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5">
+                <article key={title} className="rounded-lg border border-coal/10 bg-carbon p-5 text-white shadow-sm dark:border-white/10">
                   <Icon className="h-5 w-5 text-sunshine" />
-                  <h3 className="mt-3 font-black text-carbon dark:text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-coal dark:text-on-dark-muted">{text}</p>
+                  <h3 className="mt-3 font-black text-white">{title}</h3>
+                  <p className="mt-2 text-sm font-bold leading-6 text-white/86">{text}</p>
                 </article>
               ))}
             </div>

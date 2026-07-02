@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-const ROUTES = ['/', '/get-started', '/get-started/pickup', '/get-started/delivery', '/get-started/assessment', '/get-started/certificates', '/certificates/verify', '/helios', '/kymnis', '/kymnis/verification', '/kymnis/resource-recovery', '/sell-waste', '/contact', '/about', '/solutions', '/industries', '/insights', '/insights/technical-intelligence-brief', '/insights/technical-intelligence-brief/print', '/media-credits'];
-const MOBILE_ROUTES = ['/', '/get-started', '/solutions', '/industries', '/contact', '/insights/technical-intelligence-brief'];
+const ROUTES = ['/', '/get-started', '/get-started/pickup', '/get-started/delivery', '/get-started/assessment', '/get-started/certificates', '/certificates/verify', '/helios', '/kymnis', '/kymnis/verification', '/kymnis/resource-recovery', '/sell-waste', '/contact', '/about', '/solutions', '/industries', '/insights', '/insights/technical-intelligence-brief', '/insights/technical-intelligence-brief/print', '/media-credits', '/portal', '/portal/cases', '/portal/quotations', '/portal/invoices', '/portal/payments', '/portal/uploads', '/portal/schedule', '/admin/cases', '/admin/cases/ES-CASE-DEMO-0001', '/admin/quotations', '/admin/invoices', '/admin/reconciliation', '/admin/audit'];
+const MOBILE_ROUTES = ['/', '/get-started', '/solutions', '/industries', '/contact', '/insights/technical-intelligence-brief', '/portal', '/portal/invoices'];
 
 async function assertNoHorizontalOverflow(page: import('@playwright/test').Page) {
   const metrics = await page.evaluate(() => ({

@@ -7,13 +7,13 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.6.0
+**Version:** 0.7.0
 
 EterSolis is a privately owned resource recovery, waste and carbon management company focused on practical operational intake, circular economy services, waste valorization, certificates, repurpose, destruction, selected material review and industrial sustainability solutions.
 
 This repository contains the controlled Next.js website implementation, operational service-request intake foundation, lead-capture compatibility layer, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, full-route preview system, visual QA workflow and deployment documentation for `etersolis.com`.
 
-The master operating standard is [`docs/WEBSITE_CODEBASE_SOP.md`](./docs/WEBSITE_CODEBASE_SOP.md). All design, contrast, header, theme, release and production operations must remain aligned with that SOP.
+Start with the documentation index: [`docs/README.md`](./docs/README.md). The master operating standard is [`docs/WEBSITE_CODEBASE_SOP.md`](./docs/WEBSITE_CODEBASE_SOP.md), and the company/system source of truth is [`docs/COMPANY_SOURCE_OF_TRUTH.md`](./docs/COMPANY_SOURCE_OF_TRUTH.md). All design, contrast, header, theme, release and production operations must remain aligned with those documents.
 
 ---
 
@@ -32,6 +32,8 @@ The codebase includes:
 - Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Published CEPA Technical Intelligence Brief route with source-of-record PDF download.
+- Customer portal preview for cases, quotations, invoices, payment proofs, uploads, scheduling, certificates and profile/account claim pathways.
+- Admin operational console previews for case detail, quotations, invoices, reconciliation, refunds, receiving, stockpile, processing, audit and delivery-event recovery.
 - Service-request, pickup, delivery, assessment, certificate and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
 - Runtime configuration, migration and operational intake verification commands.
@@ -76,70 +78,7 @@ Rules:
 
 ## Route Map
 
-```txt
-/                 Homepage
-/get-started      Service request, pickup, delivery, assessment and certificate intake
-/get-started/pickup
-                  Pickup request intake
-/get-started/delivery
-                  Delivery request intake
-/get-started/assessment
-                  Assessment request intake
-/get-started/certificates
-                  Certificate request intake
-/sell-waste       Legacy redirect to /get-started
-/status/[publicToken]
-                  Public service-request status
-/certificates/verify
-                  Public certificate verification
-/solutions        Resource, waste, carbon and circular economy solutions
-/industries       Industry-specific support
-/about            Company positioning and leadership
-/kymnis           KYMNIS environmental impact registration platform foundation
-/kymnis/how-it-works
-                  KYMNIS registration and improvement pathway
-/kymnis/verification
-                  KYMNIS verification-readiness pathway
-/kymnis/resource-recovery
-                  KYMNIS recovery pathway
-/kymnis/contact   KYMNIS platform interest intake
-/contact          Contact routes and inquiry form
-/insights         Published insight archive
-/insights/introducing-etersolis
-                  EterSolis Newsletter Issue 001
-/insights/technical-intelligence-brief
-                  Published CEPA Technical Intelligence Brief
-/helios           Guided routing assistant
-/media-credits    Website media attribution
-/privacy          Privacy notice
-/terms            Website terms and non-binding submission notices
-/api/health       Health check
-/api/readiness    Operational intake readiness check
-/api/leads        Contact lead endpoint
-/api/waste        Waste opportunity endpoint
-/api/service-requests/submit
-                  Service-request intake endpoint
-/api/service-requests/status/[token]
-                  Public service-request status endpoint
-/api/payments/create-checkout
-                  Manual-invoice checkout abstraction endpoint
-/api/certificates/verify/[token]
-                  Certificate verification endpoint
-/api/v1/public/leads
-                  Versioned public lead intake alias
-/api/v1/public/waste-opportunities
-                  Versioned public waste-opportunity intake alias
-/api/v1/public/service-requests
-                  Versioned public service-request intake alias
-/api/v1/public/kymnis-interest
-                  Versioned KYMNIS interest intake alias
-/api/v1/public/helios-events
-                  Versioned Helios event capture endpoint
-/api/v1/admin/delivery-events
-                  Protected delivery queue and dead-letter recovery endpoint
-/api/v1/webhooks/*
-                  Controlled CRM, email and analytics webhook placeholders
-```
+The canonical route and API map is generated in the `Generated Project Index` at the end of this README. Do not maintain a second manual route list here. For question-based navigation, use [`docs/README.md`](./docs/README.md).
 
 ---
 
@@ -147,6 +86,8 @@ Rules:
 
 ```txt
 src/app/                 App Router pages and API routes
+src/app/portal/          Customer portal preview routes
+src/app/admin/           Admin command center and operational console routes
 src/components/brand/    EterSolis logo and brand components
 src/components/layout/   Header, footer and global layout components
 src/components/ui/       Reusable UI primitives
@@ -158,10 +99,13 @@ src/components/technical-brief/
                          Manual publication reader components
 src/components/helios/   Helios guided routing interface
 src/components/kymnis/   KYMNIS public foundation components
+src/components/admin/    Admin console UI components
 src/lib/                 Validation, env, email, CRM, DB, analytics, readiness and security utilities
 src/lib/api/             Request IDs, response envelopes, logging, idempotency and rate limits
 src/lib/operations/      Service-request taxonomy, statuses, schemas and rules
 src/lib/payments/        Payment provider abstraction and manual invoice MVP
+src/lib/portal.ts        Portal lifecycle, route and QR preview helpers
+src/lib/finance.ts       Quote, invoice, receipt, payment-reference and finance helpers
 src/lib/deliveryQueue.ts Postgres-backed outbound delivery event helpers
 src/lib/internal/        Internal KYMNIS functionality scaffolding
 content/insights/        Structured Markdown insight and newsletter sources
@@ -316,7 +260,7 @@ Full operational intake requires the configuration groups documented in [`docs/S
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.6.0
+**Version:** 0.7.0
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
@@ -332,6 +276,15 @@ Full operational intake requires the configuration groups documented in [`docs/S
 - `/status/[publicToken]` — Public service-request status
 - `/certificates/verify` — Public certificate verification
 - `/certificates/verify/[certificateId]` — Public certificate verification result
+- `/portal` — Customer portal preview for cases, quotations, invoices, uploads, scheduling and certificates
+- `/portal/cases` — Customer case history and QR status preview
+- `/portal/quotations` — Customer quotation review preview
+- `/portal/invoices` — Customer invoice and EFT reference preview
+- `/portal/payments` — Customer payment proof and reconciliation preview
+- `/portal/uploads` — Customer evidence upload preview
+- `/portal/schedule` — Customer pickup and delivery scheduling preview
+- `/portal/certificates` — Customer certificate history preview
+- `/portal/profile` — Customer profile and account-claim preview
 - `/solutions` — Resource, waste, carbon and circular economy solutions
 - `/industries` — Industry-specific support
 - `/about` — Company positioning and leadership
@@ -362,6 +315,10 @@ Full operational intake requires the configuration groups documented in [`docs/S
 - `/api/v1/public/kymnis-interest` — Versioned KYMNIS interest intake alias
 - `/api/v1/public/helios-events` — Versioned Helios event capture endpoint
 - `/api/v1/admin/delivery-events` — Protected delivery queue and dead-letter recovery endpoint
+- `/api/v1/admin/cases` — Protected portal case workbench endpoint
+- `/api/v1/admin/quotations` — Protected quotation workbench endpoint
+- `/api/v1/admin/invoices` — Protected invoice workbench endpoint
+- `/api/v1/admin/payments/reconciliation` — Protected payment proof reconciliation endpoint
 - `/api/v1/webhooks/*` — Controlled CRM, email and analytics webhook placeholders
 
 ### Required Change-Control Scripts

@@ -27,6 +27,15 @@ const previewRoutes = [
   { route: '/media-credits', title: 'Media Credits', category: 'public' },
   { route: '/privacy', title: 'Privacy', category: 'public' },
   { route: '/terms', title: 'Terms', category: 'public' },
+  { route: '/portal', title: 'Customer Portal', category: 'portal' },
+  { route: '/portal/cases', title: 'Portal Cases', category: 'portal' },
+  { route: '/portal/quotations', title: 'Portal Quotations', category: 'portal' },
+  { route: '/portal/invoices', title: 'Portal Invoices', category: 'portal' },
+  { route: '/portal/payments', title: 'Portal Payments', category: 'portal' },
+  { route: '/portal/uploads', title: 'Portal Uploads', category: 'portal' },
+  { route: '/portal/schedule', title: 'Portal Schedule', category: 'portal' },
+  { route: '/portal/certificates', title: 'Portal Certificates', category: 'portal' },
+  { route: '/portal/profile', title: 'Portal Profile', category: 'portal' },
   { route: '/kymnis', title: 'KYMNIS', category: 'kymnis' },
   { route: '/kymnis/how-it-works', title: 'KYMNIS How It Works', category: 'kymnis' },
   { route: '/kymnis/verification', title: 'KYMNIS Verification', category: 'kymnis' },
@@ -34,12 +43,22 @@ const previewRoutes = [
   { route: '/kymnis/contact', title: 'KYMNIS Contact', category: 'kymnis' },
   { route: '/admin', title: 'Admin Dashboard', category: 'admin' },
   { route: '/admin/login', title: 'Admin Login', category: 'admin' },
+  { route: '/admin/cases', title: 'Admin Cases', category: 'admin' },
+  { route: '/admin/cases/ES-CASE-DEMO-0001', title: 'Admin Case Detail', category: 'admin' },
+  { route: '/admin/quotations', title: 'Admin Quotations', category: 'admin' },
+  { route: '/admin/invoices', title: 'Admin Invoices', category: 'admin' },
+  { route: '/admin/reconciliation', title: 'Admin Reconciliation', category: 'admin' },
+  { route: '/admin/refunds', title: 'Admin Refunds', category: 'admin' },
+  { route: '/admin/receiving', title: 'Admin Receiving', category: 'admin' },
+  { route: '/admin/stockpile', title: 'Admin Stockpile', category: 'admin' },
+  { route: '/admin/processing', title: 'Admin Processing', category: 'admin' },
   { route: '/admin/service-requests', title: 'Admin Service Requests', category: 'admin' },
   { route: '/admin/delivery-events', title: 'Admin Delivery Events', category: 'admin' },
   { route: '/admin/pickups', title: 'Admin Pickups', category: 'admin' },
   { route: '/admin/deliveries', title: 'Admin Deliveries', category: 'admin' },
   { route: '/admin/payments', title: 'Admin Payments', category: 'admin' },
   { route: '/admin/certificates', title: 'Admin Certificates', category: 'admin' },
+  { route: '/admin/audit', title: 'Admin Audit', category: 'admin' },
   { route: '/admin/analytics', title: 'Admin Analytics', category: 'admin' }
 ] as const;
 
@@ -63,7 +82,7 @@ function htmlIndex(entries: Array<{ route: string; title: string; category: stri
 }
 
 test('capture current page previews', async ({ page, baseURL }) => {
-  test.setTimeout(8 * 60_000);
+  test.setTimeout(12 * 60_000);
   await ensureDir(PREVIEWS_DIR);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   const entries: Array<{ route: string; title: string; category: string; viewport: string; htmlFile: string; pngFile: string }> = [];

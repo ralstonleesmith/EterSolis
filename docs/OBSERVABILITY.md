@@ -18,6 +18,10 @@ Observability exists to make intake, delivery and operational failures visible.
 - `userId`
 - `errorCode`
 
+## Portal Events
+
+Persistent portal routes must propagate request IDs into case events, quotation events, invoice events, reconciliation records and workflow events. Logs should include case reference, route, method, actor type, commercial transition, payment transition, file access/export activity and request ID.
+
 ## Metrics To Track
 
 - lead submissions

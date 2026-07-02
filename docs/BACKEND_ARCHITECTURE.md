@@ -26,3 +26,17 @@ Do not add major operational features directly onto raw lead tables. Add migrati
 - Public v1 intake persists outbound CRM/email events before immediate compatibility delivery attempts.
 - `npm run migrations:check` verifies the numbered migration set and, when connected to PostgreSQL, required operational tables.
 - Readiness reports the Postgres-first migration, delivery queue and rate-limit table expectations alongside runtime configuration status.
+
+## 0.7.0 Operational Portal Layer
+
+The operational portal layer introduces a durable case spine for downstream work after intake. Service requests remain available, but cases now define the shared record for QR tracking, quotation, invoice, proof upload, reconciliation, scheduling, receiving, stockpile, processing, certificate decision and closure.
+
+Implemented code surfaces:
+
+- Customer portal pages under `/portal`.
+- Admin operational consoles under `/admin/cases`, `/admin/quotations`, `/admin/invoices`, `/admin/reconciliation`, `/admin/refunds`, `/admin/receiving`, `/admin/stockpile`, `/admin/processing` and `/admin/audit`.
+- v1 admin envelope endpoints for cases, quotations, invoices and payment reconciliation.
+- `src/lib/portal.ts` for lifecycle metadata and deterministic preview QR payloads.
+- `src/lib/finance.ts` for quote, invoice, receipt, payment-reference and calculation helpers.
+
+Commercial control remains quote before invoice, invoice before payment request, proof before reconciliation and reconciliation before receipt.

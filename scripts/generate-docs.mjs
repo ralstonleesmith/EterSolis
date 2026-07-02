@@ -22,6 +22,15 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/status/[publicToken]\` — Public service-request status
 - \`/certificates/verify\` — Public certificate verification
 - \`/certificates/verify/[certificateId]\` — Public certificate verification result
+- \`/portal\` — Customer portal preview for cases, quotations, invoices, uploads, scheduling and certificates
+- \`/portal/cases\` — Customer case history and QR status preview
+- \`/portal/quotations\` — Customer quotation review preview
+- \`/portal/invoices\` — Customer invoice and EFT reference preview
+- \`/portal/payments\` — Customer payment proof and reconciliation preview
+- \`/portal/uploads\` — Customer evidence upload preview
+- \`/portal/schedule\` — Customer pickup and delivery scheduling preview
+- \`/portal/certificates\` — Customer certificate history preview
+- \`/portal/profile\` — Customer profile and account-claim preview
 - \`/solutions\` — Resource, waste, carbon and circular economy solutions
 - \`/industries\` — Industry-specific support
 - \`/about\` — Company positioning and leadership
@@ -52,6 +61,10 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/api/v1/public/kymnis-interest\` — Versioned KYMNIS interest intake alias
 - \`/api/v1/public/helios-events\` — Versioned Helios event capture endpoint
 - \`/api/v1/admin/delivery-events\` — Protected delivery queue and dead-letter recovery endpoint
+- \`/api/v1/admin/cases\` — Protected portal case workbench endpoint
+- \`/api/v1/admin/quotations\` — Protected quotation workbench endpoint
+- \`/api/v1/admin/invoices\` — Protected invoice workbench endpoint
+- \`/api/v1/admin/payments/reconciliation\` — Protected payment proof reconciliation endpoint
 - \`/api/v1/webhooks/*\` — Controlled CRM, email and analytics webhook placeholders
 
 ### Required Change-Control Scripts
