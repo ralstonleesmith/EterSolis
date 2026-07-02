@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-const ROUTES = ['/', '/helios', '/kymnis', '/kymnis/verification', '/kymnis/resource-recovery', '/sell-waste', '/contact', '/about', '/insights', '/insights/technical-intelligence-brief', '/insights/technical-intelligence-brief/print', '/media-credits'];
+const ROUTES = ['/', '/get-started', '/get-started/pickup', '/get-started/delivery', '/get-started/assessment', '/get-started/certificates', '/certificates/verify', '/helios', '/kymnis', '/kymnis/verification', '/kymnis/resource-recovery', '/sell-waste', '/contact', '/about', '/solutions', '/industries', '/insights', '/insights/technical-intelligence-brief', '/insights/technical-intelligence-brief/print', '/media-credits'];
+const MOBILE_ROUTES = ['/', '/get-started', '/solutions', '/industries', '/contact', '/insights/technical-intelligence-brief'];
 
 async function assertNoHorizontalOverflow(page: import('@playwright/test').Page) {
   const metrics = await page.evaluate(() => ({
@@ -139,6 +140,21 @@ test.describe('layout and theme polish', () => {
     await expect(page.getByRole('navigation', { name: /Mobile navigation/i }).getByRole('link', { name: 'KYMNIS' })).toBeVisible();
     await assertNoHorizontalOverflow(page);
   });
+
+  for (const width of [390, 430]) {
+    test(`primary pages stay usable at ${width}px mobile width`, async ({ page, baseURL }) => {
+      await page.setViewportSize({ width, height: 844 });
+      for (const route of MOBILE_ROUTES) {
+        await page.goto(`${baseURL ?? ''}${route}`);
+        await page.waitForLoadState('networkidle');
+        await assertNoHorizontalOverflow(page);
+        const firstHeading = page.locator('h1, h2').first();
+        await expect(firstHeading).toBeVisible();
+        const box = await firstHeading.boundingBox();
+        expect(box?.width ?? 0).toBeLessThanOrEqual(width);
+      }
+    });
+  }
 
   test('header theme state persists and remains operable after reload', async ({ page, baseURL }) => {
     await page.goto(`${baseURL ?? ''}/solutions`);

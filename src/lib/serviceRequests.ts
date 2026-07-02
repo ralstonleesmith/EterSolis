@@ -1,7 +1,9 @@
 import { randomBytes } from 'node:crypto';
 import { NextResponse } from 'next/server';
+import { apiError, apiOk, enforceOperationalRateLimit, rateLimitPolicies, requestContext } from '@/lib/api';
 import { createCrmLead } from '@/lib/crm';
 import { getPool, recordServiceAuditEvent } from '@/lib/db';
+import { enqueueOutboundEvent } from '@/lib/deliveryQueue';
 import { sendServiceRequestNotifications } from '@/lib/email';
 import { determineCommercialPathway, paymentStatusForPathway } from '@/lib/operations/commercialRules';
 import { scoreDataQuality } from '@/lib/operations/dataQuality';
@@ -18,6 +20,18 @@ function isSupportedContentType(request: Request) {
 
 function publicError(status: number, error: string) {
   return NextResponse.json({ error }, { status });
+}
+
+function serviceError(status: number, error: string, requestId?: string, apiMode: 'legacy' | 'v1' = 'legacy') {
+  if (apiMode === 'v1') {
+    const code = status === 415 ? 'UNSUPPORTED_MEDIA_TYPE'
+      : status === 429 ? 'RATE_LIMITED'
+        : status === 403 ? 'FORBIDDEN'
+          : status === 400 ? 'VALIDATION_FAILED'
+            : 'BAD_REQUEST';
+    return apiError(code, error, status, requestId);
+  }
+  return publicError(status, error);
 }
 
 function token() {
@@ -258,25 +272,54 @@ export async function createServiceRequestFromData(data: ServiceRequestSubmitInp
   };
 }
 
-export async function handleServiceRequestSubmission(request: Request) {
-  if (!isSupportedContentType(request)) return publicError(415, 'Unsupported submission format.');
+export async function handleServiceRequestSubmission(request: Request, options: { apiMode?: 'legacy' | 'v1' } = {}) {
+  const apiMode = options.apiMode ?? 'legacy';
+  const context = requestContext(request);
+  if (!isSupportedContentType(request)) return serviceError(415, 'Unsupported submission format.', context.requestId, apiMode);
 
   const ip = getClientIp(request);
-  const rateLimit = await enforceRateLimit(ip);
-  if (!rateLimit.ok) return publicError(429, 'Too many requests.');
+  const rateLimit = apiMode === 'v1'
+    ? await enforceOperationalRateLimit(context.ipHash, rateLimitPolicies.publicService)
+    : await enforceRateLimit(ip);
+  if (!rateLimit.ok) return serviceError(429, 'Too many requests.', context.requestId, apiMode);
 
   const raw = await bodyForRequest(request);
   const botCheck = await verifyBotProtection(String(raw.turnstileToken ?? raw['cf-turnstile-response'] ?? ''), ip);
-  if (!botCheck.ok) return publicError(403, 'Verification failed.');
+  if (!botCheck.ok) return serviceError(403, 'Verification failed.', context.requestId, apiMode);
 
   const parsed = serviceRequestSubmitSchema.safeParse(raw);
-  if (!parsed.success) return publicError(400, 'Invalid service request submission.');
+  if (!parsed.success) return serviceError(400, 'Invalid service request submission.', context.requestId, apiMode);
 
   const result = await createServiceRequestFromData(parsed.data, hashClientIp(ip));
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://etersolis.com';
   const statusUrl = new URL(result.publicStatusPath, siteUrl).toString();
   const route = routeEmailForDepartment(parsed.data.department);
   const notificationSummary = summary(parsed.data, result);
+
+  await Promise.all([
+    enqueueOutboundEvent({
+      requestId: context.requestId,
+      eventType: 'service_request_crm_delivery',
+      destination: process.env.CRM_WEBHOOK_URL ? 'configured-crm-webhook' : 'not-configured',
+      serviceRequestId: result.id,
+      payload: { leadType: 'service_request', serviceRequestId: result.id, publicReference: result.publicReference, ...parsed.data }
+    }),
+    enqueueOutboundEvent({
+      requestId: context.requestId,
+      eventType: 'service_request_email_delivery',
+      destination: route,
+      serviceRequestId: result.id,
+      payload: {
+        publicReference: result.publicReference,
+        subjectPrefix: `[EterSolis ${departmentLabel(parsed.data.department)}]`,
+        submitterEmail: parsed.data.email,
+        summary: notificationSummary,
+        statusUrl,
+        commercialPathway: result.commercialPathway,
+        riskLevel: result.riskLevel
+      }
+    })
+  ]).catch(() => undefined);
 
   const deliveries = [
     {
@@ -316,7 +359,9 @@ export async function handleServiceRequestSubmission(request: Request) {
   }));
 
   await recordServiceAuditEvent('service_request_submitted', { publicReference: result.publicReference }, result.id).catch(() => undefined);
-  return NextResponse.json({ ok: true, ...result, statusUrl, message: 'Service request received for controlled EterSolis review.' });
+  const data = { ...result, statusUrl, message: 'Service request received for controlled EterSolis review.' };
+  if (apiMode === 'v1') return apiOk(data, context.requestId);
+  return NextResponse.json({ ok: true, ...data });
 }
 
 export async function getServiceRequestByToken(publicToken: string) {

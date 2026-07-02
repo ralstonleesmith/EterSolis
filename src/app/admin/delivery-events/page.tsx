@@ -21,7 +21,7 @@ export default async function AdminDeliveryEventsPage() {
           <table className="min-w-full text-left text-sm">
             <thead className="border-b border-coal/10 text-xs font-black uppercase tracking-normal text-subtle dark:border-white/10 dark:text-sunshine">
               <tr>
-                {['Type', 'Destination', 'Status', 'Attempts', 'Next attempt', 'Last error'].map((heading) => <th key={heading} className="px-4 py-3">{heading}</th>)}
+                {['Type', 'Destination', 'Status', 'Attempts', 'Next attempt', 'Last error', 'Recovery actions'].map((heading) => <th key={heading} className="px-4 py-3">{heading}</th>)}
               </tr>
             </thead>
             <tbody>
@@ -33,10 +33,16 @@ export default async function AdminDeliveryEventsPage() {
                   <td className="px-4 py-3 text-muted">{row.attempts} / {row.max_attempts}</td>
                   <td className="px-4 py-3 text-muted">{row.next_attempt_at ? new Date(row.next_attempt_at).toLocaleString() : 'Not scheduled'}</td>
                   <td className="px-4 py-3 text-muted">{row.last_error ?? 'None'}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex min-w-44 flex-wrap gap-2">
+                      <code className="rounded bg-cool px-2 py-1 text-xs font-bold text-carbon dark:bg-black dark:text-on-dark">POST retry</code>
+                      <code className="rounded bg-cool px-2 py-1 text-xs font-bold text-carbon dark:bg-black dark:text-on-dark">POST resolve</code>
+                    </div>
+                  </td>
                 </tr>
               ))}
               {rows.length === 0 ? (
-                <tr><td className="px-4 py-8 text-muted" colSpan={6}>No delivery events available or queue migration has not been applied.</td></tr>
+                <tr><td className="px-4 py-8 text-muted" colSpan={7}>No delivery events available or queue migration has not been applied.</td></tr>
               ) : null}
             </tbody>
           </table>

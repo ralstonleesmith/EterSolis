@@ -13,15 +13,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: 'EterSolis',
   title: {
-    default: 'EterSolis | Waste & Carbon Management, Resource Recovery and Circular Economy Solutions',
+    default: 'EterSolis | Resource Recovery, Waste, Carbon and Circular Economy Services',
     template: '%s | EterSolis'
   },
   description:
-    'EterSolis is a privately owned waste and carbon management company helping organizations recover value from waste streams, manage carbon exposure and build practical circular economy solutions.',
+    'EterSolis is a privately owned resource recovery, waste and carbon management company helping organizations route materials, recover value, manage carbon exposure and build practical circular economy solutions.',
   openGraph: {
-    title: 'EterSolis | Waste & Carbon Management',
+    title: 'EterSolis | Resource Recovery, Waste and Carbon Management',
     description:
-      'Resource recovery, carbon management, circular economy and industrial sustainability solutions.',
+      'Operational intake, resource recovery, carbon management, circular economy and industrial sustainability services.',
     url: siteUrl,
     siteName: 'EterSolis',
     type: 'website',
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
         url: mediaAssets.hero.ogSrc,
         width: 1600,
         height: 900,
-        alt: mediaAssets.wastewater.hero.alt
+        alt: mediaAssets.hero.alt
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'EterSolis | Waste & Carbon Management',
+    title: 'EterSolis | Resource Recovery, Waste and Carbon Management',
     description:
-      'Resource recovery, carbon management, circular economy and industrial sustainability solutions.',
+      'Operational intake, resource recovery, carbon management, circular economy and industrial sustainability services.',
     images: [mediaAssets.hero.ogSrc]
   },
   alternates: {
@@ -57,7 +57,7 @@ const structuredData = {
   url: siteUrl,
   logo: `${siteUrl}/media/etersolis-mark.png`,
   description:
-    'Waste and carbon management company focused on resource recovery, circular economy solutions and industrial sustainability.'
+    'Resource recovery, waste and carbon management company focused on operational intake, circular economy services and industrial sustainability.'
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

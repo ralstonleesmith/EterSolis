@@ -9,11 +9,20 @@ test('homepage renders media hero and dark mode', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Professional Waste, Resource Recovery & Carbon Management Services/i })).toBeVisible();
   await expect(page.getByAltText(/clean modern materials recovery facility/i).first()).toBeVisible();
-  await expect(page.getByRole('heading', { name: /Wastewater treatment is a resource/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Request Wastewater Assessment/i }).first()).toHaveAttribute('href', '/contact#contact-form');
+  await expect(page.getByRole('heading', { name: /EterSolis routes materials through the right operational pathway/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Start Service Intake/i }).first()).toHaveAttribute('href', '/get-started');
   await page.getByLabel(/Switch to dark mode/i).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.screenshot({ path: 'test-results/screenshots/home-desktop.png', fullPage: false });
+});
+
+test('public positioning presents full EterSolis scope before wastewater specifics', async ({ page }) => {
+  for (const route of ['/', '/solutions', '/industries', '/get-started', '/contact']) {
+    await page.goto(route);
+    const h1 = await page.locator('h1').first().innerText();
+    expect(h1.toLowerCase()).not.toContain('wastewater');
+    await expect(page.getByText(/resource recovery|carbon|circular|service|material/i).first()).toBeVisible();
+  }
 });
 
 test('header uses logo as home and avoids duplicate home navigation', async ({ page }) => {
@@ -133,7 +142,7 @@ test('lead forms show success and error states with mocked API responses', async
   await page.getByLabel(/Company/i).fill('EterSolis QA');
   await page.getByLabel(/^Email$/i).fill('review@example.com');
   await page.getByRole('button', { name: /Continue/i }).click();
-  await page.getByLabel(/Message/i).fill('This is a non-confidential mocked partnership inquiry for lead capture acceptance testing.');
+  await page.getByLabel(/Message/i).fill('This is a non-confidential mocked partnership inquiry for operational intake acceptance testing.');
   await page.getByLabel(/I consent to EterSolis contacting me/i).check();
   await page.getByRole('button', { name: /Submit Inquiry/i }).click();
   await expect(page.getByRole('heading', { name: /Your inquiry has been routed for review/i })).toBeVisible();

@@ -2,6 +2,22 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.6.0 — 2026-07-02T00:00:00Z
+
+### 10/10 Rebalance and Backend Finalization
+
+- Expanded generated previews to cover all stable public, KYMNIS, dynamic demo, admin, publication and legal routes in both desktop and mobile viewports.
+- Rebalanced the public website so EterSolis presents the full scope of resource recovery, waste, carbon, circular economy, certification, repurpose, destruction and operational intake services, with wastewater positioned as one supported pathway.
+- Reduced mobile hero height and expanded layout checks across primary pages at 390px and 430px widths.
+- Finalized v1 public intake routes so they opt into standardized `{ ok, requestId, data, error }` envelopes and route-specific operational rate limits.
+- Added durable outbound event persistence for CRM/email delivery work before immediate compatibility delivery attempts.
+- Added a non-destructive migration check command for numbered migrations and live table verification when `DATABASE_URL` is available.
+- Expanded readiness output with Postgres-first migration, delivery queue and rate-limit table expectations.
+
+### Validation
+
+- Required gates: `npm run test:backend`, `npm run migrations:check`, `npm run typecheck`, `npm run lint`, `npm run docs:check`, `npm run routes:check`, `npm run theme:audit`, `npm run asset:audit`, `npm run link:audit`, `npm run build`, `npm run test:smoke`, `npm run test:layout` and `npm run preview:capture`.
+
 ## 0.5.0 — 2026-07-02T00:00:00Z
 
 ### Backend Hardening Pass 2

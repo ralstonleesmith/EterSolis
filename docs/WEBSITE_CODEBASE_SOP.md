@@ -448,13 +448,13 @@ EterSolis
 Public descriptor:
 
 ```txt
-Waste & Carbon Management
+Resource Recovery, Waste & Carbon Management
 ```
 
 Approved positioning sentence:
 
 ```txt
-EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization, and industrial sustainability solutions.
+EterSolis is a privately owned resource recovery, waste and carbon management company focused on practical operational intake, circular economy services, waste valorization, certificates, repurpose, destruction, selected material review and industrial sustainability solutions.
 ```
 
 ## 7.2 Voice and tone
@@ -1237,7 +1237,7 @@ Disabled states must still communicate state clearly.
 
 ---
 
-# 14. Forms and Lead Capture
+# 14. Forms and Operational Intake
 
 ## 14.1 General form rules
 
@@ -1246,14 +1246,14 @@ All public forms must:
 ```txt
 1. Validate server-side with Zod.
 2. Validate client-side where useful, but never rely only on client-side validation.
-3. Use bot protection before production lead collection.
+3. Use bot protection before production operational intake.
 4. Use rate limiting.
 5. Avoid sensitive payload logging.
 6. Request non-confidential summaries only.
 7. Include clear non-binding language.
 8. Preserve no-unsolicited-samples warnings where waste is involved.
 9. Route submissions to controlled inboxes.
-10. Persist required operational records if production lead capture is enabled.
+10. Persist required operational records if production operational intake is enabled.
 11. Return clear success and error responses.
 ```
 
@@ -1323,7 +1323,7 @@ If `IP_HASH_SECRET` is exposed, rotate it immediately.
 
 ## 15.1 Required production variables
 
-Production lead capture requires:
+Production operational intake requires:
 
 ```txt
 NEXT_PUBLIC_SITE_URL

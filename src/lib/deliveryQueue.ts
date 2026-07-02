@@ -58,7 +58,8 @@ export async function markOutboundEventForRetry(id: string, actor = 'admin') {
             last_error = null,
             updated_at = now()
       where id = $1
-      returning id, status`,
+      returning id, request_id, event_type, destination, status, attempts, max_attempts, next_attempt_at,
+                last_error, service_request_id, lead_submission_id, opportunity_id, created_at, updated_at`,
     [id]
   );
   await getPool().query(
@@ -75,7 +76,8 @@ export async function markOutboundEventResolved(id: string, actor = 'admin') {
         set status = 'resolved',
             updated_at = now()
       where id = $1
-      returning id, status`,
+      returning id, request_id, event_type, destination, status, attempts, max_attempts, next_attempt_at,
+                last_error, service_request_id, lead_submission_id, opportunity_id, created_at, updated_at`,
     [id]
   );
   await getPool().query(

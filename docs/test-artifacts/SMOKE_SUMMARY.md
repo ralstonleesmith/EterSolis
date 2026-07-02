@@ -42,7 +42,7 @@ These are not code failures:
 
 ## External Production Evidence Still Required
 
-Before public lead capture is enabled, complete the production checks in `docs/LAUNCH_CHECKLIST.md` with the real server-managed runtime file:
+Before public operational intake is enabled, complete the production checks in `docs/LAUNCH_CHECKLIST.md` with the real server-managed runtime file:
 
 - `npm run runtime:check -- --env-file=/etc/etersolis-web.env`
 - `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`

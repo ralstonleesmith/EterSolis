@@ -116,6 +116,7 @@ Backend hardening checks:
 
 ```bash
 npm run test:backend
+npm run migrations:check
 npm run brief:pages # requires Poppler pdftoppm when regenerating technical brief page images
 ```
 

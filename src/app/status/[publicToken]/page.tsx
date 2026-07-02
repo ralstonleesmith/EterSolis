@@ -15,9 +15,25 @@ function titleCase(value: string | null | undefined) {
   return (value ?? 'not available').replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+const demoRecord = {
+  public_reference: 'ES-SR-DEMO-0001',
+  request_type: 'assessment',
+  department: 'industrial',
+  commercial_pathway: 'customer_paid_assessment',
+  status: 'submitted',
+  risk_level: 'standard',
+  payment_status: 'manual_invoice_pending',
+  pickup_status: null,
+  delivery_status: null,
+  certificate_status: 'not_requested',
+  data_quality_score: 86
+};
+
 export default async function ServiceRequestStatusPage({ params }: { params: Promise<{ publicToken: string }> }) {
   const resolvedParams = await params;
-  const record = await getServiceRequestByToken(resolvedParams.publicToken);
+  const record = resolvedParams.publicToken === 'demo-token'
+    ? demoRecord
+    : await getServiceRequestByToken(resolvedParams.publicToken);
   if (!record) notFound();
 
   return (

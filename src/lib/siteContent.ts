@@ -10,6 +10,10 @@ export const navItems = [
 export const siteRoutes = [
   '/',
   '/get-started',
+  '/get-started/pickup',
+  '/get-started/delivery',
+  '/get-started/assessment',
+  '/get-started/certificates',
   '/sell-waste',
   '/status/[publicToken]',
   '/certificates/verify',

@@ -13,12 +13,12 @@ export default function HomePage() {
     <>
       <Hero />
       <ServiceIntakeBanner />
-      <WastewaterTreatmentFeature />
+      <SolutionGrid />
+      <IndustryMosaic />
       <ReviewPrinciples />
       <ProblemOrbit />
-      <SolutionGrid />
+      <WastewaterTreatmentFeature />
       <HeliosPrompt context="recovery" title="Need the fastest safe route into EterSolis?" />
-      <IndustryMosaic />
       <HeliosPanel />
     </>
   );

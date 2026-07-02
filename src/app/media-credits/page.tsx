@@ -38,8 +38,8 @@ export default function MediaCreditsPage() {
         primaryLabel="Ask About Media"
         secondaryHref="/"
         secondaryLabel="Return Home"
-        imageSrc={mediaAssets.wastewater.aerial.previewSrc}
-        imageAlt={mediaAssets.wastewater.aerial.alt}
+        imageSrc={mediaAssets.facility.previewSrc}
+        imageAlt={mediaAssets.facility.alt}
       />
 
       <section className="section-padding bg-[var(--surface-muted)] dark:bg-black">

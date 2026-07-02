@@ -6,11 +6,11 @@ import { PageHero } from '@/components/ui/PageHero';
 import { mediaAssets } from '@/lib/media';
 
 export const metadata: Metadata = {
-  title: 'EterSolis Solutions | Resource Recovery, Wastewater Treatment and Carbon Management',
-  description: 'Resource recovery, waste management, wastewater treatment review, carbon management, circular economy, waste valorization and industrial decarbonization solutions.',
+  title: 'EterSolis Solutions | Resource Recovery, Waste, Carbon and Circular Services',
+  description: 'Resource recovery, waste management, carbon management, circular economy, waste valorization, certificates, repurpose, destruction and industrial sustainability services.',
   alternates: { canonical: '/solutions' },
   openGraph: {
-    images: [{ url: '/media/og/etersolis-solutions-og.png', width: 1600, height: 900, alt: mediaAssets.wastewater.hero.alt }]
+    images: [{ url: '/media/og/etersolis-solutions-og.png', width: 1600, height: 900, alt: mediaAssets.hero.alt }]
   },
   twitter: { images: ['/media/og/etersolis-solutions-og.png'] }
 };
@@ -22,12 +22,12 @@ export default function SolutionsPage() {
         eyebrow="Solutions"
         title="Practical resource, waste and carbon solutions."
         description="EterSolis applies disciplined review, controlled documentation and practical commercial reasoning to help organizations reduce waste burdens, recover value and improve operating performance."
-        imageSrc={mediaAssets.wastewater.hero.src}
-        imageAlt={mediaAssets.wastewater.hero.alt}
+        imageSrc={mediaAssets.hero.src}
+        imageAlt={mediaAssets.hero.alt}
       />
-      <WastewaterTreatmentFeature />
       <ReviewPrinciples compact />
       <SolutionGrid />
+      <WastewaterTreatmentFeature />
     </>
   );
 }

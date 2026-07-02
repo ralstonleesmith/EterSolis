@@ -21,6 +21,7 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/sell-waste\` — Legacy redirect to \`/get-started\`
 - \`/status/[publicToken]\` — Public service-request status
 - \`/certificates/verify\` — Public certificate verification
+- \`/certificates/verify/[certificateId]\` — Public certificate verification result
 - \`/solutions\` — Resource, waste, carbon and circular economy solutions
 - \`/industries\` — Industry-specific support
 - \`/about\` — Company positioning and leadership
@@ -64,6 +65,7 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`npm run routes:check\`
 - \`npm run theme:audit\`
 - \`npm run runtime:check -- --env-file=/etc/etersolis-web.env\`
+- \`npm run migrations:check\`
 - \`npm run lead-capture:check -- --env-file=/etc/etersolis-web.env\`
 - \`npm run test:backend\`
 - \`npm run check\`

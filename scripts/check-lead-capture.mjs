@@ -70,6 +70,6 @@ try {
 
   console.log('Lead capture operational check passed.');
 } catch (error) {
-  console.error(error instanceof Error ? error.message : 'Unknown lead capture operational check failure.');
+  console.error(error instanceof Error ? error.message : 'Unknown operational intake compatibility check failure.');
   process.exit(1);
 }
