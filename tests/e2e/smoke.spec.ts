@@ -61,7 +61,12 @@ test('mobile navigation opens primary routes', async ({ page }) => {
 
 test('Ask Helios popout stays compact and routes safely', async ({ page }) => {
   await page.goto('/contact');
-  await page.getByRole('button', { name: /^Ask Helios$/i }).click({ force: true });
+  await page.waitForLoadState('networkidle');
+  const launcher = page.getByRole('button', { name: /^Ask Helios$/i });
+  await expect(launcher).toBeVisible();
+  await expect(launcher).toHaveAttribute('data-ready', 'true');
+  await launcher.click();
+  await expect(launcher).toHaveAttribute('aria-expanded', 'true');
   await expect(page.getByRole('heading', { name: /Guided next-step routing/i })).toBeVisible({ timeout: 10000 });
   await expect(page.getByRole('button', { name: 'EterSolis' })).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('button', { name: 'KYMNIS' }).click();
@@ -238,6 +243,10 @@ test('insights prioritizes the technical brief with readable and print routes', 
   await expect(page.getByText('CEPA-TIB-COLCHEM-001-20260705', { exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: /Read on this page/i })).toHaveAttribute('href', '#brief-reader');
   await expect(page.locator('object[aria-label="CEPA Technical Intelligence Brief PDF reader"]')).toHaveCount(0);
+  await expect(page.getByRole('region', { name: /manual page reader/i })).toBeVisible();
+  await expect(page.getByText(/Page 1 of 40/i)).toBeVisible();
+  await expect(page.getByRole('button', { name: /Next page/i })).toBeDisabled();
+  await expect(page.getByRole('button', { name: /Previous page/i })).toBeDisabled();
   await expect(page.locator('img[src*="cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png"]').first()).toBeVisible();
   await expect(page.locator('section').first().locator('img[src*="cepa-stamp-logo"]')).toHaveCount(1);
   await expect(page.locator('section').first().locator('img[alt="CEPA logo mark"]')).toBeVisible();

@@ -20,6 +20,7 @@ export function HeliosLauncher() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<HeliosMode>(pathname.startsWith('/kymnis') ? 'kymnis' : 'etersolis');
+  const [ready, setReady] = useState(false);
   const intents = getHeliosIntents(mode, contextForPath(pathname)).slice(0, 4);
   const formSensitive = pathname.includes('contact') || pathname.includes('sell-waste');
 
@@ -32,6 +33,7 @@ export function HeliosLauncher() {
     function closeOnEscape(event: KeyboardEvent) {
       if (event.key === 'Escape') setOpen(false);
     }
+    setReady(true);
     window.addEventListener('keydown', closeOnEscape);
     return () => window.removeEventListener('keydown', closeOnEscape);
   }, []);
@@ -99,6 +101,7 @@ export function HeliosLauncher() {
         className="ml-auto flex items-center gap-2 rounded-full bg-sunshine px-5 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5"
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
+        data-ready={ready ? 'true' : 'false'}
       >
         <Image src={mediaAssets.helios.icon.darkSrc} alt="" width={mediaAssets.helios.icon.width} height={mediaAssets.helios.icon.height} className="h-6 w-6 object-contain" /> Ask Helios
       </button>

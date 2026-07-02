@@ -254,6 +254,30 @@ const requirements: Requirement[] = [
     description: 'Optional shared secret for the MVP protected admin session.'
   },
   {
+    key: 'AUTH_SECRET',
+    area: 'security',
+    required: false,
+    description: 'Auth.js session secret for the planned Google SSO admin replacement.'
+  },
+  {
+    key: 'AUTH_GOOGLE_CLIENT_ID',
+    area: 'security',
+    required: false,
+    description: 'Google OAuth client ID for the planned Auth.js admin SSO replacement.'
+  },
+  {
+    key: 'AUTH_GOOGLE_CLIENT_SECRET',
+    area: 'security',
+    required: false,
+    description: 'Google OAuth client secret for the planned Auth.js admin SSO replacement.'
+  },
+  {
+    key: 'AUTH_ALLOWED_DOMAIN',
+    area: 'security',
+    required: false,
+    description: 'Allowed Google Workspace domain for admin SSO.'
+  },
+  {
     key: 'READINESS_EXPOSE_DETAILS',
     area: 'operations',
     required: false,

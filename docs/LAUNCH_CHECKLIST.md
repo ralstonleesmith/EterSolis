@@ -40,6 +40,7 @@ Required operational groups:
 - Cloudflare Turnstile public and server verification keys.
 - Controlled routing inboxes for operations, service requests, department routing, certificates, payments, waste compatibility, information, partnerships, KYMNIS, privacy, CEO and CSO inquiries.
 - `ADMIN_SHARED_SECRET` before exposing the MVP admin area in production.
+- Auth.js Google SSO placeholders (`AUTH_SECRET`, `AUTH_GOOGLE_CLIENT_ID`, `AUTH_GOOGLE_CLIENT_SECRET`, `AUTH_ALLOWED_DOMAIN`) before replacing the MVP admin guard.
 
 Validate the runtime file before deploying:
 
@@ -55,6 +56,7 @@ npm run runtime:check -- --env-file=/etc/etersolis-web.env
 ```bash
 psql "$DATABASE_URL" -f database/schema.sql
 psql "$DATABASE_URL" -f database/migrations/2026-07-etersolis-operations.sql
+for file in database/migrations/000*.sql; do psql "$DATABASE_URL" -f "$file"; done
 ```
 
 - Confirm the following tables exist:
@@ -73,6 +75,21 @@ psql "$DATABASE_URL" -f database/migrations/2026-07-etersolis-operations.sql
   - `certificates`
   - `analytics_events`
   - `admin_actions`
+  - `schema_migrations`
+  - `organizations`
+  - `contacts`
+  - `opportunities`
+  - `waste_streams`
+  - `outbound_events`
+  - `webhook_deliveries`
+  - `crm_sync_records`
+  - `email_delivery_records`
+  - `rate_limit_counters`
+  - `admin_users`
+  - `roles`
+  - `user_roles`
+  - `consent_records`
+  - `access_logs`
 
 ## 5. Operational Intake Check
 
@@ -97,10 +114,11 @@ Run the controlled gates:
 
 ```bash
 npm ci
+npm run test:backend
 npm run launch:check
 ```
 
-`npm run launch:check` runs the production quality gate, smoke tests, layout/theme tests and deployment dry run. The release is not operationally ready if any gate fails.
+`npm run launch:check` runs the production quality gate, smoke tests, layout/theme tests and deployment dry run. `npm run test:backend` verifies the backend contract files, migrations, v1 route aliases, delivery queue and reader controls. The release is not operationally ready if any gate fails.
 
 If GitHub Actions cannot start because of account billing, payment or spending-limit state, record that external blocker in the launch record and use the local `npm run launch:check` result as the repository quality evidence until hosted runners are available again. Do not mark GitHub Actions as passed when jobs did not start.
 
@@ -125,6 +143,7 @@ For public verification after DNS and HTTPS are active:
 ```bash
 curl --fail https://etersolis.com/api/health
 curl --fail https://etersolis.com/api/readiness
+curl --fail -H "x-admin-secret: $ADMIN_SHARED_SECRET" https://etersolis.com/api/v1/admin/delivery-events
 ```
 
 ## 8. Form Acceptance Test
@@ -140,6 +159,7 @@ Submit non-sensitive test records through:
 - `/get-started/delivery`
 - `/get-started/assessment`
 - `/certificates/verify`
+- `/insights/technical-intelligence-brief#brief-reader`
 
 Confirm every test submission produces:
 
@@ -147,6 +167,7 @@ Confirm every test submission produces:
 - a `lead_submissions` record;
 - a `service_requests` record for Get Started submissions;
 - related material, risk, payment and pickup or delivery records where applicable;
+- queued or visible `outbound_events` for async delivery paths where configured;
 - an internal routing email;
 - a submitter confirmation email;
 - no raw client IP stored in the lead payload.

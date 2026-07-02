@@ -18,6 +18,16 @@ export const technicalBrief = {
   printPath: '/insights/technical-intelligence-brief/print',
   pdfPath: '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.pdf',
   briefImagePath: '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png',
+  pageImageDirectory: '/media/technical-intelligence-brief/pages',
+  pageImages: [
+    {
+      page: 1,
+      src: '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png',
+      width: 2480,
+      height: 3507,
+      alt: 'CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001 page 1'
+    }
+  ],
   issueCoverPath: '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05-cover.png',
   editionCoverPath: '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-edition-cover.png',
   editionHeroPath: '/media/technical-intelligence-brief/cepa-technical-intelligence-brief-color-chemicals-edition-hero.png',

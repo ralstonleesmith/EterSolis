@@ -118,7 +118,8 @@ It applies to:
 17. preview changes;
 18. deployment changes;
 19. database changes;
-20. production runtime configuration changes.
+20. API envelope, request ID, queue, migration and backend reliability changes;
+21. production runtime configuration changes.
 
 ---
 
@@ -173,13 +174,13 @@ previews/
 previews/generated/
 ```
 
-## 3.6 Lead capture
+## 3.6 Operational Intake
 
-`Lead capture` means any public intake form, form API, email routing, database persistence, CRM forwarding, analytics forwarding, or audit event related to website inquiries.
+`Operational intake` means any public contact, service-request, waste-opportunity, certificate, KYMNIS interest, form API, email routing, database persistence, CRM forwarding, analytics forwarding, queue event, or audit event related to website inquiries.
 
 ## 3.7 Operational readiness
 
-`Operational readiness` means the full runtime dependency state required for production lead capture to operate safely, including environment variables, database, SMTP, bot protection, and route email configuration.
+`Operational readiness` means the full runtime dependency state required for production operational intake to operate safely, including environment variables, database, SMTP, bot protection, route email configuration, request-ID logging and delivery-event storage.
 
 ## 3.8 Liveness
 
@@ -2807,6 +2808,12 @@ The disclosure audit passes.
 The asset audit passes.
 The link audit passes.
 The build succeeds.
+npm run test:backend passes when backend/API/migration/queue behavior changes.
+New APIs use the request ID and response-envelope standard.
+Database changes are additive migrations with schema_migrations records.
+Delivery side effects use durable outbound events where practical.
+Protected KYMNIS internals are not exposed on public routes.
+The technical brief reader remains manual and never auto-advances.
 The previews are updated where required.
 The production server pulled main cleanly.
 npm ci completed in production.

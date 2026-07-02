@@ -7,7 +7,7 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.4.0
+**Version:** 0.5.0
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
@@ -125,6 +125,20 @@ Rules:
                   Manual-invoice checkout abstraction endpoint
 /api/certificates/verify/[token]
                   Certificate verification endpoint
+/api/v1/public/leads
+                  Versioned public lead intake alias
+/api/v1/public/waste-opportunities
+                  Versioned public waste-opportunity intake alias
+/api/v1/public/service-requests
+                  Versioned public service-request intake alias
+/api/v1/public/kymnis-interest
+                  Versioned KYMNIS interest intake alias
+/api/v1/public/helios-events
+                  Versioned Helios event capture endpoint
+/api/v1/admin/delivery-events
+                  Protected delivery queue and dead-letter recovery endpoint
+/api/v1/webhooks/*
+                  Controlled CRM, email and analytics webhook placeholders
 ```
 
 ---
@@ -140,11 +154,15 @@ src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
 src/components/get-started/
                          Service-request wizard components
+src/components/technical-brief/
+                         Manual publication reader components
 src/components/helios/   Helios guided routing interface
 src/components/kymnis/   KYMNIS public foundation components
 src/lib/                 Validation, env, email, CRM, DB, analytics, readiness and security utilities
+src/lib/api/             Request IDs, response envelopes, logging, idempotency and rate limits
 src/lib/operations/      Service-request taxonomy, statuses, schemas and rules
 src/lib/payments/        Payment provider abstraction and manual invoice MVP
+src/lib/deliveryQueue.ts Postgres-backed outbound delivery event helpers
 src/lib/internal/        Internal KYMNIS functionality scaffolding
 content/insights/        Structured Markdown insight and newsletter sources
 public/media/            PNG brand/media assets with documented credits
@@ -180,7 +198,7 @@ NODE_ENV=production PORT=3000 npm run start:node
 
 ## Operational Intake Readiness
 
-The website can render public pages without production services, but full operational intake requires the production runtime configuration, PostgreSQL schema and operations migration, SMTP delivery and Turnstile verification to be in place.
+The website can render public pages without production services, but full operational intake requires the production runtime configuration, PostgreSQL schema, operations migrations, SMTP delivery, Turnstile verification, request-ID logging and delivery-event storage to be in place.
 
 When GitHub-hosted Actions cannot start because of account billing or spending-limit state, use `npm run launch:check` as the repository launch gate and record the external CI blocker in the launch record. Hosted CI should be rerun once the account issue is resolved.
 
@@ -227,7 +245,9 @@ npm run build
 npm run check
 npm run launch:check
 npm run test:smoke
+npm run test:backend
 npm run test:visual
+npm run brief:pages
 npm run preview:capture
 npm run newsletter:export -- --slug introducing-etersolis
 ```
@@ -266,6 +286,16 @@ See:
 - [`docs/SELF_HOSTING.md`](./docs/SELF_HOSTING.md)
 - [`docs/GCLOUD_HOSTING.md`](./docs/GCLOUD_HOSTING.md)
 - [`docs/LAUNCH_CHECKLIST.md`](./docs/LAUNCH_CHECKLIST.md)
+- [`docs/BACKEND_ARCHITECTURE.md`](./docs/BACKEND_ARCHITECTURE.md)
+- [`docs/API_STANDARD.md`](./docs/API_STANDARD.md)
+- [`docs/DATABASE_MIGRATIONS.md`](./docs/DATABASE_MIGRATIONS.md)
+- [`docs/DELIVERY_QUEUE.md`](./docs/DELIVERY_QUEUE.md)
+- [`docs/ADMIN_RBAC.md`](./docs/ADMIN_RBAC.md)
+- [`docs/OBSERVABILITY.md`](./docs/OBSERVABILITY.md)
+- [`docs/DATA_GOVERNANCE.md`](./docs/DATA_GOVERNANCE.md)
+- [`docs/KYMNIS_PROTECTED_BACKEND.md`](./docs/KYMNIS_PROTECTED_BACKEND.md)
+- [`docs/TECHNICAL_BRIEF_READER.md`](./docs/TECHNICAL_BRIEF_READER.md)
+- [`docs/RESTORE_AND_RECOVERY.md`](./docs/RESTORE_AND_RECOVERY.md)
 - [`docs/ci-cost-optimizations.md`](./docs/ci-cost-optimizations.md)
 
 ---
@@ -285,14 +315,21 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.4.0
+**Version:** 0.5.0
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 
 ### Current Public Routes
 
 - `/` — Homepage
-- `/sell-waste` — Waste opportunity intake
+- `/get-started` — Service request, pickup, delivery, assessment and certificate intake
+- `/get-started/pickup` — Pickup request intake
+- `/get-started/delivery` — Delivery request intake
+- `/get-started/assessment` — Assessment request intake
+- `/get-started/certificates` — Certificate request intake
+- `/sell-waste` — Legacy redirect to `/get-started`
+- `/status/[publicToken]` — Public service-request status
+- `/certificates/verify` — Public certificate verification
 - `/solutions` — Resource, waste, carbon and circular economy solutions
 - `/industries` — Industry-specific support
 - `/about` — Company positioning and leadership
@@ -310,7 +347,20 @@ Full operational lead capture requires the configuration groups documented in [`
 - `/privacy` — Privacy notice
 - `/terms` — Website terms and non-binding submission notices
 - `/api/health` — Liveness endpoint
-- `/api/readiness` — Operational lead-capture readiness endpoint
+- `/api/readiness` — Operational intake readiness endpoint
+- `/api/leads` — Contact lead compatibility endpoint
+- `/api/waste` — Waste opportunity compatibility endpoint
+- `/api/service-requests/submit` — Service-request intake endpoint
+- `/api/service-requests/status/[token]` — Public service-request status endpoint
+- `/api/payments/create-checkout` — Manual-invoice checkout abstraction endpoint
+- `/api/certificates/verify/[token]` — Certificate verification endpoint
+- `/api/v1/public/leads` — Versioned public lead intake alias
+- `/api/v1/public/waste-opportunities` — Versioned public waste-opportunity intake alias
+- `/api/v1/public/service-requests` — Versioned public service-request intake alias
+- `/api/v1/public/kymnis-interest` — Versioned KYMNIS interest intake alias
+- `/api/v1/public/helios-events` — Versioned Helios event capture endpoint
+- `/api/v1/admin/delivery-events` — Protected delivery queue and dead-letter recovery endpoint
+- `/api/v1/webhooks/*` — Controlled CRM, email and analytics webhook placeholders
 
 ### Required Change-Control Scripts
 
@@ -324,6 +374,7 @@ Full operational lead capture requires the configuration groups documented in [`
 - `npm run theme:audit`
 - `npm run runtime:check -- --env-file=/etc/etersolis-web.env`
 - `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`
+- `npm run test:backend`
 - `npm run check`
 - `npm run launch:check`
 - `npm run test:smoke`
