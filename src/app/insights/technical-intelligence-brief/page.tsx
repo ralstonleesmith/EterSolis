@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, Download, FileText, Printer, ShieldCheck } from 'lucide-react';
 import { EterSolisLogo } from '@/components/brand/EterSolisLogo';
+import { TechnicalBriefReader } from '@/components/technical-brief/TechnicalBriefReader';
 import { technicalBrief } from '@/lib/technicalBrief';
 
 export const metadata: Metadata = {
@@ -96,17 +97,13 @@ export default function TechnicalIntelligenceBriefPage() {
               Open PDF <Download className="h-4 w-4" />
             </a>
           </div>
-          <div className="ui-surface overflow-hidden rounded-lg bg-white p-3 shadow-soft md:p-5 dark:bg-black">
-            <Image
-              src={technicalBrief.briefImagePath}
-              alt="Readable CEPA Technical Intelligence Brief Color and Chemicals Industry Edition Issue 001"
-              width={2480}
-              height={3507}
-              className="mx-auto h-auto w-full max-w-5xl rounded-md border border-coal/10 bg-white shadow-sm dark:border-white/10"
-              sizes="(min-width: 1280px) 960px, 100vw"
-              unoptimized
-            />
-          </div>
+          <TechnicalBriefReader
+            title={technicalBrief.title}
+            pdfPath={technicalBrief.pdfPath}
+            printPath={technicalBrief.printPath}
+            pageCount={technicalBrief.pageCount}
+            pages={technicalBrief.pageImages}
+          />
         </div>
       </section>
 

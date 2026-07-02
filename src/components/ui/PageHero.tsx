@@ -42,8 +42,7 @@ export function PageHero({
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link
               href={primaryHref}
-              className="group inline-flex items-center justify-center gap-3 rounded-full border border-white px-7 py-4 font-black shadow-soft transition hover:-translate-y-0.5 hover:border-sunshine"
-              style={{ backgroundColor: '#ffffff', color: '#000000' }}
+              className="group inline-flex items-center justify-center gap-3 rounded-full border border-transparent bg-white px-7 py-4 font-black text-black shadow-soft transition hover:-translate-y-0.5 hover:border-sunshine hover:bg-sunshine"
             >
               {primaryLabel} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>

@@ -5,6 +5,7 @@ const requiredRoutes = [
   '/',
   '/about',
   '/admin',
+  '/admin/delivery-events',
   '/certificates/verify',
   '/contact',
   '/get-started',

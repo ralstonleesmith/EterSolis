@@ -38,37 +38,37 @@ export default function AboutPage() {
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {principles.map(([title, text]) => (
-                <article key={title} className="rounded-lg border border-coal/10 bg-white p-5 dark:border-white/10 dark:bg-white/5">
+                <article key={title} className="rounded-lg border border-coal/10 bg-white p-5 dark:border-white/18 dark:bg-black">
                   <h3 className="font-black text-carbon dark:text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-coal dark:text-on-dark-muted">{text}</p>
+                  <p className="mt-2 text-sm leading-6 text-coal dark:text-on-dark">{text}</p>
                 </article>
               ))}
             </div>
           </div>
           <div className="grid gap-5">
-            <article className="card-hover rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
+            <article className="card-hover rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/18 dark:bg-black">
               <Crown className="h-7 w-7 text-sunshine" />
               <h2 className="mt-5 text-2xl font-black text-carbon dark:text-white">Ralston E. Smith</h2>
-              <p className="mt-2 font-bold text-coal dark:text-on-dark-muted">Founder and Chief Executive Officer</p>
+              <p className="mt-2 font-bold text-coal dark:text-on-dark">Founder and Chief Executive Officer</p>
               <a href="mailto:smith@etersolis.com" className="mt-5 inline-block font-black text-carbon dark:text-on-dark">smith@etersolis.com</a>
             </article>
-            <article className="card-hover rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/10 dark:bg-white/5">
+            <article className="card-hover rounded-lg border border-coal/10 bg-[var(--surface-muted)] p-7 shadow-soft dark:border-white/18 dark:bg-black">
               <Atom className="h-7 w-7 text-sunshine" />
               <h2 className="mt-5 text-2xl font-black text-carbon dark:text-white">Ralston E. Lee Smith</h2>
-              <p className="mt-2 font-bold text-coal dark:text-on-dark-muted">Chief Scientific Officer</p>
+              <p className="mt-2 font-bold text-coal dark:text-on-dark">Chief Scientific Officer</p>
               <a href="mailto:cso@etersolis.com" className="mt-5 inline-block font-black text-carbon dark:text-on-dark">cso@etersolis.com</a>
             </article>
-            <article className="rounded-lg border border-sunshine/60 bg-sunshine/12 p-7 dark:bg-sunshine/10">
+            <article className="rounded-lg border border-sunshine/60 bg-sunshine/12 p-7 dark:bg-black">
               <div className="flex items-center gap-3 text-carbon dark:text-on-dark"><ShieldCheck className="h-5 w-5 text-sunshine" /><span className="font-black">Operating standard</span></div>
-              <p className="mt-4 text-sm leading-7 text-coal dark:text-on-dark-muted">Professional, controlled, commercially useful and minimally revealing communication.</p>
+              <p className="mt-4 text-sm leading-7 text-coal dark:text-on-dark">Professional, controlled, commercially useful and minimally revealing communication.</p>
             </article>
-            <article className="rounded-lg border border-coal/10 p-7 dark:border-white/10">
+            <article className="rounded-lg border border-coal/10 p-7 dark:border-white/18 dark:bg-black">
               <div className="flex items-center gap-3 text-carbon dark:text-on-dark"><Globe2 className="h-5 w-5 text-sunshine" /><span className="font-black">Public website</span></div>
-              <p className="mt-4 text-sm leading-7 text-coal dark:text-on-dark-muted">etersolis.com is the official EterSolis public web route.</p>
+              <p className="mt-4 text-sm leading-7 text-coal dark:text-on-dark">etersolis.com is the official EterSolis public web route.</p>
             </article>
-            <article className="rounded-lg border border-coal/10 p-7 dark:border-white/10">
+            <article className="rounded-lg border border-coal/10 p-7 dark:border-white/18 dark:bg-black">
               <div className="flex items-center gap-3 text-carbon dark:text-on-dark"><FileLock2 className="h-5 w-5 text-sunshine" /><span className="font-black">Confidentiality</span></div>
-              <p className="mt-4 text-sm leading-7 text-coal dark:text-on-dark-muted">Do not submit restricted or confidential details through public forms unless an approved intake route is provided.</p>
+              <p className="mt-4 text-sm leading-7 text-coal dark:text-on-dark">Do not submit restricted or confidential details through public forms unless an approved intake route is provided.</p>
             </article>
           </div>
         </div>

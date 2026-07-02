@@ -28,13 +28,13 @@ gcloud artifacts repositories create etersolis \
 
 Use the final production region selected by EterSolis operations. The examples use `us-central1`; if a different region is chosen, use that same region consistently for Artifact Registry, Cloud Run and Cloud SQL where possible.
 
-## 2. Build and Publish the v0.3.4 Image
+## 2. Build and Publish the v0.5.0 Image
 
 From the reviewed repository commit, submit the image build through Cloud Build:
 
 ```bash
 gcloud builds submit \
-  --tag us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.3.4
+  --tag us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.5.0
 ```
 
 Replace `PROJECT_ID` with the actual Google Cloud project ID. Record the reviewed git commit SHA and resulting image digest in the launch record.
@@ -96,6 +96,8 @@ Apply the schema from a trusted workstation or Cloud Shell with database access:
 
 ```bash
 psql "$DATABASE_URL" -f database/schema.sql
+psql "$DATABASE_URL" -f database/migrations/2026-07-etersolis-operations.sql
+for file in database/migrations/000*.sql; do psql "$DATABASE_URL" -f "$file"; done
 ```
 
 Confirm these tables exist before launch:
@@ -112,7 +114,7 @@ Deploy the reviewed image with port `3000` and the approved runtime configuratio
 
 ```bash
 gcloud run deploy etersolis-web \
-  --image us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.3.4 \
+  --image us-central1-docker.pkg.dev/PROJECT_ID/etersolis/etersolis-web:0.5.0 \
   --region us-central1 \
   --platform managed \
   --allow-unauthenticated \
@@ -136,8 +138,11 @@ Before routing public traffic, run the repository launch gate from a local or CI
 ```bash
 npm ci
 npm run launch:check
+npm run test:backend
 npm run preview:capture
 ```
+
+If regenerating technical brief page images in CI or Cloud Shell, install Poppler so `npm run brief:pages` can call `pdftoppm`.
 
 After Cloud Run deployment and DNS/HTTPS routing, verify:
 

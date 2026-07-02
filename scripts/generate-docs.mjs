@@ -13,7 +13,14 @@ const generated = `<!-- DOCS:GENERATED START -->
 ### Current Public Routes
 
 - \`/\` — Homepage
-- \`/sell-waste\` — Waste opportunity intake
+- \`/get-started\` — Service request, pickup, delivery, assessment and certificate intake
+- \`/get-started/pickup\` — Pickup request intake
+- \`/get-started/delivery\` — Delivery request intake
+- \`/get-started/assessment\` — Assessment request intake
+- \`/get-started/certificates\` — Certificate request intake
+- \`/sell-waste\` — Legacy redirect to \`/get-started\`
+- \`/status/[publicToken]\` — Public service-request status
+- \`/certificates/verify\` — Public certificate verification
 - \`/solutions\` — Resource, waste, carbon and circular economy solutions
 - \`/industries\` — Industry-specific support
 - \`/about\` — Company positioning and leadership
@@ -31,7 +38,20 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`/privacy\` — Privacy notice
 - \`/terms\` — Website terms and non-binding submission notices
 - \`/api/health\` — Liveness endpoint
-- \`/api/readiness\` — Operational lead-capture readiness endpoint
+- \`/api/readiness\` — Operational intake readiness endpoint
+- \`/api/leads\` — Contact lead compatibility endpoint
+- \`/api/waste\` — Waste opportunity compatibility endpoint
+- \`/api/service-requests/submit\` — Service-request intake endpoint
+- \`/api/service-requests/status/[token]\` — Public service-request status endpoint
+- \`/api/payments/create-checkout\` — Manual-invoice checkout abstraction endpoint
+- \`/api/certificates/verify/[token]\` — Certificate verification endpoint
+- \`/api/v1/public/leads\` — Versioned public lead intake alias
+- \`/api/v1/public/waste-opportunities\` — Versioned public waste-opportunity intake alias
+- \`/api/v1/public/service-requests\` — Versioned public service-request intake alias
+- \`/api/v1/public/kymnis-interest\` — Versioned KYMNIS interest intake alias
+- \`/api/v1/public/helios-events\` — Versioned Helios event capture endpoint
+- \`/api/v1/admin/delivery-events\` — Protected delivery queue and dead-letter recovery endpoint
+- \`/api/v1/webhooks/*\` — Controlled CRM, email and analytics webhook placeholders
 
 ### Required Change-Control Scripts
 
@@ -45,6 +65,7 @@ const generated = `<!-- DOCS:GENERATED START -->
 - \`npm run theme:audit\`
 - \`npm run runtime:check -- --env-file=/etc/etersolis-web.env\`
 - \`npm run lead-capture:check -- --env-file=/etc/etersolis-web.env\`
+- \`npm run test:backend\`
 - \`npm run check\`
 - \`npm run launch:check\`
 - \`npm run test:smoke\`

@@ -6,6 +6,7 @@ const adminLinks = [
   ['/admin/deliveries', 'Deliveries'],
   ['/admin/payments', 'Payments'],
   ['/admin/certificates', 'Certificates'],
+  ['/admin/delivery-events', 'Delivery Events'],
   ['/admin/analytics', 'Analytics']
 ];
 

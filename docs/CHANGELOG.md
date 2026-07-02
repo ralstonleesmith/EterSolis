@@ -2,6 +2,28 @@
 
 This changelog records controlled website upgrade work for `etersolis.com`.
 
+## 0.5.0 — 2026-07-02T00:00:00Z
+
+### Backend Hardening Pass 2
+
+- Added API request-ID, response-envelope, structured logging, idempotency and Postgres-first rate-limit helper modules.
+- Added versioned `/api/v1/*` public, admin and webhook route aliases while preserving existing compatibility endpoints.
+- Added migration registry, normalized commercial entities, delivery queue tables, RBAC tables, document/governance tables, scoring/SLA tables and protected KYMNIS backend tables.
+- Added Postgres-backed delivery event helpers and an admin delivery-events recovery view/API.
+- Added backend contract tests through `npm run test:backend`.
+- Added Auth.js + Google SSO environment placeholders and RBAC documentation for the next admin-auth implementation step.
+- Replaced the technical brief static reader block with a manual page reader supporting arrows, keyboard, swipe gestures, page input and thumbnail controls without auto-advance.
+- Added `npm run brief:pages` to generate per-page technical brief images when Poppler `pdftoppm` is available.
+
+### Documentation
+
+- Added backend architecture, API standard, database migration, delivery queue, RBAC, observability, data governance, protected KYMNIS backend, technical brief reader and restore/recovery documentation.
+- Updated README, launch checklist, SOP, preview guidance and hosting documentation to reflect the hardened backend direction.
+
+### Validation
+
+- Required gates: `npm run typecheck`, `npm run lint`, `npm run test:backend`, `npm run docs:check`, `npm run routes:check`, `npm run build`, `npm run test:smoke` and `npm run test:layout`.
+
 ## 0.4.0 — 2026-07-02T00:00:00Z
 
 ### Backend Operating System Foundation

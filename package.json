@@ -1,6 +1,6 @@
 {
   "name": "etersolis-web",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "description": "EterSolis public website upgrade for etersolis.com.",
   "scripts": {
@@ -16,7 +16,7 @@
     "routes:check": "node scripts/check-routes.mjs",
     "theme:audit": "node scripts/audit-theme.mjs",
     "link:audit": "node scripts/audit-links.mjs",
-    "test:smoke": "node node_modules/@playwright/test/cli.js test tests/e2e/smoke.spec.ts tests/e2e/a11y.spec.ts --project=chromium",
+    "test:smoke": "node node_modules/@playwright/test/cli.js test tests/e2e/smoke.spec.ts tests/e2e/a11y.spec.ts tests/e2e/technical-brief-reader.spec.ts --project=chromium",
     "test:layout": "node node_modules/@playwright/test/cli.js test tests/e2e/layout-theme.spec.ts --project=chromium",
     "test:visual": "node node_modules/@playwright/test/cli.js test tests/e2e/visual.spec.ts --project=chromium",
     "preview:capture": "CI=1 node node_modules/@playwright/test/cli.js test tests/e2e/capture-previews.spec.ts --project=chromium",
@@ -34,6 +34,8 @@
     "docs:check": "node scripts/generate-docs.mjs --check",
     "release:audit": "node scripts/check-release.mjs",
     "newsletter:export": "node scripts/export-newsletter.mjs",
+    "brief:pages": "node scripts/generate-technical-brief-pages.mjs",
+    "test:backend": "node scripts/test-backend.mjs",
     "version:bump": "node scripts/bump-version.mjs"
   },
   "dependencies": {

@@ -55,7 +55,7 @@ The smoke suite starts a local Next server through Playwright and captures deskt
 
 Copy `.env.example` to an environment file managed outside the repository. Do not commit production runtime values.
 
-Required for production lead capture:
+Required for production operational intake:
 
 - `NEXT_PUBLIC_SITE_URL`
 - `DATABASE_URL`
@@ -98,6 +98,8 @@ Create a PostgreSQL database and apply:
 
 ```bash
 psql "$DATABASE_URL" -f database/schema.sql
+psql "$DATABASE_URL" -f database/migrations/2026-07-etersolis-operations.sql
+for file in database/migrations/000*.sql; do psql "$DATABASE_URL" -f "$file"; done
 ```
 
 Use a dedicated least-privilege database user for the website application.
@@ -109,6 +111,13 @@ npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
 ```
 
 This confirms runtime configuration, database connectivity, required tables and SMTP connectivity. Use `--skip-smtp` only for non-production staging environments where SMTP cannot be reached from the test network.
+
+Backend hardening checks:
+
+```bash
+npm run test:backend
+npm run brief:pages # requires Poppler pdftoppm when regenerating technical brief page images
+```
 
 ## Readiness Endpoints
 
@@ -187,7 +196,7 @@ WantedBy=multi-user.target
 - Keep `.env` files outside the repository.
 - Run the app as a non-root user.
 - Enable HTTPS before public launch.
-- Apply `database/schema.sql` before enabling forms.
+- Apply `database/schema.sql`, the 2026 operations migration and the numbered backend migrations before enabling forms.
 - Configure Turnstile before enabling public forms in production.
 - Configure SMTP before enabling public forms in production.
 - Run `npm run runtime:check` and `npm run lead-capture:check` before public launch.
@@ -201,7 +210,7 @@ WantedBy=multi-user.target
 2. Install dependencies with `npm ci`.
 3. Run `npm run launch:check`.
 4. Run `npm run runtime:check -- --env-file=/etc/etersolis-web.env`.
-5. Apply database migrations if required.
+5. Apply database migrations if required and confirm `schema_migrations`.
 6. Run `npm run lead-capture:check -- --env-file=/etc/etersolis-web.env`.
 7. Build or pull the reviewed Docker image if using container deployment.
 8. Restart the systemd, PM2, Docker Compose or hosting-provider service.

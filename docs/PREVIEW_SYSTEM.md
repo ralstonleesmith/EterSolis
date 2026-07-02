@@ -18,7 +18,7 @@ Generated previews are preferred for final visual review because they reflect th
 
 ## Required Preview Coverage
 
-The review set must cover Home, Get Started, certificate verification, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001, Helios, KYMNIS Overview, KYMNIS How It Works, KYMNIS Verification, KYMNIS Resource Recovery, KYMNIS Contact, Media Credits, Privacy and Terms.
+The review set must cover Home, Get Started, certificate verification, Solutions, Industries, About, Contact, Insights, Newsletter Issue 001, Technical Brief reader, Helios, KYMNIS Overview, KYMNIS How It Works, KYMNIS Verification, KYMNIS Resource Recovery, KYMNIS Contact, Media Credits, Privacy and Terms.
 
 ## Preview Update Rules
 
@@ -37,7 +37,8 @@ Update previews in the same pull request when page content, visible copy, hero l
 9. Confirm no page is merely whitespace with listed text.
 10. Confirm every page has clear hierarchy, professional composition, CTA path and mobile-friendly layout.
 11. Confirm Get Started and Terms preserve non-binding, no-unsolicited-delivery and controlled-review language.
-12. Record the approval decision in the pull request or release checklist.
+12. Confirm the Technical Brief reader is manual: arrows, keyboard, swipe and page input work, and the reader never auto-advances.
+13. Record the approval decision in the pull request or release checklist.
 
 ## Approval States
 
