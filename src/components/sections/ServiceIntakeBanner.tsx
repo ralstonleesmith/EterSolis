@@ -16,7 +16,7 @@ export function ServiceIntakeBanner() {
           </p>
         </div>
         <div className="flex flex-col gap-3 md:items-end">
-          <Link href="/get-started" className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 text-center font-black text-black transition hover:-translate-y-0.5">
+          <Link href="/get-started" className="inline-flex items-center justify-center gap-2 rounded-full bg-carbon px-6 py-3 text-center font-black text-white transition hover:-translate-y-0.5 dark:bg-sunshine dark:text-black">
             Get Started <ArrowRight className="h-4 w-4" />
           </Link>
           <a href="mailto:service@etersolis.com" className="inline-flex items-center gap-2 text-sm font-black text-body dark:text-sunshine">

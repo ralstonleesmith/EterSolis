@@ -21,6 +21,7 @@ export const siteRoutes = [
   '/portal/cases',
   '/portal/quotations',
   '/portal/invoices',
+  '/portal/login',
   '/portal/payments',
   '/portal/uploads',
   '/portal/schedule',

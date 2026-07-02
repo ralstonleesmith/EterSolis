@@ -37,6 +37,7 @@ const requiredRoutes = [
   '/portal/cases',
   '/portal/certificates',
   '/portal/invoices',
+  '/portal/login',
   '/portal/payments',
   '/portal/profile',
   '/portal/quotations',

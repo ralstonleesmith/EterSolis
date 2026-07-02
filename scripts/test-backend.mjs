@@ -107,6 +107,7 @@ for (const route of [
   '/admin/delivery-events',
   '/admin/analytics',
   '/portal',
+  '/portal/login',
   '/portal/cases',
   '/portal/quotations',
   '/portal/invoices',

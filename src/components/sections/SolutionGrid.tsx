@@ -24,7 +24,7 @@ export function SolutionGrid() {
             description="Each solution follows the Issue 001 operating standard: science-based review, systems thinking, circularity, practicality and long-term stewardship."
             invert
           />
-          <Link href="/solutions" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-black text-carbon transition hover:bg-sunshine">
+          <Link href="/solutions" className="inline-flex items-center gap-2 rounded-full border border-white bg-carbon px-5 py-3 text-sm font-black text-white transition hover:border-sunshine">
             Explore solutions <ArrowUpRight className="h-4 w-4" />
           </Link>
         </MotionReveal>

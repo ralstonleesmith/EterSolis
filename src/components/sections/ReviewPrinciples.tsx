@@ -20,7 +20,7 @@ export function ReviewPrinciples({ compact = false }: { compact?: boolean }) {
             title="Simple public actions. Controlled professional review."
             description="The website is designed to make the next step clear while keeping commercial, safety and technical commitments inside EterSolis review."
           />
-          <Link href="/contact#contact-form" className="inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
+          <Link href="/contact#contact-form" className="inline-flex items-center justify-center gap-2 rounded-full bg-carbon px-6 py-3 font-black text-white shadow-soft transition hover:-translate-y-0.5 dark:bg-sunshine dark:text-black">
             Request Assessment <ArrowRight className="h-4 w-4" />
           </Link>
         </MotionReveal>

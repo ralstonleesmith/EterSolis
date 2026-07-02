@@ -37,6 +37,8 @@ intake
 -> closure
 ```
 
+Manual invoice payment instructions are server-side configuration. Raw bank account numbers must not be committed to the repository or exposed in public previews.
+
 ## Backend Truth
 
 - The backend remains inside the Next.js App Router application.

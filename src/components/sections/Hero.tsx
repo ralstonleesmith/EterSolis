@@ -10,6 +10,8 @@ const signals = [
   { icon: Zap, label: 'Global-ready operating platform' }
 ];
 
+const flow = ['Intake', 'Quote', 'Invoice', 'Schedule', 'Receive', 'Certify'];
+
 export function Hero() {
   return (
     <section className="relative isolate flex min-h-[calc(74svh-78px)] overflow-hidden bg-black py-20 text-white sm:min-h-[calc(80svh-78px)] md:min-h-[calc(86svh-78px)] md:py-28">
@@ -26,24 +28,31 @@ export function Hero() {
       <div className="container-shell relative z-10 grid items-end gap-10 lg:grid-cols-[1fr_0.72fr]">
         <MotionReveal>
           <p className="mb-5 inline-flex max-w-full rounded-full border border-sunshine/70 bg-black/35 px-4 py-2 text-xs font-black text-white shadow-sm backdrop-blur sm:text-sm">
-            Controlled Waste Services | Operational Portal | Resource Recovery | Carbon Management | Circular Economy
+            Controlled Waste Services | Recovery | Carbon | Circular Economy | Operating Portal
           </p>
           <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Waste, Resource Recovery and Carbon Operations with Commercial Control.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85 sm:text-xl">
-            EterSolis turns service requests into QR-coded cases with quotation-before-payment discipline, branded invoices, proof reconciliation, scheduling, receiving, processing, certification and permanent operational history.
+            EterSolis turns complex waste, by-product, recovery and certification needs into controlled cases with commercial review, clear payment gates, operational scheduling and permanent records.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Link href="/get-started" style={{ backgroundColor: '#0b1220', color: '#ffffff' }} className="group inline-flex items-center justify-center gap-3 rounded-full border border-white px-7 py-4 text-center font-black shadow-soft transition hover:-translate-y-0.5 hover:border-sunshine">
-              Get Started <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              Start Controlled Intake <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <Link href="/get-started/assessment" className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/12 px-7 py-4 text-center font-black text-white backdrop-blur transition hover:border-sunshine hover:bg-white/18">
               Request Assessment
             </Link>
-            <Link href="/certificates/verify" className="inline-flex items-center justify-center rounded-full px-7 py-4 text-center font-black text-white/86 underline-offset-4 transition hover:text-white hover:underline">
-              Verify Certificate
+            <Link href="/portal" className="inline-flex items-center justify-center rounded-full px-7 py-4 text-center font-black text-white/86 underline-offset-4 transition hover:text-white hover:underline">
+              View Portal
             </Link>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {flow.map((step) => (
+              <span key={step} className="rounded-full border border-white/15 bg-black/30 px-3 py-2 text-xs font-black text-white/86 backdrop-blur">
+                {step}
+              </span>
+            ))}
           </div>
           <div className="mt-5">
             <Link href="/insights/introducing-etersolis" className="inline-flex items-center gap-2 text-sm font-black text-sunshine underline-offset-4 hover:underline">
