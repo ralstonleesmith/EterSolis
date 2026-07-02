@@ -51,7 +51,7 @@ const requirements: Requirement[] = [
     key: 'DATABASE_URL',
     area: 'database',
     required: true,
-    description: 'PostgreSQL connection string for lead storage, waste opportunities and audit records.',
+    description: 'PostgreSQL connection string for operational intake, service requests, lead storage and audit records.',
     validate: isPostgresUrl
   },
   {
@@ -106,10 +106,73 @@ const requirements: Requirement[] = [
     description: 'Public Cloudflare Turnstile site key rendered in production forms.'
   },
   {
+    key: 'OPERATIONS_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for EterSolis operations routing.',
+    validate: isEmailLike
+  },
+  {
+    key: 'SERVICE_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for EterSolis service-request intake.',
+    validate: isEmailLike
+  },
+  {
     key: 'WASTE_ROUTE_EMAIL',
     area: 'routing',
     required: true,
-    description: 'Destination inbox for waste opportunity submissions.',
+    description: 'Legacy destination inbox for selected material review and waste opportunity submissions.',
+    validate: isEmailLike
+  },
+  {
+    key: 'WASTEWATER_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for wastewater and treatment residual service requests.',
+    validate: isEmailLike
+  },
+  {
+    key: 'BIOLOGICALS_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for biological, organic and biodegradable material service requests.',
+    validate: isEmailLike
+  },
+  {
+    key: 'HYDROCARBONS_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for oil, fuel, solvent and hydrocarbon-linked service requests.',
+    validate: isEmailLike
+  },
+  {
+    key: 'INDUSTRIAL_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for industrial by-product and process-residue service requests.',
+    validate: isEmailLike
+  },
+  {
+    key: 'RECYCLABLES_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for recyclable and recoverable material service requests.',
+    validate: isEmailLike
+  },
+  {
+    key: 'CERTIFICATES_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for certificate requests and verification operations.',
+    validate: isEmailLike
+  },
+  {
+    key: 'PAYMENTS_ROUTE_EMAIL',
+    area: 'routing',
+    required: true,
+    description: 'Destination inbox for manual invoice and payment operations.',
     validate: isEmailLike
   },
   {
@@ -183,6 +246,12 @@ const requirements: Requirement[] = [
     area: 'analytics',
     required: false,
     description: 'Optional bearer token or shared secret for analytics webhook delivery.'
+  },
+  {
+    key: 'ADMIN_SHARED_SECRET',
+    area: 'security',
+    required: false,
+    description: 'Optional shared secret for the MVP protected admin session.'
   },
   {
     key: 'READINESS_EXPOSE_DETAILS',

@@ -4,7 +4,9 @@ import AxeBuilder from '@axe-core/playwright';
 const ROUTES = [
   '/',
   '/about',
+  '/certificates/verify',
   '/contact',
+  '/get-started',
   '/helios',
   '/industries',
   '/insights',

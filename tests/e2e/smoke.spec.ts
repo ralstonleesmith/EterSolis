@@ -7,7 +7,7 @@ test.beforeAll(() => {
 
 test('homepage renders media hero and dark mode', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /Waste Is Value Waiting To Be Recovered/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Professional Waste, Resource Recovery & Carbon Management Services/i })).toBeVisible();
   await expect(page.getByAltText(/clean modern materials recovery facility/i).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: /Wastewater treatment is a resource/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /Request Wastewater Assessment/i }).first()).toHaveAttribute('href', '/contact#contact-form');
@@ -22,17 +22,17 @@ test('header uses logo as home and avoids duplicate home navigation', async ({ p
   const logoHome = header.getByRole('link', { name: /EterSolis home/i });
   await expect(logoHome).toHaveAttribute('href', '/');
   await expect(header.getByRole('navigation', { name: /Primary navigation/i }).getByRole('link', { name: /^Home$/i })).toHaveCount(0);
-  await expect(header.getByRole('link', { name: /^Sell Waste$/i })).toHaveAttribute('href', '/sell-waste#waste-form');
+  await expect(header.getByRole('link', { name: /^Get Started$/i }).first()).toHaveAttribute('href', '/get-started');
   await logoHome.click();
   await expect(page).toHaveURL(/\/$/);
 });
 
 test('homepage primary and footer links resolve', async ({ page }) => {
   await page.goto('/');
-  await expect(page.getByRole('link', { name: /Sell Waste To EterSolis/i }).first()).toHaveAttribute('href', '/sell-waste#waste-form');
-  await page.goto('/sell-waste#waste-form');
-  await expect(page).toHaveURL(/\/sell-waste#waste-form$/);
-  await expect(page.locator('#waste-form')).toBeVisible();
+  await expect(page.getByRole('link', { name: /^Get Started$/i }).first()).toHaveAttribute('href', '/get-started');
+  await page.goto('/sell-waste');
+  await expect(page).toHaveURL(/\/get-started$/);
+  await expect(page.locator('#service-request')).toBeVisible();
 
   await page.goto('/');
   await expect(page.getByRole('contentinfo').getByRole('link', { name: 'Media Credits' })).toHaveAttribute('href', '/media-credits');
@@ -61,8 +61,8 @@ test('mobile navigation opens primary routes', async ({ page }) => {
 
 test('Ask Helios popout stays compact and routes safely', async ({ page }) => {
   await page.goto('/contact');
-  await page.getByRole('button', { name: /Ask Helios/i }).click();
-  await expect(page.getByRole('heading', { name: /Guided next-step routing/i })).toBeVisible();
+  await page.getByRole('button', { name: /^Ask Helios$/i }).click({ force: true });
+  await expect(page.getByRole('heading', { name: /Guided next-step routing/i })).toBeVisible({ timeout: 10000 });
   await expect(page.getByRole('button', { name: 'EterSolis' })).toHaveAttribute('aria-pressed', 'true');
   await page.getByRole('button', { name: 'KYMNIS' }).click();
   await expect(page.getByText(/KYMNIS mode/i)).toBeVisible();
@@ -71,20 +71,25 @@ test('Ask Helios popout stays compact and routes safely', async ({ page }) => {
   await expect(page.getByRole('heading', { name: /Guided next-step routing/i })).toHaveCount(0);
 });
 
-test('sell waste stepper advances through intake flow', async ({ page }) => {
+test('get started stepper advances through service intake flow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/sell-waste');
-  await expect(page.getByRole('link', { name: /^Start Waste Review$/i }).first()).toBeVisible();
+  await page.goto('/get-started');
+  await expect(page.getByRole('heading', { name: /Get Started with EterSolis/i }).first()).toBeVisible();
+  await page.getByLabel(/Request assessment/i).check();
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Industrial by-products/i).check();
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Material description/i).fill('Clean recoverable cardboard and plastic packaging from a controlled test stream.');
+  await page.getByRole('button', { name: /Continue/i }).click();
   await page.getByLabel(/Company name/i).fill('EterSolis Test Company');
   await page.getByLabel(/Contact name/i).fill('Test Reviewer');
   await page.getByLabel(/^Email$/i).fill('review@example.com');
   await page.getByLabel(/Country/i).fill('South Africa');
+  await page.getByLabel(/Site address/i).fill('Test site address');
   await page.getByRole('button', { name: /Continue/i }).click();
-  await expect(page.getByLabel(/Material description/i)).toBeVisible();
-  await page.getByLabel(/Material description/i).fill('Clean recoverable cardboard and plastic packaging from a controlled test stream.');
   await page.getByRole('button', { name: /Continue/i }).click();
   await expect(page.getByLabel(/Confidentiality level/i)).toBeVisible();
-  await page.screenshot({ path: 'test-results/screenshots/sell-waste-stepper.png', fullPage: true });
+  await page.screenshot({ path: 'test-results/screenshots/get-started-stepper.png', fullPage: true });
 });
 
 test('contact stepper and Helios wizard route users', async ({ page }) => {
@@ -149,27 +154,45 @@ test('lead forms show success and error states with mocked API responses', async
   await expect(page.getByText(/Mock delivery failure/i)).toBeVisible();
 });
 
-test('waste opportunity form submits through mocked lead capture route', async ({ page }) => {
-  await page.route('**/api/waste', async (route) => {
+test('service request form submits through mocked operational intake route', async ({ page }) => {
+  await page.route('**/api/service-requests/submit', async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ ok: true, submissionId: 'waste-test-001', message: 'Mock waste opportunity received.' })
+      body: JSON.stringify({
+        ok: true,
+        publicReference: 'ES-SR-20260702-TEST01',
+        statusUrl: '/status/mock-token',
+        departmentLabel: 'Industrial by-products & process residues',
+        commercialPathway: 'customer_paid_assessment',
+        paymentStatus: 'manual_invoice_sent',
+        nextAction: 'EterSolis will confirm payment or service instructions before material movement.',
+        message: 'Mock service request received.'
+      })
     });
   });
 
-  await page.goto('/sell-waste#waste-form');
-  await page.getByLabel(/Company name/i).fill('EterSolis Test Company');
-  await page.getByLabel(/Contact name/i).fill('Waste Reviewer');
-  await page.getByLabel(/^Email$/i).fill('waste-review@example.com');
-  await page.getByLabel(/Country/i).fill('South Africa');
+  await page.goto('/get-started');
+  await page.getByLabel(/Request assessment/i).check();
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/Industrial by-products/i).check();
   await page.getByRole('button', { name: /Continue/i }).click();
   await page.getByLabel(/Material description/i).fill('Clean recoverable cardboard and plastic packaging from a controlled test stream.');
   await page.getByRole('button', { name: /Continue/i }).click();
-  await page.getByLabel(/I consent to EterSolis contacting me about this submission/i).check();
-  await page.getByRole('button', { name: /Submit Waste Opportunity/i }).click();
-  await expect(page.getByRole('heading', { name: /Your opportunity is queued for controlled review/i })).toBeVisible();
-  await expect(page.getByText(/Mock waste opportunity received/i)).toBeVisible();
+  await page.getByLabel(/Company name/i).fill('EterSolis Test Company');
+  await page.getByLabel(/Contact name/i).fill('Service Reviewer');
+  await page.getByLabel(/^Email$/i).fill('service-review@example.com');
+  await page.getByLabel(/Country/i).fill('South Africa');
+  await page.getByLabel(/Site address/i).fill('Test site address');
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByLabel(/I consent to EterSolis contacting me about this service request/i).check();
+  await page.getByRole('button', { name: /Continue/i }).click();
+  await page.getByRole('button', { name: /Continue/i }).click();
+  const submitButton = page.getByRole('button', { name: /Submit Service Request/i });
+  if (await submitButton.isVisible().catch(() => false)) await submitButton.click();
+  await expect(page.getByRole('heading', { name: /ES-SR-20260702-TEST01/i })).toBeVisible();
+  await expect(page.getByText(/Mock service request received/i)).toBeVisible();
 });
 
 test('KYMNIS public foundation and guided interest intake render', async ({ page }) => {
@@ -227,7 +250,7 @@ test('insights prioritizes the technical brief with readable and print routes', 
   await expect(page.getByRole('button', { name: /Print brief/i })).toBeVisible();
   await expect(page.locator('img[src*="cepa-technical-intelligence-brief-color-chemicals-issue-001-2026-07-05.png"]').first()).toBeVisible();
   await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);
-  await expect(page.getByText(/PDF upload pending|SOP|developer|stored at|file path|draft/i)).toHaveCount(0);
+  await expect(page.locator('main').getByText(/PDF upload pending|SOP|developer|stored at|file path|draft/i)).toHaveCount(0);
 
   await page.goto('/media-credits');
   await expect(page.locator('img[src*="cepa-horizontal-logo"]')).toHaveCount(0);

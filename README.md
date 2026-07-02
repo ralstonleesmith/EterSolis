@@ -7,11 +7,11 @@
 **Website:** https://etersolis.com  
 **Repository:** `ralstonleesmith/EterSolis`  
 **Status:** Active post-launch production website with operational launch-readiness controls<br />
-**Version:** 0.3.7
+**Version:** 0.4.0
 
 EterSolis is a privately owned waste and carbon management company focused on practical resource recovery, circular economy, carbon management, wastewater treatment, waste valorization and industrial sustainability solutions.
 
-This repository contains the controlled Next.js website implementation, lead-capture foundation, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
+This repository contains the controlled Next.js website implementation, operational service-request intake foundation, lead-capture compatibility layer, KYMNIS platform foundation, Helios guided routing layer, newsletter/insights publishing system, executive preview system, visual QA workflow and deployment documentation for `etersolis.com`.
 
 The master operating standard is [`docs/WEBSITE_CODEBASE_SOP.md`](./docs/WEBSITE_CODEBASE_SOP.md). All design, contrast, header, theme, release and production operations must remain aligned with that SOP.
 
@@ -24,7 +24,7 @@ The codebase includes:
 - Next.js App Router with TypeScript.
 - PNG-based EterSolis brand rendering.
 - Light and dark mode with accessible, persistent theme switching and semantic contrast tokens.
-- Polished public pages for Sell Waste, Solutions, Industries, About, KYMNIS, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
+- Polished public pages for Get Started, service status, certificate verification, Services, Industries, About, KYMNIS, Contact, Insights, Newsletter Issue 001, Helios, Media Credits, Privacy and Terms.
 - Host-aware same-application routing foundation for `kymnis.com`, with `/kymnis` fallback routes on `etersolis.com`.
 - Helios v2 guided routing available across the website with EterSolis and KYMNIS modes.
 - Transparent production Helios brand assets integrated into launcher, prompt and guided-routing panels.
@@ -32,7 +32,7 @@ The codebase includes:
 - Internal KYMNIS functionality scaffolding under `src/lib/internal/`, guarded by disclosure audit tooling.
 - Structured Markdown insight publishing with accessible HTML issues and PDF downloads.
 - Published CEPA Technical Intelligence Brief route with source-of-record PDF download.
-- Waste opportunity and contact intake forms.
+- Service-request, pickup, delivery, assessment, certificate and contact intake forms.
 - Zod validation, bot-protection foundation, rate limiting, PostgreSQL, email and CRM integration helpers.
 - Runtime configuration checks and operational lead-capture verification commands.
 - Liveness and readiness endpoints for deployment verification.
@@ -78,7 +78,20 @@ Rules:
 
 ```txt
 /                 Homepage
-/sell-waste       Waste opportunity intake
+/get-started      Service request, pickup, delivery, assessment and certificate intake
+/get-started/pickup
+                  Pickup request intake
+/get-started/delivery
+                  Delivery request intake
+/get-started/assessment
+                  Assessment request intake
+/get-started/certificates
+                  Certificate request intake
+/sell-waste       Legacy redirect to /get-started
+/status/[publicToken]
+                  Public service-request status
+/certificates/verify
+                  Public certificate verification
 /solutions        Resource, waste, carbon and circular economy solutions
 /industries       Industry-specific support
 /about            Company positioning and leadership
@@ -101,9 +114,17 @@ Rules:
 /privacy          Privacy notice
 /terms            Website terms and non-binding submission notices
 /api/health       Health check
-/api/readiness    Operational lead-capture readiness check
+/api/readiness    Operational intake readiness check
 /api/leads        Contact lead endpoint
 /api/waste        Waste opportunity endpoint
+/api/service-requests/submit
+                  Service-request intake endpoint
+/api/service-requests/status/[token]
+                  Public service-request status endpoint
+/api/payments/create-checkout
+                  Manual-invoice checkout abstraction endpoint
+/api/certificates/verify/[token]
+                  Certificate verification endpoint
 ```
 
 ---
@@ -117,9 +138,13 @@ src/components/layout/   Header, footer and global layout components
 src/components/ui/       Reusable UI primitives
 src/components/sections/ Page sections
 src/components/forms/    Public forms and form helpers
+src/components/get-started/
+                         Service-request wizard components
 src/components/helios/   Helios guided routing interface
 src/components/kymnis/   KYMNIS public foundation components
 src/lib/                 Validation, env, email, CRM, DB, analytics, readiness and security utilities
+src/lib/operations/      Service-request taxonomy, statuses, schemas and rules
+src/lib/payments/        Payment provider abstraction and manual invoice MVP
 src/lib/internal/        Internal KYMNIS functionality scaffolding
 content/insights/        Structured Markdown insight and newsletter sources
 public/media/            PNG brand/media assets with documented credits
@@ -153,9 +178,9 @@ NODE_ENV=production PORT=3000 npm run start:node
 
 ---
 
-## Operational Lead-Capture Readiness
+## Operational Intake Readiness
 
-The website can render public pages without production services, but full operational lead capture requires the production runtime configuration, PostgreSQL schema, SMTP delivery and Turnstile verification to be in place.
+The website can render public pages without production services, but full operational intake requires the production runtime configuration, PostgreSQL schema and operations migration, SMTP delivery and Turnstile verification to be in place.
 
 When GitHub-hosted Actions cannot start because of account billing or spending-limit state, use `npm run launch:check` as the repository launch gate and record the external CI blocker in the launch record. Hosted CI should be rerun once the account issue is resolved.
 
@@ -165,7 +190,7 @@ Configuration check:
 npm run runtime:check -- --env-file=/etc/etersolis-web.env
 ```
 
-Operational lead-capture check:
+Operational lead-capture compatibility check:
 
 ```bash
 npm run lead-capture:check -- --env-file=/etc/etersolis-web.env
@@ -260,7 +285,7 @@ Full operational lead capture requires the configuration groups documented in [`
 <!-- DOCS:GENERATED START -->
 ## Generated Project Index
 
-**Version:** 0.3.7
+**Version:** 0.4.0
 **Content system:** Structured Markdown insights in `content/insights/*.md`
 **Primary quality gate:** `npm run check`
 

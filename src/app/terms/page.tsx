@@ -42,9 +42,9 @@ export default function TermsPage() {
       <PageHero
         eyebrow="Terms"
         title="Website Terms"
-        description="These terms protect controlled communication, non-binding waste submissions, brand assets and EterSolis proprietary materials."
-        primaryHref="/sell-waste"
-        primaryLabel="Sell Waste To EterSolis"
+        description="These terms protect controlled communication, non-binding service requests, brand assets and EterSolis proprietary materials."
+        primaryHref="/get-started"
+        primaryLabel="Get Started"
         secondaryHref="/contact"
         secondaryLabel="Contact EterSolis"
       />

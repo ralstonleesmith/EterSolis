@@ -1,6 +1,6 @@
 # EterSolis Operational Launch Checklist
 
-This checklist is the controlled release record for bringing `etersolis.com` to full operational lead-capture readiness. Complete it for every production launch or server migration.
+This checklist is the controlled release record for bringing `etersolis.com` to full operational intake readiness. Complete it for every production launch or server migration.
 
 ## 1. Repository and Version Control
 
@@ -38,7 +38,8 @@ Required operational groups:
 - Client-IP HMAC key.
 - SMTP host, port, user, password and verified sender.
 - Cloudflare Turnstile public and server verification keys.
-- Controlled routing inboxes for waste, information, partnerships, KYMNIS, privacy, CEO and CSO inquiries.
+- Controlled routing inboxes for operations, service requests, department routing, certificates, payments, waste compatibility, information, partnerships, KYMNIS, privacy, CEO and CSO inquiries.
+- `ADMIN_SHARED_SECRET` before exposing the MVP admin area in production.
 
 Validate the runtime file before deploying:
 
@@ -53,14 +54,27 @@ npm run runtime:check -- --env-file=/etc/etersolis-web.env
 
 ```bash
 psql "$DATABASE_URL" -f database/schema.sql
+psql "$DATABASE_URL" -f database/migrations/2026-07-etersolis-operations.sql
 ```
 
 - Confirm the following tables exist:
   - `lead_submissions`
   - `waste_opportunities`
   - `audit_events`
+  - `customers`
+  - `customer_contacts`
+  - `customer_sites`
+  - `service_requests`
+  - `material_profiles`
+  - `risk_assessments`
+  - `pickup_requests`
+  - `delivery_requests`
+  - `payments`
+  - `certificates`
+  - `analytics_events`
+  - `admin_actions`
 
-## 5. Lead-Capture Operational Check
+## 5. Operational Intake Check
 
 After dependencies are installed and the runtime file is present, run the full operational check:
 
@@ -72,7 +86,7 @@ This check confirms:
 
 - required runtime configuration is present and well formed;
 - PostgreSQL is reachable;
-- lead-capture tables exist;
+- lead-capture and operational intake tables exist;
 - SMTP connectivity verifies successfully.
 
 If the mail relay cannot be reached from the build environment but will be reachable only from production, use `--skip-smtp` for staging only and complete the SMTP check on production before public launch.
@@ -121,13 +135,18 @@ Submit non-sensitive test records through:
 - `/contact?topic=Partnership#contact-form`
 - `/contact?topic=Wastewater%20Treatment#contact-form`
 - `/kymnis/contact`
-- `/sell-waste`
+- `/get-started`
+- `/get-started/pickup`
+- `/get-started/delivery`
+- `/get-started/assessment`
+- `/certificates/verify`
 
 Confirm every test submission produces:
 
 - an HTTP success response;
 - a `lead_submissions` record;
-- a `waste_opportunities` record for waste submissions;
+- a `service_requests` record for Get Started submissions;
+- related material, risk, payment and pickup or delivery records where applicable;
 - an internal routing email;
 - a submitter confirmation email;
 - no raw client IP stored in the lead payload.
@@ -170,7 +189,9 @@ Layout/theme tests passed: yes/no
 Health endpoint passed: yes/no
 Readiness endpoint passed: yes/no
 Contact form test passed: yes/no
-Sell Waste form test passed: yes/no
+Get Started form test passed: yes/no
+Service request status link passed: yes/no
+Certificate verification route passed: yes/no
 Internal email confirmed: yes/no
 Submitter email confirmed: yes/no
 Rollback required: yes/no

@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { generalSubmitterConfirmation, internalNotification, wasteSubmitterConfirmation } from '@/lib/emailTemplates';
+import { generalSubmitterConfirmation, internalNotification, internalServiceRequestNotification, serviceRequestSubmitterConfirmation, wasteSubmitterConfirmation } from '@/lib/emailTemplates';
 
 function getTransport() {
   const host = process.env.SMTP_HOST;
@@ -44,4 +44,36 @@ export async function sendLeadNotifications(input: {
   await transport.sendMail({ from, to: input.submitterEmail, replyTo, subject: submitter.subject, text: submitter.text });
 
   return { accepted: true, submissionId: input.submissionId, route: input.route, subjectPrefix: input.subjectPrefix };
+}
+
+export async function sendServiceRequestNotifications(input: {
+  publicReference: string;
+  route: string;
+  subjectPrefix: string;
+  submitterEmail: string;
+  summary: string;
+  statusUrl: string;
+  commercialPathway: string;
+  riskLevel: string;
+}) {
+  const from = process.env.MAIL_FROM ?? 'EterSolis <no-reply@etersolis.com>';
+  const replyTo = input.route;
+  const transport = getTransport();
+  const submitter = serviceRequestSubmitterConfirmation({
+    publicReference: input.publicReference,
+    statusUrl: input.statusUrl,
+    commercialPathway: input.commercialPathway,
+    riskLevel: input.riskLevel
+  });
+  const internal = internalServiceRequestNotification({
+    publicReference: input.publicReference,
+    subjectPrefix: input.subjectPrefix,
+    summary: input.summary,
+    statusUrl: input.statusUrl
+  });
+
+  await transport.sendMail({ from, to: input.route, replyTo: input.submitterEmail, subject: internal.subject, text: internal.text });
+  await transport.sendMail({ from, to: input.submitterEmail, replyTo, subject: submitter.subject, text: submitter.text });
+
+  return { accepted: true, publicReference: input.publicReference, route: input.route, subjectPrefix: input.subjectPrefix };
 }

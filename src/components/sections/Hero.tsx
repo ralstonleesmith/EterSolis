@@ -26,23 +26,23 @@ export function Hero() {
       <div className="container-shell relative z-10 grid items-end gap-10 lg:grid-cols-[1fr_0.72fr]">
         <MotionReveal>
           <p className="mb-5 inline-flex max-w-full rounded-full border border-sunshine/70 bg-black/35 px-4 py-2 text-sm font-black text-white shadow-sm backdrop-blur">
-            We Buy Waste | Resource Recovery | Carbon Management | Circular Economy | Industrial Sustainability
+            Controlled Waste Services | Resource Recovery | Carbon Management | Circular Economy | Industrial Intelligence
           </p>
           <h1 className="max-w-4xl text-5xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
-            Waste Is Value Waiting To Be Recovered.
+            Professional Waste, Resource Recovery & Carbon Management Services.
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-8 text-white/85">
-            EterSolis connects applied science, resource recovery and practical commercial execution so waste, water, materials and by-products can be reviewed as value-bearing systems.
+            EterSolis routes waste, water, by-products, residuals and recoverable materials through controlled service pathways for assessment, pickup, delivery, processing, repurpose, destruction, certification and operational intelligence.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link href="/sell-waste#waste-form" className="group inline-flex items-center justify-center gap-3 rounded-full bg-sunshine px-7 py-4 text-center font-black text-black shadow-soft transition hover:-translate-y-0.5">
-              Sell Waste To EterSolis <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            <Link href="/get-started" className="group inline-flex items-center justify-center gap-3 rounded-full bg-sunshine px-7 py-4 text-center font-black text-black shadow-soft transition hover:-translate-y-0.5">
+              Get Started <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
-            <Link href="/contact#contact-form" className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/12 px-7 py-4 text-center font-black text-white backdrop-blur transition hover:border-sunshine hover:bg-white/18">
+            <Link href="/get-started/assessment" className="inline-flex items-center justify-center rounded-full border border-white/35 bg-white/12 px-7 py-4 text-center font-black text-white backdrop-blur transition hover:border-sunshine hover:bg-white/18">
               Request Assessment
             </Link>
-            <Link href="/helios" className="inline-flex items-center justify-center rounded-full px-7 py-4 text-center font-black text-white/86 underline-offset-4 transition hover:text-white hover:underline">
-              Talk to Helios
+            <Link href="/certificates/verify" className="inline-flex items-center justify-center rounded-full px-7 py-4 text-center font-black text-white/86 underline-offset-4 transition hover:text-white hover:underline">
+              Verify Certificate
             </Link>
           </div>
           <div className="mt-5">

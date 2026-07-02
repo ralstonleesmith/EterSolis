@@ -18,3 +18,17 @@ export function internalNotification(input: { submissionId: string; subjectPrefi
     text: `New EterSolis ${input.leadType} submission received.\n\nReference: ${input.submissionId}\n\n${input.summary}\n\nReview in the approved EterSolis lead system. Do not request physical samples unless written intake instructions have been approved.`
   };
 }
+
+export function serviceRequestSubmitterConfirmation(input: { publicReference: string; statusUrl: string; commercialPathway: string; riskLevel: string }) {
+  return {
+    subject: `EterSolis service request received: ${input.publicReference}`,
+    text: `Thank you for starting an EterSolis service request.\n\nReference: ${input.publicReference}\nStatus link: ${input.statusUrl}\nCommercial pathway: ${input.commercialPathway}\nRisk level: ${input.riskLevel}\n\nThis submission is non-binding. EterSolis must confirm acceptance, payment instructions, pickup, delivery, receiving, processing, certificate eligibility or purchase eligibility in writing before you send or deliver material. Most EterSolis pathways are customer-paid professional services. Selected materials may qualify for purchase, credit, rebate or partnership review only after controlled review.\n\nEterSolis\nControlled waste, recovery and carbon management services\nservice@etersolis.com | etersolis.com`
+  };
+}
+
+export function internalServiceRequestNotification(input: { publicReference: string; subjectPrefix: string; summary: string; statusUrl: string }) {
+  return {
+    subject: `${input.subjectPrefix} ${input.publicReference}`,
+    text: `New EterSolis service request received.\n\nReference: ${input.publicReference}\nStatus: ${input.statusUrl}\n\n${input.summary}\n\nReview in the approved EterSolis operating system. Do not approve pickup, delivery, payment collection, receiving, certificate issuance or purchase eligibility without controlled review.`
+  };
+}

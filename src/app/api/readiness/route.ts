@@ -11,7 +11,7 @@ export async function GET() {
     status: report.ok ? 'ready' : 'not_ready',
     service: 'etersolis-web',
     timestamp: new Date().toISOString(),
-    leadCapture: {
+    operationalIntake: {
       ready: report.ok,
       requiredConfigured: report.summary.requiredConfigured,
       requiredValid: report.summary.requiredValid,

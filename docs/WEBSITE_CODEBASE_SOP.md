@@ -968,10 +968,10 @@ Canonical header actions:
 
 ```txt
 Helios
-Sell Waste
+Get Started
 ```
 
-`Sell Waste` is the primary commercial CTA.
+`Get Started` is the primary commercial CTA.
 
 ## 11.3 Current public route map
 
@@ -1082,7 +1082,7 @@ Homepage section order:
 
 ```txt
 Hero
-WastePurchaseBanner
+ServiceIntakeBanner
 WastewaterTreatmentFeature
 ReviewPrinciples
 ProblemOrbit
@@ -1772,7 +1772,7 @@ The review set must cover:
 
 ```txt
 Home
-Sell Waste
+Get Started
 Solutions
 Industries
 About
@@ -2778,7 +2778,7 @@ Homepage cache-busted check passed: yes/no
 Old homepage text absent: yes/no
 __next output present: yes/no
 Contact form test passed: yes/no/not tested
-Sell Waste form test passed: yes/no/not tested
+Get Started form test passed: yes/no/not tested
 Internal email confirmed: yes/no/not tested
 Submitter email confirmed: yes/no/not tested
 Rollback required: yes/no

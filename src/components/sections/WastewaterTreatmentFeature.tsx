@@ -67,8 +67,8 @@ export function WastewaterTreatmentFeature() {
               <Link href="/contact#contact-form" className="group inline-flex items-center justify-center gap-2 rounded-full bg-sunshine px-6 py-3 font-black text-black shadow-soft transition hover:-translate-y-0.5">
                 Request Wastewater Assessment <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </Link>
-              <Link href="/sell-waste#waste-form" className="inline-flex items-center justify-center rounded-full border border-coal/20 bg-white px-6 py-3 font-black text-carbon transition hover:border-sunshine dark:border-white/15 dark:bg-white/10 dark:text-white">
-                Submit Treatment Residual
+              <Link href="/get-started/assessment" className="inline-flex items-center justify-center rounded-full border border-coal/20 bg-white px-6 py-3 font-black text-carbon transition hover:border-sunshine dark:border-white/15 dark:bg-white/10 dark:text-white">
+                Request Service Intake
               </Link>
             </div>
           </MotionReveal>
